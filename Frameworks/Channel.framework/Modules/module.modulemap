@@ -1,0 +1,6 @@
+framework module Channel {
+  umbrella header "Channel.h"
+
+  export *
+  module * { export * }
+}
