@@ -46,8 +46,8 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
             do {
                 try keychain
                     .accessibility(.whenPasscodeSetThisDeviceOnly, authenticationPolicy: .userPresence)
-                    .set((Authenticated.account?.wif)!, key: "ozonePrivateKey")
-                self.performSegue(withIdentifier: "segueToMainFromLogin", sender: nil)
+                    .set(account.wif, key: "ozonePrivateKey")
+                DispatchQueue.main.async { self.performSegue(withIdentifier: "segueToMainFromLogin", sender: nil) }
                 Channel.shared().subscribe(toTopic: account.address)
             } catch let error {
                 fatalError("Unable to store private key in keychain \(error.localizedDescription)")

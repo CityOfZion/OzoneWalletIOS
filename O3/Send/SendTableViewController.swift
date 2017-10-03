@@ -66,7 +66,6 @@ class SendTableViewController: UITableViewController, AddressSelectDelegate, QRS
                             self.transactionCompleted = completed ?? false
                             DispatchQueue.main.async {
                                 self.performSegue(withIdentifier: "segueToTransactionComplete", sender: nil)
-
                             }
                         }
                     } catch let error {
