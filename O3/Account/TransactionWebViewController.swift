@@ -25,9 +25,9 @@ class TransactionWebViewController: UIViewController, WKUIDelegate {
         super.viewDidLoad()
         var urlString = ""
         if Neo.isTestnet {
-            urlString = "https://testnet.neotracker.io/tx/"
+            urlString = "https://neoscan-testnet.io/transaction/"
         } else {
-            urlString = "https://neotracker.io/tx/"
+            urlString = "https://neoscan.io/transaction/"
         }
         urlString += transactionID
         let myURL = URL(string: urlString)
