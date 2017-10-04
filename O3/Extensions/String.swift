@@ -73,4 +73,19 @@ extension String {
         return String(format:"%.2f%@", percentChange, "%")
     }
 
+    func trim() -> String {
+        return self.trimmingCharacters(in: CharacterSet.whitespaces)
+    }
+
+    func validNEOAddress(completion: @escaping(Bool) -> Void) {
+        Neo.client.validateAddress(self) { (result) in
+            switch result {
+            case .failure:
+                completion(false)
+            case .success(let valid):
+                completion(valid)
+            }
+        }
+    }
+
 }

@@ -31,6 +31,8 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
         tableView.tableFooterView = UIView(frame: CGRect(x:0, y:0, width:self.tableView.frame.size.width, height: 1))
         setNeedsStatusBarAppearanceUpdate()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "cameraAlt"), style: .plain, target: self, action: #selector(qrScanTapped(_:)))
+        self.wifTextField.delegate = self
+        self.checkToProceed()
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -77,5 +79,16 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
 
     func qrScanned(data: String) {
         DispatchQueue.main.async { self.wifTextField.text = data }
+    }
+
+    @IBAction func checkToProceed() {
+        loginButton.isEnabled = wifTextField.text.isEmpty == false
+    }
+}
+
+extension LoginTableViewController: UITextViewDelegate {
+
+    func textViewDidChange(_ textView: UITextView) {
+        self.checkToProceed()
     }
 }

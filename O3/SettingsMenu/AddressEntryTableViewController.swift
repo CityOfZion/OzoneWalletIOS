@@ -20,14 +20,29 @@ class AddressEntryTableViewController: UITableViewController, AVCaptureMetadataO
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var nicknameField: UITextField!
     weak var delegate: AddressAddDelegate?
+    @IBOutlet var proceedButton: ShadowedButton!
+
     var captureSession: AVCaptureSession!
     var videoPreviewLayer: AVCaptureVideoPreviewLayer!
     let supportedCodeTypes = [
         AVMetadataObject.ObjectType.qr]
 
     @IBAction func addButtonTapped(_ sender: Any) {
-        delegate?.addressAdded(addressTextView.text, nickName: nicknameField.text ?? "")
-        DispatchQueue.main.async { self.dismiss(animated: true) }
+        //validate address here
+        let address = addressTextView.text.trim()
+        address.validNEOAddress { (valid) in
+            if valid == false {
+                //localize string later
+                OzoneAlert.alertDialog(message: "Invalid Address", dismissTitle: "OK", didDismiss: {
+                    self.addressTextView.becomeFirstResponder()
+                })
+                return
+            }
+            DispatchQueue.main.async {
+                self.delegate?.addressAdded(self.addressTextView.text.trim(), nickName: self.nicknameField.text?.trim() ?? "")
+                DispatchQueue.main.async { self.dismiss(animated: true) }
+            }
+        }
     }
 
     @IBAction func dissmissTapped(_ sender: Any) {
@@ -39,6 +54,8 @@ class AddressEntryTableViewController: UITableViewController, AVCaptureMetadataO
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
+        addressTextView.delegate = self
+        self.checkCanProceed()
         let qrView = UIView(frame:  CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height * 0.5))
         tableView.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height * 0.5)
         tableView.tableHeaderView?.embed(qrView)
@@ -86,5 +103,20 @@ class AddressEntryTableViewController: UITableViewController, AVCaptureMetadataO
                 DispatchQueue.main.async { self.addressTextView.text = dataString }
             }
         }
+    }
+
+    @IBAction func checkCanProceed() {
+        var enabled = false
+        let validNickname = nicknameField.text?.trim().isEmpty == false
+        let address = addressTextView.text?.trim().isEmpty == false
+        enabled = validNickname && address
+        proceedButton.isEnabled = enabled
+    }
+}
+
+extension AddressEntryTableViewController: UITextViewDelegate {
+
+    func textViewDidChange(_ textView: UITextView) {
+        self.checkCanProceed()
     }
 }

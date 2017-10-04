@@ -1131,6 +1131,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="checkCanProceed" destination="ZJi-SS-XK7" eventType="editingChanged" id="xcm-df-Ro8"/>
+                                                    </connections>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HsJ-5u-S5J" customClass="ShadowedButton" customModule="O3" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="198" width="335" height="44"/>
@@ -1183,6 +1186,7 @@
                         <outlet property="addressTextView" destination="wU2-dH-LOf" id="13y-Ue-PIv"/>
                         <outlet property="closeButton" destination="mbt-zb-WKD" id="QmY-tA-qFS"/>
                         <outlet property="nicknameField" destination="VOu-Qa-ks8" id="pXR-Wv-I1M"/>
+                        <outlet property="proceedButton" destination="HsJ-5u-S5J" id="rjd-4E-Pzn"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dBx-TL-dUN" userLabel="First Responder" sceneMemberID="firstResponder"/>
