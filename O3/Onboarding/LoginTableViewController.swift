@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import NeoSwift
 import Channel
+import KeychainAccess
 
 class LoginTableViewController: UITableViewController, QRScanDelegate {
     @IBOutlet weak var wifTextField: UITextView!
@@ -40,12 +41,22 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
         guard let account = Account(wif: self.wifTextField.text ?? "") else {
             return
         }
+        let keychain = Keychain(service: "network.o3.neo.wallet")
+        DispatchQueue.global().async {
+            do {
+                try keychain
+                    .accessibility(.whenPasscodeSetThisDeviceOnly, authenticationPolicy: .userPresence)
+                    .set(account.wif, key: "ozonePrivateKey")
+                DispatchQueue.main.async { self.performSegue(withIdentifier: "segueToMainFromLogin", sender: nil) }
+                Channel.shared().subscribe(toTopic: account.address)
+            } catch let error {
+                fatalError("Unable to store private key in keychain \(error.localizedDescription)")
+            }
+        }
         Authenticated.account = account
         //subscribe to a topic which is an address to receive push notification
-        Channel.shared().subscribe(toTopic: account.address)
         //enable push notifcation. maybe put this in somewhere else?
         Channel.pushNotificationEnabled(true)
-        self.performSegue(withIdentifier: "segueToMainFromLogin", sender: nil)
     }
 
     @objc func qrScanTapped(_ sender: Any) {

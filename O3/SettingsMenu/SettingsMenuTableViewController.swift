@@ -19,11 +19,15 @@ class SettingsMenuTableViewController: UITableViewController, HalfModalPresentab
 
     var netString = Neo.isTestnet ? "Network: Test Network": "Network: Main Network" {
         didSet {
-            guard let label = networkCell.viewWithTag(1) as? UILabel else {
-                fatalError("Undefined behavior with table view")
-            }
-            DispatchQueue.main.async { label.text = self.netString }
+            self.setNetLabel()
         }
+    }
+
+    func setNetLabel() {
+        guard let label = networkCell.viewWithTag(1) as? UILabel else {
+            fatalError("Undefined behavior with table view")
+        }
+        DispatchQueue.main.async { label.text = self.netString }
     }
 
     override func viewDidLoad() {
@@ -35,7 +39,7 @@ class SettingsMenuTableViewController: UITableViewController, HalfModalPresentab
         contactView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(sendMail)))
         shareView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(share)))
         networkView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(changeNetwork)))
-
+        setNetLabel()
     }
 
     @objc func maximize(_ sender: Any) {
@@ -86,7 +90,7 @@ class SettingsMenuTableViewController: UITableViewController, HalfModalPresentab
     }
 
     @objc func showPrivateKey() {
-        let keychain = Keychain(service: "network.o3.wallet")
+        let keychain = Keychain(service: "network.o3.neo.wallet")
         DispatchQueue.global().async {
             do {
                 let password = try keychain
@@ -97,7 +101,7 @@ class SettingsMenuTableViewController: UITableViewController, HalfModalPresentab
                 }
 
             } catch let error {
-               // fatalError("Unable to store private key in keychain \(error.localizedDescription)")
+
             }
         }
     }

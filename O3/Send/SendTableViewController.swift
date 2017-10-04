@@ -56,7 +56,7 @@ class SendTableViewController: UITableViewController, AddressSelectDelegate, QRS
         DispatchQueue.main.async {
             let message = "Are you sure you want to send \(amount) \(assetName) to \(toAddress)"
             OzoneAlert.confirmDialog(message: message, cancelTitle: "Cancel", confirmTitle: "Confirm", didCancel: {}) {
-                let keychain = Keychain(service: "network.o3.wallet")
+                let keychain = Keychain(service: "network.o3.neo.wallet")
                 DispatchQueue.global().async {
                     do {
                         let password = try keychain
@@ -66,7 +66,6 @@ class SendTableViewController: UITableViewController, AddressSelectDelegate, QRS
                             self.transactionCompleted = completed ?? false
                             DispatchQueue.main.async {
                                 self.performSegue(withIdentifier: "segueToTransactionComplete", sender: nil)
-
                             }
                         }
                     } catch let error {
