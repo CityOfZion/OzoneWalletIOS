@@ -388,7 +388,8 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="addressTextField" destination="UWr-hZ-dbb" id="Jnb-k3-hav"/>
+                        <outlet property="addressTextField" destination="UWr-hZ-dbb" id="Viw-re-BEf"/>
+                        <outlet property="proceedButton" destination="KGq-aH-Hxu" id="MFu-Pe-aFH"/>
                         <segue destination="6fG-df-BHS" kind="presentation" identifier="segueToMainFromAddAddress" id="YXQ-3O-TBV"/>
                     </connections>
                 </tableViewController>
@@ -555,10 +556,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="chart" width="150" height="113"/>
+        <image name="chart" width="169" height="133"/>
         <image name="rectangle10" width="375" height="400"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1ME-Er-JZt"/>
+        <segue reference="YXQ-3O-TBV"/>
     </inferredMetricsTieBreakers>
 </document>

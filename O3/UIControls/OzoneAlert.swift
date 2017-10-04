@@ -26,4 +26,19 @@ class OzoneAlert {
 
         UIApplication.shared.keyWindow?.rootViewController?.presentFromEmbedded(alertController, animated: true, completion: nil)
     }
+
+    static func alertDialog(_ title: String = "", message: String,
+                              dismissTitle: String,
+                              didDismiss: @escaping () -> Void) {
+
+        let alertController = UIAlertController(title:title, message: message, preferredStyle: .alert)
+
+        let dismissAction = UIAlertAction(title: dismissTitle, style: .cancel) { _ in
+            didDismiss()
+        }
+
+        alertController.addAction(dismissAction)
+
+        UIApplication.shared.keyWindow?.rootViewController?.presentFromEmbedded(alertController, animated: true, completion: nil)
+    }
 }

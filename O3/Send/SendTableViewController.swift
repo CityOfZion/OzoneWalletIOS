@@ -45,14 +45,7 @@ class SendTableViewController: UITableViewController, AddressSelectDelegate, QRS
         }
     }
 
-    @IBAction func sendButtonTapped() {
-        let assetId = assetTypeButton.titleLabel?.text == "NEO" ? AssetId.neoAssetId : AssetId.gasAssetId
-        let assetName = assetId == .neoAssetId ? "NEO" : "GAS"
-        var amount = Double(amountField.text ?? "") ?? 0
-        if assetId == .neoAssetId {
-            amount.round()
-        }
-        let toAddress = toAddressField.text ?? ""
+    func send(assetId: AssetId, assetName: String, amount: Double, toAddress: String) {
         DispatchQueue.main.async {
             let message = "Are you sure you want to send \(amount) \(assetName) to \(toAddress)"
             OzoneAlert.confirmDialog(message: message, cancelTitle: "Cancel", confirmTitle: "Confirm", didCancel: {}) {
@@ -72,6 +65,29 @@ class SendTableViewController: UITableViewController, AddressSelectDelegate, QRS
                     }
                 }
             }
+        }
+
+    }
+
+    @IBAction func sendButtonTapped() {
+        let assetId = assetTypeButton.titleLabel?.text == "NEO" ? AssetId.neoAssetId : AssetId.gasAssetId
+        let assetName = assetId == .neoAssetId ? "NEO" : "GAS"
+        var amount = Double(amountField.text ?? "") ?? 0
+        if assetId == .neoAssetId {
+            amount.round()
+        }
+        let toAddress = toAddressField.text?.trim() ?? ""
+
+        //validate address first
+        toAddress.validNEOAddress { (valid) in
+            if valid == false {
+                //localize string later
+                OzoneAlert.alertDialog(message: "Invalid Address", dismissTitle: "OK", didDismiss: {
+                    self.toAddressField.becomeFirstResponder()
+                })
+                return
+            }
+            self.send(assetId: assetId, assetName: assetName, amount: amount, toAddress: toAddress)
         }
     }
 
@@ -95,7 +111,7 @@ class SendTableViewController: UITableViewController, AddressSelectDelegate, QRS
     }
 
     @IBAction func enableSendButton() {
-        sendButton.isEnabled = toAddressField.text!.characters.count > 0 && amountField.text!.characters.count > 0
+        sendButton.isEnabled = toAddressField.text?.isEmpty == false && amountField.text?.isEmpty == false
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -105,7 +121,7 @@ class SendTableViewController: UITableViewController, AddressSelectDelegate, QRS
             segue.destination.transitioningDelegate = self.halfModalTransitioningDelegate
             guard let dest = segue.destination as? UINavigationController,
                 let addressSelectVC = dest.childViewControllers[0] as? AddressSelectTableViewController else {
-                fatalError("Undefined Table view behavior")
+                    fatalError("Undefined Table view behavior")
             }
             addressSelectVC.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "times"), style: .plain, target: self, action: #selector(tappedCloseAddressSeletor(_:)))
             addressSelectVC.delegate = self
