@@ -15,12 +15,14 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     @IBOutlet weak var historyTableView: UITableView!
     @IBOutlet weak var assetCollectionView: UICollectionView!
+    @IBOutlet weak var claimButon: UIButton?
 
     var transactionHistory = [TransactionHistoryEntry]()
     var neoBalance: Int?
     var gasBalance: Double?
     var assets: Assets?
     var selectedTransactionID: String!
+    var refreshClaimableGasTimer: Timer?
 
     func loadNeoData() {
         Neo.client.getTransactionHistory(for: Authenticated.account?.address ?? "") { result in
@@ -53,6 +55,33 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
 
+    func showClaimableGASInButton(amount: Double) {
+        let gasAmountString = String(format:"%.8f", amount)
+        let text = String(format:"Claim\n%@", gasAmountString)
+        let attributedString = NSMutableAttributedString(string: text)
+
+        let nsText = text as NSString
+        let gasAmountRange = nsText.range(of: "\n" + gasAmountString)
+        let titleRange = nsText.range(of: "Claim")
+        attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: Theme.Light.grey, range: gasAmountRange)
+        attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: Theme.Light.primary, range: titleRange)
+        claimButon?.setAttributedTitle(attributedString, for: .normal)
+    }
+
+    @objc func loadClaimableGAS() {
+        Neo.client.getClaims(address: (Authenticated.account?.address)!) { result in
+            switch result {
+            case .failure:
+                return
+            case .success(let claims):
+                let amount: Double = Double(claims.totalUnspentClaim) / 100000000.0
+                DispatchQueue.main.async {
+                    self.showClaimableGASInButton(amount: amount)
+                }
+            }
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -63,6 +92,8 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: Theme.Light.textColor,
                                                                         NSAttributedStringKey.font: UIFont(name: "Avenir-Heavy", size: 32) as Any]
         loadNeoData()
+        refreshClaimableGasTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(AccountViewController.loadClaimableGAS), userInfo: nil, repeats: true)
+        refreshClaimableGasTimer?.fire()
     }
 
     @IBAction func sendTapped(_ sender: Any) {
@@ -99,7 +130,12 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     @IBAction func claimTapped(_ sender: Any) {
-
+        Authenticated.account?.claimGas { _, error in
+            if error != nil {
+                return
+            }
+            self.loadClaimableGAS()
+        }
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {

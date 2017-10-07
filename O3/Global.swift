@@ -37,9 +37,9 @@ struct Neo {
     static var isTestnet = true
     static var client: NeoClient {
         if isTestnet {
-            return NeoClient(seed: "http://test1.cityofzion.io:8880")
+            return NeoClient.sharedTest
         }
-        return NeoClient(seed: "http://seed1.cityofzion.io:8080")
+        return NeoClient.sharedMain
     }
 }
 
