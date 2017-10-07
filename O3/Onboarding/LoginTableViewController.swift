@@ -16,7 +16,7 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
     @IBOutlet weak var wifTextField: UITextView!
     @IBOutlet weak var loginButton: ShadowedButton!
     var watchAddresses = [WatchAddress]()
-
+    let keychain = Keychain(service: "network.o3.wallet")
     func loadWatchAddresses() {
         do {
             watchAddresses = try UIApplication.appDelegate.persistentContainer.viewContext.fetch(WatchAddress.fetchRequest())
@@ -31,8 +31,6 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
         tableView.tableFooterView = UIView(frame: CGRect(x:0, y:0, width:self.tableView.frame.size.width, height: 1))
         setNeedsStatusBarAppearanceUpdate()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "cameraAlt"), style: .plain, target: self, action: #selector(qrScanTapped(_:)))
-        self.wifTextField.delegate = self
-        self.checkToProceed()
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -43,22 +41,23 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
         guard let account = Account(wif: self.wifTextField.text ?? "") else {
             return
         }
-        let keychain = Keychain(service: "network.o3.neo.wallet")
+        Authenticated.account = account
+        //subscribe to a topic which is an address to receive push notification
+        Channel.shared().subscribe(toTopic: account.address)
+        //enable push notifcation. maybe put this in somewhere else?
+        Channel.pushNotificationEnabled(true)
+
         DispatchQueue.global().async {
             do {
-                try keychain
+                try self.keychain
                     .accessibility(.whenPasscodeSetThisDeviceOnly, authenticationPolicy: .userPresence)
-                    .set(account.wif, key: "ozonePrivateKey")
-                DispatchQueue.main.async { self.performSegue(withIdentifier: "segueToMainFromLogin", sender: nil) }
-                Channel.shared().subscribe(toTopic: account.address)
+                    .set((Authenticated.account?.wif)!, key: "ozonePrivateKey")
             } catch let error {
                 fatalError("Unable to store private key in keychain \(error.localizedDescription)")
             }
         }
-        Authenticated.account = account
-        //subscribe to a topic which is an address to receive push notification
-        //enable push notifcation. maybe put this in somewhere else?
-        Channel.pushNotificationEnabled(true)
+
+        self.performSegue(withIdentifier: "segueToMainFromLogin", sender: nil)
     }
 
     @objc func qrScanTapped(_ sender: Any) {
@@ -79,16 +78,5 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
 
     func qrScanned(data: String) {
         DispatchQueue.main.async { self.wifTextField.text = data }
-    }
-
-    @IBAction func checkToProceed() {
-        loginButton.isEnabled = wifTextField.text.isEmpty == false
-    }
-}
-
-extension LoginTableViewController: UITextViewDelegate {
-
-    func textViewDidChange(_ textView: UITextView) {
-        self.checkToProceed()
     }
 }
