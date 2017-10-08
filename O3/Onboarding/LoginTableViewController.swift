@@ -16,7 +16,7 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
     @IBOutlet weak var wifTextField: UITextView!
     @IBOutlet weak var loginButton: ShadowedButton!
     var watchAddresses = [WatchAddress]()
-    
+
     func loadWatchAddresses() {
         do {
             watchAddresses = try UIApplication.appDelegate.persistentContainer.viewContext.fetch(WatchAddress.fetchRequest())
@@ -24,7 +24,7 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
             return
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -34,11 +34,11 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
         self.wifTextField.delegate = self
         self.checkToProceed()
     }
-    
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-    
+
     @IBAction func loginButtonTapped(_ sender: Any) {
         guard let account = Account(wif: self.wifTextField.text ?? "") else {
             return
@@ -60,11 +60,11 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
         //enable push notifcation. maybe put this in somewhere else?
         Channel.pushNotificationEnabled(true)
     }
-    
+
     @objc func qrScanTapped(_ sender: Any) {
         self.performSegue(withIdentifier: "segueToQrFromLogin", sender: nil)
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToQrFromLogin" {
             guard let dest = segue.destination as? QRScannerController else {
@@ -76,21 +76,19 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
             Authenticated.watchOnlyAddresses = watchAddresses.map {$0.address ?? ""}
         }
     }
-    
+
     func qrScanned(data: String) {
         DispatchQueue.main.async { self.wifTextField.text = data }
     }
-    
+
     @IBAction func checkToProceed() {
         loginButton.isEnabled = wifTextField.text.isEmpty == false
     }
 }
 
 extension LoginTableViewController: UITextViewDelegate {
-    
+
     func textViewDidChange(_ textView: UITextView) {
         self.checkToProceed()
     }
 }
-
-
