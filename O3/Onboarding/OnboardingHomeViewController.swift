@@ -86,7 +86,6 @@ class OnboardingViewController: UIViewController, UICollectionViewDelegate, UICo
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //NOTE: MUST DISABLE TAPS HERE POTENTIAL TO GENERATE MULTIPLE KEYS
         if segue.identifier == "segueToWelcome" {
             Authenticated.account = Account()
         }

@@ -35,13 +35,15 @@ class O3HUD: UIViewController {
     static func start() {
         sharedInstance.modalTransitionStyle = .crossDissolve
         DispatchQueue.main.async {
-            UIApplication.shared.keyWindow?.rootViewController?.present(sharedInstance, animated: true)
+            UIApplication.shared.keyWindow?.rootViewController?.presentFromEmbedded(sharedInstance, animated: true) {}
         }
     }
 
-    static func stop() {
+    static func stop(completed: @escaping() -> Void) {
         DispatchQueue.main.async {
-            sharedInstance.dismiss(animated: true)
+            sharedInstance.dismiss(animated: true) {
+                completed()
+            }
         }
     }
 }

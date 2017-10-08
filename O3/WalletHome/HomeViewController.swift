@@ -83,6 +83,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     func loadPortfolio() {
         O3Client.shared.getPortfolioValue(self.displayedNeoAmount, gas: self.displayedGasAmount, interval: self.selectedInterval.rawValue) {result in
+            O3HUD.stop {
+
+            }
             switch result {
             case .failure:
                 print(result)
