@@ -13,7 +13,7 @@ import Lottie
 import KeychainAccess
 
 class SendTableViewController: UITableViewController, AddressSelectDelegate, QRScanDelegate {
-    var testAddress = "AJs38kijktEuM22sjfXqfjZ734RqR4H6JW"
+
     var halfModalTransitioningDelegate: HalfModalTransitioningDelegate?
 
     @IBOutlet weak var sendButton: UIButton!
@@ -26,7 +26,6 @@ class SendTableViewController: UITableViewController, AddressSelectDelegate, QRS
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
-        toAddressField.text = testAddress
         self.navigationController?.navigationItem.largeTitleDisplayMode = .automatic
         self.enableSendButton()
     }
