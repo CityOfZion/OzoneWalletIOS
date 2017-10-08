@@ -87,6 +87,15 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
                 let amount: Double = Double(claims.totalUnspentClaim) / 100000000.0
                 DispatchQueue.main.async {
                     self.showClaimableGASInButton(amount: amount)
+                    //only enable button if latestClaimDate is more than 5 minutes
+                    let latestClaimDateInterval: Double = UserDefaults.standard.double(forKey: "lastetClaimDate")
+                    let latestClaimDate: Date = Date(timeIntervalSince1970: latestClaimDateInterval)
+                    let diff = Date().timeIntervalSince(latestClaimDate)
+                    if diff > (5 * 60) {
+                        self.claimButon?.isEnabled = true
+                    } else {
+                        self.claimButon?.isEnabled = false
+                    }
                 }
             }
         }
@@ -163,14 +172,17 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
                 //if claim succeeded then fire the timer to refresh claimable gas again.
                 self.refreshClaimableGasTimer = Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(AccountViewController.loadClaimableGAS), userInfo: nil, repeats: true)
                 self.refreshClaimableGasTimer?.fire()
-                self.claimButon?.isEnabled = true
                 self.loadNeoData()
                 self.loadClaimableGAS()
             }
-
         }
     }
     @IBAction func claimTapped(_ sender: Any) {
+        let now = Date().timeIntervalSince1970
+        //save latest claim date/time here to limit user to only claim every 5 minutes
+        UserDefaults.standard.set(now, forKey: "lastetClaimDate")
+        UserDefaults.standard.synchronize()
+
         //disable the button after tapped
         self.claimButon?.isEnabled = false
         //we are able to claim gas only when there is data in the .claims array
@@ -193,7 +205,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
                 self.isClaiming = true
                 //disable button and invalidate the timer to refresh claimable GAS
                 self.refreshClaimableGasTimer?.invalidate()
-                
+
                 //try to claim gas after 10 seconds
                 DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
                     self.claimGas()
