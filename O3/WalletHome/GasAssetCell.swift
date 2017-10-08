@@ -40,6 +40,11 @@ class GasAssetCell: UITableViewCell {
             assetFiatPriceLabel.text = referencePrice.string(precision)
             assetFiatAmountLabel.text = (referencePrice * Double(amount)).string(precision)
 
+            //format USD properly
+            if referenceCurrency == .usd {
+                assetFiatPriceLabel.text = USD(amount: Float(referencePrice)).formattedString()
+            }
+
             assetPercentChangeLabel.text = String.percentChangeStringShort(latestPrice: latestPrice, previousPrice: firstPrice,
                                                                            referenceCurrency: referenceCurrency)
             assetPercentChangeLabel.textColor = referencePrice >= referenceFirstPrice ? Theme.Light.green : Theme.Light.red
