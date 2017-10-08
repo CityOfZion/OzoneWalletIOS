@@ -51,16 +51,17 @@ class SendTableViewController: UITableViewController, AddressSelectDelegate, QRS
                 let keychain = Keychain(service: "network.o3.neo.wallet")
                 DispatchQueue.global().async {
                     do {
-                        let password = try keychain
+                        _ = try keychain
                             .authenticationPrompt("Authenticate to send transaction")
                             .get("ozonePrivateKey")
+                        O3HUD.start()
                         Authenticated.account?.sendAssetTransaction(asset: assetId, amount: amount, toAddress: toAddress) { completed, _ in
-                            self.transactionCompleted = completed ?? false
-                            DispatchQueue.main.async {
+                            O3HUD.stop {
+                                self.transactionCompleted = completed ?? false
                                 self.performSegue(withIdentifier: "segueToTransactionComplete", sender: nil)
                             }
                         }
-                    } catch let error {
+                    } catch _ {
                     }
                 }
             }

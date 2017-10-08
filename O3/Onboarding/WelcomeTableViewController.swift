@@ -38,6 +38,6 @@ class WelcomeTableViewController: UITableViewController {
     }
 
     @IBAction func startTapped(_ sender: Any) {
-       self.performSegue(withIdentifier: "segueToMainFromWelcome", sender: nil)
+        self.performSegue(withIdentifier: "segueToMainFromWelcome", sender: nil)
     }
 }
