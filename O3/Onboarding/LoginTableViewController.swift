@@ -92,7 +92,7 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
     }
 
     @IBAction func checkToProceed() {
-        loginButton.isEnabled = wifTextField.text.isEmpty == false
+        DispatchQueue.main.async { self.loginButton.isEnabled = self.wifTextField.text.isEmpty == false }
     }
 }
 

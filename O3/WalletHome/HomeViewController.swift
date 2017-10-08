@@ -44,7 +44,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     var selectedPrice: PriceData?
     var referenceCurrency: Currency = .btc
-    var watchAddresses = [WatchAddress]()
 
     var portfolioType: PortfolioType = .writable {
         didSet {
@@ -74,11 +73,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
 
-    func loadWatchAddresses() {
+    func loadWatchAddresses() -> [WatchAddress] {
         do {
-            watchAddresses = try UIApplication.appDelegate.persistentContainer.viewContext.fetch(WatchAddress.fetchRequest())
+            let watchAddresses: [WatchAddress] = try
+                UIApplication.appDelegate.persistentContainer.viewContext.fetch(WatchAddress.fetchRequest())
+            return watchAddresses
         } catch {
-            return
+            return []
         }
     }
 
@@ -148,9 +149,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             loadBalanceData(fromReadOnly: false, address: address)
         }
 
-        for address in Authenticated.watchOnlyAddresses ?? [] {
+        for watchAddress in loadWatchAddresses() {
             group?.enter()
-            loadBalanceData(fromReadOnly: true, address: address)
+            loadBalanceData(fromReadOnly: true, address: watchAddress.address!)
         }
         group?.notify(queue: .main) {
             self.loadPortfolio()
