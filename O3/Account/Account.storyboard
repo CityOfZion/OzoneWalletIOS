@@ -111,6 +111,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="124.5" height="58"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="12"/>
                                                         <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        <inset key="imageEdgeInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         <state key="normal" title="Send" image="upload">
                                                             <color key="titleColor" name="lightThemePrimary"/>
                                                         </state>
@@ -164,6 +165,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="124.5" height="58"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="12"/>
                                                         <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        <inset key="imageEdgeInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         <state key="normal" title="My Address" image="qrCode-button">
                                                             <color key="titleColor" name="lightThemePrimary"/>
                                                         </state>
