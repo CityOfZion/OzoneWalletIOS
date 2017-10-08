@@ -96,6 +96,8 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
                     } else {
                         self.claimButon?.isEnabled = false
                     }
+
+                   self.claimButon?.isEnabled = amount > 0
                 }
             }
         }
