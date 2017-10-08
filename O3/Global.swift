@@ -33,7 +33,7 @@ struct Theme {
     }
 }
 
-struct Neo {
+class Neo {
     static var isTestnet = true {
         didSet {
             NotificationCenter.default.post(name: Notification.Name("ChangedNetwork"), object: nil)
@@ -44,11 +44,21 @@ struct Neo {
             }
         }
     }
+    static var sharedTest: NeoClient?
+    static var sharedMain: NeoClient?
+
     static var client: NeoClient {
-        if isTestnet {
-            return NeoClient.sharedTest
+        if sharedTest == nil {
+            sharedTest = NeoClient.sharedTest
         }
-        return NeoClient.sharedMain
+        if sharedMain == nil {
+            sharedMain = NeoClient.sharedMain
+        }
+
+        if isTestnet {
+            return sharedTest!
+        }
+        return sharedMain!
     }
 }
 
