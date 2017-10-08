@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import ScrollableGraphView
 import NeoSwift
+import Channel
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, GraphPanDelegate, ScrollableGraphViewDataSource {
     // Settings for price graph interval
@@ -138,8 +139,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
      * However the display in the graph and asset cells will vary depending on
      * on the portfolio you wish to display read, write, or read + write
      */
-    func getBalance(displayType: PortfolioType) {
-        self.portfolioType = displayType
+    @objc func getBalance() {
         self.readOnlyNeoBalance = 0
         self.readOnlyGasBalance = 0
         self.group = DispatchGroup()
@@ -182,8 +182,20 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         walletHeaderCollectionView.reloadData()
     }
 
+    func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.getBalance), name: Notification.Name("ChangedNetwork"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.getBalance), name: Notification.Name("UpdatedWatchOnlyAddress"), object: nil)
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("ChangedNetwork"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("UpdatedWatchOnlyAddress"), object: nil)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        addObservers()
+        Channel.shared().subscribe(toTopic: (Authenticated.account?.address)!)
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: Theme.Light.textColor,
                                                                         NSAttributedStringKey.font: UIFont(name: "Avenir-Heavy", size: 32) as Any]
 
@@ -195,7 +207,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         assetsTable.dataSource = self
         assetsTable.tableFooterView = UIView(frame: .zero)
 
-        getBalance(displayType: self.portfolioType)
+        getBalance()
 
         //control the size of the graph area here
         self.assetsTable.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height * 0.5)

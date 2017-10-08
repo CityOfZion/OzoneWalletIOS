@@ -27,6 +27,9 @@ class SendTableViewController: UITableViewController, AddressSelectDelegate, QRS
         super.viewDidLoad()
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
         self.navigationController?.navigationItem.largeTitleDisplayMode = .automatic
+        let networkButton = UIBarButtonItem(title: (Authenticated.account?.network.rawValue)! + "Net", style: .plain, target: nil, action: nil)
+        networkButton.isEnabled = false
+        self.navigationItem.rightBarButtonItem = networkButton
         self.enableSendButton()
     }
 

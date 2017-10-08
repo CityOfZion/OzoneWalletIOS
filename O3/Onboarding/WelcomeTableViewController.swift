@@ -26,9 +26,10 @@ class WelcomeTableViewController: UITableViewController {
             do {
                 try keychain
                     .accessibility(.whenPasscodeSetThisDeviceOnly, authenticationPolicy: .userPresence)
+                    .authenticationPrompt("Authenticated will remove the private key currently stored in your keychain")
                     .set((Authenticated.account?.wif)!, key: "ozonePrivateKey")
             } catch let error {
-                fatalError("Unable to store private key in keychain \(error.localizedDescription)")
+                DispatchQueue.main.async { self.navigationController?.popViewController(animated: true) }
             }
         }
     }
