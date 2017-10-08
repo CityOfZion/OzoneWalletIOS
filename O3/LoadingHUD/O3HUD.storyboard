@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bjw-MV-nSM">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--O3HUD-->
+        <scene sceneID="DQJ-ML-cnP">
+            <objects>
+                <viewController storyboardIdentifier="O3HUD" modalPresentationStyle="overCurrentContext" id="bjw-MV-nSM" customClass="O3HUD" customModule="O3" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="UOw-4Z-jaB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vfj-rY-nha">
+                                <rect key="frame" x="137" y="293.5" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="WSt-Oe-Lyg"/>
+                                    <constraint firstAttribute="width" secondItem="Vfj-rY-nha" secondAttribute="height" multiplier="1:1" id="efn-gV-vZf"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="Vfj-rY-nha" firstAttribute="centerY" secondItem="6EN-NK-QzE" secondAttribute="centerY" id="Cwu-Oe-ffH"/>
+                            <constraint firstItem="Vfj-rY-nha" firstAttribute="centerX" secondItem="6EN-NK-QzE" secondAttribute="centerX" id="I3c-zx-S3C"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6EN-NK-QzE"/>
+                    </view>
+                    <connections>
+                        <outlet property="hudContainer" destination="Vfj-rY-nha" id="y3m-35-ZFB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XxF-lB-GgP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-722" y="-127"/>
+        </scene>
+    </scenes>
+</document>

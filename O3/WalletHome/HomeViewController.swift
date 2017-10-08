@@ -111,15 +111,15 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 print(result)
                 for asset in accountState.balances {
                     if !fromReadOnly {
-                        if asset.id == NeoSwift.AssetId.neoAssetId.rawValue {
+                        if asset.id.contains(NeoSwift.AssetId.neoAssetId.rawValue) {
                             self.writeableNeoBalance = Int(asset.value) ?? 0
-                        } else if asset.id == NeoSwift.AssetId.gasAssetId.rawValue {
+                        } else if asset.id.contains(NeoSwift.AssetId.gasAssetId.rawValue) {
                             self.writeableGasBalance = Double(asset.value) ?? 0
                         }
                     } else {
-                        if asset.id == NeoSwift.AssetId.neoAssetId.rawValue {
+                        if asset.id.contains(NeoSwift.AssetId.neoAssetId.rawValue) {
                             self.readOnlyNeoBalance += (Int(asset.value) ?? 0)
-                        } else if asset.id == NeoSwift.AssetId.gasAssetId.rawValue {
+                        } else if asset.id.contains(NeoSwift.AssetId.gasAssetId.rawValue) {
                             self.readOnlyGasBalance += (Double(asset.value) ?? 0)
                         }
                     }

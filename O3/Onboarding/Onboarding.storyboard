@@ -212,6 +212,14 @@
             </objects>
             <point key="canvasLocation" x="220" y="29.23538230884558"/>
         </scene>
+        <!--O3HUD-->
+        <scene sceneID="rFH-Hf-Tm1">
+            <objects>
+                <viewControllerPlaceholder storyboardName="O3HUD" id="rFj-ZT-26b" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g8d-v2-2gZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-154" y="514"/>
+        </scene>
         <!--Login-->
         <scene sceneID="qb1-AK-3s1">
             <objects>
