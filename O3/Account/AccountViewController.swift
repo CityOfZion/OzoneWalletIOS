@@ -151,7 +151,6 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     @objc func claimGas() {
-        print("claiming")
         self.refreshClaimableGasTimer?.invalidate()
         self.claimButon?.isEnabled = false
         //refresh the amount of claimable gas
@@ -179,7 +178,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     @IBAction func claimTapped(_ sender: Any) {
         let now = Date().timeIntervalSince1970
-        //save latest claim date/time here to limit user to only claim every 5 minutes
+        //save latest claim time interval here to limit user to only claim every 5 minutes
         UserDefaults.standard.set(now, forKey: "lastetClaimDate")
         UserDefaults.standard.synchronize()
 
