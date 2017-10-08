@@ -23,8 +23,10 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     var assets: Assets?
     var selectedTransactionID: String!
     var refreshClaimableGasTimer: Timer?
+    var claims: Claims?
+    var isClaiming: Bool = false
 
-    func loadNeoData() {
+    @objc func loadNeoData() {
         Neo.client.getTransactionHistory(for: Authenticated.account?.address ?? "") { result in
             switch result {
             case .failure:
@@ -50,6 +52,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
                     self.assetCollectionView.delegate = self
                     self.assetCollectionView.dataSource = self
                     self.assetCollectionView.reloadData()
+                    self.historyTableView.refreshControl?.endRefreshing()
                 }
             }
         }
@@ -66,6 +69,12 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: Theme.Light.grey, range: gasAmountRange)
         attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: Theme.Light.primary, range: titleRange)
         claimButon?.setAttributedTitle(attributedString, for: .normal)
+
+        let attributedStringDisabled = NSMutableAttributedString(string: text)
+
+        attributedStringDisabled.addAttribute(NSAttributedStringKey.foregroundColor, value: Theme.Light.grey.withAlphaComponent(0.5), range: gasAmountRange)
+        attributedStringDisabled.addAttribute(NSAttributedStringKey.foregroundColor, value: Theme.Light.primary.withAlphaComponent(0.5), range: titleRange)
+        claimButon?.setAttributedTitle(attributedStringDisabled, for: .disabled)
     }
 
     @objc func loadClaimableGAS() {
@@ -74,6 +83,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
             case .failure:
                 return
             case .success(let claims):
+                self.claims = claims
                 let amount: Double = Double(claims.totalUnspentClaim) / 100000000.0
                 DispatchQueue.main.async {
                     self.showClaimableGASInButton(amount: amount)
@@ -84,7 +94,6 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.navigationController?.hideHairline()
         self.navigationItem.largeTitleDisplayMode = .automatic
         historyTableView.delegate = self
@@ -92,8 +101,11 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: Theme.Light.textColor,
                                                                         NSAttributedStringKey.font: UIFont(name: "Avenir-Heavy", size: 32) as Any]
         loadNeoData()
-        refreshClaimableGasTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(AccountViewController.loadClaimableGAS), userInfo: nil, repeats: true)
+        refreshClaimableGasTimer = Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(AccountViewController.loadClaimableGAS), userInfo: nil, repeats: true)
         refreshClaimableGasTimer?.fire()
+
+        self.historyTableView.refreshControl = UIRefreshControl()
+        self.historyTableView.refreshControl?.addTarget(self, action: #selector(loadNeoData), for: .valueChanged)
     }
 
     @IBAction func sendTapped(_ sender: Any) {
@@ -129,12 +141,64 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
 
-    @IBAction func claimTapped(_ sender: Any) {
+    @objc func claimGas() {
+        print("claiming")
+        self.refreshClaimableGasTimer?.invalidate()
+        self.claimButon?.isEnabled = false
+        //refresh the amount of claimable gas
+        self.loadClaimableGAS()
         Authenticated.account?.claimGas { _, error in
             if error != nil {
+                //if error then try again in 10 seconds
+                DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                    self.claimGas()
+                }
                 return
             }
-            self.loadClaimableGAS()
+
+            DispatchQueue.main.async {
+                //HUD something to notify user that claim succeeded
+                //done claiming
+                self.isClaiming = false
+                //if claim succeeded then fire the timer to refresh claimable gas again.
+                self.refreshClaimableGasTimer = Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(AccountViewController.loadClaimableGAS), userInfo: nil, repeats: true)
+                self.refreshClaimableGasTimer?.fire()
+                self.claimButon?.isEnabled = true
+                self.loadNeoData()
+                self.loadClaimableGAS()
+            }
+
+        }
+    }
+    @IBAction func claimTapped(_ sender: Any) {
+        //disable the button after tapped
+        self.claimButon?.isEnabled = false
+        //we are able to claim gas only when there is data in the .claims array
+        if self.claims != nil && self.claims!.claims.count > 0 {
+            DispatchQueue.main.async {
+                self.claimGas()
+            }
+            return
+        }
+        //to be able to claim. we need to send the entire NEO to ourself.
+        Authenticated.account?.sendAssetTransaction(asset: AssetId.neoAssetId, amount: Double(self.neoBalance!), toAddress: (Authenticated.account?.address)!) { completed, _ in
+            if completed == false {
+                //HUD or something
+                //in case it's error we then enable the button again.
+                self.claimButon?.isEnabled = true
+                return
+            }
+            DispatchQueue.main.async {
+                //if completed then mark the flag that we are claiming GAS
+                self.isClaiming = true
+                //disable button and invalidate the timer to refresh claimable GAS
+                self.refreshClaimableGasTimer?.invalidate()
+                
+                //try to claim gas after 10 seconds
+                DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                    self.claimGas()
+                }
+            }
         }
     }
 
