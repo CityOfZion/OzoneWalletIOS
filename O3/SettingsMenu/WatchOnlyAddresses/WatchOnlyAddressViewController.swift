@@ -67,6 +67,7 @@ class WatchOnlyAddressViewController: UIViewController, UITableViewDelegate, UIT
         watchAddress.nickName = nickName
         UIApplication.appDelegate.saveContext()
         self.loadWatchAddresses()
+        NotificationCenter.default.post(name: Notification.Name("UpdatedWatchOnlyAddress"), object: nil)
         tableView.reloadData()
     }
 
@@ -79,6 +80,7 @@ class WatchOnlyAddressViewController: UIViewController, UITableViewDelegate, UIT
             UIApplication.appDelegate.persistentContainer.viewContext.delete(self.watchAddresses[index])
             try? UIApplication.appDelegate.persistentContainer.viewContext.save()
             self.loadWatchAddresses()
+            NotificationCenter.default.post(name: Notification.Name("UpdatedWatchOnlyAddress"), object: nil)
             self.tableView.reloadData()
         }
     }

@@ -32,7 +32,18 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
         setNeedsStatusBarAppearanceUpdate()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "cameraAlt"), style: .plain, target: self, action: #selector(qrScanTapped(_:)))
         self.wifTextField.delegate = self
-        self.checkToProceed()
+        let keychain = Keychain(service: "network.o3.neo.wallet")
+        DispatchQueue.global().async {
+            do {
+                let key = try keychain
+                    .accessibility(.whenPasscodeSetThisDeviceOnly, authenticationPolicy: .userPresence)
+                    .get("ozonePrivateKey")
+                DispatchQueue.main.async { self.wifTextField.text = key }
+                self.checkToProceed()
+            } catch _ {
+                self.checkToProceed()
+            }
+        }
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -50,7 +61,6 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
                     .accessibility(.whenPasscodeSetThisDeviceOnly, authenticationPolicy: .userPresence)
                     .set(account.wif, key: "ozonePrivateKey")
                 DispatchQueue.main.async { self.performSegue(withIdentifier: "segueToMainFromLogin", sender: nil) }
-                Channel.shared().subscribe(toTopic: account.address)
             } catch let error {
                 fatalError("Unable to store private key in keychain \(error.localizedDescription)")
             }
