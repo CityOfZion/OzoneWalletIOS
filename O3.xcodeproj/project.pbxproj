@@ -70,6 +70,9 @@
 		75B6E5C21F6D4E8A00F53CA8 /* QR.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75B6E5C11F6D4E8A00F53CA8 /* QR.storyboard */; };
 		75BEB25E1F89F3CA00DC20E9 /* NeoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75BEB25D1F89F3C900DC20E9 /* NeoSwift.framework */; };
 		75BEB25F1F89F3CA00DC20E9 /* NeoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 75BEB25D1F89F3C900DC20E9 /* NeoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		75BEB2621F89FB2A00DC20E9 /* O3HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BEB2611F89FB2A00DC20E9 /* O3HUD.swift */; };
+		75BEB2641F89FB8A00DC20E9 /* O3HUD.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75BEB2631F89FB8A00DC20E9 /* O3HUD.storyboard */; };
+		75BEB2681F8A068100DC20E9 /* HUD.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75BEB2671F8A068100DC20E9 /* HUD.xcassets */; };
 		75CEACE61F6678C0005974CE /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CEACE51F6678C0005974CE /* Color.swift */; };
 		75CEACE81F66B683005974CE /* SendTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CEACE71F66B683005974CE /* SendTableViewController.swift */; };
 		75CEACEC1F66B750005974CE /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CEACEB1F66B750005974CE /* AccountViewController.swift */; };
@@ -179,6 +182,9 @@
 		75B6E5C11F6D4E8A00F53CA8 /* QR.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = QR.storyboard; sourceTree = "<group>"; };
 		75BEB2551F88CBC000DC20E9 /* fidget_spinner.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = fidget_spinner.json; path = ../../../Downloads/fidget_spinner.json; sourceTree = "<group>"; };
 		75BEB25D1F89F3C900DC20E9 /* NeoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NeoSwift.framework; path = Carthage/Build/iOS/NeoSwift.framework; sourceTree = "<group>"; };
+		75BEB2611F89FB2A00DC20E9 /* O3HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = O3HUD.swift; sourceTree = "<group>"; };
+		75BEB2631F89FB8A00DC20E9 /* O3HUD.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = O3HUD.storyboard; sourceTree = "<group>"; };
+		75BEB2671F8A068100DC20E9 /* HUD.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = HUD.xcassets; sourceTree = "<group>"; };
 		75CEACE51F6678C0005974CE /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		75CEACE71F66B683005974CE /* SendTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTableViewController.swift; sourceTree = "<group>"; };
 		75CEACEB1F66B750005974CE /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
@@ -348,6 +354,7 @@
 				75D5BFB01F6CE8B700E64855 /* Onboarding */,
 				75DA58F91F7A67690065FE0D /* SettingsMenu */,
 				752006841F7F695C00D19B5F /* TabBar */,
+				75BEB2601F89FAFE00DC20E9 /* LoadingHUD */,
 				755D8F541F665F5D00058434 /* WalletHome */,
 				7575ADC51F6006AC0077007B /* AppDelegate.swift */,
 				75D5BFC31F6D1A4F00E64855 /* AppAssets.xcassets */,
@@ -368,6 +375,16 @@
 				75B6E5C11F6D4E8A00F53CA8 /* QR.storyboard */,
 			);
 			path = QRScan;
+			sourceTree = "<group>";
+		};
+		75BEB2601F89FAFE00DC20E9 /* LoadingHUD */ = {
+			isa = PBXGroup;
+			children = (
+				75BEB2611F89FB2A00DC20E9 /* O3HUD.swift */,
+				75BEB2631F89FB8A00DC20E9 /* O3HUD.storyboard */,
+				75BEB2671F8A068100DC20E9 /* HUD.xcassets */,
+			);
+			path = LoadingHUD;
 			sourceTree = "<group>";
 		};
 		75CEACE41F6678A4005974CE /* Extensions */ = {
@@ -549,6 +566,7 @@
 				75B6E5C21F6D4E8A00F53CA8 /* QR.storyboard in Resources */,
 				7520068E1F7FC56400D19B5F /* SendAssets.xcassets in Resources */,
 				6ED6001E1F76559E006760E6 /* LogoAssets.xcassets in Resources */,
+				75BEB2641F89FB8A00DC20E9 /* O3HUD.storyboard in Resources */,
 				6ED6001C1F76506B006760E6 /* SharedAssets.xcassets in Resources */,
 				75D5BFC41F6D1A4F00E64855 /* AppAssets.xcassets in Resources */,
 				7575ADCB1F6006AC0077007B /* Main.storyboard in Resources */,
@@ -556,6 +574,7 @@
 				75D5BFAF1F6CE8AB00E64855 /* Onboarding.storyboard in Resources */,
 				6E7C927C1F7A6B1400F8D7AA /* Account.storyboard in Resources */,
 				75D5BFC21F6D196200E64855 /* OnboardingAssets.xcassets in Resources */,
+				75BEB2681F8A068100DC20E9 /* HUD.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -638,6 +657,7 @@
 				75D5BFB81F6CF5AB00E64855 /* AddAddressTableViewController.swift in Sources */,
 				75DA59111F7A89F70065FE0D /* AddressBookEntryTableViewCell.swift in Sources */,
 				752006861F7F698300D19B5F /* O3TabBarController.swift in Sources */,
+				75BEB2621F89FB2A00DC20E9 /* O3HUD.swift in Sources */,
 				6E7C92741F7A5FBA00F8D7AA /* UINavigationController.swift in Sources */,
 				75DA59031F7A6CEF0065FE0D /* WatchOnlyAddressTableViewCell.swift in Sources */,
 				752586B11F77DD9800ED5312 /* OzoneGraphView.swift in Sources */,
