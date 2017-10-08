@@ -55,8 +55,6 @@
 		7537438B1F7F572500803A6C /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7537438A1F7F572500803A6C /* KeychainAccess.framework */; };
 		7537438C1F7F572500803A6C /* KeychainAccess.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7537438A1F7F572500803A6C /* KeychainAccess.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7546DB451F765295001DF5A2 /* AssetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7546DB441F765295001DF5A2 /* AssetDetailViewController.swift */; };
-		7546DB471F767ABE001DF5A2 /* NeoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7546DB461F767AB0001DF5A2 /* NeoSwift.framework */; };
-		7546DB481F767ABE001DF5A2 /* NeoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7546DB461F767AB0001DF5A2 /* NeoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7550940D1F779EEE00127B4F /* WalletHeaderCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7550940C1F779EEE00127B4F /* WalletHeaderCollectionCell.swift */; };
 		755D8F561F665F8200058434 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755D8F551F665F8200058434 /* HomeViewController.swift */; };
 		755D8F581F66605B00058434 /* NeoAssetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755D8F571F66605B00058434 /* NeoAssetCell.swift */; };
@@ -70,6 +68,11 @@
 		757FEB711F77E2790099E26F /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757FEB701F77E2790099E26F /* UIView.swift */; };
 		757FEB731F77F07B0099E26F /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757FEB721F77F07B0099E26F /* String.swift */; };
 		75B6E5C21F6D4E8A00F53CA8 /* QR.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75B6E5C11F6D4E8A00F53CA8 /* QR.storyboard */; };
+		75BEB25E1F89F3CA00DC20E9 /* NeoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75BEB25D1F89F3C900DC20E9 /* NeoSwift.framework */; };
+		75BEB25F1F89F3CA00DC20E9 /* NeoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 75BEB25D1F89F3C900DC20E9 /* NeoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		75BEB2621F89FB2A00DC20E9 /* O3HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BEB2611F89FB2A00DC20E9 /* O3HUD.swift */; };
+		75BEB2641F89FB8A00DC20E9 /* O3HUD.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75BEB2631F89FB8A00DC20E9 /* O3HUD.storyboard */; };
+		75BEB2681F8A068100DC20E9 /* HUD.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75BEB2671F8A068100DC20E9 /* HUD.xcassets */; };
 		75CEACE61F6678C0005974CE /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CEACE51F6678C0005974CE /* Color.swift */; };
 		75CEACE81F66B683005974CE /* SendTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CEACE71F66B683005974CE /* SendTableViewController.swift */; };
 		75CEACEC1F66B750005974CE /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CEACEB1F66B750005974CE /* AccountViewController.swift */; };
@@ -93,7 +96,6 @@
 		75DA59111F7A89F70065FE0D /* AddressBookEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DA59101F7A89F70065FE0D /* AddressBookEntryTableViewCell.swift */; };
 		75DA59131F7A8A070065FE0D /* AddContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DA59121F7A8A070065FE0D /* AddContactTableViewCell.swift */; };
 		75E14E541F7D27F900BEAE22 /* O3.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 75E14E521F7D27F900BEAE22 /* O3.xcdatamodeld */; };
-		75E14E551F7D2A0E00BEAE22 /* O3.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 75E14E521F7D27F900BEAE22 /* O3.xcdatamodeld */; };
 		75E14E571F7D2AEC00BEAE22 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E14E561F7D2AEC00BEAE22 /* UIApplication.swift */; };
 /* End PBXBuildFile section */
 
@@ -107,7 +109,7 @@
 				6E97C4BA1F7FCB4000526FF0 /* DeckTransition.framework in Embed Frameworks */,
 				7537438C1F7F572500803A6C /* KeychainAccess.framework in Embed Frameworks */,
 				755D8F621F66747A00058434 /* ScrollableGraphView.framework in Embed Frameworks */,
-				7546DB481F767ABE001DF5A2 /* NeoSwift.framework in Embed Frameworks */,
+				75BEB25F1F89F3CA00DC20E9 /* NeoSwift.framework in Embed Frameworks */,
 				6ED600141F76219D006760E6 /* Channel.framework in Embed Frameworks */,
 				752017371F729AFC00090C4F /* Lottie.framework in Embed Frameworks */,
 			);
@@ -163,7 +165,6 @@
 		752586B01F77DD9800ED5312 /* OzoneGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OzoneGraphView.swift; sourceTree = "<group>"; };
 		7537438A1F7F572500803A6C /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
 		7546DB441F765295001DF5A2 /* AssetDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDetailViewController.swift; sourceTree = "<group>"; };
-		7546DB461F767AB0001DF5A2 /* NeoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NeoSwift.framework; sourceTree = "<group>"; };
 		7550940C1F779EEE00127B4F /* WalletHeaderCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletHeaderCollectionCell.swift; sourceTree = "<group>"; };
 		755D8F551F665F8200058434 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		755D8F571F66605B00058434 /* NeoAssetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeoAssetCell.swift; sourceTree = "<group>"; };
@@ -179,6 +180,11 @@
 		757FEB701F77E2790099E26F /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		757FEB721F77F07B0099E26F /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		75B6E5C11F6D4E8A00F53CA8 /* QR.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = QR.storyboard; sourceTree = "<group>"; };
+		75BEB2551F88CBC000DC20E9 /* fidget_spinner.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = fidget_spinner.json; path = ../../../Downloads/fidget_spinner.json; sourceTree = "<group>"; };
+		75BEB25D1F89F3C900DC20E9 /* NeoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NeoSwift.framework; path = Carthage/Build/iOS/NeoSwift.framework; sourceTree = "<group>"; };
+		75BEB2611F89FB2A00DC20E9 /* O3HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = O3HUD.swift; sourceTree = "<group>"; };
+		75BEB2631F89FB8A00DC20E9 /* O3HUD.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = O3HUD.storyboard; sourceTree = "<group>"; };
+		75BEB2671F8A068100DC20E9 /* HUD.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = HUD.xcassets; sourceTree = "<group>"; };
 		75CEACE51F6678C0005974CE /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		75CEACE71F66B683005974CE /* SendTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTableViewController.swift; sourceTree = "<group>"; };
 		75CEACEB1F66B750005974CE /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
@@ -214,9 +220,9 @@
 				6E97C4B91F7FCB4000526FF0 /* DeckTransition.framework in Frameworks */,
 				7537438B1F7F572500803A6C /* KeychainAccess.framework in Frameworks */,
 				752017361F729AFC00090C4F /* Lottie.framework in Frameworks */,
-				7546DB471F767ABE001DF5A2 /* NeoSwift.framework in Frameworks */,
 				6ED600131F76219D006760E6 /* Channel.framework in Frameworks */,
 				755D8F601F66743A00058434 /* ScrollableGraphView.framework in Frameworks */,
+				75BEB25E1F89F3CA00DC20E9 /* NeoSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,7 +312,6 @@
 				751666B11F80C290009ACC07 /* WebKit.framework */,
 				6E97C4B81F7FC92B00526FF0 /* DeckTransition.framework */,
 				7501E83F1F79520600123EA8 /* SideMenu.framework */,
-				7546DB461F767AB0001DF5A2 /* NeoSwift.framework */,
 				6ED600121F76219A006760E6 /* Channel.framework */,
 				752017351F729AFC00090C4F /* Lottie.framework */,
 				755D8F5F1F66743A00058434 /* ScrollableGraphView.framework */,
@@ -317,6 +322,7 @@
 		7575ADB91F6006AB0077007B = {
 			isa = PBXGroup;
 			children = (
+				75BEB25D1F89F3C900DC20E9 /* NeoSwift.framework */,
 				756AC1951F80A888003BF8F7 /* DeckTransition.framework */,
 				7537438A1F7F572500803A6C /* KeychainAccess.framework */,
 				7575ADC41F6006AC0077007B /* O3 */,
@@ -336,6 +342,7 @@
 		7575ADC41F6006AC0077007B /* O3 */ = {
 			isa = PBXGroup;
 			children = (
+				75BEB2551F88CBC000DC20E9 /* fidget_spinner.json */,
 				6ED600111F762189006760E6 /* O3.entitlements */,
 				75D5BFBB1F6D0EC400E64855 /* Global.swift */,
 				7533B2A41F7F671C00A21B89 /* Transitions */,
@@ -347,6 +354,7 @@
 				75D5BFB01F6CE8B700E64855 /* Onboarding */,
 				75DA58F91F7A67690065FE0D /* SettingsMenu */,
 				752006841F7F695C00D19B5F /* TabBar */,
+				75BEB2601F89FAFE00DC20E9 /* LoadingHUD */,
 				755D8F541F665F5D00058434 /* WalletHome */,
 				7575ADC51F6006AC0077007B /* AppDelegate.swift */,
 				75D5BFC31F6D1A4F00E64855 /* AppAssets.xcassets */,
@@ -367,6 +375,16 @@
 				75B6E5C11F6D4E8A00F53CA8 /* QR.storyboard */,
 			);
 			path = QRScan;
+			sourceTree = "<group>";
+		};
+		75BEB2601F89FAFE00DC20E9 /* LoadingHUD */ = {
+			isa = PBXGroup;
+			children = (
+				75BEB2611F89FB2A00DC20E9 /* O3HUD.swift */,
+				75BEB2631F89FB8A00DC20E9 /* O3HUD.storyboard */,
+				75BEB2671F8A068100DC20E9 /* HUD.xcassets */,
+			);
+			path = LoadingHUD;
 			sourceTree = "<group>";
 		};
 		75CEACE41F6678A4005974CE /* Extensions */ = {
@@ -487,6 +505,7 @@
 				7575ADC01F6006AC0077007B /* Resources */,
 				7575ADDB1F600E800077007B /* Embed Frameworks */,
 				6E7C92751F7A626100F8D7AA /* ShellScript */,
+				75A7A7311F851ECE00D6CB11 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -541,13 +560,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75E14E551F7D2A0E00BEAE22 /* O3.xcdatamodeld in Resources */,
 				6E1BBF7F1F77BEE30095F466 /* WalletHomeAssets.xcassets in Resources */,
 				7520173F1F73ED1D00090C4F /* Send.storyboard in Resources */,
 				7575ADD01F6006AC0077007B /* LaunchScreen.storyboard in Resources */,
 				75B6E5C21F6D4E8A00F53CA8 /* QR.storyboard in Resources */,
 				7520068E1F7FC56400D19B5F /* SendAssets.xcassets in Resources */,
 				6ED6001E1F76559E006760E6 /* LogoAssets.xcassets in Resources */,
+				75BEB2641F89FB8A00DC20E9 /* O3HUD.storyboard in Resources */,
 				6ED6001C1F76506B006760E6 /* SharedAssets.xcassets in Resources */,
 				75D5BFC41F6D1A4F00E64855 /* AppAssets.xcassets in Resources */,
 				7575ADCB1F6006AC0077007B /* Main.storyboard in Resources */,
@@ -555,6 +574,7 @@
 				75D5BFAF1F6CE8AB00E64855 /* Onboarding.storyboard in Resources */,
 				6E7C927C1F7A6B1400F8D7AA /* Account.storyboard in Resources */,
 				75D5BFC21F6D196200E64855 /* OnboardingAssets.xcassets in Resources */,
+				75BEB2681F8A068100DC20E9 /* HUD.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,12 +587,26 @@
 			files = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/myfile",
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\nswiftlint autocorrect\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+		75A7A7311F851ECE00D6CB11 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Channel.framework/strip-frameworks.sh\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -623,6 +657,7 @@
 				75D5BFB81F6CF5AB00E64855 /* AddAddressTableViewController.swift in Sources */,
 				75DA59111F7A89F70065FE0D /* AddressBookEntryTableViewCell.swift in Sources */,
 				752006861F7F698300D19B5F /* O3TabBarController.swift in Sources */,
+				75BEB2621F89FB2A00DC20E9 /* O3HUD.swift in Sources */,
 				6E7C92741F7A5FBA00F8D7AA /* UINavigationController.swift in Sources */,
 				75DA59031F7A6CEF0065FE0D /* WatchOnlyAddressTableViewCell.swift in Sources */,
 				752586B11F77DD9800ED5312 /* OzoneGraphView.swift in Sources */,
@@ -797,6 +832,7 @@
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-D DEBUG -Xfrontend -warn-long-expression-type-checking=200 -Xfrontend -warn-long-function-bodies=200";
 				PRODUCT_BUNDLE_IDENTIFIER = network.o3.ios.neo.wallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRIP_BITCODE_FROM_COPIED_FILES = NO;
 				SWIFT_VERSION = 4.0;
@@ -826,6 +862,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = network.o3.ios.neo.wallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRIP_BITCODE_FROM_COPIED_FILES = NO;
 				SWIFT_VERSION = 4.0;

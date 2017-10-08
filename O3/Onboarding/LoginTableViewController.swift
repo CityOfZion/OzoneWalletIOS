@@ -16,7 +16,7 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
     @IBOutlet weak var wifTextField: UITextView!
     @IBOutlet weak var loginButton: ShadowedButton!
     var watchAddresses = [WatchAddress]()
-    
+
     func loadWatchAddresses() {
         do {
             watchAddresses = try UIApplication.appDelegate.persistentContainer.viewContext.fetch(WatchAddress.fetchRequest())
@@ -24,7 +24,7 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
             return
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -32,13 +32,24 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
         setNeedsStatusBarAppearanceUpdate()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "cameraAlt"), style: .plain, target: self, action: #selector(qrScanTapped(_:)))
         self.wifTextField.delegate = self
-        self.checkToProceed()
+        let keychain = Keychain(service: "network.o3.neo.wallet")
+        DispatchQueue.global().async {
+            do {
+                let key = try keychain
+                    .accessibility(.whenPasscodeSetThisDeviceOnly, authenticationPolicy: .userPresence)
+                    .get("ozonePrivateKey")
+                DispatchQueue.main.async { self.wifTextField.text = key }
+                self.checkToProceed()
+            } catch _ {
+                self.checkToProceed()
+            }
+        }
     }
-    
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-    
+
     @IBAction func loginButtonTapped(_ sender: Any) {
         guard let account = Account(wif: self.wifTextField.text ?? "") else {
             return
@@ -50,7 +61,6 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
                     .accessibility(.whenPasscodeSetThisDeviceOnly, authenticationPolicy: .userPresence)
                     .set(account.wif, key: "ozonePrivateKey")
                 DispatchQueue.main.async { self.performSegue(withIdentifier: "segueToMainFromLogin", sender: nil) }
-                Channel.shared().subscribe(toTopic: account.address)
             } catch let error {
                 fatalError("Unable to store private key in keychain \(error.localizedDescription)")
             }
@@ -60,11 +70,11 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
         //enable push notifcation. maybe put this in somewhere else?
         Channel.pushNotificationEnabled(true)
     }
-    
+
     @objc func qrScanTapped(_ sender: Any) {
         self.performSegue(withIdentifier: "segueToQrFromLogin", sender: nil)
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToQrFromLogin" {
             guard let dest = segue.destination as? QRScannerController else {
@@ -76,21 +86,19 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
             Authenticated.watchOnlyAddresses = watchAddresses.map {$0.address ?? ""}
         }
     }
-    
+
     func qrScanned(data: String) {
         DispatchQueue.main.async { self.wifTextField.text = data }
     }
-    
+
     @IBAction func checkToProceed() {
-        loginButton.isEnabled = wifTextField.text.isEmpty == false
+        DispatchQueue.main.async { self.loginButton.isEnabled = self.wifTextField.text.isEmpty == false }
     }
 }
 
 extension LoginTableViewController: UITextViewDelegate {
-    
+
     func textViewDidChange(_ textView: UITextView) {
         self.checkToProceed()
     }
 }
-
-

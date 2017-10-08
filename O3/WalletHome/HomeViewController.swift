@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import ScrollableGraphView
 import NeoSwift
+import Channel
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, GraphPanDelegate, ScrollableGraphViewDataSource {
     // Settings for price graph interval
@@ -43,7 +44,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     var selectedPrice: PriceData?
     var referenceCurrency: Currency = .btc
-    var watchAddresses = [WatchAddress]()
 
     var portfolioType: PortfolioType = .writable {
         didSet {
@@ -73,16 +73,21 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
 
-    func loadWatchAddresses() {
+    func loadWatchAddresses() -> [WatchAddress] {
         do {
-            watchAddresses = try UIApplication.appDelegate.persistentContainer.viewContext.fetch(WatchAddress.fetchRequest())
+            let watchAddresses: [WatchAddress] = try
+                UIApplication.appDelegate.persistentContainer.viewContext.fetch(WatchAddress.fetchRequest())
+            return watchAddresses
         } catch {
-            return
+            return []
         }
     }
 
     func loadPortfolio() {
         O3Client.shared.getPortfolioValue(self.displayedNeoAmount, gas: self.displayedGasAmount, interval: self.selectedInterval.rawValue) {result in
+            O3HUD.stop {
+
+            }
             switch result {
             case .failure:
                 print(result)
@@ -111,15 +116,15 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 print(result)
                 for asset in accountState.balances {
                     if !fromReadOnly {
-                        if asset.id == NeoSwift.AssetId.neoAssetId.rawValue {
+                        if asset.id.contains(NeoSwift.AssetId.neoAssetId.rawValue) {
                             self.writeableNeoBalance = Int(asset.value) ?? 0
-                        } else if asset.id == NeoSwift.AssetId.gasAssetId.rawValue {
+                        } else if asset.id.contains(NeoSwift.AssetId.gasAssetId.rawValue) {
                             self.writeableGasBalance = Double(asset.value) ?? 0
                         }
                     } else {
-                        if asset.id == NeoSwift.AssetId.neoAssetId.rawValue {
+                        if asset.id.contains(NeoSwift.AssetId.neoAssetId.rawValue) {
                             self.readOnlyNeoBalance += (Int(asset.value) ?? 0)
-                        } else if asset.id == NeoSwift.AssetId.gasAssetId.rawValue {
+                        } else if asset.id.contains(NeoSwift.AssetId.gasAssetId.rawValue) {
                             self.readOnlyGasBalance += (Double(asset.value) ?? 0)
                         }
                     }
@@ -135,8 +140,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
      * However the display in the graph and asset cells will vary depending on
      * on the portfolio you wish to display read, write, or read + write
      */
-    func getBalance(displayType: PortfolioType) {
-        self.portfolioType = displayType
+    @objc func getBalance() {
         self.readOnlyNeoBalance = 0
         self.readOnlyGasBalance = 0
         self.group = DispatchGroup()
@@ -145,9 +149,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             loadBalanceData(fromReadOnly: false, address: address)
         }
 
-        for address in Authenticated.watchOnlyAddresses ?? [] {
+        for watchAddress in loadWatchAddresses() {
             group?.enter()
-            loadBalanceData(fromReadOnly: true, address: address)
+            loadBalanceData(fromReadOnly: true, address: watchAddress.address!)
         }
         group?.notify(queue: .main) {
             self.loadPortfolio()
@@ -179,8 +183,20 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         walletHeaderCollectionView.reloadData()
     }
 
+    func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.getBalance), name: Notification.Name("ChangedNetwork"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.getBalance), name: Notification.Name("UpdatedWatchOnlyAddress"), object: nil)
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("ChangedNetwork"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("UpdatedWatchOnlyAddress"), object: nil)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        addObservers()
+        Channel.shared().subscribe(toTopic: (Authenticated.account?.address)!)
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: Theme.Light.textColor,
                                                                         NSAttributedStringKey.font: UIFont(name: "Avenir-Heavy", size: 32) as Any]
 
@@ -192,7 +208,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         assetsTable.dataSource = self
         assetsTable.tableFooterView = UIView(frame: .zero)
 
-        getBalance(displayType: self.portfolioType)
+        getBalance()
 
         //control the size of the graph area here
         self.assetsTable.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height * 0.5)

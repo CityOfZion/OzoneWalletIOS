@@ -33,13 +33,32 @@ struct Theme {
     }
 }
 
-struct Neo {
-    static var isTestnet = true
-    static var client: NeoClient {
-        if isTestnet {
-            return NeoClient.sharedTest
+class Neo {
+    static var isTestnet = true {
+        didSet {
+            NotificationCenter.default.post(name: Notification.Name("ChangedNetwork"), object: nil)
+            if isTestnet {
+                Authenticated.account?.network = .test
+            } else {
+                Authenticated.account?.network = .main
+            }
         }
-        return NeoClient.sharedMain
+    }
+    static var sharedTest: NeoClient?
+    static var sharedMain: NeoClient?
+
+    static var client: NeoClient {
+        if sharedTest == nil {
+            sharedTest = NeoClient.sharedTest
+        }
+        if sharedMain == nil {
+            sharedMain = NeoClient.sharedMain
+        }
+
+        if isTestnet {
+            return sharedTest!
+        }
+        return sharedMain!
     }
 }
 

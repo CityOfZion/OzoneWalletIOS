@@ -13,7 +13,7 @@ import Lottie
 import KeychainAccess
 
 class SendTableViewController: UITableViewController, AddressSelectDelegate, QRScanDelegate {
-    var testAddress = "AJs38kijktEuM22sjfXqfjZ734RqR4H6JW"
+
     var halfModalTransitioningDelegate: HalfModalTransitioningDelegate?
 
     @IBOutlet weak var sendButton: UIButton!
@@ -26,8 +26,10 @@ class SendTableViewController: UITableViewController, AddressSelectDelegate, QRS
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
-        toAddressField.text = testAddress
         self.navigationController?.navigationItem.largeTitleDisplayMode = .automatic
+        let networkButton = UIBarButtonItem(title: (Authenticated.account?.network.rawValue)! + "Net", style: .plain, target: nil, action: nil)
+        networkButton.isEnabled = false
+        self.navigationItem.rightBarButtonItem = networkButton
         self.enableSendButton()
     }
 
@@ -52,16 +54,17 @@ class SendTableViewController: UITableViewController, AddressSelectDelegate, QRS
                 let keychain = Keychain(service: "network.o3.neo.wallet")
                 DispatchQueue.global().async {
                     do {
-                        let password = try keychain
+                        _ = try keychain
                             .authenticationPrompt("Authenticate to send transaction")
                             .get("ozonePrivateKey")
+                        O3HUD.start()
                         Authenticated.account?.sendAssetTransaction(asset: assetId, amount: amount, toAddress: toAddress) { completed, _ in
-                            self.transactionCompleted = completed ?? false
-                            DispatchQueue.main.async {
+                            O3HUD.stop {
+                                self.transactionCompleted = completed ?? false
                                 self.performSegue(withIdentifier: "segueToTransactionComplete", sender: nil)
                             }
                         }
-                    } catch let error {
+                    } catch _ {
                     }
                 }
             }

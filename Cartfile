@@ -2,3 +2,4 @@ github "philackm/ScrollableGraphView" ~> 4.0.2
 github "airbnb/lottie-ios" "master"
 github "kishikawakatsumi/KeychainAccess"
 github "HarshilShah/DeckTransition" ~> 1.0
+github "CityOfZion/neo-swift" "master"
