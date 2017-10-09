@@ -85,9 +85,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     func loadPortfolio() {
         O3Client.shared.getPortfolioValue(self.displayedNeoAmount, gas: self.displayedGasAmount, interval: self.selectedInterval.rawValue) {result in
-            O3HUD.stop {
-
-            }
             switch result {
             case .failure:
                 print(result)
@@ -99,7 +96,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                     self.walletHeaderCollectionView.reloadData()
                     self.assetsTable.reloadData()
                     if self.firstTimeGraphLoad {
-                        self.graphView.reload()
+                        self.getBalance()
                         self.firstTimeGraphLoad = false
                     }
                 }
@@ -143,17 +140,20 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @objc func getBalance() {
         self.readOnlyNeoBalance = 0
         self.readOnlyGasBalance = 0
+        self.tabBarController?.tabBar.isUserInteractionEnabled = false
         self.group = DispatchGroup()
         if let address = Authenticated.account?.address {
             group?.enter()
             loadBalanceData(fromReadOnly: false, address: address)
         }
 
-        for watchAddress in loadWatchAddresses() {
-            group?.enter()
-            loadBalanceData(fromReadOnly: true, address: watchAddress.address!)
+        for watchAddress in self.loadWatchAddresses() {
+            self.group?.enter()
+            self.loadBalanceData(fromReadOnly: true, address: watchAddress.address!)
         }
+
         group?.notify(queue: .main) {
+            self.tabBarController?.tabBar.isUserInteractionEnabled = true
             self.loadPortfolio()
         }
     }
@@ -216,10 +216,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         assetsTable.dataSource = self
         assetsTable.tableFooterView = UIView(frame: .zero)
 
-        getBalance()
-
         //control the size of the graph area here
         self.assetsTable.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height * 0.5)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.getBalance()
     }
 
     /*
