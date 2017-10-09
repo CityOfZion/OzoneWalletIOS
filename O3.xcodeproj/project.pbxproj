@@ -37,6 +37,7 @@
 		751666B01F80C190009ACC07 /* TransactionWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751666AF1F80C190009ACC07 /* TransactionWebViewController.swift */; };
 		751666B21F80C290009ACC07 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 751666B11F80C290009ACC07 /* WebKit.framework */; };
 		75179F021F7620E700F4C67F /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75179F011F7620E700F4C67F /* Double.swift */; };
+		7518C0001F8B49D500FBA0BA /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7518BFFF1F8B49D500FBA0BA /* UserDefaultsManager.swift */; };
 		752006861F7F698300D19B5F /* O3TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752006851F7F698300D19B5F /* O3TabBarController.swift */; };
 		752006871F7F6F5D00D19B5F /* HalfModalPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7520067F1F7F68AA00D19B5F /* HalfModalPresentationController.swift */; };
 		752006881F7F6F5D00D19B5F /* HalfModalTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752006801F7F68B900D19B5F /* HalfModalTransitioningDelegate.swift */; };
@@ -148,6 +149,7 @@
 		751666AF1F80C190009ACC07 /* TransactionWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionWebViewController.swift; sourceTree = "<group>"; };
 		751666B11F80C290009ACC07 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		75179F011F7620E700F4C67F /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		7518BFFF1F8B49D500FBA0BA /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		7520067F1F7F68AA00D19B5F /* HalfModalPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalPresentationController.swift; sourceTree = "<group>"; };
 		752006801F7F68B900D19B5F /* HalfModalTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalTransitioningDelegate.swift; sourceTree = "<group>"; };
 		752006811F7F68B900D19B5F /* HalfModalInteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalInteractiveTransition.swift; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 				75BEB2551F88CBC000DC20E9 /* fidget_spinner.json */,
 				6ED600111F762189006760E6 /* O3.entitlements */,
 				75D5BFBB1F6D0EC400E64855 /* Global.swift */,
+				7518BFFF1F8B49D500FBA0BA /* UserDefaultsManager.swift */,
 				7533B2A41F7F671C00A21B89 /* Transitions */,
 				75D5BFC51F6D1D2B00E64855 /* UIControls */,
 				75CEACE41F6678A4005974CE /* Extensions */,
@@ -616,6 +619,7 @@
 				752006881F7F6F5D00D19B5F /* HalfModalTransitioningDelegate.swift in Sources */,
 				752006891F7F6F5D00D19B5F /* HalfModalInteractiveTransition.swift in Sources */,
 				7520068A1F7F6F5D00D19B5F /* HalfModalTransitionAnimator.swift in Sources */,
+				7518C0001F8B49D500FBA0BA /* UserDefaultsManager.swift in Sources */,
 				755D8F561F665F8200058434 /* HomeViewController.swift in Sources */,
 				75DA59051F7A6CFB0065FE0D /* AddAddressTableViewCell.swift in Sources */,
 				752006901F7FD0FF00D19B5F /* AddressSelectTableViewController.swift in Sources */,

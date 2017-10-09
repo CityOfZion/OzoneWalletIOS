@@ -26,9 +26,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                                         NSAttributedStringKey.font: UIFont(name: "Avenir-Heavy", size: 32) as Any]
     }
 
+    func registerDefaults() {
+        let userDefaultsDefaults = [
+            "networkKey": "test"
+        ]
+        UserDefaults.standard.register(defaults: userDefaultsDefaults)
+    }
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         self.setupChannel()
         self.setupApperances()
+        self.registerDefaults()
         return true
     }
 

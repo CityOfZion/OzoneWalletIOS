@@ -83,6 +83,7 @@ class OnboardingViewController: UIViewController, UICollectionViewDelegate, UICo
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToWelcome" {
             Authenticated.account = Account()
+            Authenticated.account?.network = UserDefaultsManager.network
         }
     }
 }

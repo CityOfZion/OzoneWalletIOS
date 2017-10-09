@@ -62,10 +62,11 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
                     .set(account.wif, key: "ozonePrivateKey")
                 DispatchQueue.main.async { self.performSegue(withIdentifier: "segueToMainFromLogin", sender: nil) }
             } catch let error {
-                fatalError("Unable to store private key in keychain \(error.localizedDescription)")
+                return
             }
         }
         Authenticated.account = account
+        account.network = UserDefaultsManager.network
         //subscribe to a topic which is an address to receive push notification
         //enable push notifcation. maybe put this in somewhere else?
         Channel.pushNotificationEnabled(true)
