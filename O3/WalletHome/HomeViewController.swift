@@ -196,7 +196,15 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         addObservers()
-        Channel.shared().subscribe(toTopic: (Authenticated.account?.address)!)
+
+        if UserDefaults.standard.string(forKey: "subscribedAddress") != Authenticated.account?.address {
+            Channel.shared().unsubscribe(fromTopic: "*") {
+                Channel.shared().subscribe(toTopic: (Authenticated.account?.address)!)
+                UserDefaults.standard.set(Authenticated.account?.address, forKey: "subscribedAddress")
+                UserDefaults.standard.synchronize()
+            }
+        }
+
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: Theme.Light.textColor,
                                                                         NSAttributedStringKey.font: UIFont(name: "Avenir-Heavy", size: 32) as Any]
 

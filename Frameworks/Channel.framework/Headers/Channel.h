@@ -11,6 +11,7 @@
 #import "CHNotification.h"
 #import "CHNotificationButton.h"
 #import "CHMessage.h"
+#import "CHBlock.h"
 
 @class Channel;
 @class CHNotification;
@@ -61,6 +62,7 @@ typedef void (^DidCheckUnseenMessage)(NSInteger numberOfNewMessages);
 - (void)appendTags:(NSDictionary* _Nonnull)tags;
 
 - (void)subscribeToTopic:(NSString* _Nonnull)topic;
+- (void)unsubscribeFromTopic:(NSString* _Nonnull)topic block:(_Nonnull DidFinish)block;
 
 - (void)startReceivingRealtimeUpdate;
 
