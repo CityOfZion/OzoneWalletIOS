@@ -85,9 +85,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     func loadPortfolio() {
         O3Client.shared.getPortfolioValue(self.displayedNeoAmount, gas: self.displayedGasAmount, interval: self.selectedInterval.rawValue) {result in
-            O3HUD.stop {
-
-            }
             switch result {
             case .failure:
                 print(result)
@@ -212,6 +209,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         //control the size of the graph area here
         self.assetsTable.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height * 0.5)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        getBalance()
     }
 
     /*
