@@ -34,16 +34,6 @@ struct Theme {
 }
 
 class Neo {
-    static var isTestnet = true {
-        didSet {
-            NotificationCenter.default.post(name: Notification.Name("ChangedNetwork"), object: nil)
-            if isTestnet {
-                Authenticated.account?.network = .test
-            } else {
-                Authenticated.account?.network = .main
-            }
-        }
-    }
     static var sharedTest: NeoClient?
     static var sharedMain: NeoClient?
 
@@ -55,7 +45,7 @@ class Neo {
             sharedMain = NeoClient.sharedMain
         }
 
-        if isTestnet {
+        if UserDefaultsManager.network == .test {
             return sharedTest!
         }
         return sharedMain!

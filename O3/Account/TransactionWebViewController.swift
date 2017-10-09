@@ -24,7 +24,7 @@ class TransactionWebViewController: UIViewController, WKUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         var urlString = ""
-        if Neo.isTestnet {
+        if UserDefaultsManager.network == .test {
             urlString = "https://neoscan-testnet.io/transaction/"
         } else {
             urlString = "https://neoscan.io/transaction/"

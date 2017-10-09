@@ -49,7 +49,7 @@ class SendTableViewController: UITableViewController, AddressSelectDelegate, QRS
 
     func send(assetId: AssetId, assetName: String, amount: Double, toAddress: String) {
         DispatchQueue.main.async {
-            let message = "Are you sure you want to send \(amount) \(assetName) to \(toAddress)"
+            let message = "Are you sure you want to send \(amount) \(assetName) to \(toAddress) on the \(Authenticated.account?.network.rawValue)Net"
             OzoneAlert.confirmDialog(message: message, cancelTitle: "Cancel", confirmTitle: "Confirm", didCancel: {}) {
                 let keychain = Keychain(service: "network.o3.neo.wallet")
                 DispatchQueue.global().async {
