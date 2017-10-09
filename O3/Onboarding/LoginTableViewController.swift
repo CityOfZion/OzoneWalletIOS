@@ -62,7 +62,7 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
                     .set(account.wif, key: "ozonePrivateKey")
                 DispatchQueue.main.async { self.performSegue(withIdentifier: "segueToMainFromLogin", sender: nil) }
             } catch let error {
-                fatalError("Unable to store private key in keychain \(error.localizedDescription)")
+                return
             }
         }
         Authenticated.account = account
