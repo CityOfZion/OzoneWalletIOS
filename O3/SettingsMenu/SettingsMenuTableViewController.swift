@@ -17,7 +17,7 @@ class SettingsMenuTableViewController: UITableViewController, HalfModalPresentab
     @IBOutlet weak var networkView: UIView!
     @IBOutlet weak var networkCell: UITableViewCell!
 
-    var netString = Neo.isTestnet ? "Network: Test Network": "Network: Main Network" {
+    var netString = UserDefaultsManager.network == .test ? "Network: Test Network": "Network: Main Network" {
         didSet {
             self.setNetLabel()
         }
@@ -50,12 +50,12 @@ class SettingsMenuTableViewController: UITableViewController, HalfModalPresentab
        let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         let testNetAction = UIAlertAction(title: "Test Network", style: .default) { _ in
-            Neo.isTestnet = true
+            UserDefaultsManager.network = .test
             self.netString = "Network: Test Network"
         }
 
         let mainNetAction = UIAlertAction(title: "Main Network", style: .default) { _ in
-            Neo.isTestnet = false
+            UserDefaultsManager.network = .main
             self.netString = "Network: Main Network"
         }
 

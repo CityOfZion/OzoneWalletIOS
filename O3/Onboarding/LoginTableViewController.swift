@@ -66,6 +66,7 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
             }
         }
         Authenticated.account = account
+        account.network = UserDefaultsManager.network
         //subscribe to a topic which is an address to receive push notification
         //enable push notifcation. maybe put this in somewhere else?
         Channel.pushNotificationEnabled(true)
