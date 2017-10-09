@@ -68,13 +68,8 @@ class OnboardingViewController: UIViewController, UICollectionViewDelegate, UICo
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        //TODO: FIX THIS TO BE RELATIVE TO SAFE AREA
         let screenSize = UIScreen.main.bounds
         return CGSize(width: screenSize.width, height: screenSize.height * 0.6)
-    }
-
-    @IBAction func addAddressButtonTapped(_ sender: Any) {
-        performSegue(withIdentifier: "segueToAddAddress", sender: nil)
     }
 
     @IBAction func loginButtonTapped(_ sender: Any) {

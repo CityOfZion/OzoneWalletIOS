@@ -81,7 +81,6 @@
 		75D5BFB21F6CED5900E64855 /* OnboardingHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D5BFB11F6CED5900E64855 /* OnboardingHomeViewController.swift */; };
 		75D5BFB41F6CEF2E00E64855 /* OnboardingCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D5BFB31F6CEF2E00E64855 /* OnboardingCollectionCell.swift */; };
 		75D5BFB61F6CF59C00E64855 /* LoginTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D5BFB51F6CF59C00E64855 /* LoginTableViewController.swift */; };
-		75D5BFB81F6CF5AB00E64855 /* AddAddressTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D5BFB71F6CF5AB00E64855 /* AddAddressTableViewController.swift */; };
 		75D5BFBA1F6CF5E200E64855 /* WelcomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D5BFB91F6CF5E200E64855 /* WelcomeTableViewController.swift */; };
 		75D5BFBC1F6D0EC400E64855 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D5BFBB1F6D0EC400E64855 /* Global.swift */; };
 		75D5BFC21F6D196200E64855 /* OnboardingAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75D5BFC11F6D196200E64855 /* OnboardingAssets.xcassets */; };
@@ -193,7 +192,6 @@
 		75D5BFB11F6CED5900E64855 /* OnboardingHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingHomeViewController.swift; sourceTree = "<group>"; };
 		75D5BFB31F6CEF2E00E64855 /* OnboardingCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionCell.swift; sourceTree = "<group>"; };
 		75D5BFB51F6CF59C00E64855 /* LoginTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTableViewController.swift; sourceTree = "<group>"; };
-		75D5BFB71F6CF5AB00E64855 /* AddAddressTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressTableViewController.swift; sourceTree = "<group>"; };
 		75D5BFB91F6CF5E200E64855 /* WelcomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeTableViewController.swift; sourceTree = "<group>"; };
 		75D5BFBB1F6D0EC400E64855 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		75D5BFC11F6D196200E64855 /* OnboardingAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = OnboardingAssets.xcassets; sourceTree = "<group>"; };
@@ -438,7 +436,6 @@
 				75D5BFAE1F6CE8AB00E64855 /* Onboarding.storyboard */,
 				75D5BFB11F6CED5900E64855 /* OnboardingHomeViewController.swift */,
 				75D5BFB51F6CF59C00E64855 /* LoginTableViewController.swift */,
-				75D5BFB71F6CF5AB00E64855 /* AddAddressTableViewController.swift */,
 				75D5BFB91F6CF5E200E64855 /* WelcomeTableViewController.swift */,
 				75D5BFB31F6CEF2E00E64855 /* OnboardingCollectionCell.swift */,
 				75D5BFC11F6D196200E64855 /* OnboardingAssets.xcassets */,
@@ -654,7 +651,6 @@
 				751666B01F80C190009ACC07 /* TransactionWebViewController.swift in Sources */,
 				7550940D1F779EEE00127B4F /* WalletHeaderCollectionCell.swift in Sources */,
 				755D8F5A1F66606C00058434 /* GasAssetCell.swift in Sources */,
-				75D5BFB81F6CF5AB00E64855 /* AddAddressTableViewController.swift in Sources */,
 				75DA59111F7A89F70065FE0D /* AddressBookEntryTableViewCell.swift in Sources */,
 				752006861F7F698300D19B5F /* O3TabBarController.swift in Sources */,
 				75BEB2621F89FB2A00DC20E9 /* O3HUD.swift in Sources */,
