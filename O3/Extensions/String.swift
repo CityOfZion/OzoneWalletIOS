@@ -71,10 +71,10 @@ extension String {
         switch referenceCurrency {
         case .btc:
             amountChange = latestPrice.averageBTC - previousPrice.averageBTC
-            percentChange = (amountChange / previousPrice.averageBTC) * 100
+            percentChange = 0 < previousPrice.averageBTC ? (amountChange / previousPrice.averageBTC) * 100 : 0
         case .usd:
             amountChange = latestPrice.averageUSD - previousPrice.averageUSD
-            percentChange = (amountChange / previousPrice.averageUSD) * 100
+            percentChange = 0 < previousPrice.averageUSD ? (amountChange / previousPrice.averageUSD) * 100 : 0
         }
         return String(format:"%.2f%@", percentChange, "%")
     }
