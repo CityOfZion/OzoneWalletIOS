@@ -48,14 +48,14 @@ extension String {
         case .btc:
             amountChange = latestPrice.averageBTC - previousPrice.averageBTC
             amountChangeString = String.formattedAmountChange(amount: amountChange, currency: .btc)
-            percentChange = (amountChange / previousPrice.averageBTC) * 100
+            percentChange = 0 < previousPrice.averageBTC ? (amountChange / previousPrice.averageBTC) * 100 : 0
             if amountChange == 0 {
                 percentChange = 0
             }
         case .usd:
             amountChange = latestPrice.averageUSD - previousPrice.averageUSD
             amountChangeString = String.formattedAmountChange(amount: amountChange, currency: .usd)
-            percentChange = (amountChange / previousPrice.averageUSD) * 100
+            percentChange = 0 < previousPrice.averageUSD ? (amountChange / previousPrice.averageUSD) * 100 : 0
             if amountChange == 0 {
                 percentChange = 0
             }
