@@ -129,7 +129,7 @@ class AssetDetailViewController: UIViewController, GraphPanDelegate, ScrollableG
                 referenceCurrencyOriginalValue = originalValue.averageUSD
                 self.amountLabel.text = USD(amount: Float(referenceCurrencyCurrentValue)).formattedString()
             }
-            let percentChange = ((referenceCurrencyCurrentValue - referenceCurrencyOriginalValue) / referenceCurrencyOriginalValue * 100)
+            let percentChange = 0 < referenceCurrencyOriginalValue ? ((referenceCurrencyCurrentValue - referenceCurrencyOriginalValue) / referenceCurrencyOriginalValue * 100) : 0
             self.percentChangeLabel.text = String(format:"%.2f%@", percentChange, "%")
             self.percentChangeLabel.textColor = percentChange >= 0 ? Theme.Light.green : Theme.Light.red
 
