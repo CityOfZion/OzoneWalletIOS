@@ -27,8 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func registerDefaults() {
-        let userDefaultsDefaults = [
-            "networkKey": "test"
+        let userDefaultsDefaults: [String: Any] = [
+            "networkKey": "main",
+            "usedDefaultSeedKey": true
         ]
         UserDefaults.standard.register(defaults: userDefaultsDefaults)
     }

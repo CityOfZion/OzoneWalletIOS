@@ -169,17 +169,20 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
             DispatchQueue.main.async {
                 //HUD something to notify user that claim succeeded
                 //done claiming
-                self.isClaiming = false
-                //if claim succeeded then fire the timer to refresh claimable gas again.
-                self.refreshClaimableGasTimer = Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(AccountViewController.loadClaimableGAS), userInfo: nil, repeats: true)
-                self.refreshClaimableGasTimer?.fire()
-                self.loadNeoData()
-                self.loadClaimableGAS()
+                O3HUD.stop {
+                    self.isClaiming = false
+                    //if claim succeeded then fire the timer to refresh claimable gas again.
+                    self.refreshClaimableGasTimer = Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(AccountViewController.loadClaimableGAS), userInfo: nil, repeats: true)
+                    self.refreshClaimableGasTimer?.fire()
+                    self.loadNeoData()
+                    self.loadClaimableGAS()
+                }
             }
         }
     }
     @IBAction func claimTapped(_ sender: Any) {
         let now = Date().timeIntervalSince1970
+        O3HUD.start()
         //save latest claim time interval here to limit user to only claim every 5 minutes
         UserDefaults.standard.set(now, forKey: "lastetClaimDate")
         UserDefaults.standard.synchronize()
@@ -196,6 +199,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         //to be able to claim. we need to send the entire NEO to ourself.
         Authenticated.account?.sendAssetTransaction(asset: AssetId.neoAssetId, amount: Double(self.neoBalance!), toAddress: (Authenticated.account?.address)!) { completed, _ in
             if completed == false {
+                O3HUD.stop {}
                 //HUD or something
                 //in case it's error we then enable the button again.
                 self.claimButon?.isEnabled = true
