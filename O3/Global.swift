@@ -16,23 +16,6 @@ struct Authenticated {
     static var contacts: [(String, String)]?
 }
 
-struct Theme {
-    struct Light {
-        static let cornerRadius: CGFloat = 6.0
-        static let borderWidth: CGFloat = 1.0
-        static let borderColor = UIColor(named: "borderColor")!
-        static let textColor = UIColor(named: "textColor")!
-        static let primary = UIColor(named: "lightThemePrimary")!
-        static let grey = UIColor(named: "grey")!
-        static let lightgrey = UIColor(named: "lightGreyTransparent")!
-        static let red = UIColor(named: "lightThemeRed")!
-        static let orange = UIColor(named: "lightThemeOrange")!
-        static let green = UIColor(named: "lightThemeGreen")!
-        static let smallText = UIFont(name: "Avenir-Book", size: 12)
-        static let barButtonItemFont = UIFont(name: "Avenir-Heavy", size: 16)
-    }
-}
-
 class Neo {
     static var sharedTest: NeoClient?
     static var sharedMain: NeoClient?

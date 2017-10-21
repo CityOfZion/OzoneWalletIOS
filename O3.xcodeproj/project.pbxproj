@@ -97,6 +97,7 @@
 		75DA59131F7A8A070065FE0D /* AddContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DA59121F7A8A070065FE0D /* AddContactTableViewCell.swift */; };
 		75E14E541F7D27F900BEAE22 /* O3.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 75E14E521F7D27F900BEAE22 /* O3.xcdatamodeld */; };
 		75E14E571F7D2AEC00BEAE22 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E14E561F7D2AEC00BEAE22 /* UIApplication.swift */; };
+		75E28F311F9B3B34006C6E37 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E28F301F9B3B34006C6E37 /* ThemeManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -209,6 +210,7 @@
 		75DA59121F7A8A070065FE0D /* AddContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContactTableViewCell.swift; sourceTree = "<group>"; };
 		75E14E531F7D27F900BEAE22 /* O3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = O3.xcdatamodel; sourceTree = "<group>"; };
 		75E14E561F7D2AEC00BEAE22 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		75E28F301F9B3B34006C6E37 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -346,6 +348,7 @@
 				6ED600111F762189006760E6 /* O3.entitlements */,
 				75D5BFBB1F6D0EC400E64855 /* Global.swift */,
 				7518BFFF1F8B49D500FBA0BA /* UserDefaultsManager.swift */,
+				75E28F301F9B3B34006C6E37 /* ThemeManager.swift */,
 				7533B2A41F7F671C00A21B89 /* Transitions */,
 				75D5BFC51F6D1D2B00E64855 /* UIControls */,
 				75CEACE41F6678A4005974CE /* Extensions */,
@@ -656,6 +659,7 @@
 				7550940D1F779EEE00127B4F /* WalletHeaderCollectionCell.swift in Sources */,
 				755D8F5A1F66606C00058434 /* GasAssetCell.swift in Sources */,
 				75DA59111F7A89F70065FE0D /* AddressBookEntryTableViewCell.swift in Sources */,
+				75E28F311F9B3B34006C6E37 /* ThemeManager.swift in Sources */,
 				752006861F7F698300D19B5F /* O3TabBarController.swift in Sources */,
 				75BEB2621F89FB2A00DC20E9 /* O3HUD.swift in Sources */,
 				6E7C92741F7A5FBA00F8D7AA /* UINavigationController.swift in Sources */,
