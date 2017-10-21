@@ -1019,6 +1019,11 @@
                                         <constraint firstItem="2Kx-xS-T4t" firstAttribute="leading" secondItem="va1-eZ-JsJ" secondAttribute="leading" constant="18" id="fOD-2H-Ydr"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="blockCountLabel" destination="BP8-br-A3Y" id="IiN-au-RnQ"/>
+                                    <outlet property="peersLabel" destination="7fl-ph-FRW" id="N33-rq-vcF"/>
+                                    <outlet property="seedNameLabel" destination="2Kx-xS-T4t" id="RIy-8W-pRr"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

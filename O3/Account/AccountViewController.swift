@@ -170,6 +170,9 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
                 //HUD something to notify user that claim succeeded
                 //done claiming
                 O3HUD.stop {
+                    DispatchQueue.main.async {
+                        OzoneAlert.alertDialog(message: "Your claim has succeeded, it may take a few minutes to be reflected in your transaction history", dismissTitle: "Ok") { }
+                    }
                     self.isClaiming = false
                     //if claim succeeded then fire the timer to refresh claimable gas again.
                     self.refreshClaimableGasTimer = Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(AccountViewController.loadClaimableGAS), userInfo: nil, repeats: true)

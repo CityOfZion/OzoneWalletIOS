@@ -31,7 +31,20 @@ class UserDefaultsManager {
             return UserDefaults.standard.bool(forKey: useDefaultSeedKey)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: useDefaultSeedKey)
+            if newValue {
+                Neo.client.getBestNode { result in
+                    switch result {
+                    case .failure:
+                        return
+                    case .success(let node):
+                        UserDefaults.standard.set(newValue, forKey: useDefaultSeedKey)
+                        UserDefaultsManager.seed = node
+                    }
+                }
+            } else {
+                UserDefaults.standard.set(newValue, forKey: useDefaultSeedKey)
+                UserDefaults.standard.synchronize()
+            }
         }
     }
 
@@ -41,9 +54,10 @@ class UserDefaultsManager {
             return UserDefaults.standard.string(forKey: seedKey)!
         }
         set {
-            //Authenticated.account?.seed = newValue
+            Neo.client.seed = newValue
             UserDefaults.standard.set(newValue, forKey: seedKey)
             NotificationCenter.default.post(name: Notification.Name("ChangedNetwork"), object: nil)
+            UserDefaults.standard.synchronize()
         }
     }
 }

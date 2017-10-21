@@ -12,14 +12,26 @@ import UIKit
 class NetworkTypeCell: UITableViewCell {
     @IBOutlet weak var networkTypeButton: UIButton!
     @IBOutlet weak var seedTypeButton: UIButton!
-    var delegate: UITableViewController?
+    weak var delegate: NetworkTableViewController?
 
     @IBAction func networkTypeTapped(_ sender: Any) {
         let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         let testNetAction = UIAlertAction(title: "Test Network", style: .default) { _ in
-            UserDefaultsManager.network = .test
-            self.networkTypeButton.setTitle("Test Network", for: UIControlState())
+            if !UserDefaultsManager.useDefaultSeed {
+                OzoneAlert.confirmDialog(message: "This action will revert you to the defualt seed configuration", cancelTitle: "Cancel", confirmTitle: "Confirm", didCancel: {}) {
+                    UserDefaultsManager.network = .test
+                    UserDefaultsManager.useDefaultSeed = true
+                    DispatchQueue.main.async {
+                        self.networkTypeButton.setTitle("Test Network", for: UIControlState())
+                        self.seedTypeButton.setTitle("Default", for: UIControlState())
+                    }
+                }
+            } else {
+                UserDefaultsManager.network = .test
+                self.networkTypeButton.setTitle("Test Network", for: UIControlState())
+            }
+            self.delegate?.updateNodeData()
         }
 
         let mainNetAction = UIAlertAction(title: "Main Network", style: .default) { _ in
@@ -36,6 +48,7 @@ class NetworkTypeCell: UITableViewCell {
                 UserDefaultsManager.network = .main
                 self.networkTypeButton.setTitle("Main Network", for: UIControlState())
             }
+            self.delegate?.updateNodeData()
         }
 
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
@@ -55,6 +68,7 @@ class NetworkTypeCell: UITableViewCell {
         } else {
             OzoneAlert.confirmDialog(message: "Are you sure you want to revert to the default seed configuration?", cancelTitle: "Cancel", confirmTitle: "Confirms", didCancel: { }) {
                 UserDefaultsManager.useDefaultSeed = true
+                DispatchQueue.main.async {  self.seedTypeButton.setTitle("Default", for: UIControlState()) }
             }
         }
     }

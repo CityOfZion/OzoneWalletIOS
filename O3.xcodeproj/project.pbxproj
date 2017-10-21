@@ -470,9 +470,9 @@
 		75DA58F91F7A67690065FE0D /* SettingsMenu */ = {
 			isa = PBXGroup;
 			children = (
-				75E28F291F9B222C006C6E37 /* Network */,
 				7501C0261F7BBFF400B4B2FF /* AddressEntryTableViewController.swift */,
 				7501E8421F79536300123EA8 /* SettingsMenuTableViewController.swift */,
+				75E28F291F9B222C006C6E37 /* Network */,
 				75DA590D1F7A87090065FE0D /* AddressBook */,
 				75DA590C1F7A86EA0065FE0D /* WatchOnlyAddresses */,
 				7520068B1F7F8AC400D19B5F /* PrivateKeyViewController.swift */,
