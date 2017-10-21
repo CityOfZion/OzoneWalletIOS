@@ -38,7 +38,7 @@ class SettingsMenuTableViewController: UITableViewController, HalfModalPresentab
         showPrivateKeyView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showPrivateKey)))
         contactView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(sendMail)))
         shareView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(share)))
-        networkView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(changeNetwork)))
+        //networkView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(changeNetwork)))
         setNetLabel()
     }
 

@@ -97,6 +97,9 @@
 		75DA59131F7A8A070065FE0D /* AddContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DA59121F7A8A070065FE0D /* AddContactTableViewCell.swift */; };
 		75E14E541F7D27F900BEAE22 /* O3.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 75E14E521F7D27F900BEAE22 /* O3.xcdatamodeld */; };
 		75E14E571F7D2AEC00BEAE22 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E14E561F7D2AEC00BEAE22 /* UIApplication.swift */; };
+		75E28F2B1F9B2241006C6E37 /* NetworkTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E28F2A1F9B2241006C6E37 /* NetworkTableViewController.swift */; };
+		75E28F2D1F9B249F006C6E37 /* NetworkTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E28F2C1F9B249F006C6E37 /* NetworkTypeCell.swift */; };
+		75E28F2F1F9B24B4006C6E37 /* NetworkSeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E28F2E1F9B24B4006C6E37 /* NetworkSeedCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -209,6 +212,9 @@
 		75DA59121F7A8A070065FE0D /* AddContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContactTableViewCell.swift; sourceTree = "<group>"; };
 		75E14E531F7D27F900BEAE22 /* O3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = O3.xcdatamodel; sourceTree = "<group>"; };
 		75E14E561F7D2AEC00BEAE22 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		75E28F2A1F9B2241006C6E37 /* NetworkTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTableViewController.swift; sourceTree = "<group>"; };
+		75E28F2C1F9B249F006C6E37 /* NetworkTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTypeCell.swift; sourceTree = "<group>"; };
+		75E28F2E1F9B24B4006C6E37 /* NetworkSeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSeedCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -466,6 +472,7 @@
 			children = (
 				7501C0261F7BBFF400B4B2FF /* AddressEntryTableViewController.swift */,
 				7501E8421F79536300123EA8 /* SettingsMenuTableViewController.swift */,
+				75E28F291F9B222C006C6E37 /* Network */,
 				75DA590D1F7A87090065FE0D /* AddressBook */,
 				75DA590C1F7A86EA0065FE0D /* WatchOnlyAddresses */,
 				7520068B1F7F8AC400D19B5F /* PrivateKeyViewController.swift */,
@@ -491,6 +498,16 @@
 				75DA59121F7A8A070065FE0D /* AddContactTableViewCell.swift */,
 			);
 			path = AddressBook;
+			sourceTree = "<group>";
+		};
+		75E28F291F9B222C006C6E37 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				75E28F2A1F9B2241006C6E37 /* NetworkTableViewController.swift */,
+				75E28F2C1F9B249F006C6E37 /* NetworkTypeCell.swift */,
+				75E28F2E1F9B24B4006C6E37 /* NetworkSeedCell.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -637,11 +654,13 @@
 				75DA59091F7A815E0065FE0D /* OzoneAlert.swift in Sources */,
 				6EA7F9291F6E32B600E31B78 /* PriceData.swift in Sources */,
 				7575ADC61F6006AC0077007B /* AppDelegate.swift in Sources */,
+				75E28F2B1F9B2241006C6E37 /* NetworkTableViewController.swift in Sources */,
 				757FEB711F77E2790099E26F /* UIView.swift in Sources */,
 				75D5BFBA1F6CF5E200E64855 /* WelcomeTableViewController.swift in Sources */,
 				7520068C1F7F8AC400D19B5F /* PrivateKeyViewController.swift in Sources */,
 				75DA590B1F7A83940065FE0D /* UIViewController.swift in Sources */,
 				7501E8431F79536300123EA8 /* SettingsMenuTableViewController.swift in Sources */,
+				75E28F2F1F9B24B4006C6E37 /* NetworkSeedCell.swift in Sources */,
 				75D5BFB21F6CED5900E64855 /* OnboardingHomeViewController.swift in Sources */,
 				6E97C4B31F7FB91000526FF0 /* AssetCollectionViewCell.swift in Sources */,
 				7520174B1F74071900090C4F /* QRScannerController.swift in Sources */,
@@ -674,6 +693,7 @@
 				757FEB731F77F07B0099E26F /* String.swift in Sources */,
 				6E61BBD11F729D3B00D2B30B /* Money.swift in Sources */,
 				7513FADD1F695433003450ED /* AssetsHeaderCell.swift in Sources */,
+				75E28F2D1F9B249F006C6E37 /* NetworkTypeCell.swift in Sources */,
 				75CEACE61F6678C0005974CE /* Color.swift in Sources */,
 				75CEACF61F66BEEE005974CE /* SendButtonCell.swift in Sources */,
 				755D8F581F66605B00058434 /* NeoAssetCell.swift in Sources */,
