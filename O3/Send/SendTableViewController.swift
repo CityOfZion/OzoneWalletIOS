@@ -12,7 +12,7 @@ import NeoSwift
 import Lottie
 import KeychainAccess
 
-class SendTableViewController: UITableViewController, AddressSelectDelegate, QRScanDelegate {
+class SendTableViewController: ThemedTableViewController, AddressSelectDelegate, QRScanDelegate {
 
     var halfModalTransitioningDelegate: HalfModalTransitioningDelegate?
 
@@ -21,11 +21,23 @@ class SendTableViewController: UITableViewController, AddressSelectDelegate, QRS
     @IBOutlet weak var amountField: UITextField!
     @IBOutlet weak var noteTextView: UITextView!
     @IBOutlet weak var toAddressField: UITextField!
+    @IBOutlet weak var toLabel: UILabel!
+    @IBOutlet weak var assetLabel: UILabel!
+    @IBOutlet weak var amountLabel: UILabel!
+    @IBOutlet weak var noteLabel: UILabel!
+
     var transactionCompleted: Bool!
 
+    func addThemedElements() {
+        themedTitleLabels = [toLabel, assetLabel, amountLabel, noteLabel]
+        themedTextFields = [toAddressField, amountField]
+        themedTextViews = [noteTextView]
+    }
+
     override func viewDidLoad() {
+        addThemedElements()
         super.viewDidLoad()
-        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
+        tableView.tableFooterView = UIView(frame: .zero)
         self.navigationController?.navigationItem.largeTitleDisplayMode = .automatic
         let networkButton = UIBarButtonItem(title: (Authenticated.account?.network.rawValue)! + "Net", style: .plain, target: nil, action: nil)
         networkButton.isEnabled = false

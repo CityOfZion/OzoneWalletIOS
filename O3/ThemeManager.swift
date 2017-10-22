@@ -10,8 +10,7 @@ import Foundation
 /*
 struct Theme {
     struct Light {
-        static let cornerRadius: CGFloat = 6.0
-        static let borderWidth: CGFloat = 1.0
+ 
         static let borderColor = UIColor(named: "borderColor")!
         static let textColor = UIColor(named: "textColor")!
         static let primary = UIColor(named: "lightThemePrimary")!
@@ -20,137 +19,192 @@ struct Theme {
         static let red = UIColor(named: "lightThemeRed")!
         static let orange = UIColor(named: "lightThemeOrange")!
         static let green = UIColor(named: "lightThemeGreen")!
-        static let smallText = UIFont(name: "Avenir-Book", size: 12)
-        static let barButtonItemFont = UIFont(name: "Avenir-Heavy", size: 16)
+ 
     }
 }
 */
-enum Theme {
-    
+enum Theme: String {
+
     case light, dark
-    
-    var primary: UIColor {
+
+    //Customizing the Navigation Bar
+    var statusBarStyle: UIStatusBarStyle {
+        switch self {
+        case .light:
+            return .default
+        case .dark:
+            return .lightContent
+        }
+    }
+    /*
+    var navigationBackgroundImage: UIImage? {
+        return self == .theme1 ? UIImage(named: "navBackground") : nil
+    }*/
+    /*
+    var tabBarBackgroundImage: UIImage? {
+        return self == .theme1 ? UIImage(named: "tabBarBackground") : nil
+    }*/
+
+    var backgroundColor: UIColor {
+        switch self {
+        case .light:
+            return UIColor.white
+        case .dark:
+            return UIColor(named: "darkThemeBackground")!
+        }
+    }
+
+    var primaryColor: UIColor {
         switch self {
         case .light:
             return UIColor(named: "lightThemePrimary")!
         case .dark:
-            return UIColor(named: "darkThemePrimary")!
+            return UIColor(named: "lightThemePrimary")!
         }
     }
-    
-    //Customizing the Navigation Bar
-    var barStyle: UIBarStyle {
+
+    var disabledColor: UIColor {
         switch self {
         case .light:
-            return .default
-        case .theme2:
-            return .black
+            return UIColor(named: "lightGreyTransparent")!
+        case .dark:
+            return UIColor(named: "lightGreyTransparent")!
         }
     }
-    
-    var navigationBackgroundImage: UIImage? {
-        return self == .theme1 ? UIImage(named: "navBackground") : nil
-    }
-    
-    var tabBarBackgroundImage: UIImage? {
-        return self == .theme1 ? UIImage(named: "tabBarBackground") : nil
-    }
-    
-    var backgroundColor: UIColor {
+
+    var accentColor: UIColor {
         switch self {
-        case .theme1:
-            return UIColor().colorFromHexString("ffffff")
-        case .theme2:
-            return UIColor().colorFromHexString("000000")
+        case .light:
+            return UIColor(named: "lightThemeOrange")!
+        case .dark:
+            return UIColor(named: "lightThemeOrange")!
         }
     }
-    
-    var secondaryColor: UIColor {
-        switch self {
-        case .theme1:
-            return UIColor().colorFromHexString("ffffff")
-        case .theme2:
-            return UIColor().colorFromHexString("000000")
-        }
-    }
-    
+
     var titleTextColor: UIColor {
         switch self {
-        case .theme1:
-            return UIColor().colorFromHexString("ffffff")
-        case .theme2:
-            return UIColor().colorFromHexString("000000")
+        case .light:
+            return UIColor.black
+        case .dark:
+            return UIColor.white
         }
     }
-    var subtitleTextColor: UIColor {
+
+    var textColor: UIColor {
         switch self {
-        case .theme1:
-            return UIColor().colorFromHexString("ffffff")
-        case .theme2:
-            return UIColor().colorFromHexString("000000")
+        case .light:
+            return UIColor(named: "textColor")!
+        case .dark:
+            return UIColor(named: "textColor")!
+        }
+    }
+
+    var lightTextColor: UIColor {
+        switch self {
+        case .light:
+            return UIColor.lightGray
+        case .dark:
+            return UIColor.lightGray
+        }
+    }
+
+    var errorColor: UIColor {
+        switch self {
+        case .light:
+            return UIColor(named: "lightThemeRed")!
+        case .dark:
+            return UIColor(named: "lightThemeRed")!
+        }
+    }
+
+    var positiveGainColor: UIColor {
+        switch self {
+        case .light:
+            return UIColor(named: "lightThemeGreen")!
+        case .dark:
+            return UIColor(named: "lightThemeGreen")!
+        }
+    }
+
+    var negativeLossColor: UIColor {
+        switch self {
+        case .light:
+            return UIColor(named: "lightThemeRed")!
+        case .dark:
+            return UIColor(named: "lightThemeRed")!
+        }
+    }
+
+    var borderColor: UIColor {
+        switch self {
+        case .light:
+            return UIColor.lightGray
+        case .dark:
+            return UIColor.lightGray
+        }
+    }
+
+    var cardColor: UIColor {
+        switch self {
+        case .light:
+            return UIColor.white
+        case .dark:
+            return UIColor.gray
+        }
+    }
+
+    var seperatorColor: UIColor {
+        switch self {
+        case .light:
+            return UITableView().separatorColor!
+        case .dark:
+            return UIColor.darkGray
+        }
+    }
+
+    var textFieldBackgroundColor: UIColor {
+        switch self {
+        case .light:
+            return UITextField().backgroundColor!
+        case .dark:
+            return self.backgroundColor
+        }
+    }
+
+    var textFieldPlaceHolderColor: UIColor {
+        switch self {
+        case .light:
+            return UIColor(hexString: "C7C7CD")!
+        case .dark:
+            return UIColor.lightGray
+        }
+    }
+
+    var textFieldTextColor: UIColor {
+        switch self {
+        case .light:
+            return UIColor.black
+        case .dark:
+            return UIColor.white
         }
     }
 }
 
-// Enum declaration
-let SelectedThemeKey = "SelectedTheme"
-
 // This will let you use a theme in the app.
 class ThemeManager {
-    
-    // ThemeManager
-    static func currentTheme() -> Theme {
-        if let storedTheme = (UserDefaults.standard.value(forKey: SelectedThemeKey) as AnyObject).integerValue {
-            return Theme(rawValue: storedTheme)!
-        } else {
-            return .theme2
-        }
-    }
-    
+    static let cornerRadius: CGFloat = 6.0
+    static let borderWidth: CGFloat = 1.0
+    static let smallText = UIFont(name: "Avenir-Book", size: 12)!
+    static let barButtonItemFont = UIFont(name: "Avenir-Heavy", size: 16)!
+    static let largeTitleFont = UIFont(name: "Avenir-Heavy", size: 32)!
+
     static func applyTheme(theme: Theme) {
         // First persist the selected theme using NSUserDefaults.
-        UserDefaults.standard.setValue(theme.rawValue, forKey: SelectedThemeKey)
+        UserDefaultsManager.theme = theme
         UserDefaults.standard.synchronize()
-        
+
         // You get your current (selected) theme and apply the main color to the tintColor property of your application’s window.
         let sharedApplication = UIApplication.shared
-        sharedApplication.delegate?.window??.tintColor = theme.mainColor
-        
-        UINavigationBar.appearance().barStyle = theme.barStyle
-        UINavigationBar.appearance().setBackgroundImage(theme.navigationBackgroundImage, for: .default)
-        UINavigationBar.appearance().backIndicatorImage = UIImage(named: "backArrow")
-        UINavigationBar.appearance().backIndicatorTransitionMaskImage = UIImage(named: "backArrowMaskFixed")
-        
-        UITabBar.appearance().barStyle = theme.barStyle
-        UITabBar.appearance().backgroundImage = theme.tabBarBackgroundImage
-        
-        let tabIndicator = UIImage(named: "tabBarSelectionIndicator")?.withRenderingMode(.alwaysTemplate)
-        let tabResizableIndicator = tabIndicator?.resizableImage(withCapInsets: UIEdgeInsets(top: 0, left: 2.0, bottom: 0, right: 2.0))
-        UITabBar.appearance().selectionIndicatorImage = tabResizableIndicator
-        
-        let controlBackground = UIImage(named: "controlBackground")?.withRenderingMode(.alwaysTemplate)
-            .resizableImage(withCapInsets: UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3))
-        let controlSelectedBackground = UIImage(named: "controlSelectedBackground")?
-            .withRenderingMode(.alwaysTemplate)
-            .resizableImage(withCapInsets: UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3))
-        
-        UISegmentedControl.appearance().setBackgroundImage(controlBackground, for: .normal, barMetrics: .default)
-        UISegmentedControl.appearance().setBackgroundImage(controlSelectedBackground, for: .selected, barMetrics: .default)
-        
-        UIStepper.appearance().setBackgroundImage(controlBackground, for: .normal)
-        UIStepper.appearance().setBackgroundImage(controlBackground, for: .disabled)
-        UIStepper.appearance().setBackgroundImage(controlBackground, for: .highlighted)
-        UIStepper.appearance().setDecrementImage(UIImage(named: "fewerPaws"), for: .normal)
-        UIStepper.appearance().setIncrementImage(UIImage(named: "morePaws"), for: .normal)
-        
-        UISlider.appearance().setThumbImage(UIImage(named: "sliderThumb"), for: .normal)
-        UISlider.appearance().setMaximumTrackImage(UIImage(named: "maximumTrack")?
-            .resizableImage(withCapInsets: UIEdgeInsets(top: 0, left: 0.0, bottom: 0, right: 6.0)), for: .normal)
-        UISlider.appearance().setMinimumTrackImage(UIImage(named: "minimumTrack")?
-            .withRenderingMode(.alwaysTemplate)
-            .resizableImage(withCapInsets: UIEdgeInsets(top: 0, left: 6.0, bottom: 0, right: 0)), for: .normal)
-        
-        UISwitch.appearance().onTintColor = theme.mainColor.withAlphaComponent(0.3)
-        UISwitch.appearance().thumbTintColor = theme.mainColor
+        sharedApplication.delegate?.window??.tintColor = UserDefaultsManager.theme.primaryColor
     }
 }

@@ -61,7 +61,7 @@ class WalletHeaderCollectionCell: UICollectionViewCell {
             }
             percentChangeLabel.text = String.percentChangeString(latestPrice: latestPrice, previousPrice: previousPrice,
                                                                  with: selectedInterval, referenceCurrency: referenceCurrency)
-            percentChangeLabel.textColor = latestPrice.averageBTC >= previousPrice.averageBTC ? Theme.Light.green : Theme.Light.red
+            percentChangeLabel.textColor = latestPrice.averageBTC >= previousPrice.averageBTC ? UserDefaultsManager.theme.positiveGainColor : UserDefaultsManager.theme.negativeLossColor
         }
     }
 

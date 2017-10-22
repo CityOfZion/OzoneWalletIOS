@@ -240,10 +240,14 @@
                     </tableView>
                     <connections>
                         <outlet property="amountField" destination="bGg-fs-bbW" id="ZIh-qB-VjE"/>
+                        <outlet property="amountLabel" destination="8C1-08-qRh" id="brl-Nf-fHX"/>
+                        <outlet property="assetLabel" destination="UzJ-KV-tT0" id="w9Z-yO-rL4"/>
                         <outlet property="assetTypeButton" destination="NIC-To-69s" id="mMg-N2-W6d"/>
+                        <outlet property="noteLabel" destination="2sr-74-96e" id="XIt-qy-dcf"/>
                         <outlet property="noteTextView" destination="GLS-bH-Ps3" id="qPE-U7-pFZ"/>
                         <outlet property="sendButton" destination="hc8-Fj-ahK" id="PuG-1n-UTv"/>
                         <outlet property="toAddressField" destination="vaJ-pL-bR0" id="v9r-AF-obl"/>
+                        <outlet property="toLabel" destination="9eu-wM-z0U" id="a9J-pT-Gbb"/>
                         <segue destination="apJ-tv-Dug" kind="presentation" identifier="segueToTransactionComplete" id="FwU-th-5pk"/>
                         <segue destination="VdC-Si-otx" kind="presentation" identifier="segueToAddressSelect" id="rNF-NR-QQ1"/>
                         <segue destination="Leg-a3-ZXh" kind="presentation" identifier="segueToQR" id="1oY-bc-yk9"/>

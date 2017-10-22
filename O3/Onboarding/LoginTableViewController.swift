@@ -38,8 +38,15 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
                 let key = try keychain
                     .accessibility(.whenPasscodeSetThisDeviceOnly, authenticationPolicy: .userPresence)
                     .get("ozonePrivateKey")
-                DispatchQueue.main.async { self.wifTextField.text = key }
-                self.checkToProceed()
+                O3HUD.start()
+                guard let account = Account(wif: key!) else {
+                    return
+                }
+                Authenticated.account = account
+                account.network = UserDefaultsManager.network
+                O3HUD.stop {
+                    DispatchQueue.main.async { self.performSegue(withIdentifier: "segueToMainFromLogin", sender: nil) }
+                }
             } catch _ {
                 self.checkToProceed()
             }

@@ -14,6 +14,11 @@ class O3TabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if UserDefaultsManager.theme == .dark {
+            tabBar.barStyle = .black
+        } else {
+            tabBar.barStyle = .default
+        }
 
         tabBar.items?[2].image = UIImage(named:"cog")?.withRenderingMode(.alwaysOriginal)
         tabBar.items?[2].title = ""

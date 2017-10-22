@@ -16,22 +16,22 @@ class ShadowedButton: UIButton {
 
     override var isEnabled: Bool {
         didSet {
-            self.backgroundColor = isEnabled == true ? Theme.Light.primary : Theme.Light.lightgrey
+            self.backgroundColor = isEnabled == true ?  UserDefaultsManager.theme.primaryColor : UserDefaultsManager.theme.disabledColor
             if shadowLayer != nil {
                 shadowLayer.shadowOpacity = isEnabled == true ? 0.8 : 0
-                shadowLayer.fillColor = isEnabled == true ? Theme.Light.primary.cgColor : UIColor.clear.cgColor
+                shadowLayer.fillColor = isEnabled == true ? UserDefaultsManager.theme.primaryColor.cgColor : UIColor.clear.cgColor
             }
         }
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.backgroundColor = isEnabled == true ? Theme.Light.primary : Theme.Light.lightgrey
+        self.backgroundColor = isEnabled == true ? UserDefaultsManager.theme.primaryColor : UserDefaultsManager.theme.disabledColor
         if shadowLayer == nil {
             shadowLayer = CAShapeLayer()
             shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: 22).cgPath
-            shadowLayer.fillColor = isEnabled == true ? Theme.Light.primary.cgColor : UIColor.clear.cgColor
-            shadowLayer.shadowColor = Theme.Light.grey.cgColor
+            shadowLayer.fillColor = isEnabled == true ? UserDefaultsManager.theme.primaryColor.cgColor : UIColor.clear.cgColor
+            shadowLayer.shadowColor = UserDefaultsManager.theme.disabledColor.cgColor
             shadowLayer.shadowPath = shadowLayer.path
             shadowLayer.shadowOffset = CGSize(width: 2.0, height: 2.0)
             shadowLayer.shadowOpacity =  isEnabled == true ? 0.8 : 0

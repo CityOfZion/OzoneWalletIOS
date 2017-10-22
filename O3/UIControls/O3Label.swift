@@ -11,7 +11,7 @@ import UIKit
 class O3Label: UILabel {
 
     func setupView() {
-        self.textColor = Theme.Light.textColor
+        self.textColor = UserDefaultsManager.theme.textColor
     }
 
     required init?(coder aDecoder: NSCoder) {

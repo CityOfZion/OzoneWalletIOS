@@ -13,6 +13,7 @@ class AssetView: UIView {
     var shadowLayer: CAShapeLayer!
 
     func setupView() {
+        self.backgroundColor = UserDefaultsManager.theme.cardColor
         self.layer.cornerRadius = 10.0
         self.clipsToBounds = false
         if shadowLayer == nil {

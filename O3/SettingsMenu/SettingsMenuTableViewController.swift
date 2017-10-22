@@ -32,13 +32,13 @@ class SettingsMenuTableViewController: UITableViewController, HalfModalPresentab
 
     override func viewDidLoad() {
         navigationController?.hideHairline()
-        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: Theme.Light.textColor, NSAttributedStringKey.font: UIFont(name: "Avenir-Heavy", size: 32) as Any]
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UserDefaultsManager.theme.textColor, NSAttributedStringKey.font: UIFont(name: "Avenir-Heavy", size: 32) as Any]
         let rightBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "angle-up"), style: .plain, target: self, action: #selector(SettingsMenuTableViewController.maximize(_:)))
         navigationItem.rightBarButtonItem = rightBarButton
         showPrivateKeyView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showPrivateKey)))
         contactView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(sendMail)))
         shareView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(share)))
-        networkView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(changeNetwork)))
+        //networkView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(changeNetwork)))
         setNetLabel()
     }
 

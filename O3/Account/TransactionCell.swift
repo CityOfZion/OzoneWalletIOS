@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class TransactionCell: UITableViewCell {
+class TransactionCell: ThemedTableCell {
     enum TransactionType: String {
         case send = "Sent"
         case claim = "Claimed"
@@ -31,6 +31,12 @@ class TransactionCell: UITableViewCell {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
 
+    override func awakeFromNib() {
+        titleLabels = [assetLabel]
+        subtitleLabels = [addressLabel]
+        super.awakeFromNib()
+    }
+
     var data: TransactionData? {
         didSet {
             //transactionTypeLabel.text = "Confirmed on Block: ".uppercased()
@@ -38,7 +44,7 @@ class TransactionCell: UITableViewCell {
             assetLabel.text = data?.asset.uppercased()
             addressLabel.text = data?.address
             amountLabel.text = data?.amount.stringWithSign((data?.precision)!)
-            amountLabel.textColor = data?.amount ?? 0 <= 0 ? Theme.Light.red : Theme.Light.green
+            amountLabel.textColor = data?.amount ?? 0 <= 0 ? UserDefaultsManager.theme.negativeLossColor : UserDefaultsManager.theme.positiveGainColor
         }
     }
 }

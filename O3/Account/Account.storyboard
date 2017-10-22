@@ -314,6 +314,8 @@
                         <outlet property="assetCollectionView" destination="SBM-t3-t6u" id="kpt-dZ-taE"/>
                         <outlet property="claimButon" destination="Pc0-bV-reg" id="YVa-Fh-Y4t"/>
                         <outlet property="historyTableView" destination="tLu-DP-NUN" id="baR-oe-uhA"/>
+                        <outlet property="myAddressButton" destination="gmO-Le-5uH" id="aq1-fy-3eJ"/>
+                        <outlet property="sendButton" destination="5Mo-qx-AsP" id="2RI-5j-fPF"/>
                         <segue destination="KBv-H9-1mv" kind="show" identifier="segueToSend" id="sPV-dI-HhF"/>
                         <segue destination="SXR-uC-W8D" kind="custom" identifier="myAddress" customClass="DeckSegue" id="jpz-Vc-738"/>
                         <segue destination="tP3-ti-kjI" kind="show" identifier="segueToWebview" id="xoD-tI-Tmf"/>

@@ -15,7 +15,9 @@ class MyAddressViewController: UIViewController {
     @IBOutlet var qrCodeContainerView: UIView!
 
     func configureView() {
-         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: Theme.Light.textColor, NSAttributedStringKey.font: UIFont(name: "Avenir-Heavy", size: 32) as Any]
+         navigationController?.navigationBar.largeTitleTextAttributes = [
+            NSAttributedStringKey.foregroundColor: UserDefaultsManager.theme.textColor,
+            NSAttributedStringKey.font: ThemeManager.largeTitleFont as Any]
         self.navigationController?.hideHairline()
         addressLabel.text = Authenticated.account?.address
         qrImageView.image = UIImage.init(qrData: (Authenticated.account?.address)!, width: qrImageView.bounds.size.width, height: qrImageView.bounds.size.height)
