@@ -19,6 +19,7 @@ class TransactionsHeaderCell: ThemedTableCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
+        applyTheme()
         historyTitleLabel.text = "Transaction history"
     }
 }

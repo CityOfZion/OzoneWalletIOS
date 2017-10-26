@@ -25,6 +25,7 @@ class WatchOnlyAddressTableViewCell: ThemedTableCell {
 
     var data: Data? {
         didSet {
+            applyTheme()
             addressLabel.text = data?.address ?? ""
             nicknameLabel.text = data?.addressName ?? ""
         }

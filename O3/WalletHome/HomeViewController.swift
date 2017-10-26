@@ -170,9 +170,17 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
         }
     }
 
+    @objc func updateGraphAppearance(_ sender: Any) {
+        DispatchQueue.main.async {
+            self.graphView.removeFromSuperview()
+            self.panView.removeFromSuperview()
+            self.setupGraphView()
+            self.loadPortfolio()
+        }
+    }
+
     func setupGraphView() {
         graphView = ScrollableGraphView.ozoneTheme(frame: graphViewContainer.bounds, dataSource: self)
-        themedGraphs.append(graphView)
         graphViewContainer.embed(graphView)
 
         panView = GraphPanView(frame: graphViewContainer.bounds)
@@ -199,11 +207,13 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
     func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.getBalance), name: Notification.Name("ChangedNetwork"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.getBalance), name: Notification.Name("UpdatedWatchOnlyAddress"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateGraphAppearance), name: Notification.Name("ChangedTheme"), object: nil)
     }
 
     deinit {
         NotificationCenter.default.removeObserver(self, name: Notification.Name("ChangedNetwork"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("UpdatedWatchOnlyAddress"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("ChangedTheme"), object: nil)
     }
 
     override func viewDidLoad() {

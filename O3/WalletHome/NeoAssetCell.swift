@@ -31,6 +31,7 @@ class NeoAssetCell: ThemedTableCell {
 
     var data: NeoAssetCell.Data? {
         didSet {
+            applyTheme()
             guard let amount = data?.amount,
                 let referenceCurrency = data?.referenceCurrency,
                 let latestPrice = data?.latestPrice,

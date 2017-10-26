@@ -12,12 +12,16 @@ class AssetCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var assetNameLabel: UILabel!
     @IBOutlet weak var assetAmountLabel: UILabel!
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    func updateThemedUI() {
         DispatchQueue.main.async {
             self.assetNameLabel.textColor = UserDefaultsManager.theme.titleTextColor
             self.assetAmountLabel.textColor = UserDefaultsManager.theme.titleTextColor
         }
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        updateThemedUI()
     }
 
     struct AssetData {
@@ -28,6 +32,7 @@ class AssetCollectionViewCell: UICollectionViewCell {
 
     var data: AssetData? {
         didSet {
+            updateThemedUI()
             assetNameLabel.text = data?.assetName
             assetAmountLabel.text = data?.assetAmount.string((data?.precision)!)
         }
