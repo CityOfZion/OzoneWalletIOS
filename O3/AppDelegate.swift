@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func registerDefaults() {
         let userDefaultsDefaults: [String: Any] = [
             "networkKey": "main",
-            "usedDefaultSeedKey": true
+            "usedDefaultSeedKey": false
         ]
         UserDefaults.standard.register(defaults: userDefaultsDefaults)
     }
