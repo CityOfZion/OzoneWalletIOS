@@ -22,7 +22,6 @@ class NetworkTableViewController: UITableViewController, NetworkSeedCellDelegate
     }
 
     func updateNodeData() {
-        O3HUD.start()
         let group = DispatchGroup()
         for node in tableNodes {
             group.enter()
@@ -38,6 +37,7 @@ class NetworkTableViewController: UITableViewController, NetworkSeedCellDelegate
                             group.leave()
                         case .success(let count):
                             node.peerCount = UInt(count)
+                            DispatchQueue.main.async { self.tableView.reloadData() }
                             group.leave()
                         }
                     }
@@ -46,9 +46,7 @@ class NetworkTableViewController: UITableViewController, NetworkSeedCellDelegate
         }
 
         group.notify(queue: .main) {
-            O3HUD.stop {
-                DispatchQueue.main.async { self.tableView.reloadData() }
-            }
+            DispatchQueue.main.async { self.tableView.reloadData() }
         }
     }
 
