@@ -39,8 +39,7 @@ class TransactionCell: ThemedTableCell {
 
     var data: TransactionData? {
         didSet {
-            //transactionTypeLabel.text = "Confirmed on Block: ".uppercased()
-           // transactionTimeLabel.text = data?.date.description //format
+            applyTheme()
             assetLabel.text = data?.asset.uppercased()
             addressLabel.text = data?.address
             amountLabel.text = data?.amount.stringWithSign((data?.precision)!)

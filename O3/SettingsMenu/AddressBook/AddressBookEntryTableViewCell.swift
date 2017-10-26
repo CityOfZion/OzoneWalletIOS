@@ -25,6 +25,7 @@ class AddressBookEntryTableViewCell: ThemedTableCell {
 
     var data: AddressBookEntryTableViewCell.Data? {
         didSet {
+            applyTheme()
             addressNameLabel.text = data?.addressName ?? ""
             addressLabel.text = data?.address ?? ""
         }

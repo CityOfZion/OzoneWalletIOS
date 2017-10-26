@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import ScrollableGraphView
 
 class ThemedViewController: UIViewController {
     var themedPrimaryButtons = [UIButton]()
@@ -17,7 +16,6 @@ class ThemedViewController: UIViewController {
     var themedCollectionViews = [UICollectionView]()
     var themedTransparentButtons = [UIButton]()
     var themedBackgroundViews = [UIView]()
-    var themedGraphs = [ScrollableGraphView]()
 
     func addThemeObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.changedTheme), name: Notification.Name("ChangedTheme"), object: nil)
@@ -93,10 +91,6 @@ class ThemedViewController: UIViewController {
 
             for view in self.themedBackgroundViews {
                 view.backgroundColor = UserDefaultsManager.theme.backgroundColor
-            }
-
-            for view in self.themedGraphs {
-                view.backgroundFillColor = UserDefaultsManager.theme.backgroundColor
             }
         }
     }
