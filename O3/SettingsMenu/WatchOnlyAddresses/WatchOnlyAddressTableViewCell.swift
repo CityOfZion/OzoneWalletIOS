@@ -9,9 +9,14 @@
 import Foundation
 import UIKit
 
-class WatchOnlyAddressTableViewCell: UITableViewCell {
+class WatchOnlyAddressTableViewCell: ThemedTableCell {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var nicknameLabel: UILabel!
+
+    override func awakeFromNib() {
+        subtitleLabels = [addressLabel]
+        super.awakeFromNib()
+    }
 
     struct Data {
         var addressName: String
@@ -20,6 +25,7 @@ class WatchOnlyAddressTableViewCell: UITableViewCell {
 
     var data: Data? {
         didSet {
+            applyTheme()
             addressLabel.text = data?.address ?? ""
             nicknameLabel.text = data?.addressName ?? ""
         }

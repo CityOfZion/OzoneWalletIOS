@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class GasAssetCell: UITableViewCell {
+class GasAssetCell: ThemedTableCell {
     @IBOutlet weak var assetTitleLabel: UILabel!
     @IBOutlet weak var assetAmountLabel: UILabel!
     @IBOutlet weak var assetFiatPriceLabel: UILabel!
@@ -23,8 +23,15 @@ class GasAssetCell: UITableViewCell {
         var firstPrice: PriceData
     }
 
+    override func awakeFromNib() {
+        titleLabels = [assetTitleLabel, assetAmountLabel, assetFiatAmountLabel]
+        subtitleLabels = [assetFiatPriceLabel]
+        super.awakeFromNib()
+    }
+
     var data: GasAssetCell.Data? {
         didSet {
+            applyTheme()
             guard let amount = data?.amount,
                 let referenceCurrency = data?.referenceCurrency,
                 let latestPrice = data?.latestPrice,
@@ -47,7 +54,7 @@ class GasAssetCell: UITableViewCell {
 
             assetPercentChangeLabel.text = String.percentChangeStringShort(latestPrice: latestPrice, previousPrice: firstPrice,
                                                                            referenceCurrency: referenceCurrency)
-            assetPercentChangeLabel.textColor = referencePrice >= referenceFirstPrice ? Theme.Light.green : Theme.Light.red
+            assetPercentChangeLabel.textColor = referencePrice >= referenceFirstPrice ? UserDefaultsManager.theme.positiveGainColor : UserDefaultsManager.theme.negativeLossColor
         }
     }
 }

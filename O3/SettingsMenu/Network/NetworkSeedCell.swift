@@ -14,7 +14,7 @@ protocol NetworkSeedCellDelegate: class {
     func highestBlockCount() -> UInt
 }
 
-class NetworkSeedCell: UITableViewCell {
+class NetworkSeedCell: ThemedTableCell {
     @IBOutlet weak var seedNameLabel: UILabel!
     @IBOutlet weak var blockCountLabel: UILabel!
     @IBOutlet weak var peersLabel: UILabel!
@@ -32,6 +32,7 @@ class NetworkSeedCell: UITableViewCell {
             DispatchQueue.main.async {
                 if self.node?.URL == Neo.sharedMain?.seed {
                     self.accessoryType = .checkmark
+                    self.accessoryView?.backgroundColor = UserDefaultsManager.theme.backgroundColor
                 } else {
                     self.accessoryType = .none
                 }
@@ -39,15 +40,15 @@ class NetworkSeedCell: UITableViewCell {
 
             if (delegate?.highestBlockCount() ?? 0) - (node?.blockCount ?? 0)  > 5 { //give a small amount of buffer for unaligned blocks
                 DispatchQueue.main.async {
-                    self.blockCountLabel.textColor = Theme.Light.red
-                    self.seedNameLabel.textColor = Theme.Light.red
-                    self.peersLabel.textColor = Theme.Light.red
+                    self.blockCountLabel.textColor = UserDefaultsManager.theme.errorColor
+                    self.seedNameLabel.textColor = UserDefaultsManager.theme.errorColor
+                    self.peersLabel.textColor = UserDefaultsManager.theme.errorColor
                 }
             } else {
                 DispatchQueue.main.async {
-                    self.blockCountLabel.textColor = Theme.Light.primary
-                    self.peersLabel.textColor = Theme.Light.orange
-                    self.seedNameLabel.textColor = Theme.Light.textColor
+                    self.blockCountLabel.textColor = UserDefaultsManager.theme.primaryColor
+                    self.peersLabel.textColor = UserDefaultsManager.theme.accentColor
+                    self.seedNameLabel.textColor = UserDefaultsManager.theme.titleTextColor
                 }
             }
         }

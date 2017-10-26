@@ -12,17 +12,15 @@ class WalletHomeNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        UIApplication.shared.statusBarStyle = .default
+        UIApplication.shared.statusBarStyle = UserDefaultsManager.theme.statusBarStyle
         setNeedsStatusBarAppearanceUpdate()
         self.hideHairline()
         self.navigationItem.largeTitleDisplayMode = .automatic
-        self.navigationBar.barTintColor = UIColor.white
-        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: Theme.Light.textColor,
-                                                                        NSAttributedStringKey.font: UIFont(name: "Avenir-Heavy", size: 32) as Any]
-    }
+        self.navigationBar.barTintColor = UserDefaultsManager.theme.backgroundColor
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+        self.navigationBar.isTranslucent = false
+        self.navigationBar.backgroundColor = UserDefaultsManager.theme.backgroundColor
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white,
+                                                                        NSAttributedStringKey.font: ThemeManager.largeTitleFont]
     }
-
 }

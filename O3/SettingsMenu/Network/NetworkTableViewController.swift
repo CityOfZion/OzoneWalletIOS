@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import NeoSwift
 
-class NetworkTableViewController: UITableViewController, NetworkSeedCellDelegate {
+class NetworkTableViewController: ThemedTableViewController, NetworkSeedCellDelegate {
     var testNodes = (NEONetworkMonitor.sharedInstance.network?.testNet.nodes)!
     var mainNodes = (NEONetworkMonitor.sharedInstance.network?.mainNet.nodes)!
     var tableNodes: [NEONode] {

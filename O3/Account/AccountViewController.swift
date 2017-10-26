@@ -11,11 +11,14 @@ import UIKit
 import NeoSwift
 import DeckTransition
 
-class AccountViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class AccountViewController: ThemedViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var historyTableView: UITableView!
     @IBOutlet weak var assetCollectionView: UICollectionView!
-    @IBOutlet weak var claimButon: UIButton?
+    @IBOutlet weak var claimButon: UIButton!
+    @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var myAddressButton: UIButton!
+    @IBOutlet weak var actionBarView: UIView!
 
     var transactionHistory = [TransactionHistoryEntry]()
     var neoBalance: Int?
@@ -25,6 +28,12 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     var refreshClaimableGasTimer: Timer?
     var claims: Claims?
     var isClaiming: Bool = false
+
+    func addThemedElements() {
+        themedTableViews = [historyTableView]
+        themedCollectionViews = [assetCollectionView]
+        themedTransparentButtons = [claimButon, sendButton, myAddressButton]
+    }
 
     @objc func loadNeoData() {
         Neo.client.getTransactionHistory(for: Authenticated.account?.address ?? "") { result in
@@ -36,6 +45,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
                 DispatchQueue.main.async { self.historyTableView.reloadData() }
             }
         }
+
         Neo.client.getAccountState(for: Authenticated.account?.address ?? "") { result in
             switch result {
             case .failure:
@@ -66,14 +76,14 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         let nsText = text as NSString
         let gasAmountRange = nsText.range(of: "\n" + gasAmountString)
         let titleRange = nsText.range(of: "Claim")
-        attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: Theme.Light.grey, range: gasAmountRange)
-        attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: Theme.Light.primary, range: titleRange)
+        attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: UserDefaultsManager.theme.textColor, range: gasAmountRange)
+        attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: UserDefaultsManager.theme.primaryColor, range: titleRange)
         claimButon?.setAttributedTitle(attributedString, for: .normal)
 
         let attributedStringDisabled = NSMutableAttributedString(string: text)
 
-        attributedStringDisabled.addAttribute(NSAttributedStringKey.foregroundColor, value: Theme.Light.grey.withAlphaComponent(0.5), range: gasAmountRange)
-        attributedStringDisabled.addAttribute(NSAttributedStringKey.foregroundColor, value: Theme.Light.primary.withAlphaComponent(0.5), range: titleRange)
+        attributedStringDisabled.addAttribute(NSAttributedStringKey.foregroundColor, value: UserDefaultsManager.theme.disabledColor, range: gasAmountRange)
+        attributedStringDisabled.addAttribute(NSAttributedStringKey.foregroundColor, value: UserDefaultsManager.theme.disabledColor, range: titleRange)
         claimButon?.setAttributedTitle(attributedStringDisabled, for: .disabled)
     }
 
@@ -104,19 +114,27 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     override func viewDidLoad() {
+        addThemedElements()
         super.viewDidLoad()
         self.navigationController?.hideHairline()
         self.navigationItem.largeTitleDisplayMode = .automatic
         historyTableView.delegate = self
         historyTableView.dataSource = self
-        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: Theme.Light.textColor,
-                                                                        NSAttributedStringKey.font: UIFont(name: "Avenir-Heavy", size: 32) as Any]
         loadNeoData()
         refreshClaimableGasTimer = Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(AccountViewController.loadClaimableGAS), userInfo: nil, repeats: true)
         refreshClaimableGasTimer?.fire()
 
         self.historyTableView.refreshControl = UIRefreshControl()
         self.historyTableView.refreshControl?.addTarget(self, action: #selector(loadNeoData), for: .valueChanged)
+        actionBarView!.backgroundColor = UserDefaultsManager.theme.borderColor
+    }
+
+    override func changedTheme(_ sender: Any) {
+        super.changedTheme(sender)
+        DispatchQueue.main.async {
+            self.actionBarView!.backgroundColor = UserDefaultsManager.theme.borderColor
+            self.assetCollectionView.reloadData()
+        }
     }
 
     @IBAction func sendTapped(_ sender: Any) {
@@ -316,6 +334,7 @@ extension AccountViewController: UICollectionViewDataSource, UICollectionViewDel
                 fatalError("undefined table view behavior")
             }
             cell.data = assetData
+            cell.assetBackgroundView.backgroundColor = UserDefaultsManager.theme.cardColor
             return cell
         case 1:
             let assetData = AssetCollectionViewCell.AssetData(assetName: "GAS", assetAmount: Double(gasBalance ?? 0), precision: 8)
@@ -323,6 +342,7 @@ extension AccountViewController: UICollectionViewDataSource, UICollectionViewDel
                 fatalError("undefined table view behavior")
             }
             cell.data = assetData
+            cell.assetBackgroundView.backgroundColor = UserDefaultsManager.theme.cardColor
             return cell
         default: fatalError("undefined table view behavior")
         }

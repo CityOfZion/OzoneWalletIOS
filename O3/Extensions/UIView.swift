@@ -28,6 +28,26 @@ extension UIView {
         }
     }
 
+    @IBInspectable
+    var borderColor: UIColor {
+        get {
+            return UIColor(cgColor: layer.borderColor!)
+        }
+        set {
+            layer.borderColor = newValue.cgColor
+        }
+    }
+
+    @IBInspectable
+    var borderWidth: CGFloat {
+        get {
+            return layer.borderWidth
+        }
+        set {
+            layer.borderWidth = newValue
+        }
+    }
+
     func startRotating(duration: Double = 1) {
         let kAnimationKey = "rotation"
         if self.layer.animation(forKey: kAnimationKey) == nil {

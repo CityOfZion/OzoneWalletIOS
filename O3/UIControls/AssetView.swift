@@ -11,14 +11,22 @@ import UIKit
 class AssetView: UIView {
 
     var shadowLayer: CAShapeLayer!
+    override var backgroundColor: UIColor? {
+        didSet {
+            if shadowLayer != nil {
+                shadowLayer.fillColor = UserDefaultsManager.theme.cardColor.cgColor
+            }
+        }
+    }
 
     func setupView() {
         self.layer.cornerRadius = 10.0
         self.clipsToBounds = false
+        self.backgroundColor = UserDefaultsManager.theme.cardColor
         if shadowLayer == nil {
             shadowLayer = CAShapeLayer()
             shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: 10).cgPath
-            shadowLayer.fillColor = self.backgroundColor?.cgColor
+            shadowLayer.fillColor = UserDefaultsManager.theme.cardColor.cgColor
 
             shadowLayer.shadowColor = UIColor.black.cgColor
             shadowLayer.shadowPath = shadowLayer.path
@@ -37,4 +45,5 @@ class AssetView: UIView {
     override func prepareForInterfaceBuilder() {
         self.setupView()
     }
+
 }

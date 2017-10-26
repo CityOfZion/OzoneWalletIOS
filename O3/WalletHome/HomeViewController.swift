@@ -12,7 +12,8 @@ import ScrollableGraphView
 import NeoSwift
 import Channel
 
-class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, GraphPanDelegate, ScrollableGraphViewDataSource {
+class HomeViewController: ThemedViewController, UITableViewDelegate, UITableViewDataSource, GraphPanDelegate, ScrollableGraphViewDataSource {
+
     // Settings for price graph interval
     @IBOutlet weak var walletHeaderCollectionView: UICollectionView!
 
@@ -21,6 +22,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     // Xcode 9 beta issue with outlet connections gonna just hook up two buttons for now
     @IBOutlet weak var fiveMinButton: UIButton!
     @IBOutlet weak var fifteenMinButton: UIButton!
+    @IBOutlet weak var thirtyMinButton: UIButton!
+    @IBOutlet weak var sixtyMinButton: UIButton!
+    @IBOutlet weak var oneDayButton: UIButton!
+    @IBOutlet weak var allButton: UIButton!
 
     @IBOutlet weak var graphViewContainer: UIView!
 
@@ -44,6 +49,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     var selectedPrice: PriceData?
     var referenceCurrency: Currency = .btc
+
+    func addThemedElements() {
+        themedTableViews = [assetsTable]
+        themedCollectionViews = [walletHeaderCollectionView]
+        themedTransparentButtons = [fiveMinButton, fifteenMinButton, thirtyMinButton, sixtyMinButton, oneDayButton, allButton]
+        themedBackgroundViews = [graphViewContainer]
+    }
 
     var portfolioType: PortfolioType = .writable {
         didSet {
@@ -158,6 +170,15 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
 
+    @objc func updateGraphAppearance(_ sender: Any) {
+        DispatchQueue.main.async {
+            self.graphView.removeFromSuperview()
+            self.panView.removeFromSuperview()
+            self.setupGraphView()
+            self.loadPortfolio()
+        }
+    }
+
     func setupGraphView() {
         graphView = ScrollableGraphView.ozoneTheme(frame: graphViewContainer.bounds, dataSource: self)
         graphViewContainer.embed(graphView)
@@ -186,14 +207,17 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.getBalance), name: Notification.Name("ChangedNetwork"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.getBalance), name: Notification.Name("UpdatedWatchOnlyAddress"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateGraphAppearance), name: Notification.Name("ChangedTheme"), object: nil)
     }
 
     deinit {
         NotificationCenter.default.removeObserver(self, name: Notification.Name("ChangedNetwork"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("UpdatedWatchOnlyAddress"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("ChangedTheme"), object: nil)
     }
 
     override func viewDidLoad() {
+        addThemedElements()
         super.viewDidLoad()
         addObservers()
 
@@ -205,11 +229,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
 
-        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: Theme.Light.textColor,
-                                                                        NSAttributedStringKey.font: UIFont(name: "Avenir-Heavy", size: 32) as Any]
-
-        setupGraphView()
-
         walletHeaderCollectionView.delegate = self
         walletHeaderCollectionView.dataSource = self
         assetsTable.delegate = self
@@ -218,6 +237,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         //control the size of the graph area here
         self.assetsTable.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height * 0.5)
+        setupGraphView()
     }
 
     override func viewDidAppear(_ animated: Bool) {

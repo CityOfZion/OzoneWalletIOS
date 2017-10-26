@@ -21,23 +21,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func setupApperances() {
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: Theme.Light.barButtonItemFont ?? UIFont.systemFont(ofSize: 16), NSAttributedStringKey.foregroundColor: Theme.Light.primary], for: .normal)
-        UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: Theme.Light.textColor,
-                                                                        NSAttributedStringKey.font: UIFont(name: "Avenir-Heavy", size: 32) as Any]
+        UIBarButtonItem.appearance().setTitleTextAttributes([
+            NSAttributedStringKey.font: ThemeManager.barButtonItemFont,
+            NSAttributedStringKey.foregroundColor: UserDefaultsManager.theme.primaryColor], for: .normal)
+        UINavigationBar.appearance().largeTitleTextAttributes = [
+            NSAttributedStringKey.foregroundColor: UserDefaultsManager.theme.textColor,
+            NSAttributedStringKey.font: UIFont(name: "Avenir-Heavy", size: 32) as Any]
     }
 
     func registerDefaults() {
         let userDefaultsDefaults: [String: Any] = [
             "networkKey": "main",
-            "usedDefaultSeedKey": false
+            "usedDefaultSeedKey": false,
+            "selectedThemeKey": Theme.dark.rawValue
         ]
         UserDefaults.standard.register(defaults: userDefaultsDefaults)
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        self.registerDefaults()
         self.setupChannel()
         self.setupApperances()
-        self.registerDefaults()
         return true
     }
 

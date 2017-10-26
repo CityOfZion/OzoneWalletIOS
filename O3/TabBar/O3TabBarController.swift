@@ -12,9 +12,28 @@ import UIKit
 class O3TabBarController: UITabBarController {
     var halfModalTransitioningDelegate: HalfModalTransitioningDelegate?
 
+    func addThemeObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateAppearance), name: Notification.Name("ChangedTheme"), object: nil)
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("ChangedTheme"), object: nil)
+    }
+
+    @objc func updateAppearance(_ sender: Any?) {
+        DispatchQueue.main.async {
+            if UserDefaultsManager.theme == .dark {
+                self.tabBar.barStyle = .black
+            } else {
+                self.tabBar.barStyle = .default
+            }
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        addThemeObserver()
+        updateAppearance(nil)
         tabBar.items?[2].image = UIImage(named:"cog")?.withRenderingMode(.alwaysOriginal)
         tabBar.items?[2].title = ""
         tabBar.items?[2].imageInsets = UIEdgeInsets(top: 0, left: 0, bottom: -10, right: 0)

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import ScrollableGraphView
 
-class AssetDetailViewController: UIViewController, GraphPanDelegate, ScrollableGraphViewDataSource {
+class AssetDetailViewController: ThemedViewController, GraphPanDelegate, ScrollableGraphViewDataSource {
 
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var percentChangeLabel: UILabel!
@@ -18,6 +18,11 @@ class AssetDetailViewController: UIViewController, GraphPanDelegate, ScrollableG
     @IBOutlet weak var graphContainerView: UIView!
     @IBOutlet weak var fiveMinButton: UIButton!
     @IBOutlet weak var fifteenMinButton: UIButton!
+    @IBOutlet weak var thirtyMinButton: UIButton!
+    @IBOutlet weak var sixtyMinButton: UIButton!
+    @IBOutlet weak var oneDayButton: UIButton!
+    @IBOutlet weak var allButton: UIButton!
+
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var activatedLine: UIView!
     var activatedLineCenterXAnchor: NSLayoutConstraint?
@@ -40,6 +45,11 @@ class AssetDetailViewController: UIViewController, GraphPanDelegate, ScrollableG
         case .all:
             return ""
         }
+    }
+
+    func addThemedElements() {
+        themedTransparentButtons = [fiveMinButton, fifteenMinButton, thirtyMinButton, sixtyMinButton, oneDayButton, allButton]
+        themedBackgroundViews = [graphContainerView]
     }
 
     func setupGraphView() {
@@ -67,6 +77,7 @@ class AssetDetailViewController: UIViewController, GraphPanDelegate, ScrollableG
     }
 
     override func viewDidLoad() {
+        addThemedElements()
         super.viewDidLoad()
         setupGraphView()
         navigationItem.title = selectedAsset.uppercased()
@@ -92,7 +103,7 @@ class AssetDetailViewController: UIViewController, GraphPanDelegate, ScrollableG
         }
         percentChangeLabel.text = String.percentChangeString(latestPrice: latestPrice, previousPrice: earliestPrice,
                                                              with: selectedInterval, referenceCurrency: referenceCurrency)
-        percentChangeLabel.textColor = latestPrice.averageBTC >= earliestPrice.averageBTC ? Theme.Light.green : Theme.Light.red
+        percentChangeLabel.textColor = latestPrice.averageBTC >= earliestPrice.averageBTC ? UserDefaultsManager.theme.positiveGainColor : UserDefaultsManager.theme.negativeLossColor
     }
 
     @objc func referenceCurrencyTapped(_ sender: UITapGestureRecognizer) {
@@ -131,7 +142,7 @@ class AssetDetailViewController: UIViewController, GraphPanDelegate, ScrollableG
             }
             let percentChange = 0 < referenceCurrencyOriginalValue ? ((referenceCurrencyCurrentValue - referenceCurrencyOriginalValue) / referenceCurrencyOriginalValue * 100) : 0
             self.percentChangeLabel.text = String(format:"%.2f%@", percentChange, "%")
-            self.percentChangeLabel.textColor = percentChange >= 0 ? Theme.Light.green : Theme.Light.red
+            self.percentChangeLabel.textColor = percentChange >= 0 ? UserDefaultsManager.theme.positiveGainColor : UserDefaultsManager.theme.negativeLossColor
 
             let posixString = self.priceHistory?.data.reversed()[index].time ?? ""
             timeLabel.text = posixString.intervaledDateString(self.selectedInterval)

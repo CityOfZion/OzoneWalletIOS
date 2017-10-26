@@ -29,12 +29,12 @@ class GraphPanView: UIView {
         timeLabel = UILabel(frame: CGRect(x: 15, y: 0, width: self.frame.width, height: 25))
         timeLabel.text = ""
         timeLabel.textAlignment = .center
-        timeLabel.textColor = Theme.Light.grey
-        timeLabel.font = Theme.Light.smallText
+        timeLabel.textColor = UserDefaultsManager.theme.lightTextColor
+        timeLabel.font = ThemeManager.smallText
         timeLabel.center  = CGPoint(x: verticalLineView.center.x, y: 5)
         self.addSubview(verticalLineView)
         self.addSubview(timeLabel)
-        verticalLineView.backgroundColor = Theme.Light.lightgrey
+        verticalLineView.backgroundColor = UserDefaultsManager.theme.lightTextColor
         verticalLineView.isHidden = true
 
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.graphPanned(_:)))

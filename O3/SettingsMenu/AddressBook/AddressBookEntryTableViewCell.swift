@@ -9,9 +9,14 @@
 import Foundation
 import UIKit
 
-class AddressBookEntryTableViewCell: UITableViewCell {
+class AddressBookEntryTableViewCell: ThemedTableCell {
     @IBOutlet weak var addressNameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
+
+    override func awakeFromNib() {
+        subtitleLabels = [addressLabel]
+        super.awakeFromNib()
+    }
 
     struct Data {
         var addressName: String
@@ -20,6 +25,7 @@ class AddressBookEntryTableViewCell: UITableViewCell {
 
     var data: AddressBookEntryTableViewCell.Data? {
         didSet {
+            applyTheme()
             addressNameLabel.text = data?.addressName ?? ""
             addressLabel.text = data?.address ?? ""
         }
