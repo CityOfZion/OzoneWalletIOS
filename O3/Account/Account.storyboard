@@ -26,7 +26,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="SBM-t3-t6u">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="SBM-t3-t6u">
                                 <rect key="frame" x="0.0" y="64" width="375" height="160"/>
                                 <color key="backgroundColor" name="superLightGrey"/>
                                 <constraints>
@@ -68,7 +68,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="aTv-nS-B8V" secondAttribute="bottom" constant="20" id="10M-iH-1fq"/>
                                                         <constraint firstItem="aTv-nS-B8V" firstAttribute="leading" secondItem="UNP-LZ-n43" secondAttribute="leading" constant="20" id="JHC-JE-0FY"/>
@@ -93,6 +93,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="assetAmountLabel" destination="aTv-nS-B8V" id="OBT-Wq-pIi"/>
+                                            <outlet property="assetBackgroundView" destination="UNP-LZ-n43" id="u1x-IY-YJI"/>
                                             <outlet property="assetNameLabel" destination="7jJ-ha-nKf" id="Rhl-Qp-Jsl"/>
                                         </connections>
                                     </collectionViewCell>
@@ -185,7 +186,7 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" name="borderColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="R6m-DR-WP4" firstAttribute="leading" secondItem="Z5D-f7-ShH" secondAttribute="leading" id="28b-Zp-1Jp"/>
                                     <constraint firstItem="R6m-DR-WP4" firstAttribute="top" secondItem="Z5D-f7-ShH" secondAttribute="top" constant="1" id="GKD-cw-GqR"/>
@@ -286,6 +287,7 @@
                     <tabBarItem key="tabBarItem" title="Account" id="4MA-YR-RWw"/>
                     <navigationItem key="navigationItem" title="Wallet" largeTitleDisplayMode="never" id="2lb-nD-fnZ"/>
                     <connections>
+                        <outlet property="actionBarView" destination="Z5D-f7-ShH" id="h6d-EF-HSx"/>
                         <outlet property="assetCollectionView" destination="SBM-t3-t6u" id="kpt-dZ-taE"/>
                         <outlet property="claimButon" destination="Pc0-bV-reg" id="YVa-Fh-Y4t"/>
                         <outlet property="historyTableView" destination="tLu-DP-NUN" id="baR-oe-uhA"/>
@@ -345,11 +347,19 @@
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="bEW-sc-cCW" secondAttribute="height" multiplier="1:1" id="ffU-Qv-mo3"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="3"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AJs38kijktEuM22sjfXqfjZ734RqR4H6JW" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jc8-c0-b1X">
                                         <rect key="frame" x="0.0" y="340" width="335" height="16.5"/>
                                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="12"/>
-                                        <color key="textColor" name="textColor"/>
+                                        <color key="textColor" name="lightThemePrimary"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="https://o3.network" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nyB-40-J1d">
@@ -359,7 +369,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="jc8-c0-b1X" firstAttribute="leading" secondItem="bEW-sc-cCW" secondAttribute="leading" id="9Ie-eh-Gtt"/>
                                     <constraint firstItem="jc8-c0-b1X" firstAttribute="top" secondItem="bEW-sc-cCW" secondAttribute="bottom" constant="5" id="H9e-AJ-Mj7"/>
@@ -470,11 +480,14 @@
         <image name="times" width="20" height="20"/>
         <image name="upload" width="20" height="20"/>
         <image name="wallet" width="25" height="25"/>
-        <namedColor name="borderColor">
-            <color red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="grey">
             <color red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="lightThemePrimary">
+            <color red="0.0" green="0.41176470588235292" blue="0.85098039215686272" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="lightThemePrimary">
+            <color red="0.0" green="0.41176470588235292" blue="0.85098039215686272" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="lightThemePrimary">
             <color red="0.0" green="0.41176470588235292" blue="0.85098039215686272" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

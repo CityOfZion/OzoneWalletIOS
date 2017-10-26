@@ -138,9 +138,9 @@ enum Theme: String {
     var borderColor: UIColor {
         switch self {
         case .light:
-            return UIColor.lightGray
+            return UIColor(named: "borderColor")!
         case .dark:
-            return UIColor.lightGray
+            return UIColor(named: "darkThemeSecondaryBackground")!
         }
     }
 
@@ -149,7 +149,7 @@ enum Theme: String {
         case .light:
             return UIColor.white
         case .dark:
-            return UIColor.gray
+            return UIColor(named: "darkThemeSecondaryBackground")!
         }
     }
 
@@ -158,7 +158,7 @@ enum Theme: String {
         case .light:
             return UITableView().separatorColor!
         case .dark:
-            return UIColor.darkGray
+            return UIColor(named: "darkThemeSecondaryBackground")!
         }
     }
 

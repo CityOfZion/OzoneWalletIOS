@@ -18,6 +18,7 @@ class AccountViewController: ThemedViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var claimButon: UIButton!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var myAddressButton: UIButton!
+    @IBOutlet weak var actionBarView: UIView!
 
     var transactionHistory = [TransactionHistoryEntry]()
     var neoBalance: Int?
@@ -44,6 +45,7 @@ class AccountViewController: ThemedViewController, UITableViewDelegate, UITableV
                 DispatchQueue.main.async { self.historyTableView.reloadData() }
             }
         }
+
         Neo.client.getAccountState(for: Authenticated.account?.address ?? "") { result in
             switch result {
             case .failure:
@@ -124,6 +126,15 @@ class AccountViewController: ThemedViewController, UITableViewDelegate, UITableV
 
         self.historyTableView.refreshControl = UIRefreshControl()
         self.historyTableView.refreshControl?.addTarget(self, action: #selector(loadNeoData), for: .valueChanged)
+        actionBarView!.backgroundColor = UserDefaultsManager.theme.borderColor
+    }
+
+    override func changedTheme(_ sender: Any) {
+        super.changedTheme(sender)
+        DispatchQueue.main.async {
+            self.actionBarView!.backgroundColor = UserDefaultsManager.theme.borderColor
+            self.assetCollectionView.reloadData()
+        }
     }
 
     @IBAction func sendTapped(_ sender: Any) {
@@ -323,6 +334,7 @@ extension AccountViewController: UICollectionViewDataSource, UICollectionViewDel
                 fatalError("undefined table view behavior")
             }
             cell.data = assetData
+            cell.assetBackgroundView.backgroundColor = UserDefaultsManager.theme.cardColor
             return cell
         case 1:
             let assetData = AssetCollectionViewCell.AssetData(assetName: "GAS", assetAmount: Double(gasBalance ?? 0), precision: 8)
@@ -330,6 +342,7 @@ extension AccountViewController: UICollectionViewDataSource, UICollectionViewDel
                 fatalError("undefined table view behavior")
             }
             cell.data = assetData
+            cell.assetBackgroundView.backgroundColor = UserDefaultsManager.theme.cardColor
             return cell
         default: fatalError("undefined table view behavior")
         }
