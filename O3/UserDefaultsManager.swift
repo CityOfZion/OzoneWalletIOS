@@ -56,8 +56,21 @@ class UserDefaultsManager {
         set {
             Neo.client.seed = newValue
             UserDefaults.standard.set(newValue, forKey: seedKey)
-            NotificationCenter.default.post(name: Notification.Name("ChangedNetwork"), object: nil)
             UserDefaults.standard.synchronize()
+            NotificationCenter.default.post(name: Notification.Name("ChangedNetwork"), object: nil)
+        }
+    }
+
+    private static let selectedThemeKey = "selectedThemeKey"
+    static var theme: Theme {
+        get {
+            let stringValue = UserDefaults.standard.string(forKey: selectedThemeKey)!
+            return Theme(rawValue: stringValue)!
+        }
+        set {
+            UserDefaults.standard.set(newValue.rawValue, forKey: selectedThemeKey)
+            UserDefaults.standard.synchronize()
+            NotificationCenter.default.post(name: Notification.Name("ChangedTheme"), object: nil)
         }
     }
 }

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class WatchOnlyAddressViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddressAddDelegate, AddAddressCellDelegate, HalfModalPresentable {
+class WatchOnlyAddressViewController: ThemedViewController, UITableViewDelegate, UITableViewDataSource, AddressAddDelegate, AddAddressCellDelegate, HalfModalPresentable {
     @IBOutlet weak var tableView: UITableView!
     var watchAddresses = [WatchAddress]()
 
@@ -21,7 +21,12 @@ class WatchOnlyAddressViewController: UIViewController, UITableViewDelegate, UIT
         }
     }
 
+    func setThemedElements() {
+        themedTableViews = [tableView]
+    }
+
     override func viewDidLoad() {
+        setThemedElements()
         super.viewDidLoad()
         let rightBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "angle-up"), style: .plain, target: self, action: #selector(maximize(_:)))
         navigationItem.rightBarButtonItem = rightBarButton

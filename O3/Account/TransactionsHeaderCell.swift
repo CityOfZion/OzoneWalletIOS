@@ -9,13 +9,16 @@
 import Foundation
 import UIKit
 
-class TransactionsHeaderCell: UITableViewCell {
+class TransactionsHeaderCell: ThemedTableCell {
     @IBOutlet weak var historyTitleLabel: UILabel!
-    @IBOutlet weak var dropdownLabel: UILabel?
+
+    override func awakeFromNib() {
+        titleLabels = [historyTitleLabel]
+        super.awakeFromNib()
+    }
 
     override func layoutSubviews() {
         super.layoutSubviews()
         historyTitleLabel.text = "Transaction history"
-//        dropdownLabel.text = "All >"
     }
 }

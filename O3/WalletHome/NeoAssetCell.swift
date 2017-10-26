@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class NeoAssetCell: UITableViewCell {
+class NeoAssetCell: ThemedTableCell {
     @IBOutlet weak var assetTitleLabel: UILabel!
     @IBOutlet weak var assetAmountLabel: UILabel!
     @IBOutlet weak var assetFiatPriceLabel: UILabel!
@@ -21,6 +21,12 @@ class NeoAssetCell: UITableViewCell {
         var referenceCurrency: Currency
         var latestPrice: PriceData
         var firstPrice: PriceData
+    }
+
+    override func awakeFromNib() {
+        titleLabels = [assetTitleLabel, assetAmountLabel, assetFiatAmountLabel]
+        subtitleLabels = [assetFiatPriceLabel]
+        super.awakeFromNib()
     }
 
     var data: NeoAssetCell.Data? {
@@ -47,7 +53,7 @@ class NeoAssetCell: UITableViewCell {
 
             assetPercentChangeLabel.text = String.percentChangeStringShort(latestPrice: latestPrice, previousPrice: firstPrice,
                                                              referenceCurrency: referenceCurrency)
-            assetPercentChangeLabel.textColor = referencePrice >= referenceFirstPrice ? Theme.Light.green : Theme.Light.red
+            assetPercentChangeLabel.textColor = referencePrice >= referenceFirstPrice ? UserDefaultsManager.theme.positiveGainColor : UserDefaultsManager.theme.negativeLossColor
         }
     }
 }

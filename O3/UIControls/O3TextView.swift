@@ -12,10 +12,10 @@ class O3TextView: UITextView {
 
     func setupView() {
         self.clipsToBounds = true
-        self.layer.borderWidth = Theme.Light.borderWidth
-        self.layer.cornerRadius = Theme.Light.cornerRadius
-        self.layer.borderColor = Theme.Light.borderColor.cgColor
-        self.textColor = Theme.Light.textColor
+        self.layer.borderWidth = ThemeManager.borderWidth
+        self.layer.cornerRadius = ThemeManager.cornerRadius
+        self.layer.borderColor = UserDefaultsManager.theme.borderColor.cgColor
+        self.textColor = UserDefaultsManager.theme.textColor
     }
 
     required init?(coder aDecoder: NSCoder) {
