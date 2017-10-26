@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class AddressBookViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddressAddDelegate, AddAddressCellDelegate, HalfModalPresentable {
+class AddressBookViewController: ThemedViewController, UITableViewDelegate, UITableViewDataSource, AddressAddDelegate, AddAddressCellDelegate, HalfModalPresentable {
     @IBOutlet weak var tableView: UITableView!
     var contacts = [Contact]()
 
@@ -21,9 +21,13 @@ class AddressBookViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    func setThemedElements() {
+        themedTableViews = [self.tableView]
+    }
 
+    override func viewDidLoad() {
+        setThemedElements()
+        super.viewDidLoad()
         let rightBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "angle-up"), style: .plain, target: self, action: #selector(maximize(_:)))
 
         navigationItem.rightBarButtonItem = rightBarButton

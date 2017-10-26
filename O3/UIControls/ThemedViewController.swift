@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import ScrollableGraphView
 
 class ThemedViewController: UIViewController {
     var themedPrimaryButtons = [UIButton]()
@@ -16,6 +17,25 @@ class ThemedViewController: UIViewController {
     var themedCollectionViews = [UICollectionView]()
     var themedTransparentButtons = [UIButton]()
     var themedBackgroundViews = [UIView]()
+    var themedGraphs = [ScrollableGraphView]()
+
+    func addThemeObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.changedTheme), name: Notification.Name("ChangedTheme"), object: nil)
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("ChangedTheme"), object: nil)
+    }
+
+    @objc func changedTheme(_ sender: Any) {
+        applyTheme()
+        for tableView in themedTableViews {
+            tableView.reloadData()
+        }
+        for collection in themedCollectionViews {
+            collection.reloadData()
+        }
+    }
 
     func setupNavBar() {
         DispatchQueue.main.async {
@@ -34,13 +54,14 @@ class ThemedViewController: UIViewController {
     }
 
     func applyTheme() {
+        addThemeObserver()
         setupNavBar()
         DispatchQueue.main.async {
             self.view.backgroundColor = UserDefaultsManager.theme.backgroundColor
 
             for button in self.themedPrimaryButtons {
                 button.backgroundColor = UserDefaultsManager.theme.backgroundColor
-                button.setTitleColor(UserDefaultsManager.theme.textColor, for: UIControlState())
+                button.setTitleColor(UIColor.white, for: UIControlState())
             }
 
             for label in self.themedLabels {
@@ -50,9 +71,11 @@ class ThemedViewController: UIViewController {
             for tableView in self.themedTableViews {
                 tableView.separatorColor = UserDefaultsManager.theme.seperatorColor
                 tableView.tableHeaderView?.backgroundColor = UserDefaultsManager.theme.backgroundColor
+                tableView.tableFooterView?.backgroundColor = UserDefaultsManager.theme.backgroundColor
                 tableView.backgroundColor = UserDefaultsManager.theme.backgroundColor
                 for cell in tableView.visibleCells {
                     cell.contentView.backgroundColor = UserDefaultsManager.theme.backgroundColor
+                    cell.backgroundColor = UserDefaultsManager.theme.backgroundColor
                 }
             }
 
@@ -70,6 +93,10 @@ class ThemedViewController: UIViewController {
 
             for view in self.themedBackgroundViews {
                 view.backgroundColor = UserDefaultsManager.theme.backgroundColor
+            }
+
+            for view in self.themedGraphs {
+                view.backgroundFillColor = UserDefaultsManager.theme.backgroundColor
             }
         }
     }

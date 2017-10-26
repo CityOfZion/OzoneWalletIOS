@@ -14,7 +14,7 @@ protocol NetworkSeedCellDelegate: class {
     func highestBlockCount() -> UInt
 }
 
-class NetworkSeedCell: UITableViewCell {
+class NetworkSeedCell: ThemedTableCell {
     @IBOutlet weak var seedNameLabel: UILabel!
     @IBOutlet weak var blockCountLabel: UILabel!
     @IBOutlet weak var peersLabel: UILabel!
@@ -32,6 +32,7 @@ class NetworkSeedCell: UITableViewCell {
             DispatchQueue.main.async {
                 if self.node?.URL == Neo.sharedMain?.seed {
                     self.accessoryType = .checkmark
+                    self.accessoryView?.backgroundColor = UserDefaultsManager.theme.backgroundColor
                 } else {
                     self.accessoryType = .none
                 }
@@ -47,7 +48,7 @@ class NetworkSeedCell: UITableViewCell {
                 DispatchQueue.main.async {
                     self.blockCountLabel.textColor = UserDefaultsManager.theme.primaryColor
                     self.peersLabel.textColor = UserDefaultsManager.theme.accentColor
-                    self.seedNameLabel.textColor = UserDefaultsManager.theme.textColor
+                    self.seedNameLabel.textColor = UserDefaultsManager.theme.titleTextColor
                 }
             }
         }

@@ -165,7 +165,7 @@ enum Theme: String {
     var textFieldBackgroundColor: UIColor {
         switch self {
         case .light:
-            return UITextField().backgroundColor!
+            return .white
         case .dark:
             return self.backgroundColor
         }

@@ -10,16 +10,32 @@ import Foundation
 import KeychainAccess
 import UIKit
 
-class SettingsMenuTableViewController: UITableViewController, HalfModalPresentable {
+class SettingsMenuTableViewController: ThemedTableViewController, HalfModalPresentable {
     @IBOutlet weak var showPrivateKeyView: UIView!
     @IBOutlet weak var contactView: UIView!
     @IBOutlet weak var shareView: UIView!
     @IBOutlet weak var networkView: UIView!
     @IBOutlet weak var networkCell: UITableViewCell!
+    @IBOutlet weak var themeCell: UITableViewCell!
+    @IBOutlet weak var themeView: UIView!
+    @IBOutlet weak var privateKeyLabel: UILabel!
+    @IBOutlet weak var addressBookLabel: UILabel!
+    @IBOutlet weak var watchOnlyLabel: UILabel!
+    @IBOutlet weak var netLabel: UILabel!
+    @IBOutlet weak var shareLabel: UILabel!
+    @IBOutlet weak var contactLabel: UILabel!
+    @IBOutlet weak var versionLabel: UILabel!
+    @IBOutlet weak var themeLabel: UILabel!
 
     var netString = UserDefaultsManager.network == .test ? "Network: Test Network": "Network: Main Network" {
         didSet {
             self.setNetLabel()
+        }
+    }
+
+    var themeString = UserDefaultsManager.theme == .light ? "Theme: Classic": "Theme: Dark" {
+        didSet {
+            self.setThemeLabel()
         }
     }
 
@@ -30,44 +46,56 @@ class SettingsMenuTableViewController: UITableViewController, HalfModalPresentab
         DispatchQueue.main.async { label.text = self.netString }
     }
 
+    func setThemeLabel() {
+        guard let label = themeCell.viewWithTag(1) as? UILabel else {
+            fatalError("Undefined behavior with table view")
+        }
+        DispatchQueue.main.async { label.text = self.themeString }
+    }
+
+    func setThemedElements() {
+        themedTitleLabels = [privateKeyLabel, addressBookLabel, watchOnlyLabel, netLabel, shareLabel, contactLabel, themeLabel]
+        themedLabels = [versionLabel]
+    }
+
     override func viewDidLoad() {
-        navigationController?.hideHairline()
-        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UserDefaultsManager.theme.textColor, NSAttributedStringKey.font: UIFont(name: "Avenir-Heavy", size: 32) as Any]
+        setThemedElements()
+        super.viewDidLoad()
         let rightBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "angle-up"), style: .plain, target: self, action: #selector(SettingsMenuTableViewController.maximize(_:)))
         navigationItem.rightBarButtonItem = rightBarButton
         showPrivateKeyView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showPrivateKey)))
         contactView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(sendMail)))
         shareView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(share)))
-        //networkView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(changeNetwork)))
+        themeView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(changeTheme)))
         setNetLabel()
+        setThemeLabel()
     }
 
     @objc func maximize(_ sender: Any) {
         maximizeToFullScreen()
     }
 
-    @objc func changeNetwork() {
-       let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+    @objc func changeTheme() {
+        let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        let testNetAction = UIAlertAction(title: "Test Network", style: .default) { _ in
-            UserDefaultsManager.network = .test
-            self.netString = "Network: Test Network"
+        let lightThemeAction = UIAlertAction(title: "Classic Theme", style: .default) { _ in
+            UserDefaultsManager.theme = .light
+            self.themeString = "Theme: Classic"
         }
 
-        let mainNetAction = UIAlertAction(title: "Main Network", style: .default) { _ in
-            UserDefaultsManager.network = .main
-            self.netString = "Network: Main Network"
+        let darkThemeAction = UIAlertAction(title: "Dark Theme", style: .default) { _ in
+            UserDefaultsManager.theme = .dark
+            self.themeString = "Theme: Dark"
         }
 
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
         }
 
-        optionMenu.addAction(testNetAction)
-        optionMenu.addAction(mainNetAction)
+        optionMenu.addAction(lightThemeAction)
+        optionMenu.addAction(darkThemeAction)
         optionMenu.addAction(cancelAction)
 
         present(optionMenu, animated: true, completion: nil)
-
     }
 
     @objc func sendMail() {

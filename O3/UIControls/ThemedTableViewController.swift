@@ -20,6 +20,19 @@ class ThemedTableViewController: UITableViewController {
     var themedTextFields = [UITextField]()
     var themedTextViews = [UITextView]()
 
+    func addThemeObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.changedTheme), name: Notification.Name("ChangedTheme"), object: nil)
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("ChangedTheme"), object: nil)
+    }
+
+    @objc func changedTheme(_ sender: Any) {
+        applyTheme()
+        tableView.reloadData()
+    }
+
     func setupNavBar() {
         DispatchQueue.main.async {
             UIApplication.shared.statusBarStyle = UserDefaultsManager.theme.statusBarStyle
@@ -37,13 +50,17 @@ class ThemedTableViewController: UITableViewController {
     }
 
     func applyTheme() {
+        addThemeObserver()
         setupNavBar()
         DispatchQueue.main.async {
             self.view.backgroundColor = UserDefaultsManager.theme.backgroundColor
-
+            self.tableView.backgroundColor = UserDefaultsManager.theme.backgroundColor
+            for cell in self.tableView.visibleCells {
+                cell.contentView.backgroundColor = UserDefaultsManager.theme.backgroundColor
+            }
             for button in self.themedPrimaryButtons {
                 button.backgroundColor = UserDefaultsManager.theme.backgroundColor
-                button.setTitleColor(UserDefaultsManager.theme.textColor, for: UIControlState())
+                button.setTitleColor(UIColor.white, for: UIControlState())
             }
 
             for label in self.themedLabels {
@@ -55,10 +72,12 @@ class ThemedTableViewController: UITableViewController {
             }
 
             self.tableView.tableHeaderView?.backgroundColor = UserDefaultsManager.theme.backgroundColor
+            self.tableView.tableFooterView?.backgroundColor = UserDefaultsManager.theme.backgroundColor
             self.tableView.backgroundColor = UserDefaultsManager.theme.backgroundColor
             self.tableView.separatorColor = UserDefaultsManager.theme.seperatorColor
             for cell in self.tableView.visibleCells {
                 cell.contentView.backgroundColor = UserDefaultsManager.theme.backgroundColor
+                cell.backgroundColor = UserDefaultsManager.theme.backgroundColor
             }
 
             for collection in self.themedCollectionViews {

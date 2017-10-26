@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func registerDefaults() {
         let userDefaultsDefaults: [String: Any] = [
             "networkKey": "main",
-            "usedDefaultSeedKey": true,
+            "usedDefaultSeedKey": false,
             "selectedThemeKey": Theme.light.rawValue
         ]
         UserDefaults.standard.register(defaults: userDefaultsDefaults)
@@ -42,7 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.registerDefaults()
         self.setupChannel()
         self.setupApperances()
-        UserDefaultsManager.theme = Theme.dark
         return true
     }
 

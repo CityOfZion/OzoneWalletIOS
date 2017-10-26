@@ -13,7 +13,19 @@ class ThemedTableCell: UITableViewCell {
     var titleLabels = [UILabel]()
     var subtitleLabels = [UILabel]()
 
-    override func awakeFromNib() {
+    func addThemeObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.changedTheme), name: Notification.Name("ChangedTheme"), object: nil)
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("ChangedTheme"), object: nil)
+    }
+
+    @objc func changedTheme(_ sender: Any) {
+        applyTheme()
+    }
+
+    func applyTheme() {
         DispatchQueue.main.async {
             for label in self.titleLabels {
                 label.textColor = UserDefaultsManager.theme.titleTextColor
@@ -24,6 +36,11 @@ class ThemedTableCell: UITableViewCell {
             }
             self.contentView.backgroundColor = UserDefaultsManager.theme.backgroundColor
         }
+    }
+
+    override func awakeFromNib() {
         super.awakeFromNib()
+        addThemeObserver()
+        applyTheme()
     }
 }

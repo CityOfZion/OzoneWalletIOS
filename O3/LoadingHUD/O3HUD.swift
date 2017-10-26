@@ -16,7 +16,10 @@ class O3HUD: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
+        var blurEffect = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
+        if UserDefaultsManager.theme == .dark {
+            blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+        }
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = view.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

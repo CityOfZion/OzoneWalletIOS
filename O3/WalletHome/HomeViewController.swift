@@ -172,6 +172,7 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
 
     func setupGraphView() {
         graphView = ScrollableGraphView.ozoneTheme(frame: graphViewContainer.bounds, dataSource: self)
+        themedGraphs.append(graphView)
         graphViewContainer.embed(graphView)
 
         panView = GraphPanView(frame: graphViewContainer.bounds)
@@ -227,7 +228,6 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
         //control the size of the graph area here
         self.assetsTable.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height * 0.5)
         setupGraphView()
-
     }
 
     override func viewDidAppear(_ animated: Bool) {
