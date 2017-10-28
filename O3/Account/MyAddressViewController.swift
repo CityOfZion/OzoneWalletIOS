@@ -31,7 +31,7 @@ class MyAddressViewController: UIViewController {
     }
 
     func configureView() {
-         navigationController?.navigationBar.largeTitleTextAttributes = [
+        navigationController?.navigationBar.largeTitleTextAttributes = [
             NSAttributedStringKey.foregroundColor: UserDefaultsManager.theme.textColor,
             NSAttributedStringKey.font: ThemeManager.largeTitleFont as Any]
         self.navigationController?.hideHairline()
@@ -46,7 +46,7 @@ class MyAddressViewController: UIViewController {
         UIImageWriteToSavedPhotosAlbum(qrWithBranding, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
 
- func share() {
+    func share() {
         let shareURL = URL(string: "https://o3.network/")
         let qrWithBranding = UIImage.imageWithView(view: self.qrCodeContainerView)
         let activityViewController = UIActivityViewController(activityItems: [shareURL, qrWithBranding], applicationActivities: nil)
@@ -55,7 +55,7 @@ class MyAddressViewController: UIViewController {
         self.present(activityViewController, animated: true, completion: nil)
     }
 
-     @IBAction func showActionSheet() {
+    @IBAction func showActionSheet() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let saveQR = UIAlertAction(title: "Save QR Code Image", style: .default) { _ in
             self.saveQRCodeImage()
@@ -67,7 +67,7 @@ class MyAddressViewController: UIViewController {
         }
         alert.addAction(copyAddress)
         let share = UIAlertAction(title: "Share", style: .default) { _ in
-          self.share()
+            self.share()
         }
         alert.addAction(share)
 

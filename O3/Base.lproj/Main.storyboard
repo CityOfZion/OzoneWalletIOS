@@ -624,7 +624,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="MNX-oG-Dku">
-                            <rect key="frame" x="0.0" y="308" width="375" height="44"/>
+                            <rect key="frame" x="0.0" y="352" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="O3 Wallet Version 0.1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="We1-HS-Cs2">
@@ -891,6 +891,39 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="yVa-Bn-CxE">
+                                        <rect key="frame" x="0.0" y="308" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yVa-Bn-CxE" id="ZgG-gu-znR">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log out" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pqq-De-3i3">
+                                                    <rect key="frame" x="48" y="0.0" width="287" height="44"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
+                                                    <color key="textColor" red="0.058823529409999999" green="0.062745098040000002" blue="0.090196078430000007" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mB8-KL-0Ny">
+                                                    <rect key="frame" x="18" y="12" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="97T-U4-oqQ"/>
+                                                        <constraint firstAttribute="height" constant="20" id="VgZ-GZ-XOO"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="mB8-KL-0Ny" firstAttribute="leading" secondItem="ZgG-gu-znR" secondAttribute="leading" constant="18" id="1bf-ni-TnL"/>
+                                                <constraint firstItem="Pqq-De-3i3" firstAttribute="leading" secondItem="mB8-KL-0Ny" secondAttribute="trailing" constant="10" id="Rof-0v-FF2"/>
+                                                <constraint firstAttribute="bottom" secondItem="Pqq-De-3i3" secondAttribute="bottom" id="hCa-l8-3Bt"/>
+                                                <constraint firstAttribute="trailing" secondItem="Pqq-De-3i3" secondAttribute="trailing" constant="40" id="lQh-dK-kjP"/>
+                                                <constraint firstItem="mB8-KL-0Ny" firstAttribute="centerY" secondItem="ZgG-gu-znR" secondAttribute="centerY" id="lVe-IN-pXW"/>
+                                                <constraint firstItem="Pqq-De-3i3" firstAttribute="top" secondItem="ZgG-gu-znR" secondAttribute="top" id="qIA-5j-aq6"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -910,6 +943,7 @@
                         <outlet property="addressBookLabel" destination="c1T-T5-lJv" id="FNs-0b-uTf"/>
                         <outlet property="contactLabel" destination="JnV-5q-g4u" id="mmC-06-gRK"/>
                         <outlet property="contactView" destination="wZZ-Zg-S0l" id="eH5-ww-cbX"/>
+                        <outlet property="logoutLabel" destination="Pqq-De-3i3" id="3kr-n2-HMT"/>
                         <outlet property="netLabel" destination="5bw-KM-Kj0" id="IIS-m0-Zcb"/>
                         <outlet property="networkCell" destination="gcC-jA-3pg" id="Yud-99-vqH"/>
                         <outlet property="networkView" destination="dye-OC-KVR" id="dI5-CP-WTu"/>
@@ -958,11 +992,25 @@
                                 <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aT5-wf-cbV">
+                                <rect key="frame" x="20" y="306" width="335" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="ofw-vS-Enc"/>
+                                </constraints>
+                                <color key="tintColor" name="lightThemePrimary"/>
+                                <state key="normal" image="plus"/>
+                                <connections>
+                                    <action selector="shareTapped:" destination="4nu-8p-E2h" eventType="touchUpInside" id="DHK-9S-JxL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="aT5-wf-cbV" firstAttribute="top" secondItem="23Y-sy-V4z" secondAttribute="bottom" constant="20" id="2eu-Ph-Win"/>
                             <constraint firstItem="23Y-sy-V4z" firstAttribute="leading" secondItem="5z6-VI-4mH" secondAttribute="leading" constant="20" id="7eI-j0-yeo"/>
+                            <constraint firstItem="5z6-VI-4mH" firstAttribute="trailing" secondItem="aT5-wf-cbV" secondAttribute="trailing" constant="20" id="C4s-oQ-jwh"/>
                             <constraint firstItem="jUd-Br-OcF" firstAttribute="leading" secondItem="23Y-sy-V4z" secondAttribute="trailing" constant="20" id="TxO-cH-wyn"/>
+                            <constraint firstItem="aT5-wf-cbV" firstAttribute="leading" secondItem="5z6-VI-4mH" secondAttribute="leading" constant="20" id="e0Y-eY-A2I"/>
                             <constraint firstItem="5z6-VI-4mH" firstAttribute="trailing" secondItem="jUd-Br-OcF" secondAttribute="trailing" constant="20" id="gLz-DX-tnR"/>
                             <constraint firstItem="23Y-sy-V4z" firstAttribute="top" secondItem="5z6-VI-4mH" secondAttribute="top" constant="20" id="uGM-I6-jt1"/>
                             <constraint firstItem="jUd-Br-OcF" firstAttribute="top" secondItem="5z6-VI-4mH" secondAttribute="top" constant="20" id="wjk-iQ-LFZ"/>
@@ -1503,6 +1551,7 @@
         <image name="chevron-left" width="10" height="18"/>
         <image name="chevron-right" width="10" height="18"/>
         <image name="codeBranchSetting" width="20" height="15"/>
+        <image name="plus" width="24" height="24"/>
         <image name="shapeSetting" width="20" height="20"/>
         <image name="shareAltSetting" width="17" height="20"/>
         <image name="times" width="20" height="20"/>
@@ -1515,6 +1564,9 @@
         </namedColor>
         <namedColor name="lightThemePrimary">
             <color red="0.0" green="0.41176470588235292" blue="0.85098039215686272" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="lightThemePrimary">
+            <color red="0.0" green="0.41176470590000003" blue="0.85098039219999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>

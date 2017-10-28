@@ -42,6 +42,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.registerDefaults()
         self.setupChannel()
         self.setupApperances()
+
+        //check if there is an existing wallet in keychain
+        //if so, present LoginToCurrentWalletViewController
+
+        let walletExists =  UserDefaultsManager.o3WalletAddress != nil
+        if walletExists {
+            let login = UIStoryboard(name: "Onboarding", bundle: nil).instantiateViewController(withIdentifier: "LoginToCurrentWalletViewController")
+            if let window = self.window {
+                window.rootViewController = login
+            }
+        }
+
         return true
     }
 

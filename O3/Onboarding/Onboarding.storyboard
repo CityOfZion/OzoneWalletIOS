@@ -183,11 +183,13 @@
                         <outlet property="loginButton" destination="aOA-TP-pz9" id="aMu-GU-53Z"/>
                         <segue destination="2cF-Xh-uiy" kind="show" identifier="segueToLogin" id="nDz-8f-fC4"/>
                         <segue destination="bCm-98-80m" kind="show" identifier="segueToWelcome" id="H33-T8-8WR"/>
+                        <segue destination="iy0-Jz-sHW" kind="show" identifier="firstTimeLogin" id="x6J-qK-Ati"/>
+                        <segue destination="VNX-u0-3hQ" kind="show" identifier="preCreateWallet" id="46h-0N-JHs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KHk-1R-Di0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="220" y="29.23538230884558"/>
+            <point key="canvasLocation" x="190" y="29"/>
         </scene>
         <!--O3HUD-->
         <scene sceneID="rFH-Hf-Tm1">
@@ -195,7 +197,127 @@
                 <viewControllerPlaceholder storyboardName="O3HUD" id="rFj-ZT-26b" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g8d-v2-2gZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-154" y="514"/>
+            <point key="canvasLocation" x="-193" y="430"/>
+        </scene>
+        <!--Login To Current Wallet View Controller-->
+        <scene sceneID="Qga-0C-y6A">
+            <objects>
+                <viewController storyboardIdentifier="LoginToCurrentWalletViewController" id="xk2-J6-ZVf" customClass="LoginToCurrentWalletViewController" customModule="O3" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="grv-a0-Tfn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="qrLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Foa-Cs-0Cp">
+                                <rect key="frame" x="157" y="293.5" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="cZd-1a-kya"/>
+                                    <constraint firstAttribute="height" constant="60" id="eAy-3g-fm7"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BgK-hP-zRg">
+                                <rect key="frame" x="20" y="563" width="335" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="loM-6c-2Pc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="16"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" name="grey"/>
+                                </state>
+                                <connections>
+                                    <action selector="createNewWalletButtonTapped:" destination="tuA-sa-oFr" eventType="touchUpInside" id="z2B-Aw-f5s"/>
+                                    <action selector="didTapCancel:" destination="xk2-J6-ZVf" eventType="touchUpInside" id="MOK-i6-sAC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zxT-w2-Mdf">
+                                <rect key="frame" x="20" y="373.5" width="335" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="grQ-Rt-EEo"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="16"/>
+                                <state key="normal" title="Login using TouchID">
+                                    <color key="titleColor" red="0.0" green="0.41176470590000003" blue="0.85098039219999999" alpha="1" colorSpace="custom" customColorSpace="adobeRGB1998"/>
+                                </state>
+                                <connections>
+                                    <action selector="createNewWalletButtonTapped:" destination="tuA-sa-oFr" eventType="touchUpInside" id="4EJ-NZ-ugy"/>
+                                    <action selector="didTapLogin:" destination="xk2-J6-ZVf" eventType="touchUpInside" id="5Yd-bD-6Qh"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hCT-fL-H0W" firstAttribute="trailing" secondItem="BgK-hP-zRg" secondAttribute="trailing" constant="20" id="8ka-2J-QF4"/>
+                            <constraint firstItem="zxT-w2-Mdf" firstAttribute="top" secondItem="Foa-Cs-0Cp" secondAttribute="bottom" constant="20" id="Ife-DC-JPu"/>
+                            <constraint firstItem="zxT-w2-Mdf" firstAttribute="leading" secondItem="hCT-fL-H0W" secondAttribute="leading" constant="20" id="Tbw-uL-AGR"/>
+                            <constraint firstItem="Foa-Cs-0Cp" firstAttribute="centerX" secondItem="hCT-fL-H0W" secondAttribute="centerX" id="Zro-Ga-ZxX"/>
+                            <constraint firstItem="hCT-fL-H0W" firstAttribute="trailing" secondItem="zxT-w2-Mdf" secondAttribute="trailing" constant="20" id="rt1-rQ-sU0"/>
+                            <constraint firstItem="BgK-hP-zRg" firstAttribute="leading" secondItem="hCT-fL-H0W" secondAttribute="leading" constant="20" id="sdQ-Zc-u6o"/>
+                            <constraint firstItem="Foa-Cs-0Cp" firstAttribute="centerY" secondItem="hCT-fL-H0W" secondAttribute="centerY" constant="-20" id="uJZ-RY-gPZ"/>
+                            <constraint firstItem="hCT-fL-H0W" firstAttribute="bottom" secondItem="BgK-hP-zRg" secondAttribute="bottom" constant="60" id="xiW-RT-DQK"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="hCT-fL-H0W"/>
+                    </view>
+                    <connections>
+                        <outlet property="loginButton" destination="zxT-w2-Mdf" id="RLx-O5-zKd"/>
+                        <segue destination="6fG-df-BHS" kind="presentation" identifier="loggedin" modalTransitionStyle="crossDissolve" id="2cU-TJ-2tJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hEv-OX-lBp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-314" y="900"/>
+        </scene>
+        <!--First Time Login View Controller-->
+        <scene sceneID="cQN-zp-tPR">
+            <objects>
+                <viewController id="iy0-Jz-sHW" customClass="FirstTimeLoginViewController" customModule="O3" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="id8-M8-yPi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3S6-Qi-MRL">
+                                <rect key="frame" x="20" y="60" width="335" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="ax8-kc-ZXT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Oa-pS-iez" customClass="ShadowedButton" customModule="O3" customModuleProvider="target">
+                                <rect key="frame" x="20" y="120" width="335" height="44"/>
+                                <color key="backgroundColor" red="0.0" green="0.41176470590000003" blue="0.85098039219999999" alpha="1" colorSpace="custom" customColorSpace="adobeRGB1998"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="PTG-ap-ubP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="16"/>
+                                <state key="normal" title="Next">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="22"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="startTapped:" destination="bCm-98-80m" eventType="touchUpInside" id="rmT-9B-ulg"/>
+                                    <segue destination="2cF-Xh-uiy" kind="show" id="cOx-hE-n1W"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="3S6-Qi-MRL" firstAttribute="top" secondItem="qg8-eZ-7cO" secondAttribute="top" constant="40" id="3ES-lF-jOG"/>
+                            <constraint firstItem="3S6-Qi-MRL" firstAttribute="leading" secondItem="qg8-eZ-7cO" secondAttribute="leading" constant="20" id="C3c-Nq-OLE"/>
+                            <constraint firstItem="qg8-eZ-7cO" firstAttribute="trailing" secondItem="1Oa-pS-iez" secondAttribute="trailing" constant="20" id="PYY-JE-J5Q"/>
+                            <constraint firstItem="qg8-eZ-7cO" firstAttribute="trailing" secondItem="3S6-Qi-MRL" secondAttribute="trailing" constant="20" id="VJq-DF-44r"/>
+                            <constraint firstItem="1Oa-pS-iez" firstAttribute="top" secondItem="3S6-Qi-MRL" secondAttribute="bottom" constant="40" id="q7v-k6-xlv"/>
+                            <constraint firstItem="1Oa-pS-iez" firstAttribute="leading" secondItem="qg8-eZ-7cO" secondAttribute="leading" constant="20" id="r9h-ht-T1f"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="qg8-eZ-7cO"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OHi-Hi-Kno" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="833" y="-669"/>
         </scene>
         <!--Login-->
         <scene sceneID="qb1-AK-3s1">
@@ -231,7 +353,7 @@
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                                 </textView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="36p-VS-Jw7" customClass="ShadowedButton" customModule="O3" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="36p-VS-Jw7" customClass="ShadowedButton" customModule="O3" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="170.5" width="335" height="44"/>
                                                     <color key="backgroundColor" red="0.0" green="0.41176470588235292" blue="0.85098039215686272" alpha="1" colorSpace="custom" customColorSpace="adobeRGB1998"/>
                                                     <constraints>
@@ -250,8 +372,8 @@
                                                         <action selector="loginButtonTapped:" destination="2cF-Xh-uiy" eventType="touchUpInside" id="ZQa-DT-OfD"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some footnote..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PGR-rj-rKv">
-                                                    <rect key="frame" x="20" y="134" width="91" height="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log in to NEO wallet using private key" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PGR-rj-rKv">
+                                                    <rect key="frame" x="20" y="134" width="335" height="17"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                                     <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="adobeRGB1998"/>
                                                     <nil key="highlightedColor"/>
@@ -264,6 +386,7 @@
                                                 <constraint firstItem="36p-VS-Jw7" firstAttribute="leading" secondItem="dYy-kR-u1y" secondAttribute="leading" constant="20" id="EbA-Qv-wJZ"/>
                                                 <constraint firstItem="eHV-oy-wwY" firstAttribute="top" secondItem="6p0-gY-L30" secondAttribute="bottom" constant="16" id="F71-pe-KjX"/>
                                                 <constraint firstItem="PGR-rj-rKv" firstAttribute="top" secondItem="eHV-oy-wwY" secondAttribute="bottom" constant="16" id="HpB-yS-QVJ"/>
+                                                <constraint firstAttribute="trailing" secondItem="PGR-rj-rKv" secondAttribute="trailing" constant="20" id="PfT-Mw-dQg"/>
                                                 <constraint firstItem="eHV-oy-wwY" firstAttribute="leading" secondItem="dYy-kR-u1y" secondAttribute="leading" constant="20" id="ZAZ-zp-kCV"/>
                                                 <constraint firstItem="6p0-gY-L30" firstAttribute="top" secondItem="dYy-kR-u1y" secondAttribute="top" constant="20" id="Zwt-80-WMl"/>
                                                 <constraint firstAttribute="trailing" secondItem="eHV-oy-wwY" secondAttribute="trailing" constant="20" id="duE-K9-VKR"/>
@@ -288,7 +411,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="coD-an-fNa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1004" y="-287"/>
+            <point key="canvasLocation" x="1910" y="-648"/>
         </scene>
         <!--Main-->
         <scene sceneID="JFO-7g-scy">
@@ -296,7 +419,7 @@
                 <viewControllerPlaceholder storyboardName="Main" id="6fG-df-BHS" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LV7-F0-l2s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1525" y="-61"/>
+            <point key="canvasLocation" x="1539" y="1293"/>
         </scene>
         <!--QR-->
         <scene sceneID="l8g-bg-7lq">
@@ -304,7 +427,63 @@
                 <viewControllerPlaceholder storyboardName="QR" id="1YE-0v-iEa" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Yv-EW-bLt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1534" y="-287"/>
+            <point key="canvasLocation" x="2342" y="-443"/>
+        </scene>
+        <!--Pre Create Wallet View Controller-->
+        <scene sceneID="Ffr-x8-58C">
+            <objects>
+                <viewController id="VNX-u0-3hQ" customClass="PreCreateWalletViewController" customModule="O3" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6Fk-0s-jAE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SEW-OK-L5T">
+                                <rect key="frame" x="20" y="60" width="335" height="131.5"/>
+                                <string key="text">Looks like you already have an existing wallet on this device.  
+Create a new wallet will write the new private key over the existing one. Please make sure you have your private key back up.</string>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JYL-wE-2wB" customClass="ShadowedButton" customModule="O3" customModuleProvider="target">
+                                <rect key="frame" x="20" y="231.5" width="335" height="44"/>
+                                <color key="backgroundColor" red="0.0" green="0.41176470590000003" blue="0.85098039219999999" alpha="1" colorSpace="custom" customColorSpace="adobeRGB1998"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="xCh-9a-7S0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="16"/>
+                                <state key="normal" title="Create new wallet">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="22"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="startTapped:" destination="bCm-98-80m" eventType="touchUpInside" id="Eme-vi-JPH"/>
+                                    <segue destination="bCm-98-80m" kind="show" identifier="segueToWelcome" id="4F1-SI-Z13"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="YN4-R6-lKF" firstAttribute="trailing" secondItem="SEW-OK-L5T" secondAttribute="trailing" constant="20" id="BfJ-Bd-H5q"/>
+                            <constraint firstItem="JYL-wE-2wB" firstAttribute="leading" secondItem="YN4-R6-lKF" secondAttribute="leading" constant="20" id="TPk-vi-cb7"/>
+                            <constraint firstItem="JYL-wE-2wB" firstAttribute="top" secondItem="SEW-OK-L5T" secondAttribute="bottom" constant="40" id="ZO7-SQ-OeV"/>
+                            <constraint firstItem="SEW-OK-L5T" firstAttribute="top" secondItem="YN4-R6-lKF" secondAttribute="top" constant="40" id="bj2-zr-Ejd"/>
+                            <constraint firstItem="YN4-R6-lKF" firstAttribute="trailing" secondItem="JYL-wE-2wB" secondAttribute="trailing" constant="20" id="c3Q-xk-w8I"/>
+                            <constraint firstItem="SEW-OK-L5T" firstAttribute="leading" secondItem="YN4-R6-lKF" secondAttribute="leading" constant="20" id="uET-Oa-Mu8"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="YN4-R6-lKF"/>
+                    </view>
+                    <connections>
+                        <outlet property="titleLabel" destination="SEW-OK-L5T" id="be6-Nx-B2K"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nIA-8f-gne" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="649" y="746"/>
         </scene>
         <!--Welcome!-->
         <scene sceneID="7jX-vg-AEC">
@@ -360,21 +539,24 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="135" id="Dfw-Ke-lmY">
-                                        <rect key="frame" x="0.0" y="150" width="375" height="135"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="250" id="Dfw-Ke-lmY">
+                                        <rect key="frame" x="0.0" y="150" width="375" height="250"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Dfw-Ke-lmY" id="AVg-ot-qtB">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="135"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Never lose your private key. Your public address is always available inside the app" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mks-dB-te8">
-                                                    <rect key="frame" x="20" y="20" width="335" height="33"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mks-dB-te8">
+                                                    <rect key="frame" x="20" y="20" width="335" height="82"/>
+                                                    <string key="text">Please backup this private key in another secure location. 
+
+It is highly reccomended that you have a passcode set on your iPhone. Removing the passcode from your device will delete your private key from the keychain.</string>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                                     <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eBZ-Su-uxi" customClass="ShadowedButton" customModule="O3" customModuleProvider="target">
-                                                    <rect key="frame" x="20" y="73" width="335" height="44"/>
+                                                    <rect key="frame" x="20" y="122" width="335" height="44"/>
                                                     <color key="backgroundColor" red="0.0" green="0.41176470590000003" blue="0.85098039219999999" alpha="1" colorSpace="custom" customColorSpace="adobeRGB1998"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="44" id="Zmt-HZ-SYe"/>
@@ -419,7 +601,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wNE-KF-hrh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1004" y="417"/>
+            <point key="canvasLocation" x="1382" y="355"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5zh-jm-uIr">
@@ -450,12 +632,18 @@
     </scenes>
     <resources>
         <image name="chart" width="169" height="133"/>
+        <image name="qrLogo" width="88" height="87"/>
         <image name="rectangle10" width="375" height="400"/>
+        <namedColor name="grey">
+            <color red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="textColor">
             <color red="0.062745098039215685" green="0.062745098039215685" blue="0.094117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="4F1-SI-Z13"/>
         <segue reference="gND-3E-7d0"/>
+        <segue reference="nDz-8f-fC4"/>
     </inferredMetricsTieBreakers>
 </document>

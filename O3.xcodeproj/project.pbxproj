@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		6E1BBF7F1F77BEE30095F466 /* WalletHomeAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E1BBF7E1F77BEE30095F466 /* WalletHomeAssets.xcassets */; };
+		6E3E381A1FA4436E004965F8 /* FirstTimeLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3E38191FA4436E004965F8 /* FirstTimeLoginViewController.swift */; };
+		6E3E381C1FA4437A004965F8 /* PreCreateWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3E381B1FA4437A004965F8 /* PreCreateWalletViewController.swift */; };
+		6E3E381E1FA44C84004965F8 /* LoginToCurrentWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3E381D1FA44C84004965F8 /* LoginToCurrentWalletViewController.swift */; };
 		6E61BBD11F729D3B00D2B30B /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E61BBD01F729D3B00D2B30B /* Money.swift */; };
 		6E7C92741F7A5FBA00F8D7AA /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C92731F7A5FBA00F8D7AA /* UINavigationController.swift */; };
 		6E7C927C1F7A6B1400F8D7AA /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E7C927B1F7A6B1400F8D7AA /* Account.storyboard */; };
@@ -126,6 +129,9 @@
 
 /* Begin PBXFileReference section */
 		6E1BBF7E1F77BEE30095F466 /* WalletHomeAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = WalletHomeAssets.xcassets; sourceTree = "<group>"; };
+		6E3E38191FA4436E004965F8 /* FirstTimeLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTimeLoginViewController.swift; sourceTree = "<group>"; };
+		6E3E381B1FA4437A004965F8 /* PreCreateWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreCreateWalletViewController.swift; sourceTree = "<group>"; };
+		6E3E381D1FA44C84004965F8 /* LoginToCurrentWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginToCurrentWalletViewController.swift; sourceTree = "<group>"; };
 		6E61BBD01F729D3B00D2B30B /* Money.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Money.swift; sourceTree = "<group>"; };
 		6E7C92731F7A5FBA00F8D7AA /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		6E7C927B1F7A6B1400F8D7AA /* Account.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Account.storyboard; sourceTree = "<group>"; };
@@ -454,6 +460,9 @@
 				75D5BFB91F6CF5E200E64855 /* WelcomeTableViewController.swift */,
 				75D5BFB31F6CEF2E00E64855 /* OnboardingCollectionCell.swift */,
 				75D5BFC11F6D196200E64855 /* OnboardingAssets.xcassets */,
+				6E3E38191FA4436E004965F8 /* FirstTimeLoginViewController.swift */,
+				6E3E381B1FA4437A004965F8 /* PreCreateWalletViewController.swift */,
+				6E3E381D1FA44C84004965F8 /* LoginToCurrentWalletViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -556,6 +565,15 @@
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
+							com.apple.DataProtection = {
+								enabled = 0;
+							};
+							com.apple.Keychain = {
+								enabled = 0;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -666,6 +684,7 @@
 				75E28F2B1F9B2241006C6E37 /* NetworkTableViewController.swift in Sources */,
 				757FEB711F77E2790099E26F /* UIView.swift in Sources */,
 				75D5BFBA1F6CF5E200E64855 /* WelcomeTableViewController.swift in Sources */,
+				6E3E381E1FA44C84004965F8 /* LoginToCurrentWalletViewController.swift in Sources */,
 				7520068C1F7F8AC400D19B5F /* PrivateKeyViewController.swift in Sources */,
 				75DA590B1F7A83940065FE0D /* UIViewController.swift in Sources */,
 				7501E8431F79536300123EA8 /* SettingsMenuTableViewController.swift in Sources */,
@@ -686,6 +705,7 @@
 				75DA59111F7A89F70065FE0D /* AddressBookEntryTableViewCell.swift in Sources */,
 				75E28F311F9B3B34006C6E37 /* ThemeManager.swift in Sources */,
 				752006861F7F698300D19B5F /* O3TabBarController.swift in Sources */,
+				6E3E381C1FA4437A004965F8 /* PreCreateWalletViewController.swift in Sources */,
 				75BEB2621F89FB2A00DC20E9 /* O3HUD.swift in Sources */,
 				6E7C92741F7A5FBA00F8D7AA /* UINavigationController.swift in Sources */,
 				75DA59031F7A6CEF0065FE0D /* WatchOnlyAddressTableViewCell.swift in Sources */,
@@ -696,6 +716,7 @@
 				75DA59011F7A6C7D0065FE0D /* WatchOnlyAddressViewController.swift in Sources */,
 				6ED600201F765C9C006760E6 /* WalletHomeNavigationController.swift in Sources */,
 				750E17431F6FD560001F62FD /* GraphPanView.swift in Sources */,
+				6E3E381A1FA4436E004965F8 /* FirstTimeLoginViewController.swift in Sources */,
 				6ED600161F763434006760E6 /* O3TextView.swift in Sources */,
 				75D5BFBC1F6D0EC400E64855 /* Global.swift in Sources */,
 				758FF9221F9CD09800CD0A3C /* ThemedTableViewController.swift in Sources */,
