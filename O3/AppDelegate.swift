@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let userDefaultsDefaults: [String: Any] = [
             "networkKey": "main",
             "usedDefaultSeedKey": false,
-            "selectedThemeKey": Theme.dark.rawValue
+            "selectedThemeKey": Theme.light.rawValue
         ]
         UserDefaults.standard.register(defaults: userDefaultsDefaults)
     }
