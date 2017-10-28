@@ -24,15 +24,10 @@ class WelcomeTableViewController: UITableViewController {
         let keychain = Keychain(service: "network.o3.neo.wallet")
         DispatchQueue.global().async {
             do {
-                if UserDefaultsManager.o3WalletAddress != nil {
-                    try keychain
-                        .accessibility(.whenPasscodeSetThisDeviceOnly, authenticationPolicy: .userPresence)
-                        .authenticationPrompt("Authenticated will overwrite the private key currently stored in your keychain")
-                        .set((Authenticated.account?.wif)!, key: "ozonePrivateKey")
-                } else {
-                    try keychain.set((Authenticated.account?.wif)!, key: "ozonePrivateKey")
-                }
-
+                try keychain
+                    .accessibility(.whenPasscodeSetThisDeviceOnly, authenticationPolicy: .userPresence)
+                    .authenticationPrompt("You already have an account on the device. Registering a new one will delete all private key information from your device. Authenticate to delete and generate a new account.")
+                    .set((Authenticated.account?.wif)!, key: "ozonePrivateKey")
             } catch let error {
                 DispatchQueue.main.async { self.navigationController?.popViewController(animated: true) }
             }
@@ -44,6 +39,10 @@ class WelcomeTableViewController: UITableViewController {
     }
 
     @IBAction func startTapped(_ sender: Any) {
-        self.performSegue(withIdentifier: "segueToMainFromWelcome", sender: nil)
+
+        OzoneAlert.confirmDialog(message: "I confirm that I have read the warning text and have backed up my private key in another secure location.", cancelTitle: "Not yet.", confirmTitle: "Confirm", didCancel: {}) {
+            DispatchQueue.main.async { self.performSegue(withIdentifier: "segueToMainFromWelcome", sender: nil) }
+        }
+
     }
 }
