@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NeoSwift
 
 class PreCreateWalletViewController: UIViewController {
 
@@ -22,7 +23,14 @@ class PreCreateWalletViewController: UIViewController {
         if UserDefaultsManager.o3WalletAddress != nil {
 
         }
+    }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueToWelcome" {
+            //create a new wallet
+            Authenticated.account = Account()
+            Authenticated.account?.network = UserDefaultsManager.network
+        }
     }
 
 }
