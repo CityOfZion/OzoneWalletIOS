@@ -11,7 +11,14 @@ import NeoSwift
 import UIKit
 
 struct Authenticated {
-    static var account: Account?
+    static var account: Account? {
+        didSet {
+            if account != nil {
+                //store current address in user default
+                UserDefaultsManager.o3WalletAddress = account?.address
+            }
+        }
+    }
     static var watchOnlyAddresses: [String]? //watch only addresses
     static var contacts: [(String, String)]?
 }

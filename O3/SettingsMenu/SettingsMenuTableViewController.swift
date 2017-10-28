@@ -26,6 +26,7 @@ class SettingsMenuTableViewController: ThemedTableViewController, HalfModalPrese
     @IBOutlet weak var contactLabel: UILabel!
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var themeLabel: UILabel!
+    @IBOutlet weak var logoutLabel: UILabel!
 
     var netString = UserDefaultsManager.network == .test ? "Network: Test Network": "Network: Main Network" {
         didSet {
@@ -54,7 +55,7 @@ class SettingsMenuTableViewController: ThemedTableViewController, HalfModalPrese
     }
 
     func setThemedElements() {
-        themedTitleLabels = [privateKeyLabel, addressBookLabel, watchOnlyLabel, netLabel, shareLabel, contactLabel, themeLabel]
+        themedTitleLabels = [privateKeyLabel, addressBookLabel, watchOnlyLabel, netLabel, shareLabel, contactLabel, themeLabel, logoutLabel, versionLabel]
         themedLabels = [versionLabel]
     }
 
@@ -69,6 +70,10 @@ class SettingsMenuTableViewController: ThemedTableViewController, HalfModalPrese
         themeView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(changeTheme)))
         setNetLabel()
         setThemeLabel()
+
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            self.versionLabel.text = String(format:"Version: %@", version)
+        }
     }
 
     @objc func maximize(_ sender: Any) {
@@ -131,6 +136,24 @@ class SettingsMenuTableViewController: ThemedTableViewController, HalfModalPrese
             } catch let error {
 
             }
+        }
+    }
+
+    func logoutTapped(_ sender: Any) {
+
+    }
+
+    //properly implement cell did tap
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.row == 7 {
+            OzoneAlert.confirmDialog(message: "Log out?", cancelTitle: "Cancel", confirmTitle: "Log out", didCancel: {
+
+            }, didConfirm: {
+                Authenticated.account = nil
+                UIApplication.shared.keyWindow?.rootViewController = UIStoryboard(name: "Onboarding", bundle: nil).instantiateInitialViewController()
+            })
+
         }
     }
 }

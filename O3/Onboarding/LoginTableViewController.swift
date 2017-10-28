@@ -37,7 +37,11 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
             do {
                 let key = try keychain
                     .accessibility(.whenPasscodeSetThisDeviceOnly, authenticationPolicy: .userPresence)
+                    .authenticationPrompt("Log in to your existing wallet stored on this device")
                     .get("ozonePrivateKey")
+                if key == nil {
+                    return
+                }
                 O3HUD.start()
                 guard let account = Account(wif: key!) else {
                     return

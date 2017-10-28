@@ -19,4 +19,11 @@ class PrivateKeyViewController: UIViewController {
         privateKeyLabel.text = Authenticated.account?.wif
         qrView.image = UIImage(qrData: Authenticated.account?.wif ?? "", width: qrView.frame.width, height: qrView.frame.height)
     }
+
+    @IBAction func shareTapped(_ sender: Any) {
+        let string = privateKeyLabel.text!
+        let activityViewController = UIActivityViewController(activityItems: [string], applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        self.present(activityViewController, animated: true, completion: nil)
+    }
 }

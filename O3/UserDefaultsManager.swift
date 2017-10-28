@@ -73,4 +73,28 @@ class UserDefaultsManager {
             NotificationCenter.default.post(name: Notification.Name("ChangedTheme"), object: nil)
         }
     }
+
+    private static let launchedBeforeKey = "launchedBeforeKey"
+    static var launchedBefore: Bool {
+        get {
+            let value = UserDefaults.standard.bool(forKey: launchedBeforeKey)
+            return value
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: launchedBeforeKey)
+            UserDefaults.standard.synchronize()
+        }
+    }
+
+    private static let o3WalletAddressKey = "o3WalletAddressKey"
+    static var o3WalletAddress: String? {
+        get {
+            let stringValue = UserDefaults.standard.string(forKey: o3WalletAddressKey)
+            return stringValue
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: o3WalletAddressKey)
+            UserDefaults.standard.synchronize()
+        }
+    }
 }

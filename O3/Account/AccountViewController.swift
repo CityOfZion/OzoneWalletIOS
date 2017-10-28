@@ -88,6 +88,10 @@ class AccountViewController: ThemedViewController, UITableViewDelegate, UITableV
     }
 
     @objc func loadClaimableGAS() {
+        if Authenticated.account == nil {
+            return
+        }
+
         Neo.client.getClaims(address: (Authenticated.account?.address)!) { result in
             switch result {
             case .failure:

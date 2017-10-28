@@ -28,6 +28,7 @@ class OnboardingViewController: UIViewController, UICollectionViewDelegate, UICo
         collectionView.dataSource = self
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white,
                                                                         NSAttributedStringKey.font: UIFont(name: "Avenir-Heavy", size: 32) as Any]
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -73,15 +74,27 @@ class OnboardingViewController: UIViewController, UICollectionViewDelegate, UICo
     }
 
     @IBAction func loginButtonTapped(_ sender: Any) {
-        performSegue(withIdentifier: "segueToLogin", sender: nil)
+        //if UserDefaultsManager.launchedBefore == true {
+            performSegue(withIdentifier: "segueToLogin", sender: nil)
+            return
+        //}
+       // UserDefaultsManager.launchedBefore = true
+       // performSegue(withIdentifier: "firstTimeLogin", sender: nil)
     }
 
     @IBAction func createNewWalletButtonTapped(_ sender: Any) {
-        performSegue(withIdentifier: "segueToWelcome", sender: nil)
+        //if user doesn't have wallet we then create one
+        if UserDefaultsManager.o3WalletAddress == nil {
+            performSegue(withIdentifier: "segueToWelcome", sender: nil)
+            return
+        }
+       // UserDefaultsManager.launchedBefore = true
+        performSegue(withIdentifier: "preCreateWallet", sender: nil)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToWelcome" {
+            //create a new wallet
             Authenticated.account = Account()
             Authenticated.account?.network = UserDefaultsManager.network
         }
