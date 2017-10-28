@@ -24,10 +24,15 @@ class WelcomeTableViewController: UITableViewController {
         let keychain = Keychain(service: "network.o3.neo.wallet")
         DispatchQueue.global().async {
             do {
-                try keychain
-                    .accessibility(.whenPasscodeSetThisDeviceOnly, authenticationPolicy: .userPresence)
-                    .authenticationPrompt("Authenticated will remove the private key currently stored in your keychain")
-                    .set((Authenticated.account?.wif)!, key: "ozonePrivateKey")
+                if UserDefaultsManager.o3WalletAddress != nil {
+                    try keychain
+                        .accessibility(.whenPasscodeSetThisDeviceOnly, authenticationPolicy: .userPresence)
+                        .authenticationPrompt("Authenticated will overwrite the private key currently stored in your keychain")
+                        .set((Authenticated.account?.wif)!, key: "ozonePrivateKey")
+                } else {
+                    try keychain.set((Authenticated.account?.wif)!, key: "ozonePrivateKey")
+                }
+
             } catch let error {
                 DispatchQueue.main.async { self.navigationController?.popViewController(animated: true) }
             }
