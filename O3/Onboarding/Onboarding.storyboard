@@ -462,7 +462,7 @@ Create a new wallet will write the new private key over the existing one. Please
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="startTapped:" destination="bCm-98-80m" eventType="touchUpInside" id="Eme-vi-JPH"/>
-                                    <segue destination="bCm-98-80m" kind="show" id="4F1-SI-Z13"/>
+                                    <segue destination="bCm-98-80m" kind="show" identifier="segueToWelcome" id="4F1-SI-Z13"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -639,7 +639,7 @@ Create a new wallet will write the new private key over the existing one. Please
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="H33-T8-8WR"/>
+        <segue reference="4F1-SI-Z13"/>
         <segue reference="2cU-TJ-2tJ"/>
         <segue reference="nDz-8f-fC4"/>
     </inferredMetricsTieBreakers>
