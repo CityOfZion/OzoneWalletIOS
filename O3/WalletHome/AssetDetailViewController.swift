@@ -91,6 +91,9 @@ class AssetDetailViewController: ThemedViewController, GraphPanDelegate, Scrolla
     }
 
     func showLatestPrice() {
+        if self.priceHistory == nil || self.priceHistory?.data.count == 0 {
+            return
+        }
         guard let latestPrice = self.priceHistory?.data.first,
             let earliestPrice = self.priceHistory?.data.last else {
                 fatalError("undefined latest price behavior")
