@@ -9,6 +9,7 @@
 import UIKit
 import Channel
 import CoreData
+import Reachability
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func setupChannel() {
         //O3 Development on Channel app_gUHDmimXT8oXRSpJvCxrz5DZvUisko_mliB61uda9iY
-       Channel.setup(withApplicationId: "app_gUHDmimXT8oXRSpJvCxrz5DZvUisko_mliB61uda9iY")
+        Channel.setup(withApplicationId: "app_gUHDmimXT8oXRSpJvCxrz5DZvUisko_mliB61uda9iY")
     }
 
     func setupApperances() {
@@ -38,14 +39,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.register(defaults: userDefaultsDefaults)
     }
 
+    let alertController = UIAlertController(title: "Uh oh! There is no internet connection. 😵", message: nil, preferredStyle: .alert)
+    @objc func reachabilityChanged(_ note: Notification) {
+        switch reachability.connection {
+        case .wifi:
+            print("Reachable via WiFi")
+            alertController.dismiss(animated: true, completion: nil)
+
+        case .cellular:
+            print("Reachable via cellular")
+            alertController.dismiss(animated: true, completion: nil)
+        case .none:
+            print("Network not reachable")
+            UIApplication.shared.keyWindow?.rootViewController?.presentFromEmbedded(alertController, animated: true, completion: nil)
+        }
+    }
+    let reachability = Reachability()!
+    func setupReachability() {
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(_:)), name: .reachabilityChanged, object: nil)
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("could not start reachability notifier")
+        }
+    }
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         self.registerDefaults()
         self.setupChannel()
         self.setupApperances()
+        self.setupReachability()
 
         //check if there is an existing wallet in keychain
         //if so, present LoginToCurrentWalletViewController
-
         let walletExists =  UserDefaultsManager.o3WalletAddress != nil
         if walletExists {
             let login = UIStoryboard(name: "Onboarding", bundle: nil).instantiateViewController(withIdentifier: "LoginToCurrentWalletViewController")

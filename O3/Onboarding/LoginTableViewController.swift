@@ -20,6 +20,9 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
     func loadWatchAddresses() {
         do {
             watchAddresses = try UIApplication.appDelegate.persistentContainer.viewContext.fetch(WatchAddress.fetchRequest())
+            for a in watchAddresses {
+                Channel.shared().subscribe(toTopic: a.address!)
+            }
         } catch {
             return
         }

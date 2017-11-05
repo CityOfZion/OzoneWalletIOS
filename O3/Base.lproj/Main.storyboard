@@ -1166,19 +1166,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="74.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zNS-WD-DYU">
-                                                    <rect key="frame" x="347" y="9.5" width="8" height="34.5"/>
-                                                    <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="25"/>
-                                                    <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bittrex Wallet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DOJ-Y3-rfF">
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bittrex Wallet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DOJ-Y3-rfF">
                                                     <rect key="frame" x="20" y="15" width="109.5" height="23.5"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dsa8vASvnm39nfdsgfdsgsf" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GaY-1w-dVz">
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dsa8vASvnm39nfdsgfdsgsf" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GaY-1w-dVz">
                                                     <rect key="frame" x="20" y="43.5" width="335" height="22"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -1189,9 +1183,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="GaY-1w-dVz" secondAttribute="trailing" constant="20" id="1Xx-hY-Tri"/>
                                                 <constraint firstItem="DOJ-Y3-rfF" firstAttribute="leading" secondItem="GaY-1w-dVz" secondAttribute="leading" id="3uK-jo-Hw7"/>
                                                 <constraint firstItem="GaY-1w-dVz" firstAttribute="leading" secondItem="lQP-AF-Uq0" secondAttribute="leading" constant="20" id="7VQ-Jw-Onn"/>
-                                                <constraint firstItem="zNS-WD-DYU" firstAttribute="centerY" secondItem="DOJ-Y3-rfF" secondAttribute="centerY" id="BMq-Kg-iZ8"/>
                                                 <constraint firstItem="GaY-1w-dVz" firstAttribute="top" secondItem="DOJ-Y3-rfF" secondAttribute="bottom" constant="5" id="Bs5-pz-fFu"/>
-                                                <constraint firstAttribute="trailing" secondItem="zNS-WD-DYU" secondAttribute="trailing" constant="20" id="DSb-cD-urV"/>
                                                 <constraint firstItem="DOJ-Y3-rfF" firstAttribute="top" secondItem="lQP-AF-Uq0" secondAttribute="top" constant="15" id="lWJ-Jy-F64"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1451,12 +1443,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="74.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TTO-QU-5oK">
-                                                    <rect key="frame" x="325" y="12" width="30" height="30"/>
-                                                    <state key="normal" title="-">
-                                                        <color key="titleColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    </state>
-                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dsa8vASvnm39nfdsgfdsgsf" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mdc-mF-xuW">
                                                     <rect key="frame" x="20" y="43.5" width="335" height="22"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
@@ -1464,7 +1450,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bittrex Wallet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6pW-iQ-OhK">
-                                                    <rect key="frame" x="20" y="15" width="295" height="23.5"/>
+                                                    <rect key="frame" x="20" y="15" width="109.5" height="23.5"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1473,12 +1459,9 @@
                                             <constraints>
                                                 <constraint firstItem="mdc-mF-xuW" firstAttribute="top" secondItem="6pW-iQ-OhK" secondAttribute="bottom" constant="5" id="BwK-ZM-mZd"/>
                                                 <constraint firstItem="6pW-iQ-OhK" firstAttribute="top" secondItem="bQ5-6Q-Rsa" secondAttribute="top" constant="15" id="JzT-lv-qwY"/>
-                                                <constraint firstAttribute="trailing" secondItem="TTO-QU-5oK" secondAttribute="trailing" constant="20" id="TK6-Mh-MXJ"/>
                                                 <constraint firstItem="mdc-mF-xuW" firstAttribute="leading" secondItem="bQ5-6Q-Rsa" secondAttribute="leading" constant="20" id="Tru-Yn-QaO"/>
-                                                <constraint firstItem="TTO-QU-5oK" firstAttribute="centerY" secondItem="6pW-iQ-OhK" secondAttribute="centerY" id="YHM-wp-Eka"/>
                                                 <constraint firstAttribute="trailing" secondItem="mdc-mF-xuW" secondAttribute="trailing" constant="20" id="ajI-VT-75T"/>
                                                 <constraint firstItem="6pW-iQ-OhK" firstAttribute="leading" secondItem="mdc-mF-xuW" secondAttribute="leading" id="hkq-0j-RLs"/>
-                                                <constraint firstItem="TTO-QU-5oK" firstAttribute="leading" secondItem="6pW-iQ-OhK" secondAttribute="trailing" constant="10" id="tPZ-1Z-y1V"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -1565,12 +1548,9 @@
         <namedColor name="lightThemePrimary">
             <color red="0.0" green="0.41176470588235292" blue="0.85098039215686272" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="lightThemePrimary">
-            <color red="0.0" green="0.41176470590000003" blue="0.85098039219999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="vu8-Wi-L2s"/>
-        <segue reference="cRR-Z4-Rsz"/>
+        <segue reference="wao-17-bwB"/>
     </inferredMetricsTieBreakers>
 </document>

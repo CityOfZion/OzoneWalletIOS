@@ -65,6 +65,9 @@ class AddressEntryTableViewController: UITableViewController, AVCaptureMetadataO
         #if (arch(i386) || arch(x86_64)) && os(iOS)
                 return
         #endif
+        if captureDevice == nil {
+            return
+        }
         do {
             let input = try AVCaptureDeviceInput(device: captureDevice!)
 
