@@ -32,11 +32,12 @@ class AddressEntryTableViewController: UITableViewController, AVCaptureMetadataO
         let address = addressTextView.text.trim()
         address.validNEOAddress { (valid) in
             if valid == false {
-                //localize string later
-                OzoneAlert.alertDialog(message: "Invalid Address", dismissTitle: "OK", didDismiss: {
-                    self.addressTextView.becomeFirstResponder()
-                })
-                return
+                DispatchQueue.main.async {
+                    OzoneAlert.alertDialog(message: "Invalid Address", dismissTitle: "OK", didDismiss: {
+                        self.addressTextView.becomeFirstResponder()
+                    })
+                    return
+                }
             }
             DispatchQueue.main.async {
                 self.delegate?.addressAdded(self.addressTextView.text.trim(), nickName: self.nicknameField.text?.trim() ?? "")
@@ -63,7 +64,7 @@ class AddressEntryTableViewController: UITableViewController, AVCaptureMetadataO
         let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
 
         #if (arch(i386) || arch(x86_64)) && os(iOS)
-                return
+            return
         #endif
         if captureDevice == nil {
             return

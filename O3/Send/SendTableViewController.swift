@@ -96,11 +96,12 @@ class SendTableViewController: ThemedTableViewController, AddressSelectDelegate,
         //validate address first
         toAddress.validNEOAddress { (valid) in
             if valid == false {
-                //localize string later
-                OzoneAlert.alertDialog(message: "Invalid Address", dismissTitle: "OK", didDismiss: {
-                    self.toAddressField.becomeFirstResponder()
-                })
-                return
+                DispatchQueue.main.async {
+                    OzoneAlert.alertDialog(message: "Invalid Address", dismissTitle: "OK", didDismiss: {
+                        self.toAddressField.becomeFirstResponder()
+                    })
+                    return
+                }
             }
             self.send(assetId: assetId, assetName: assetName, amount: amount, toAddress: toAddress)
         }
