@@ -174,7 +174,7 @@ enum Theme: String {
     var textFieldPlaceHolderColor: UIColor {
         switch self {
         case .light:
-            return UIColor(hexString: "C7C7CD")!
+            return UIColor(hexString: "#C7C7CDFF")!
         case .dark:
             return UIColor.lightGray
         }
