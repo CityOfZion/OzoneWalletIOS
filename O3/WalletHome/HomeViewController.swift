@@ -396,7 +396,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
         
-        let visibleIndexPath: IndexPath = walletHeaderCollectionView.indexPathForItem(at: visiblePoint)
+        let visibleIndexPath: IndexPath = walletHeaderCollectionView.indexPathForItem(at: visiblePoint)!
         
         if visibleIndexPath != nil {
             self.portfolioType = self.indexToPortfolioType(visibleIndexPath.row)
