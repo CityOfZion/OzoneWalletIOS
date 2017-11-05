@@ -3,3 +3,4 @@ github "airbnb/lottie-ios" "master"
 github "kishikawakatsumi/KeychainAccess"
 github "HarshilShah/DeckTransition" ~> 1.0
 github "CityOfZion/neo-swift" "master"
+github "ashleymills/Reachability.swift"
