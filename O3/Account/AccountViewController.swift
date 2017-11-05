@@ -206,6 +206,10 @@ class AccountViewController: ThemedViewController, UITableViewDelegate, UITableV
         }
     }
     @IBAction func claimTapped(_ sender: Any) {
+        if self.neoBalance == nil || self.neoBalance == 0 {
+            return
+        }
+        
         let now = Date().timeIntervalSince1970
         O3HUD.start()
         //save latest claim time interval here to limit user to only claim every 5 minutes
