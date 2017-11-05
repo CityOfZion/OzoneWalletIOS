@@ -97,11 +97,43 @@ class AddressBookViewController: ThemedViewController, UITableViewDelegate, UITa
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row < contacts.count {
-            tappedRemoveAddress(indexPath.row)
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let edit = UIAlertAction(title: "Edit Name", style: .default) { _ in
+            self.tappedEditWatchOnlyAddress(indexPath.row)
         }
+        actionSheet.addAction(edit)
+
+        let delete = UIAlertAction(title: "Delete", style: .destructive) { _ in
+            self.tappedRemoveAddress(indexPath.row)
+        }
+        actionSheet.addAction(delete)
+
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+
+        }
+        actionSheet.addAction(cancel)
+        present(actionSheet, animated: true, completion: nil)
     }
 
+    func tappedEditWatchOnlyAddress(_ index: Int) {
+        let toUpdate = self.contacts[index]
+        let alert = UIAlertController(title: "Edit name", message: nil, preferredStyle: .alert)
+        alert.addTextField { (textfield) in
+            textfield.text = toUpdate.nickName
+        }
+        let save = UIAlertAction(title: "Save", style: .default) { _ in
+            let textfield = alert.textFields?.first
+            toUpdate.nickName = textfield?.text?.trim()
+            try? UIApplication.appDelegate.persistentContainer.viewContext.save()
+            self.tableView.reloadData()
+        }
+        alert.addAction(save)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+
+        }
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil)
+    }
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
