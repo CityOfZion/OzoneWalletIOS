@@ -10,6 +10,20 @@ import Foundation
 import UIKit
 import NeoSwift
 import DeckTransition
+struct Settings: Codable {
+    public var transact: Bool
+    enum CodingKeys: String, CodingKey {
+        case transact = "transact"
+    }
+    init(transact: Bool) {
+        self.transact = transact
+    }
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let transact: Bool = try container.decode(Bool.self, forKey: .transact)
+        self.init(transact: transact)
+    }
+}
 
 class AccountViewController: ThemedViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -115,12 +129,41 @@ class AccountViewController: ThemedViewController, UITableViewDelegate, UITableV
                         self.claimButon?.isEnabled = false
                     }
 
-                   self.claimButon?.isEnabled = amount > 0
+                    self.claimButon?.isEnabled = amount > 0
                 }
             }
         }
     }
 
+    func loadSettings() {
+        let request = NSMutableURLRequest(url: URL(string: "https://o3.network/settings.json")!)
+        request.httpMethod = "GET"
+
+        let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, _, err) in
+            if err != nil {
+                return
+            }
+
+            guard let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? JSONDictionary else {
+                return
+            }
+            let decoder = JSONDecoder()
+            guard let data = try? JSONSerialization.data(withJSONObject: json!["settings"]!, options: .prettyPrinted),
+                let settings = try? decoder.decode(Settings.self, from: data) else {
+                    return
+            }
+            if settings.transact == false {
+                DispatchQueue.main.async {
+                    self.sendView?.removeFromSuperview()
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.sendView?.isHidden = false
+                }
+            }
+        }
+        task.resume()
+    }
     override func viewDidLoad() {
         addThemedElements()
         super.viewDidLoad()
@@ -135,10 +178,8 @@ class AccountViewController: ThemedViewController, UITableViewDelegate, UITableV
         self.historyTableView.refreshControl = UIRefreshControl()
         self.historyTableView.refreshControl?.addTarget(self, action: #selector(loadNeoData), for: .valueChanged)
         actionBarView!.backgroundColor = UserDefaultsManager.theme.borderColor
-
-        if sendEnabled == false {
-            sendView?.removeFromSuperview()
-        }
+        self.sendView?.isHidden = true
+        self.loadSettings()
     }
 
     override func changedTheme(_ sender: Any) {
