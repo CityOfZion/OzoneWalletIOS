@@ -19,6 +19,7 @@ class AccountViewController: ThemedViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var myAddressButton: UIButton!
     @IBOutlet weak var actionBarView: UIView!
+    @IBOutlet weak var sendView: UIView?
 
     var transactionHistory = [TransactionHistoryEntry]()
     var neoBalance: Int?
@@ -28,6 +29,9 @@ class AccountViewController: ThemedViewController, UITableViewDelegate, UITableV
     var refreshClaimableGasTimer: Timer?
     var claims: Claims?
     var isClaiming: Bool = false
+    var sendEnabled: Bool {
+        return UserDefaults.standard.bool(forKey: "sendEnabled")
+    }
 
     func addThemedElements() {
         themedTableViews = [historyTableView]
@@ -131,6 +135,10 @@ class AccountViewController: ThemedViewController, UITableViewDelegate, UITableV
         self.historyTableView.refreshControl = UIRefreshControl()
         self.historyTableView.refreshControl?.addTarget(self, action: #selector(loadNeoData), for: .valueChanged)
         actionBarView!.backgroundColor = UserDefaultsManager.theme.borderColor
+
+        if sendEnabled == false {
+            sendView?.removeFromSuperview()
+        }
     }
 
     override func changedTheme(_ sender: Any) {
