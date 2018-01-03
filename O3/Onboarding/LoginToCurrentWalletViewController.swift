@@ -27,14 +27,23 @@ class LoginToCurrentWalletViewController: UIViewController {
                 if key == nil {
                     return
                 }
-                O3HUD.start()
+
                 guard let account = Account(wif: key!) else {
                     return
                 }
+                O3HUD.start()
                 Authenticated.account = account
-                account.network = UserDefaultsManager.network
-                O3HUD.stop {
-                    DispatchQueue.main.async { self.performSegue(withIdentifier: "loggedin", sender: nil) }
+                DispatchQueue.global(qos: .background).async {
+                    let bestNode = NEONetworkMonitor.autoSelectBestNode()
+                    DispatchQueue.main.async {
+                        if bestNode != nil {
+                            UserDefaultsManager.seed = bestNode!
+                            UserDefaultsManager.useDefaultSeed = false
+                        }
+                        O3HUD.stop {
+                            DispatchQueue.main.async { self.performSegue(withIdentifier: "loggedin", sender: nil) }
+                        }
+                    }
                 }
             } catch _ {
 

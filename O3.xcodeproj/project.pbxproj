@@ -12,6 +12,8 @@
 		6E3E381C1FA4437A004965F8 /* PreCreateWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3E381B1FA4437A004965F8 /* PreCreateWalletViewController.swift */; };
 		6E3E381E1FA44C84004965F8 /* LoginToCurrentWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3E381D1FA44C84004965F8 /* LoginToCurrentWalletViewController.swift */; };
 		6E61BBD11F729D3B00D2B30B /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E61BBD01F729D3B00D2B30B /* Money.swift */; };
+		6E6BD24B1FFC69330049098A /* PKHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E6BD24A1FFC67E10049098A /* PKHUD.framework */; };
+		6E6BD24C1FFC69330049098A /* PKHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6E6BD24A1FFC67E10049098A /* PKHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6E7C92741F7A5FBA00F8D7AA /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C92731F7A5FBA00F8D7AA /* UINavigationController.swift */; };
 		6E7C927C1F7A6B1400F8D7AA /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E7C927B1F7A6B1400F8D7AA /* Account.storyboard */; };
 		6E97C4B31F7FB91000526FF0 /* AssetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E97C4B21F7FB91000526FF0 /* AssetCollectionViewCell.swift */; };
@@ -125,6 +127,7 @@
 				6ED600141F76219D006760E6 /* Channel.framework in Embed Frameworks */,
 				752017371F729AFC00090C4F /* Lottie.framework in Embed Frameworks */,
 				6ECF0E2B1FAED7BF00884F38 /* Reachability.framework in Embed Frameworks */,
+				6E6BD24C1FFC69330049098A /* PKHUD.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -137,6 +140,7 @@
 		6E3E381B1FA4437A004965F8 /* PreCreateWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreCreateWalletViewController.swift; sourceTree = "<group>"; };
 		6E3E381D1FA44C84004965F8 /* LoginToCurrentWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginToCurrentWalletViewController.swift; sourceTree = "<group>"; };
 		6E61BBD01F729D3B00D2B30B /* Money.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Money.swift; sourceTree = "<group>"; };
+		6E6BD24A1FFC67E10049098A /* PKHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PKHUD.framework; path = Carthage/Build/iOS/PKHUD.framework; sourceTree = "<group>"; };
 		6E7C92731F7A5FBA00F8D7AA /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		6E7C927B1F7A6B1400F8D7AA /* Account.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Account.storyboard; sourceTree = "<group>"; };
 		6E97C4B21F7FB91000526FF0 /* AssetCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -156,7 +160,6 @@
 		6ED6001F1F765C9C006760E6 /* WalletHomeNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletHomeNavigationController.swift; sourceTree = "<group>"; };
 		6EF8D8E51F7A732C005CC24D /* AccountAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AccountAssets.xcassets; sourceTree = "<group>"; };
 		7501C0261F7BBFF400B4B2FF /* AddressEntryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressEntryTableViewController.swift; sourceTree = "<group>"; };
-		7501E83F1F79520600123EA8 /* SideMenu.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SideMenu.framework; path = Carthage/Build/iOS/SideMenu.framework; sourceTree = "<group>"; };
 		7501E8421F79536300123EA8 /* SettingsMenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenuTableViewController.swift; sourceTree = "<group>"; };
 		750E17421F6FD560001F62FD /* GraphPanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphPanView.swift; sourceTree = "<group>"; };
 		7513FAD61F6952B8003450ED /* TransactionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCell.swift; sourceTree = "<group>"; };
@@ -240,6 +243,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				751666B21F80C290009ACC07 /* WebKit.framework in Frameworks */,
+				6E6BD24B1FFC69330049098A /* PKHUD.framework in Frameworks */,
 				6ECF0E251FAED3D800884F38 /* Reachability.framework in Frameworks */,
 				6E97C4B91F7FCB4000526FF0 /* DeckTransition.framework in Frameworks */,
 				7537438B1F7F572500803A6C /* KeychainAccess.framework in Frameworks */,
@@ -337,7 +341,6 @@
 				6ECF0E241FAED3D800884F38 /* Reachability.framework */,
 				751666B11F80C290009ACC07 /* WebKit.framework */,
 				6E97C4B81F7FC92B00526FF0 /* DeckTransition.framework */,
-				7501E83F1F79520600123EA8 /* SideMenu.framework */,
 				6ED600121F76219A006760E6 /* Channel.framework */,
 				752017351F729AFC00090C4F /* Lottie.framework */,
 				755D8F5F1F66743A00058434 /* ScrollableGraphView.framework */,
@@ -348,6 +351,7 @@
 		7575ADB91F6006AB0077007B = {
 			isa = PBXGroup;
 			children = (
+				6E6BD24A1FFC67E10049098A /* PKHUD.framework */,
 				75BEB25D1F89F3C900DC20E9 /* NeoSwift.framework */,
 				756AC1951F80A888003BF8F7 /* DeckTransition.framework */,
 				7537438A1F7F572500803A6C /* KeychainAccess.framework */,

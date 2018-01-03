@@ -2,6 +2,6 @@ github "philackm/ScrollableGraphView" ~> 4.0.2
 github "airbnb/lottie-ios" "master"
 github "kishikawakatsumi/KeychainAccess"
 github "HarshilShah/DeckTransition" ~> 1.0
-github "apisit/neo-swift" "master"
+github "apisit/neo-swift" "fix/seed-node-change"
 github "ashleymills/Reachability.swift"
 github "pkluz/PKHUD" ~> 4.0

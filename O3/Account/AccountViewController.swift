@@ -178,8 +178,8 @@ class AccountViewController: ThemedViewController, UITableViewDelegate, UITableV
         self.historyTableView.refreshControl = UIRefreshControl()
         self.historyTableView.refreshControl?.addTarget(self, action: #selector(loadNeoData), for: .valueChanged)
         actionBarView!.backgroundColor = UserDefaultsManager.theme.borderColor
-        self.sendView?.isHidden = true
-        self.loadSettings()
+       // self.sendView?.isHidden = true
+        //self.loadSettings()
     }
 
     override func changedTheme(_ sender: Any) {
@@ -228,6 +228,7 @@ class AccountViewController: ThemedViewController, UITableViewDelegate, UITableV
         self.claimButon?.isEnabled = false
         //refresh the amount of claimable gas
         self.loadClaimableGAS()
+
         Authenticated.account?.claimGas { _, error in
             if error != nil {
                 //if error then try again in 10 seconds

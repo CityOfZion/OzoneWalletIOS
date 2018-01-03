@@ -96,7 +96,6 @@ class OnboardingViewController: UIViewController, UICollectionViewDelegate, UICo
         if segue.identifier == "segueToWelcome" {
             //create a new wallet
             Authenticated.account = Account()
-            Authenticated.account?.network = UserDefaultsManager.network
         }
     }
 }

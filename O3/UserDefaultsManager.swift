@@ -19,7 +19,7 @@ class UserDefaultsManager {
             return Network(rawValue: stringValue)!
         }
         set {
-            Authenticated.account?.network = newValue
+            Authenticated.account?.neoClient = NeoClient(network: network, seedURL: UserDefaultsManager.seed)
             UserDefaults.standard.set(newValue.rawValue, forKey: networkKey)
             NotificationCenter.default.post(name: Notification.Name("ChangedNetwork"), object: nil)
         }
@@ -32,14 +32,9 @@ class UserDefaultsManager {
         }
         set {
             if newValue {
-                Neo.client.getBestNode { result in
-                    switch result {
-                    case .failure:
-                        return
-                    case .success(let node):
-                        UserDefaults.standard.set(newValue, forKey: useDefaultSeedKey)
-                        UserDefaultsManager.seed = node
-                    }
+                if let bestNode = NEONetworkMonitor.autoSelectBestNode() {
+                    UserDefaults.standard.set(newValue, forKey: useDefaultSeedKey)
+                    UserDefaultsManager.seed = bestNode
                 }
             } else {
                 UserDefaults.standard.set(newValue, forKey: useDefaultSeedKey)
@@ -55,6 +50,7 @@ class UserDefaultsManager {
         }
         set {
             Neo.client.seed = newValue
+            Authenticated.account?.neoClient = NeoClient(network: UserDefaultsManager.network, seedURL: newValue)
             UserDefaults.standard.set(newValue, forKey: seedKey)
             UserDefaults.standard.synchronize()
             NotificationCenter.default.post(name: Notification.Name("ChangedNetwork"), object: nil)

@@ -11,6 +11,7 @@ import UIKit
 import NeoSwift
 import Channel
 import KeychainAccess
+import PKHUD
 
 class LoginTableViewController: UITableViewController, QRScanDelegate {
     @IBOutlet weak var wifTextField: UITextView!
@@ -35,29 +36,29 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
         setNeedsStatusBarAppearanceUpdate()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "cameraAlt"), style: .plain, target: self, action: #selector(qrScanTapped(_:)))
         self.wifTextField.delegate = self
-        let keychain = Keychain(service: "network.o3.neo.wallet")
-        DispatchQueue.global().async {
-            do {
-                let key = try keychain
-                    .accessibility(.whenPasscodeSetThisDeviceOnly, authenticationPolicy: .userPresence)
-                    .authenticationPrompt("Log in to your existing wallet stored on this device")
-                    .get("ozonePrivateKey")
-                if key == nil {
-                    return
-                }
-                O3HUD.start()
-                guard let account = Account(wif: key!) else {
-                    return
-                }
-                Authenticated.account = account
-                account.network = UserDefaultsManager.network
-                O3HUD.stop {
-                    DispatchQueue.main.async { self.performSegue(withIdentifier: "segueToMainFromLogin", sender: nil) }
-                }
-            } catch _ {
-                self.checkToProceed()
-            }
-        }
+        // let keychain = Keychain(service: "network.o3.neo.wallet")
+        //        DispatchQueue.global().async {
+        //            do {
+        //                let key = try keychain
+        //                    .accessibility(.whenPasscodeSetThisDeviceOnly, authenticationPolicy: .userPresence)
+        //                    .authenticationPrompt("Log in to your existing wallet stored on this device")
+        //                    .get("ozonePrivateKey")
+        //                if key == nil {
+        //                    return
+        //                }
+        //                guard let account = Account(wif: key!) else {
+        //                    return
+        //                }
+        //               //O3HUD.start()
+        //                Authenticated.account = account
+        //                account.network = UserDefaultsManager.network
+        //                O3HUD.stop {
+        //                    DispatchQueue.main.async { self.performSegue(withIdentifier: "segueToMainFromLogin", sender: nil) }
+        //                }
+        //            } catch _ {
+       self.checkToProceed()
+        //            }
+        //        }
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -69,21 +70,33 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
             return
         }
         let keychain = Keychain(service: "network.o3.neo.wallet")
-        DispatchQueue.global().async {
-            do {
-                try keychain
-                    .accessibility(.whenPasscodeSetThisDeviceOnly, authenticationPolicy: .userPresence)
-                    .set(account.wif, key: "ozonePrivateKey")
-                DispatchQueue.main.async { self.performSegue(withIdentifier: "segueToMainFromLogin", sender: nil) }
-            } catch let error {
-                return
-            }
-        }
+
         Authenticated.account = account
-        account.network = UserDefaultsManager.network
+
         //subscribe to a topic which is an address to receive push notification
         //enable push notifcation. maybe put this in somewhere else?
         Channel.pushNotificationEnabled(true)
+
+        HUD.show(.labeledProgress(title: nil, subtitle: "Selecting best node..."))
+        DispatchQueue.global(qos: .background).async {
+            let bestNode = NEONetworkMonitor.autoSelectBestNode()
+            DispatchQueue.main.async {
+                HUD.hide()
+                if bestNode != nil {
+                    UserDefaultsManager.seed = bestNode!
+                    UserDefaultsManager.useDefaultSeed = false
+                }
+                do {
+                    //save pirivate key to keychain
+                    try keychain
+                        .accessibility(.whenPasscodeSetThisDeviceOnly, authenticationPolicy: .userPresence)
+                        .set(account.wif, key: "ozonePrivateKey")
+                    DispatchQueue.main.async { self.performSegue(withIdentifier: "segueToMainFromLogin", sender: nil) }
+                } catch _ {
+                    return
+                }
+            }
+        }
     }
 
     @objc func qrScanTapped(_ sender: Any) {

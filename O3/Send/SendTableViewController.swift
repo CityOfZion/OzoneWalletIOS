@@ -39,19 +39,18 @@ class SendTableViewController: ThemedTableViewController, AddressSelectDelegate,
         super.viewDidLoad()
         tableView.tableFooterView = UIView(frame: .zero)
         self.navigationController?.navigationItem.largeTitleDisplayMode = .automatic
-        let networkButton = UIBarButtonItem(title: (Authenticated.account?.network.rawValue)! + "Net", style: .plain, target: nil, action: nil)
+        let networkButton = UIBarButtonItem(title: (Authenticated.account?.neoClient.network.rawValue)! + "Net", style: .plain, target: nil, action: nil)
         networkButton.isEnabled = false
         self.navigationItem.rightBarButtonItem = networkButton
         self.enableSendButton()
+
+        assetTypeButton.setTitle("NEO", for:.normal)
+        assetTypeButton.setTitle("GAS", for:.selected)
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 1 {
-            if assetTypeButton.titleLabel?.text == "NEO" {
-                assetTypeButton.titleLabel?.text = "GAS"
-            } else {
-                assetTypeButton.titleLabel?.text = "NEO"
-            }
+            assetTypeButton.isSelected = !assetTypeButton.isSelected
         } else if indexPath.row == 2 {
             amountField.becomeFirstResponder()
         } else if indexPath.row == 3 {
@@ -61,7 +60,7 @@ class SendTableViewController: ThemedTableViewController, AddressSelectDelegate,
 
     func send(assetId: AssetId, assetName: String, amount: Double, toAddress: String) {
         DispatchQueue.main.async {
-            let message = "Are you sure you want to send \(amount) \(assetName) to \(toAddress) on the \(Authenticated.account?.network.rawValue)Net"
+            let message = "Are you sure you want to send \(amount) \(assetName) to \(toAddress) on the \(Authenticated.account?.neoClient.network.rawValue)Net"
             OzoneAlert.confirmDialog(message: message, cancelTitle: "Cancel", confirmTitle: "Confirm", didCancel: {}) {
                 let keychain = Keychain(service: "network.o3.neo.wallet")
                 DispatchQueue.global().async {
@@ -70,6 +69,10 @@ class SendTableViewController: ThemedTableViewController, AddressSelectDelegate,
                             .authenticationPrompt("Authenticate to send transaction")
                             .get("ozonePrivateKey")
                         O3HUD.start()
+                        if let bestNode = NEONetworkMonitor.autoSelectBestNode() {
+                            UserDefaultsManager.seed = bestNode
+                            UserDefaultsManager.useDefaultSeed = false
+                        }
                         Authenticated.account?.sendAssetTransaction(asset: assetId, amount: amount, toAddress: toAddress) { completed, _ in
                             O3HUD.stop {
                                 self.transactionCompleted = completed ?? false
@@ -85,7 +88,7 @@ class SendTableViewController: ThemedTableViewController, AddressSelectDelegate,
     }
 
     @IBAction func sendButtonTapped() {
-        let assetId = assetTypeButton.titleLabel?.text == "NEO" ? AssetId.neoAssetId : AssetId.gasAssetId
+        let assetId = assetTypeButton.isSelected == false ? AssetId.neoAssetId : AssetId.gasAssetId
         let assetName = assetId == .neoAssetId ? "NEO" : "GAS"
         var amount = Double(amountField.text ?? "") ?? 0
         if assetId == .neoAssetId {

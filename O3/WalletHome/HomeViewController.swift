@@ -123,7 +123,6 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
             case .failure:
                 self.group?.leave()
             case .success(let accountState):
-                print(result)
                 for asset in accountState.balances {
                     if !fromReadOnly {
                         if asset.id.contains(NeoSwift.AssetId.neoAssetId.rawValue) {
@@ -215,19 +214,6 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
         NotificationCenter.default.removeObserver(self, name: Notification.Name("ChangedNetwork"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("UpdatedWatchOnlyAddress"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("ChangedTheme"), object: nil)
-    }
-
-    func autoSelectBestNode() {
-        DispatchQueue.global(qos: .background).async {
-            let bestNode = NEONetworkMonitor.autoSelectBestNode()
-            DispatchQueue.main.async {
-
-                if bestNode != nil {
-
-                }
-            }
-        }
-
     }
 
     override func viewDidLoad() {
