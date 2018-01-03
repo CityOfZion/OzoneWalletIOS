@@ -11,6 +11,7 @@ import UIKit
 import ScrollableGraphView
 import NeoSwift
 import Channel
+import PKHUD
 
 class HomeViewController: ThemedViewController, UITableViewDelegate, UITableViewDataSource, GraphPanDelegate, ScrollableGraphViewDataSource {
 
@@ -122,7 +123,6 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
             case .failure:
                 self.group?.leave()
             case .success(let accountState):
-                print(result)
                 for asset in accountState.balances {
                     if !fromReadOnly {
                         if asset.id.contains(NeoSwift.AssetId.neoAssetId.rawValue) {

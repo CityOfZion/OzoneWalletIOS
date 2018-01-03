@@ -35,9 +35,6 @@ class Neo {
             sharedMain = NeoClient.sharedMain
         }
 
-        if UserDefaultsManager.network == .test {
-            return sharedTest!
-        }
         return sharedMain!
     }
 }

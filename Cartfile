@@ -4,3 +4,4 @@ github "kishikawakatsumi/KeychainAccess"
 github "HarshilShah/DeckTransition" ~> 1.0
 github "CityOfZion/neo-swift" "master"
 github "ashleymills/Reachability.swift"
+github "pkluz/PKHUD" ~> 4.0
