@@ -878,7 +878,7 @@
 				CODE_SIGN_ENTITLEMENTS = O3/O3.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DS5S7EUZRZ;
+				DEVELOPMENT_TEAM = EYFAGQ57U2;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -909,7 +909,7 @@
 				CODE_SIGN_ENTITLEMENTS = O3/O3.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DS5S7EUZRZ;
+				DEVELOPMENT_TEAM = EYFAGQ57U2;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

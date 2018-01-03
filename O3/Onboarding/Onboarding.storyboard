@@ -427,7 +427,7 @@
                 <viewControllerPlaceholder storyboardName="QR" id="1YE-0v-iEa" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Yv-EW-bLt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2342" y="-443"/>
+            <point key="canvasLocation" x="2490" y="-444"/>
         </scene>
         <!--Pre Create Wallet View Controller-->
         <scene sceneID="Ffr-x8-58C">
@@ -643,7 +643,7 @@ It is highly reccomended that you have a passcode set on your iPhone. Removing t
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="4F1-SI-Z13"/>
-        <segue reference="gND-3E-7d0"/>
+        <segue reference="1ME-Er-JZt"/>
         <segue reference="nDz-8f-fC4"/>
     </inferredMetricsTieBreakers>
 </document>
