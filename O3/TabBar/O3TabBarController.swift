@@ -34,12 +34,12 @@ class O3TabBarController: UITabBarController {
         super.viewDidLoad()
         addThemeObserver()
         updateAppearance(nil)
-        tabBar.items?[2].image = UIImage(named: "cog")?.withRenderingMode(.alwaysOriginal)
-        tabBar.items?[2].title = ""
-        tabBar.items?[2].imageInsets = UIEdgeInsets(top: 0, left: 0, bottom: -10, right: 0)
-        tabBar.items?[2].isEnabled = true
+        tabBar.items?[3].image = UIImage(named: "cog")?.withRenderingMode(.alwaysOriginal)
+        tabBar.items?[3].title = ""
+        tabBar.items?[3].imageInsets = UIEdgeInsets(top: 0, left: 0, bottom: -10, right: 0)
+        tabBar.items?[3].isEnabled = true
 
-        let tabOverrideView = UIView(frame: tabBar.subviews[2].frame)
+        let tabOverrideView = UIView(frame: tabBar.subviews[3].frame)
         tabOverrideView.isUserInteractionEnabled = true
         tabOverrideView.backgroundColor = UIColor.clear
 
@@ -56,7 +56,7 @@ class O3TabBarController: UITabBarController {
 
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         guard let index = tabBar.items?.index(of: item) else { return }
-        if index == 2 {
+        if index == 3 {
             self.performSegue(withIdentifier: "segueToSettings", sender: nil)
         }
     }

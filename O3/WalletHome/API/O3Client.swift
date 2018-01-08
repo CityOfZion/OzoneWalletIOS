@@ -37,6 +37,7 @@ public class O3Client {
     enum O3Endpoints: String {
         case getPriceHistory = "/v1/history/"
         case getPortfolioValue = "/v1/portfolio"
+        case getNewsFeed = "/v1/feed/"
     }
 
     enum HTTPMethod: String {
@@ -124,4 +125,25 @@ public class O3Client {
         }
     }
 
+    func getNewsFeed(completion: @escaping(O3ClientResult<FeedData>) -> Void) {
+        let endpoint = O3Endpoints.getNewsFeed.rawValue
+        sendRequest(endpoint, method: .GET, data: nil) { result in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(let response):
+                let decoder = JSONDecoder()
+                guard let result = response["result"] as? JSONDictionary,
+                    let data = result["data"] as? JSONDictionary,
+                    let responseData = try? JSONSerialization.data(withJSONObject: data, options: .prettyPrinted),
+                    let feedData = try? decoder.decode(FeedData.self, from: responseData) else {
+                        completion(.failure(.invalidData))
+                        return
+                }
+
+                let clientResult = O3ClientResult.success(feedData)
+                completion(clientResult)
+            }
+        }
+    }
 }

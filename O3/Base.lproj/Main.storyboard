@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Sc3-3c-aB2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Sc3-3c-aB2">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -406,13 +406,14 @@
                     <connections>
                         <segue destination="F25-Yg-MOz" kind="relationship" relationship="viewControllers" id="aXT-lt-Sa1"/>
                         <segue destination="nwB-AY-Qhc" kind="relationship" relationship="viewControllers" id="pfm-AG-37V"/>
-                        <segue destination="dgW-vt-Uop" kind="relationship" relationship="viewControllers" id="wod-q7-V4F"/>
-                        <segue destination="dgW-vt-Uop" kind="presentation" identifier="segueToSettings" id="vu8-Wi-L2s"/>
+                        <segue destination="Yal-Kt-dC0" kind="relationship" relationship="viewControllers" id="YUK-jF-Bcb"/>
+                        <segue destination="dgW-vt-Uop" kind="relationship" relationship="viewControllers" id="dIa-be-Gyn"/>
+                        <segue destination="dgW-vt-Uop" kind="presentation" identifier="segueToSettings" id="dcc-db-Hi2"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nZe-SP-xuA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2556" y="-170"/>
+            <point key="canvasLocation" x="2412" y="-170"/>
         </scene>
         <!--Wallet Home Navigation Controller-->
         <scene sceneID="biH-0S-AIy">
@@ -603,6 +604,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wkl-N0-KN2" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4761" y="-170"/>
+        </scene>
+        <!--NewsFeed-->
+        <scene sceneID="zoM-4C-BMM">
+            <objects>
+                <viewControllerPlaceholder storyboardName="NewsFeed" id="Yal-Kt-dC0" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="XTy-W3-5ZZ"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J7h-MF-JYe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2413" y="-643"/>
         </scene>
         <!--Account-->
         <scene sceneID="Vn7-UZ-hmH">
@@ -961,7 +972,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tyb-lI-4RW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2556" y="1515"/>
+            <point key="canvasLocation" x="2412" y="1325"/>
         </scene>
         <!--Private Key-->
         <scene sceneID="1Aw-Wd-cew">
@@ -1079,7 +1090,7 @@
                                 <rect key="frame" x="0.0" y="72" width="375" height="68"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Gwh-hm-Onn" id="va1-eZ-JsJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="336" height="67.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="335" height="67.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seed4.cityOfZion" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Kx-xS-T4t">
@@ -1403,7 +1414,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4VA-yM-EWQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2556" y="752"/>
+            <point key="canvasLocation" x="2412" y="620"/>
         </scene>
         <!--Address Book-->
         <scene sceneID="wFo-II-0cz">
@@ -1550,7 +1561,7 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vu8-Wi-L2s"/>
+        <segue reference="dcc-db-Hi2"/>
         <segue reference="wao-17-bwB"/>
     </inferredMetricsTieBreakers>
 </document>

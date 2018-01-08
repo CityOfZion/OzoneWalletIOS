@@ -5,6 +5,7 @@ github "HarshilShah/DeckTransition" ~> 1.0
 github "CityOfZion/neo-swift" "master"
 github "ashleymills/Reachability.swift"
 github "pkluz/PKHUD" ~> 4.0
+github "onevcat/Kingfisher" ~> 4.0
 
 binary "https://raw.githubusercontent.com/Building42/Specs/master/Carthage/Fabric.json"
 binary "https://raw.githubusercontent.com/Building42/Specs/master/Carthage/Crashlytics.json"
