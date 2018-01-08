@@ -37,7 +37,7 @@ class AssetDetailViewController: ThemedViewController, GraphPanDelegate, Scrolla
     func selectedPriceIntervalString() -> String {
         switch selectedInterval {
         case .fiveMinutes, .fifteenMinutes, .thirtyMinutes:
-             return String(format:"Past %d minutes".uppercased(), selectedInterval.rawValue)
+             return String(format: "Past %d minutes".uppercased(), selectedInterval.rawValue)
         case .sixtyMinutes:
             return "Past hour".uppercased()
         case .oneDay:
@@ -100,7 +100,7 @@ class AssetDetailViewController: ThemedViewController, GraphPanDelegate, Scrolla
         }
         switch referenceCurrency {
         case .btc:
-            amountLabel.text = String(format:"%.8fBTC", latestPrice.averageBTC)
+            amountLabel.text = String(format: "%.8fBTC", latestPrice.averageBTC)
         case .usd:
             amountLabel.text = USD(amount: Float(latestPrice.averageUSD)).formattedString()
         }
@@ -137,14 +137,14 @@ class AssetDetailViewController: ThemedViewController, GraphPanDelegate, Scrolla
             case .btc:
                 referenceCurrencyCurrentValue = currentValue.averageBTC
                 referenceCurrencyOriginalValue = originalValue.averageBTC
-                self.amountLabel.text = String(format:"%@BTC", referenceCurrencyCurrentValue.string(Precision.btc))
+                self.amountLabel.text = String(format: "%@BTC", referenceCurrencyCurrentValue.string(Precision.btc))
             case .usd:
                 referenceCurrencyCurrentValue = currentValue.averageUSD
                 referenceCurrencyOriginalValue = originalValue.averageUSD
                 self.amountLabel.text = USD(amount: Float(referenceCurrencyCurrentValue)).formattedString()
             }
             let percentChange = 0 < referenceCurrencyOriginalValue ? ((referenceCurrencyCurrentValue - referenceCurrencyOriginalValue) / referenceCurrencyOriginalValue * 100) : 0
-            self.percentChangeLabel.text = String(format:"%.2f%@", percentChange, "%")
+            self.percentChangeLabel.text = String(format: "%.2f%@", percentChange, "%")
             self.percentChangeLabel.textColor = percentChange >= 0 ? UserDefaultsManager.theme.positiveGainColor : UserDefaultsManager.theme.negativeLossColor
 
             let posixString = self.priceHistory?.data.reversed()[index].time ?? ""

@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias JSONDictionary = [String : Any]
+typealias JSONDictionary = [String: Any]
 
 public enum O3ClientError: Error {
     case  invalidBodyRequest, invalidData, invalidRequest, noInternet

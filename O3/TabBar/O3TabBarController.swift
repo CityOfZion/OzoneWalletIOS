@@ -34,12 +34,12 @@ class O3TabBarController: UITabBarController {
         super.viewDidLoad()
         addThemeObserver()
         updateAppearance(nil)
-        tabBar.items?[2].image = UIImage(named:"cog")?.withRenderingMode(.alwaysOriginal)
+        tabBar.items?[2].image = UIImage(named: "cog")?.withRenderingMode(.alwaysOriginal)
         tabBar.items?[2].title = ""
         tabBar.items?[2].imageInsets = UIEdgeInsets(top: 0, left: 0, bottom: -10, right: 0)
         tabBar.items?[2].isEnabled = true
 
-        let tabOverrideView = UIView(frame:tabBar.subviews[2].frame)
+        let tabOverrideView = UIView(frame: tabBar.subviews[2].frame)
         tabOverrideView.isUserInteractionEnabled = true
         tabOverrideView.backgroundColor = UIColor.clear
 
