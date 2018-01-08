@@ -55,7 +55,7 @@ class WalletHeaderCollectionCell: UICollectionViewCell {
             }
             switch referenceCurrency {
             case .btc:
-                portfolioValueLabel.text = String(format:"%.8fBTC", latestPrice.averageBTC)
+                portfolioValueLabel.text = String(format: "%.8fBTC", latestPrice.averageBTC)
             case .usd:
                 portfolioValueLabel.text = USD(amount: Float(latestPrice.averageUSD)).formattedString()
             }

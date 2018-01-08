@@ -72,7 +72,7 @@ class SettingsMenuTableViewController: ThemedTableViewController, HalfModalPrese
         setThemeLabel()
 
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-            self.versionLabel.text = String(format:"Version: %@", version)
+            self.versionLabel.text = String(format: "Version: %@", version)
         }
     }
 

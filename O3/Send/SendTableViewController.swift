@@ -44,8 +44,8 @@ class SendTableViewController: ThemedTableViewController, AddressSelectDelegate,
         self.navigationItem.rightBarButtonItem = networkButton
         self.enableSendButton()
 
-        assetTypeButton.setTitle("NEO", for:.normal)
-        assetTypeButton.setTitle("GAS", for:.selected)
+        assetTypeButton.setTitle("NEO", for: .normal)
+        assetTypeButton.setTitle("GAS", for: .selected)
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

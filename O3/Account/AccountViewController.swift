@@ -87,8 +87,8 @@ class AccountViewController: ThemedViewController, UITableViewDelegate, UITableV
     }
 
     func showClaimableGASInButton(amount: Double) {
-        let gasAmountString = String(format:"%.8f", amount)
-        let text = String(format:"Claim\n%@", gasAmountString)
+        let gasAmountString = String(format: "%.8f", amount)
+        let text = String(format: "Claim\n%@", gasAmountString)
         let attributedString = NSMutableAttributedString(string: text)
 
         let nsText = text as NSString

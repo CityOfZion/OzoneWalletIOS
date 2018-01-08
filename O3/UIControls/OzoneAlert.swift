@@ -13,7 +13,7 @@ class OzoneAlert {
                               cancelTitle: String, confirmTitle: String,
                               didCancel: @escaping () -> Void, didConfirm:@escaping () -> Void) {
 
-        let alertController = UIAlertController(title:title, message: message, preferredStyle: .alert)
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let confirmAction = UIAlertAction(title: confirmTitle, style: .default) { _ in
             didConfirm()
         }
@@ -31,7 +31,7 @@ class OzoneAlert {
                               dismissTitle: String,
                               didDismiss: @escaping () -> Void) {
 
-        let alertController = UIAlertController(title:title, message: message, preferredStyle: .alert)
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
         let dismissAction = UIAlertAction(title: dismissTitle, style: .cancel) { _ in
             didDismiss()

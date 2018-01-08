@@ -61,7 +61,7 @@ extension String {
             }
         }
         let posixString = previousPrice.time
-        return String(format:"%@ (%.2f%@) SINCE %@", amountChangeString, percentChange, "%", posixString.intervaledDateString(selectedInterval))
+        return String(format: "%@ (%.2f%@) SINCE %@", amountChangeString, percentChange, "%", posixString.intervaledDateString(selectedInterval))
     }
 
     static func percentChangeStringShort(latestPrice: PriceData, previousPrice: PriceData, referenceCurrency: Currency) -> String {
@@ -76,7 +76,7 @@ extension String {
             amountChange = latestPrice.averageUSD - previousPrice.averageUSD
             percentChange = 0 < previousPrice.averageUSD ? (amountChange / previousPrice.averageUSD) * 100 : 0
         }
-        return String(format:"%.2f%@", percentChange, "%")
+        return String(format: "%.2f%@", percentChange, "%")
     }
 
     func trim() -> String {

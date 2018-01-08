@@ -57,7 +57,7 @@ class AddressEntryTableViewController: UITableViewController, AVCaptureMetadataO
         self.hideKeyboardWhenTappedAround()
         addressTextView.delegate = self
         self.checkCanProceed()
-        let qrView = UIView(frame:  CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height * 0.5))
+        let qrView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height * 0.5))
         tableView.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height * 0.5)
         tableView.tableHeaderView?.embed(qrView)
         tableView.tableHeaderView?.bringSubview(toFront: closeButton)
