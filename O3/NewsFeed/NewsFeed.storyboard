@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hSP-G9-crL">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Avenir.ttc">
+            <string>Avenir-Book</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--News Feed View Controller-->
+        <scene sceneID="xdd-RR-ZHh">
+            <objects>
+                <viewController storyboardIdentifier="segueToNewsItem" id="86O-Va-JSM" customClass="NewsFeedViewController" customModule="O3" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Fdn-8K-Sgs">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="89" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="amQ-Y1-F6o">
+                                <rect key="frame" x="0.0" y="116" width="320" height="403"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="newsFeedCell" id="HVy-Py-qIf" customClass="NewsFeedCell" customModule="O3" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="89"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HVy-Py-qIf" id="drF-gv-hAI">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="88.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Iio-AL-8S2">
+                                                    <rect key="frame" x="0.0" y="0.0" width="157.5" height="88.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="Iio-AL-8S2" secondAttribute="height" multiplier="16:9" id="hg0-jA-ljJ"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City of Zion release NEO wallet v0.0.9 featuring QLC support" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RZv-vF-Gn1">
+                                                    <rect key="frame" x="165.5" y="8" width="146.5" height="61.5"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018-01-06" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w7K-bT-qLy">
+                                                    <rect key="frame" x="246" y="68" width="67" height="18"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                                                    <color key="textColor" name="grey"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="Iio-AL-8S2" secondAttribute="bottom" id="6rJ-lq-aIX"/>
+                                                <constraint firstItem="w7K-bT-qLy" firstAttribute="bottom" secondItem="drF-gv-hAI" secondAttribute="bottomMargin" constant="8" id="Kae-Kg-K3v"/>
+                                                <constraint firstItem="RZv-vF-Gn1" firstAttribute="leading" secondItem="Iio-AL-8S2" secondAttribute="trailing" constant="8" id="R87-t9-IE0"/>
+                                                <constraint firstItem="RZv-vF-Gn1" firstAttribute="top" secondItem="drF-gv-hAI" secondAttribute="top" constant="8" id="SKI-Xj-Zh5"/>
+                                                <constraint firstItem="Iio-AL-8S2" firstAttribute="leading" secondItem="drF-gv-hAI" secondAttribute="leading" id="T28-yt-ZOy"/>
+                                                <constraint firstItem="w7K-bT-qLy" firstAttribute="trailing" secondItem="drF-gv-hAI" secondAttribute="trailingMargin" constant="8" id="tO4-Oe-X6J"/>
+                                                <constraint firstItem="Iio-AL-8S2" firstAttribute="top" secondItem="drF-gv-hAI" secondAttribute="top" id="xcd-2c-Niw"/>
+                                                <constraint firstAttribute="trailing" secondItem="RZv-vF-Gn1" secondAttribute="trailing" constant="8" id="zCF-aq-Bcl"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="newsDateLabel" destination="w7K-bT-qLy" id="DxR-bl-cEY"/>
+                                            <outlet property="newsRowImageView" destination="Iio-AL-8S2" id="SIE-b3-1ZT"/>
+                                            <outlet property="newsTitleLabel" destination="RZv-vF-Gn1" id="3Ks-F7-ybE"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="atk-Gz-aBS" firstAttribute="trailing" secondItem="amQ-Y1-F6o" secondAttribute="trailing" id="Du1-O9-R8E"/>
+                            <constraint firstItem="amQ-Y1-F6o" firstAttribute="top" secondItem="atk-Gz-aBS" secondAttribute="top" id="HB1-mw-yC8"/>
+                            <constraint firstItem="atk-Gz-aBS" firstAttribute="bottom" secondItem="amQ-Y1-F6o" secondAttribute="bottom" id="IfG-cn-xvm"/>
+                            <constraint firstItem="amQ-Y1-F6o" firstAttribute="leading" secondItem="atk-Gz-aBS" secondAttribute="leading" id="UPF-f0-uTW"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="atk-Gz-aBS"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="czL-Kp-j7D"/>
+                    <connections>
+                        <outlet property="newsFeedTableView" destination="amQ-Y1-F6o" id="g14-Fp-vQV"/>
+                        <segue destination="qY4-5L-Ohx" kind="show" identifier="segueToNewsItem" id="O8a-9Z-Ln2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tLd-8O-st9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2033" y="-254"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="MZP-9z-ZTX">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hSP-G9-crL" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="newspaper" id="XVm-dL-tIa">
+                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-10"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="8Gj-vj-fBu">
+                        <rect key="frame" x="0.0" y="20" width="320" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="86O-Va-JSM" kind="relationship" relationship="rootViewController" id="EMh-gD-GZG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u6W-vF-KnF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2685" y="-253"/>
+        </scene>
+        <!--News Item View Controller-->
+        <scene sceneID="tld-tt-yvw">
+            <objects>
+                <viewController id="qY4-5L-Ohx" customClass="NewsItemViewController" customModule="O3" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="97U-l9-2Mh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="qZO-LW-fne"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UQx-gz-PZR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1256" y="-255"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="newspaper" width="37" height="25"/>
+        <namedColor name="grey">
+            <color red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

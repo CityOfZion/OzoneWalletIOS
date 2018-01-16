@@ -26,6 +26,19 @@ extension String {
         return dateFormatter.string(from: date)
     }
 
+    func shortDateString() -> String {
+        let dateFormatter = DateFormatter()
+        let tempLocale = dateFormatter.locale // save locale temporarily
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        guard let date = dateFormatter.date(from: self) else {
+            fatalError("Invalid posix formatted string")
+        }
+        dateFormatter.dateFormat = "YYYY-MM-dd"
+        dateFormatter.locale = tempLocale
+        return dateFormatter.string(from: date)
+    }
+
     static func formattedAmountChange(amount: Double, currency: Currency) -> String {
         let amountNumber = NSNumber(value: amount)
         let formatter = NumberFormatter()
