@@ -43,7 +43,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City of Zion release NEO wallet v0.0.9 featuring QLC support" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RZv-vF-Gn1">
-                                                    <rect key="frame" x="165.5" y="0.0" width="146.5" height="61.5"/>
+                                                    <rect key="frame" x="165.5" y="8" width="146.5" height="61.5"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -59,7 +59,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="Iio-AL-8S2" secondAttribute="bottom" id="6rJ-lq-aIX"/>
                                                 <constraint firstItem="w7K-bT-qLy" firstAttribute="bottom" secondItem="drF-gv-hAI" secondAttribute="bottomMargin" constant="8" id="Kae-Kg-K3v"/>
                                                 <constraint firstItem="RZv-vF-Gn1" firstAttribute="leading" secondItem="Iio-AL-8S2" secondAttribute="trailing" constant="8" id="R87-t9-IE0"/>
-                                                <constraint firstItem="RZv-vF-Gn1" firstAttribute="top" secondItem="drF-gv-hAI" secondAttribute="top" id="SKI-Xj-Zh5"/>
+                                                <constraint firstItem="RZv-vF-Gn1" firstAttribute="top" secondItem="drF-gv-hAI" secondAttribute="top" constant="8" id="SKI-Xj-Zh5"/>
                                                 <constraint firstItem="Iio-AL-8S2" firstAttribute="leading" secondItem="drF-gv-hAI" secondAttribute="leading" id="T28-yt-ZOy"/>
                                                 <constraint firstItem="w7K-bT-qLy" firstAttribute="trailing" secondItem="drF-gv-hAI" secondAttribute="trailingMargin" constant="8" id="tO4-Oe-X6J"/>
                                                 <constraint firstItem="Iio-AL-8S2" firstAttribute="top" secondItem="drF-gv-hAI" secondAttribute="top" id="xcd-2c-Niw"/>

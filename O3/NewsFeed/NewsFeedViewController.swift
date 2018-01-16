@@ -10,15 +10,22 @@ import Foundation
 import UIKit
 import Kingfisher
 
-class NewsFeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class NewsFeedViewController: ThemedViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var newsFeedTableView: UITableView!
     var feedData: FeedData?
     var urlToLoad = ""
+
+    func setThemedElements() {
+        themedTableViews = [newsFeedTableView]
+        themedBackgroundViews = [view]
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         newsFeedTableView.dataSource = self
         newsFeedTableView.delegate = self
+        newsFeedTableView.tableFooterView = UIView(frame: .zero)
+
         self.navigationController?.hideHairline()
         self.navigationItem.largeTitleDisplayMode = .automatic
         self.navigationItem.title = "News Feed"
