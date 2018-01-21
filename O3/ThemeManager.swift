@@ -196,6 +196,7 @@ class ThemeManager {
     static let borderWidth: CGFloat = 1.0
     static let smallText = UIFont(name: "Avenir-Book", size: 12)!
     static let barButtonItemFont = UIFont(name: "Avenir-Heavy", size: 16)!
+    static let topTabbarItemFont = UIFont(name: "Avenir-Medium", size: 12)!
     static let largeTitleFont = UIFont(name: "Avenir-Heavy", size: 32)!
 
     static func applyTheme(theme: Theme) {
