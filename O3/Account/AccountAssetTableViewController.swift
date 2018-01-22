@@ -359,6 +359,8 @@ class AccountAssetTableViewController: ThemedTableViewController {
 
 extension AccountAssetTableViewController: UnclaimGASDelegate {
     func claimButtonTapped() {
-        self.prepareClaimingGAS()
+        DispatchQueue.main.async {
+            self.prepareClaimingGAS()
+        }
     }
 }
