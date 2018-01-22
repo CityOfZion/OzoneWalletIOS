@@ -84,7 +84,7 @@ enum Theme: String {
     var titleTextColor: UIColor {
         switch self {
         case .light:
-            return UIColor.black
+            return UIColor(named: "textColor")!
         case .dark:
             return UIColor.white
         }
@@ -102,9 +102,9 @@ enum Theme: String {
     var lightTextColor: UIColor {
         switch self {
         case .light:
-            return UIColor.lightGray
+            return UIColor(named: "grey")!
         case .dark:
-            return UIColor.lightGray
+            return UIColor(named: "grey")!
         }
     }
 
@@ -183,7 +183,7 @@ enum Theme: String {
     var textFieldTextColor: UIColor {
         switch self {
         case .light:
-            return UIColor.black
+            return UIColor(named: "textColor")!
         case .dark:
             return UIColor.white
         }

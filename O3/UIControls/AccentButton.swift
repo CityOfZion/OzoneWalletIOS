@@ -27,15 +27,15 @@ class AccentButton: UIButton {
         self.backgroundColor = isEnabled == true ? UserDefaultsManager.theme.accentColor : UserDefaultsManager.theme.disabledColor
         if shadowLayer == nil {
             shadowLayer = CAShapeLayer()
-            shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: 22).cgPath
+            shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: self.cornerRadius).cgPath
             shadowLayer.fillColor = isEnabled == true ? UserDefaultsManager.theme.accentColor.cgColor : UIColor.clear.cgColor
             shadowLayer.shadowColor = UserDefaultsManager.theme.disabledColor.cgColor
             shadowLayer.shadowPath = shadowLayer.path
             shadowLayer.shadowOffset = CGSize(width: 2.0, height: 2.0)
             shadowLayer.shadowOpacity =  isEnabled == true ? 0.8 : 0
             shadowLayer.shadowRadius = 2
-
             layer.insertSublayer(shadowLayer, at: 0)
+            self.clipsToBounds = false
         }
     }
 
@@ -44,6 +44,7 @@ class AccentButton: UIButton {
         shadowLayer.shadowOpacity = 0.8
         super.touchesBegan(touches, with: event)
     }
+
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         shadowLayer.shadowOffset = CGSize(width: 2.0, height: 2.0)
         shadowLayer.shadowOpacity = 0.8

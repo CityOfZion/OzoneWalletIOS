@@ -8,14 +8,14 @@
 
 import UIKit
 
-class NativeAssetTableViewCell: UITableViewCell {
+class NativeAssetTableViewCell: ThemedTableCell {
 
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var amountLabel: UILabel!
 
     override func awakeFromNib() {
+        titleLabels = [titleLabel, amountLabel]
         super.awakeFromNib()
-        // Initialization code
     }
 
 }

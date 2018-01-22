@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import NeoSwift
+import PKHUD
 
-class AccountAssetTableViewController: UITableViewController {
+class AccountAssetTableViewController: ThemedTableViewController {
 
     private enum sections: Int {
         case unclaimedGAS = 0
@@ -16,51 +18,192 @@ class AccountAssetTableViewController: UITableViewController {
         case nep5Tokens
     }
 
-    var selectedNEP5Tokens: [NEP5Token] = []
-    //load this remotely later
-    var availableNEP5Tokens: [NEP5Token] = []
+    var selectedNEP5Tokens: [String: NEP5Token] = [:]
+    var claims: Claims?
+    var isClaiming: Bool = false
+
+    var neoBalance: Int?
+    var gasBalance: Double?
+    var refreshClaimableGasTimer: Timer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.loadSelectedNEP5Tokens()
+        loadSelectedNEP5Tokens()
+        loadClaimableGAS()
+        loadAccountState()
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadNEP5TokensSection), name: NSNotification.Name(rawValue: "halfModalDismissed"), object: nil)
+        refreshClaimableGasTimer = Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(AccountAssetTableViewController.loadClaimableGAS), userInfo: nil, repeats: true)
+        refreshClaimableGasTimer?.fire()
     }
 
-    func loadClaimableGas() {
+    @objc func reloadNEP5TokensSection() {
+        self.loadSelectedNEP5Tokens()
+        tableView.reloadSections(IndexSet(integer: sections.nep5Tokens.rawValue), with: .automatic)
+    }
 
+    func claimGas() {
+        self.enableClaimButton(enable: false)
+        //refresh the amount of claimable gas
+        self.loadClaimableGAS()
+        Authenticated.account?.claimGas { _, error in
+            if error != nil {
+                //if error then try again in 10 seconds
+                DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                    self.claimGas()
+                }
+                return
+            }
+
+            DispatchQueue.main.async {
+                //HUD something to notify user that claim succeeded
+                //done claiming
+                HUD.hide()
+
+                DispatchQueue.main.async {
+                    OzoneAlert.alertDialog(message: "Your claim has succeeded, it may take a few minutes to be reflected in your transaction history. You can claim again after 5 minutes", dismissTitle: "Got it") { }
+                }
+                self.isClaiming = false
+                //if claim succeeded then fire the timer to refresh claimable gas again.
+                self.refreshClaimableGasTimer = Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(AccountAssetTableViewController.loadClaimableGAS), userInfo: nil, repeats: true)
+                self.refreshClaimableGasTimer?.fire()
+
+                self.loadClaimableGAS()
+
+            }
+        }
+    }
+
+    func enableClaimButton(enable: Bool) {
+        let indexPath = IndexPath(row: 0, section: sections.unclaimedGAS.rawValue)
+        guard let cell = tableView.cellForRow(at: indexPath) as? UnclaimedGASTableViewCell else {
+            return
+        }
+        cell.claimButton.isEnabled = enable && isClaiming == false
+    }
+
+    func prepareClaimingGAS() {
+
+        if self.neoBalance == nil || self.neoBalance == 0 {
+            return
+        }
+        refreshClaimableGasTimer?.invalidate()
+        let now = Date().timeIntervalSince1970
+        HUD.show(.labeledProgress(title: "Claiming GAS", subtitle: "This might take a little while..."))
+
+        //save latest claim time interval here to limit user to only claim every 5 minutes
+        UserDefaults.standard.set(now, forKey: "lastetClaimDate")
+        UserDefaults.standard.synchronize()
+
+        //disable the button after tapped
+        enableClaimButton(enable: false)
+
+        //we are able to claim gas only when there is data in the .claims array
+        if self.claims != nil && self.claims!.claims.count > 0 {
+            DispatchQueue.main.async {
+                self.claimGas()
+            }
+            return
+        }
+        //to be able to claim. we need to send the entire NEO to ourself.
+        Authenticated.account?.sendAssetTransaction(asset: AssetId.neoAssetId, amount: Double(self.neoBalance!), toAddress: (Authenticated.account?.address)!) { completed, _ in
+            if completed == false {
+                HUD.hide()
+                //HUD or something
+                //in case it's error we then enable the button again.
+                self.enableClaimButton(enable: true)
+                return
+            }
+            DispatchQueue.main.async {
+                //if completed then mark the flag that we are claiming GAS
+                self.isClaiming = true
+                //disable button and invalidate the timer to refresh claimable GAS
+                self.refreshClaimableGasTimer?.invalidate()
+                //try to claim gas after 10 seconds
+                DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                    self.claimGas()
+                }
+            }
+        }
+    }
+
+    @objc func loadClaimableGAS() {
+        if Authenticated.account == nil {
+            return
+        }
+
+        Neo.client.getClaims(address: (Authenticated.account?.address)!) { result in
+            switch result {
+            case .failure:
+                return
+            case .success(let claims):
+                self.claims = claims
+                let amount: Double = Double(claims.totalUnspentClaim) / 100000000.0
+                DispatchQueue.main.async {
+                    self.showClaimableGASAmount(amount: amount)
+                }
+            }
+        }
+    }
+
+    func showClaimableGASAmount(amount: Double) {
+        let indexPath = IndexPath(row: 0, section: sections.unclaimedGAS.rawValue)
+        guard let cell = tableView.cellForRow(at: indexPath) as? UnclaimedGASTableViewCell else {
+            return
+        }
+        cell.amountLabel.text = amount.string(8)
+
+        //only enable button if latestClaimDate is more than 5 minutes
+        let latestClaimDateInterval: Double = UserDefaults.standard.double(forKey: "lastetClaimDate")
+        let latestClaimDate: Date = Date(timeIntervalSince1970: latestClaimDateInterval)
+        let diff = Date().timeIntervalSince(latestClaimDate)
+        if diff > (5 * 60) {
+            cell.claimButton.isEnabled = true
+        } else {
+            cell.claimButton.isEnabled = false
+        }
+    }
+
+    func showAccountState(accountState: AccountState) {
+        guard let cellNEO = tableView.cellForRow(at: IndexPath(row: 0, section: sections.nativeAssets.rawValue)) as? NativeAssetTableViewCell else {
+            return
+        }
+
+        guard let cellGAS = tableView.cellForRow(at: IndexPath(row: 1, section: sections.nativeAssets.rawValue)) as? NativeAssetTableViewCell else {
+            return
+        }
+        DispatchQueue.main.async {
+            for asset in accountState.balances {
+                if asset.id.contains(NeoSwift.AssetId.neoAssetId.rawValue) {
+                    self.neoBalance =  Int(asset.value) ?? 0
+                    cellNEO.amountLabel.text = String(format:"%ld", Int(asset.value) ?? 0)
+                } else if asset.id.contains(NeoSwift.AssetId.gasAssetId.rawValue) {
+                    self.gasBalance = Double(asset.value) ?? 0.0
+                    cellGAS.amountLabel.text = String(format:"%.8f", Double(asset.value) ?? 0.0)
+                }
+            }
+
+        }
+    }
+
+    func loadAccountState() {
+        Neo.client.getAccountState(for: Authenticated.account?.address ?? "") { result in
+            switch result {
+            case .failure:
+                return
+            case .success(let accountState):
+                DispatchQueue.main.async {
+                    self.showAccountState(accountState: accountState)
+                }
+            }
+        }
     }
 
     func loadSelectedNEP5Tokens() {
+        self.selectedNEP5Tokens = UserDefaultsManager.selectedNEP5Token!
+    }
 
-        let rpx = NEP5Token(tokenHash: "ecc6b20d3ccac1ee9ef109af5a7cdb85706b1df9",
-                            name: "Red Pulse Token",
-                            symbol: "RPX",
-                            decimal: 8,
-                            totalSupply: 1358371250)
-
-        selectedNEP5Tokens.append(rpx)
-
-        let dbc = NEP5Token(tokenHash: "b951ecbbc5fe37a9c280a76cb0ce0014827294cf",
-                            name: "DeepBrain Coin",
-                            symbol: "DBC",
-                            decimal: 8,
-                            totalSupply: 9580000000)
-
-        selectedNEP5Tokens.append(dbc)
-
-        let rht = NEP5Token(tokenHash: "2328008e6f6c7bd157a342e789389eb034d9cbc4",
-                            name: "Redeemable HashPuppy Token",
-                            symbol: "RHT",
-                            decimal: 0,
-                            totalSupply: 60000)
-        selectedNEP5Tokens.append(rht)
-
-        let qlc = NEP5Token(tokenHash: "0d821bd7b6d53f5c2b40e217c6defc8bbe896cf5",
-                            name: "Qlink Token",
-                            symbol: "QLC",
-                            decimal: 8,
-                            totalSupply: 600000000)
-        selectedNEP5Tokens.append(qlc)
+    @IBAction func addNEP5TokensTapped(_ sender: Any) {
+        self.performSegue(withIdentifier: "addTokens", sender: nil)
     }
 
     // MARK: - Table view data source
@@ -88,51 +231,45 @@ class AccountAssetTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
         if indexPath.section == sections.unclaimedGAS.rawValue {
-            return UITableViewAutomaticDimension
+            return 108.0
         }
 
         if indexPath.section == sections.nativeAssets.rawValue {
-            return 60.0
+            return 52.0
         }
 
         if indexPath.section == sections.nep5Tokens.rawValue {
-            return 60.0
+            return 52.0
         }
-        return 60.0
+        return 52.0
     }
-//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//
-//            guard let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell") as? HeaderTableViewCell else {
-//                fatalError("undefined table view behavior")
-//            }
-//
-//        if section == sections.nativeAssets.rawValue {
-//            cell.titleLabel.text = NSLocalizedString("Native Assets", comment: "")
-//        }
-//
-//        if section == sections.nep5Tokens.rawValue {
-//            cell.titleLabel.text = NSLocalizedString("NEP5 Tokens", comment: "")
-//        }
-//
-//            return cell
-//    }
 
-//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 0.0
-//
-//        if section == sections.unclaimedGAS.rawValue {
-//            return 0.0
-//        }
-//
-//        if section == sections.nativeAssets.rawValue {
-//             return 44.0
-//        }
-//
-//        if section == sections.nep5Tokens.rawValue {
-//             return 44.0
-//        }
-//        return 44.0
-//    }
+    func loadTokenBalance(cell: NEP5TokenTableViewCell, token: NEP5Token) {
+        guard let address =  Authenticated.account?.address else {
+            return
+        }
+
+        Neo.client.getTokenBalanceUInt(token.tokenHash, address: address) { result in
+            switch result {
+            case .failure:
+                DispatchQueue.main.async {
+                    cell.loadingView?.stopAnimating()
+                }
+                return
+            case .success(let balance):
+                DispatchQueue.main.async {
+                    cell.loadingView?.stopAnimating()
+                    let balanceDecimal = Decimal(balance) / pow(10, token.decimal)
+                    let formatter = NumberFormatter()
+                    formatter.minimumFractionDigits = 0
+                    formatter.maximumFractionDigits = token.decimal
+                    formatter.numberStyle = .decimal
+                    cell.amountLabel.text = formatter.string(for: balanceDecimal)
+                }
+            }
+        }
+
+    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == sections.unclaimedGAS.rawValue {
@@ -140,12 +277,11 @@ class AccountAssetTableViewController: UITableViewController {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell-unclaimedgas") as? UnclaimedGASTableViewCell else {
                 return UITableViewCell()
             }
-
+            cell.delegate = self
             return cell
         }
 
         if indexPath.section == sections.nativeAssets.rawValue {
-
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell-nativeasset") as? NativeAssetTableViewCell else {
                 return UITableViewCell()
             }
@@ -153,6 +289,7 @@ class AccountAssetTableViewController: UITableViewController {
             //NEO
             if indexPath.row == 0 {
                 cell.titleLabel.text = "NEO"
+                //load neo balance here
             }
 
             //GAS
@@ -166,9 +303,13 @@ class AccountAssetTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell-nep5token") as? NEP5TokenTableViewCell else {
             return UITableViewCell()
         }
-        let token = selectedNEP5Tokens[indexPath.row]
+        let list = Array(selectedNEP5Tokens.values)
+        let token = list[indexPath.row]
         cell.titleLabel.text = token.symbol
         cell.subtitleLabel.text = token.name
+        DispatchQueue.global().async {
+            self.loadTokenBalance(cell: cell, token: token)
+        }
         return cell
     }
     override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
@@ -176,10 +317,26 @@ class AccountAssetTableViewController: UITableViewController {
         if indexPath.section == sections.unclaimedGAS.rawValue {
             return false
         }
-        return true
+        return false
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    //mark: -
+    var halfModalTransitioningDelegate: HalfModalTransitioningDelegate?
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "addTokens" {
+            self.halfModalTransitioningDelegate = HalfModalTransitioningDelegate(viewController: self, presentingViewController: segue.destination)
+            segue.destination.modalPresentationStyle = .custom
+            segue.destination.transitioningDelegate = self.halfModalTransitioningDelegate
+        }
+    }
+}
+
+extension AccountAssetTableViewController: UnclaimGASDelegate {
+    func claimButtonTapped() {
+        self.prepareClaimingGAS()
     }
 }

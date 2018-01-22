@@ -9,7 +9,7 @@
 import UIKit
 import NeoSwift
 
-class TransactionHistoryTableViewController: UITableViewController {
+class TransactionHistoryTableViewController: ThemedTableViewController {
 
     var transactionHistory = [TransactionHistoryEntry]()
 
