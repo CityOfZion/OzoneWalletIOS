@@ -34,6 +34,14 @@ class AccountAssetTableViewController: ThemedTableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadNEP5TokensSection), name: NSNotification.Name(rawValue: "halfModalDismissed"), object: nil)
         refreshClaimableGasTimer = Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(AccountAssetTableViewController.loadClaimableGAS), userInfo: nil, repeats: true)
         refreshClaimableGasTimer?.fire()
+
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(reloadAllData), for: .valueChanged)
+    }
+
+    @objc func reloadAllData() {
+        loadAccountState()
+        loadClaimableGAS()
     }
 
     @objc func reloadNEP5TokensSection() {
@@ -95,9 +103,9 @@ class AccountAssetTableViewController: ThemedTableViewController {
         refreshClaimableGasTimer?.invalidate()
         //disable the button after tapped
         enableClaimButton(enable: false)
-        
+
         HUD.show(.labeledProgress(title: "Claiming GAS", subtitle: "This might take a little while..."))
-        
+
         //select best node
         if let bestNode = NEONetworkMonitor.autoSelectBestNode() {
             UserDefaultsManager.seed = bestNode
@@ -154,23 +162,22 @@ class AccountAssetTableViewController: ThemedTableViewController {
 
     func showClaimableGASAmount(amount: Double) {
         DispatchQueue.main.async {
-            
-        
-        let indexPath = IndexPath(row: 0, section: sections.unclaimedGAS.rawValue)
-        guard let cell = tableView.cellForRow(at: indexPath) as? UnclaimedGASTableViewCell else {
-            return
-        }
-        cell.amountLabel.text = amount.string(8)
 
-        //only enable button if latestClaimDate is more than 5 minutes
-        let latestClaimDateInterval: Double = UserDefaults.standard.double(forKey: "lastetClaimDate")
-        let latestClaimDate: Date = Date(timeIntervalSince1970: latestClaimDateInterval)
-        let diff = Date().timeIntervalSince(latestClaimDate)
-        if diff > (5 * 60) {
-            cell.claimButton.isEnabled = true
-        } else {
-            cell.claimButton.isEnabled = false
-        }
+            let indexPath = IndexPath(row: 0, section: sections.unclaimedGAS.rawValue)
+            guard let cell = self.tableView.cellForRow(at: indexPath) as? UnclaimedGASTableViewCell else {
+                return
+            }
+            cell.amountLabel.text = amount.string(8)
+
+            //only enable button if latestClaimDate is more than 5 minutes
+            let latestClaimDateInterval: Double = UserDefaults.standard.double(forKey: "lastetClaimDate")
+            let latestClaimDate: Date = Date(timeIntervalSince1970: latestClaimDateInterval)
+            let diff = Date().timeIntervalSince(latestClaimDate)
+            if diff > (5 * 60) {
+                cell.claimButton.isEnabled = true
+            } else {
+                cell.claimButton.isEnabled = false
+            }
         }
     }
 
@@ -200,9 +207,13 @@ class AccountAssetTableViewController: ThemedTableViewController {
         Neo.client.getAccountState(for: Authenticated.account?.address ?? "") { result in
             switch result {
             case .failure:
-                return
+                DispatchQueue.main.async {
+                    self.tableView.refreshControl?.endRefreshing()
+                    return
+                }
             case .success(let accountState):
                 DispatchQueue.main.async {
+                    self.tableView.refreshControl?.endRefreshing()
                     self.showAccountState(accountState: accountState)
                 }
             }

@@ -12,21 +12,33 @@ import NeoSwift
 class TransactionHistoryTableViewController: ThemedTableViewController {
 
     var transactionHistory = [TransactionHistoryEntry]()
-
     func loadTransactionHistory() {
         Neo.client.getTransactionHistory(for: Authenticated.account?.address ?? "") { result in
             switch result {
             case .failure:
+                DispatchQueue.main.async {
+                    self.tableView.refreshControl?.endRefreshing()
+                }
                 return
             case .success(let txHistory):
                 self.transactionHistory = txHistory.entries
-                DispatchQueue.main.async { self.tableView.reloadData() }
+                DispatchQueue.main.async {
+                    self.tableView.refreshControl?.endRefreshing()
+                    self.tableView.reloadData()
+                }
             }
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.loadTransactionHistory()
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(reloadData), for: .valueChanged)
+
+    }
+
+    @objc func reloadData() {
         self.loadTransactionHistory()
     }
 
