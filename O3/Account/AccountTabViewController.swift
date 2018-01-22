@@ -9,6 +9,7 @@
 import UIKit
 import Tabman_Carthage
 import Pageboy
+import DeckTransition
 
 class AccountTabViewController: TabmanViewController, PageboyViewControllerDataSource {
 
@@ -19,9 +20,8 @@ class AccountTabViewController: TabmanViewController, PageboyViewControllerDataS
         self.navigationController?.hideHairline()
 
         let accountAssetViewController = UIStoryboard(name: "Account", bundle: nil).instantiateViewController(withIdentifier: "AccountAssetTableViewController")
-
-           let transactionHistory = UIStoryboard(name: "Account", bundle: nil).instantiateViewController(withIdentifier: "TransactionHistoryTableViewController")
-          let contactsViewController = UIStoryboard(name: "Account", bundle: nil).instantiateViewController(withIdentifier: "ContactsTableViewController")
+        let transactionHistory = UIStoryboard(name: "Account", bundle: nil).instantiateViewController(withIdentifier: "TransactionHistoryTableViewController")
+        let contactsViewController = UIStoryboard(name: "Account", bundle: nil).instantiateViewController(withIdentifier: "ContactsTableViewController")
 
         self.viewControllers.append(accountAssetViewController)
         self.viewControllers.append(transactionHistory)
@@ -42,6 +42,8 @@ class AccountTabViewController: TabmanViewController, PageboyViewControllerDataS
                           Item(title: "TRANSACTIONS"),
                           Item(title: "CONTACTS")]
 
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"qrCode-button"), style: .plain, target: self, action: #selector(myAddressTapped(_:)))
+
     }
 
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
@@ -54,6 +56,15 @@ class AccountTabViewController: TabmanViewController, PageboyViewControllerDataS
 
     func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
         return nil
+    }
+
+    @objc func myAddressTapped(_ sender: Any) {
+        let modal = UIStoryboard(name: "Account", bundle: nil).instantiateViewController(withIdentifier: "MyAddressNavigationController")
+
+        let transitionDelegate = DeckTransitioningDelegate()
+        modal.transitioningDelegate = transitionDelegate
+        modal.modalPresentationStyle = .custom
+        present(modal, animated: true, completion: nil)
     }
 
 }

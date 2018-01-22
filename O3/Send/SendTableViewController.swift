@@ -128,6 +128,10 @@ class SendTableViewController: ThemedTableViewController, AddressSelectDelegate,
         toAddressField.text = data
         enableSendButton()
     }
+    
+    func selectTokenTapped(_ sender: Any) {
+        
+    }
 
     @IBAction func enableSendButton() {
         sendButton.isEnabled = toAddressField.text?.isEmpty == false && amountField.text?.isEmpty == false

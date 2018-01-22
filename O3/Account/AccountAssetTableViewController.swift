@@ -178,6 +178,9 @@ class AccountAssetTableViewController: ThemedTableViewController {
             } else {
                 cell.claimButton.isEnabled = false
             }
+
+            //amount needs to be more than zero
+            cell.claimButton.isEnabled = amount > 0
         }
     }
 
@@ -346,7 +349,7 @@ class AccountAssetTableViewController: ThemedTableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    //mark: -
+    // MARK: -
     var halfModalTransitioningDelegate: HalfModalTransitioningDelegate?
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "addTokens" {

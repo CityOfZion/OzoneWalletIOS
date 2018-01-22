@@ -59,6 +59,7 @@
 		6ED6001C1F76506B006760E6 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6ED6001B1F76506B006760E6 /* SharedAssets.xcassets */; };
 		6ED6001E1F76559E006760E6 /* LogoAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6ED6001D1F76559E006760E6 /* LogoAssets.xcassets */; };
 		6ED600201F765C9C006760E6 /* WalletHomeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED6001F1F765C9C006760E6 /* WalletHomeNavigationController.swift */; };
+		6EE34BA0201607C7006558E9 /* oval.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EE34B9F201605FC006558E9 /* oval.json */; };
 		6EF8D8E61F7A732C005CC24D /* AccountAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EF8D8E51F7A732C005CC24D /* AccountAssets.xcassets */; };
 		6EFF839A20148CD700BDBE52 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFF839920148CD700BDBE52 /* CardView.swift */; };
 		7501C0271F7BBFF400B4B2FF /* AddressEntryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7501C0261F7BBFF400B4B2FF /* AddressEntryTableViewController.swift */; };
@@ -208,6 +209,7 @@
 		6ED6001B1F76506B006760E6 /* SharedAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SharedAssets.xcassets; sourceTree = "<group>"; };
 		6ED6001D1F76559E006760E6 /* LogoAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = LogoAssets.xcassets; sourceTree = "<group>"; };
 		6ED6001F1F765C9C006760E6 /* WalletHomeNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletHomeNavigationController.swift; sourceTree = "<group>"; };
+		6EE34B9F201605FC006558E9 /* oval.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = oval.json; sourceTree = "<group>"; };
 		6EF8D8E51F7A732C005CC24D /* AccountAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AccountAssets.xcassets; sourceTree = "<group>"; };
 		6EFF839920148CD700BDBE52 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		7501C0261F7BBFF400B4B2FF /* AddressEntryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressEntryTableViewController.swift; sourceTree = "<group>"; };
@@ -253,7 +255,6 @@
 		757FEB721F77F07B0099E26F /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		758FF9211F9CD09800CD0A3C /* ThemedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemedTableViewController.swift; sourceTree = "<group>"; };
 		75B6E5C11F6D4E8A00F53CA8 /* QR.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = QR.storyboard; sourceTree = "<group>"; };
-		75BEB2551F88CBC000DC20E9 /* fidget_spinner.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = fidget_spinner.json; path = ../../../Downloads/fidget_spinner.json; sourceTree = "<group>"; };
 		75BEB25D1F89F3C900DC20E9 /* NeoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NeoSwift.framework; path = Carthage/Build/iOS/NeoSwift.framework; sourceTree = "<group>"; };
 		75BEB2611F89FB2A00DC20E9 /* O3HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = O3HUD.swift; sourceTree = "<group>"; };
 		75BEB2631F89FB8A00DC20E9 /* O3HUD.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = O3HUD.storyboard; sourceTree = "<group>"; };
@@ -465,7 +466,7 @@
 		7575ADC41F6006AC0077007B /* O3 */ = {
 			isa = PBXGroup;
 			children = (
-				75BEB2551F88CBC000DC20E9 /* fidget_spinner.json */,
+				6EE34B9F201605FC006558E9 /* oval.json */,
 				6ED600111F762189006760E6 /* O3.entitlements */,
 				75D5BFBB1F6D0EC400E64855 /* Global.swift */,
 				7518BFFF1F8B49D500FBA0BA /* UserDefaultsManager.swift */,
@@ -719,6 +720,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EE34BA0201607C7006558E9 /* oval.json in Resources */,
 				6E1BBF7F1F77BEE30095F466 /* WalletHomeAssets.xcassets in Resources */,
 				7520173F1F73ED1D00090C4F /* Send.storyboard in Resources */,
 				7575ADD01F6006AC0077007B /* LaunchScreen.storyboard in Resources */,

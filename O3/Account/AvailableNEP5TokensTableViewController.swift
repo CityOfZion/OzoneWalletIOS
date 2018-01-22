@@ -39,7 +39,12 @@ class AvailableNEP5TokensTableViewController: UITableViewController {
         super.viewDidLoad()
         self.navigationController?.hideHairline()
         self.title = NSLocalizedString("NEP5 Tokens", comment: "")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: "Done bar button item"), style: .done, target: self, action: #selector(doneTapped(_:)))
         self.loadTokens()
+    }
+
+    @objc func doneTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
 
     // MARK: - Table view data source
