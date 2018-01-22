@@ -62,6 +62,12 @@ class AccountAssetTableViewController: ThemedTableViewController {
                 DispatchQueue.main.async {
                     OzoneAlert.alertDialog(message: "Your claim has succeeded, it may take a few minutes to be reflected in your transaction history. You can claim again after 5 minutes", dismissTitle: "Got it") { }
                 }
+
+                //save latest claim time interval here to limit user to only claim every 5 minutes
+                let now = Date().timeIntervalSince1970
+                UserDefaults.standard.set(now, forKey: "lastetClaimDate")
+                UserDefaults.standard.synchronize()
+
                 self.isClaiming = false
                 //if claim succeeded then fire the timer to refresh claimable gas again.
                 self.refreshClaimableGasTimer = Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(AccountAssetTableViewController.loadClaimableGAS), userInfo: nil, repeats: true)
@@ -87,15 +93,16 @@ class AccountAssetTableViewController: ThemedTableViewController {
             return
         }
         refreshClaimableGasTimer?.invalidate()
-        let now = Date().timeIntervalSince1970
-        HUD.show(.labeledProgress(title: "Claiming GAS", subtitle: "This might take a little while..."))
-
-        //save latest claim time interval here to limit user to only claim every 5 minutes
-        UserDefaults.standard.set(now, forKey: "lastetClaimDate")
-        UserDefaults.standard.synchronize()
-
         //disable the button after tapped
         enableClaimButton(enable: false)
+        
+        HUD.show(.labeledProgress(title: "Claiming GAS", subtitle: "This might take a little while..."))
+        
+        //select best node
+        if let bestNode = NEONetworkMonitor.autoSelectBestNode() {
+            UserDefaultsManager.seed = bestNode
+            UserDefaultsManager.useDefaultSeed = false
+        }
 
         //we are able to claim gas only when there is data in the .claims array
         if self.claims != nil && self.claims!.claims.count > 0 {
@@ -146,6 +153,9 @@ class AccountAssetTableViewController: ThemedTableViewController {
     }
 
     func showClaimableGASAmount(amount: Double) {
+        DispatchQueue.main.async {
+            
+        
         let indexPath = IndexPath(row: 0, section: sections.unclaimedGAS.rawValue)
         guard let cell = tableView.cellForRow(at: indexPath) as? UnclaimedGASTableViewCell else {
             return
@@ -160,6 +170,7 @@ class AccountAssetTableViewController: ThemedTableViewController {
             cell.claimButton.isEnabled = true
         } else {
             cell.claimButton.isEnabled = false
+        }
         }
     }
 
