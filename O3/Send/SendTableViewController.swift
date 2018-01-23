@@ -123,15 +123,22 @@ class SendTableViewController: ThemedTableViewController, AddressSelectDelegate,
 
         let assetId: String! = self.selectedAsset!.assetID!
         let assetName: String! = self.selectedAsset?.name!
-        var amount = Double(amountField.text ?? "") ?? 0
-        if self.selectedAsset?.decimal == 0 {
-            amount.round()
+        let amountFormatter = NumberFormatter()
+        amountFormatter.minimumFractionDigits = 0
+        amountFormatter.maximumFractionDigits = self.selectedAsset!.decimal
+        amountFormatter.numberStyle = .decimal
+
+        var amount = amountFormatter.number(from: (self.amountField.text?.trim())!)
+
+        if amount == nil {
+            OzoneAlert.alertDialog(message: "Invalid amount", dismissTitle: "OK", didDismiss: {
+                self.amountField.becomeFirstResponder()
+            })
+            return
         }
 
         //validate amount
-
-        if Decimal(amount) > self.selectedAsset!.balance! {
-
+        if amount!.decimalValue > self.selectedAsset!.balance! {
             let balanceDecimal = self.selectedAsset!.balance / pow(10, self.selectedAsset!.decimal)
             let formatter = NumberFormatter()
             formatter.minimumFractionDigits = 0
@@ -159,9 +166,9 @@ class SendTableViewController: ThemedTableViewController, AddressSelectDelegate,
             }
 
             if self.selectedAsset?.assetType == AssetType.NativeAsset {
-                self.sendNativeAsset(assetId: NeoSwift.AssetId(rawValue: assetId)!, assetName: assetName, amount: amount, toAddress: toAddress)
+                self.sendNativeAsset(assetId: NeoSwift.AssetId(rawValue: assetId)!, assetName: assetName, amount: amount!.doubleValue, toAddress: toAddress)
             } else if self.selectedAsset?.assetType == AssetType.NEP5Token {
-                self.sendNEP5Token(tokenHash: assetId, assetName: assetName, amount: amount, toAddress: toAddress)
+                self.sendNEP5Token(tokenHash: assetId, assetName: assetName, amount: amount!.doubleValue, toAddress: toAddress)
             }
 
         }
