@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AvailableNEP5TokensTableViewController: UITableViewController {
+class AvailableNEP5TokensTableViewController: ThemedTableViewController {
 
     var tokens: [NEP5Token]! = []
     func loadTokens() {
