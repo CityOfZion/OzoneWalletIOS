@@ -87,21 +87,34 @@ class O3TabBarController: UITabBarController {
         present(nav, animated: true, completion: nil)
     }
 
+    func receivedTapped() {
+        let modal = UIStoryboard(name: "Account", bundle: nil).instantiateViewController(withIdentifier: "MyAddressNavigationController")
+
+        let transitionDelegate = DeckTransitioningDelegate()
+        modal.transitioningDelegate = transitionDelegate
+        modal.modalPresentationStyle = .custom
+        present(modal, animated: true, completion: nil)
+    }
+
     @IBAction func tappedLeftBarButtonItem(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
 
+    @IBAction func unwindToTabbar(segue: UIStoryboardSegue) {
+    }
+
     @objc func menuButtonAction(_ sender: UIButton) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let scan = UIAlertAction(title: "Scan QR code", style: .default) { _ in
-
-        }
-        actionSheet.addAction(scan)
 
         let send = UIAlertAction(title: "Send", style: .default) { _ in
             self.sendTapped()
         }
         actionSheet.addAction(send)
+
+        let receive = UIAlertAction(title: "Receive", style: .default) { _ in
+            self.receivedTapped()
+        }
+        actionSheet.addAction(receive)
 
         let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
 

@@ -43,6 +43,10 @@ class ThemedTableViewController: UITableViewController {
 
             self.navigationController?.navigationBar.isTranslucent = false
             self.navigationController?.navigationBar.backgroundColor = UserDefaultsManager.theme.backgroundColor
+            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UserDefaultsManager.theme.titleTextColor,
+                                                                                 NSAttributedStringKey.font:
+                                                                                    ThemeManager.navBarTitle]
+
             self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UserDefaultsManager.theme.titleTextColor,
                                                                                  NSAttributedStringKey.font:
                                                                                     ThemeManager.largeTitleFont]

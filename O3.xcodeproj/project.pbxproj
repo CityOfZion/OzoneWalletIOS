@@ -51,6 +51,8 @@
 		6ECF0E251FAED3D800884F38 /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ECF0E241FAED3D800884F38 /* Reachability.framework */; };
 		6ECF0E2A1FAED7BF00884F38 /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ECF0E241FAED3D800884F38 /* Reachability.framework */; };
 		6ECF0E2B1FAED7BF00884F38 /* Reachability.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6ECF0E241FAED3D800884F38 /* Reachability.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6ED5D7EC2016BFC900AF3713 /* AssetSelectorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED5D7EB2016BFC900AF3713 /* AssetSelectorTableViewController.swift */; };
+		6ED5D7EE2016C69D00AF3713 /* NEOAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED5D7ED2016C69D00AF3713 /* NEOAsset.swift */; };
 		6ED600131F76219D006760E6 /* Channel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED600121F76219A006760E6 /* Channel.framework */; };
 		6ED600141F76219D006760E6 /* Channel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED600121F76219A006760E6 /* Channel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6ED600161F763434006760E6 /* O3TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED600151F763434006760E6 /* O3TextView.swift */; };
@@ -201,6 +203,8 @@
 		6EA7F9271F6E2F7F00E31B78 /* O3Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = O3Client.swift; sourceTree = "<group>"; };
 		6EC1ED542015B9E900BD2AC1 /* AvailableNEP5TokensTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableNEP5TokensTableViewController.swift; sourceTree = "<group>"; };
 		6ECF0E241FAED3D800884F38 /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = Carthage/Build/iOS/Reachability.framework; sourceTree = "<group>"; };
+		6ED5D7EB2016BFC900AF3713 /* AssetSelectorTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetSelectorTableViewController.swift; sourceTree = "<group>"; };
+		6ED5D7ED2016C69D00AF3713 /* NEOAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEOAsset.swift; sourceTree = "<group>"; };
 		6ED600111F762189006760E6 /* O3.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = O3.entitlements; sourceTree = "<group>"; };
 		6ED600121F76219A006760E6 /* Channel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Channel.framework; path = Frameworks/Channel.framework; sourceTree = "<group>"; };
 		6ED600151F763434006760E6 /* O3TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = O3TextView.swift; sourceTree = "<group>"; };
@@ -331,6 +335,7 @@
 			isa = PBXGroup;
 			children = (
 				6E4E6F83201462D7001A5844 /* NEP5Token.swift */,
+				6ED5D7ED2016C69D00AF3713 /* NEOAsset.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -538,6 +543,7 @@
 				75CEACF51F66BEEE005974CE /* SendButtonCell.swift */,
 				752017331F72980A00090C4F /* SendCompleteViewController.swift */,
 				7520173E1F73ED1D00090C4F /* Send.storyboard */,
+				6ED5D7EB2016BFC900AF3713 /* AssetSelectorTableViewController.swift */,
 			);
 			path = Send;
 			sourceTree = "<group>";
@@ -811,6 +817,7 @@
 				6E3E381E1FA44C84004965F8 /* LoginToCurrentWalletViewController.swift in Sources */,
 				353F364B200370D6002B4FE1 /* NewsFeedViewController.swift in Sources */,
 				6E4E6F9C20147FBC001A5844 /* HeaderTableViewCell.swift in Sources */,
+				6ED5D7EE2016C69D00AF3713 /* NEOAsset.swift in Sources */,
 				7520068C1F7F8AC400D19B5F /* PrivateKeyViewController.swift in Sources */,
 				75DA590B1F7A83940065FE0D /* UIViewController.swift in Sources */,
 				7501E8431F79536300123EA8 /* SettingsMenuTableViewController.swift in Sources */,
@@ -834,6 +841,7 @@
 				75E28F311F9B3B34006C6E37 /* ThemeManager.swift in Sources */,
 				752006861F7F698300D19B5F /* O3TabBarController.swift in Sources */,
 				6E4E6F89201465BE001A5844 /* NativeAssetTableViewCell.swift in Sources */,
+				6ED5D7EC2016BFC900AF3713 /* AssetSelectorTableViewController.swift in Sources */,
 				6E3E381C1FA4437A004965F8 /* PreCreateWalletViewController.swift in Sources */,
 				75BEB2621F89FB2A00DC20E9 /* O3HUD.swift in Sources */,
 				6E7C92741F7A5FBA00F8D7AA /* UINavigationController.swift in Sources */,
