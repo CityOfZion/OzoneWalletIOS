@@ -84,7 +84,7 @@ enum Theme: String {
     var titleTextColor: UIColor {
         switch self {
         case .light:
-            return UIColor.black
+            return UIColor(named: "textColor")!
         case .dark:
             return UIColor.white
         }
@@ -102,9 +102,9 @@ enum Theme: String {
     var lightTextColor: UIColor {
         switch self {
         case .light:
-            return UIColor.lightGray
+            return UIColor(named: "grey")!
         case .dark:
-            return UIColor.lightGray
+            return UIColor(named: "grey")!
         }
     }
 
@@ -183,7 +183,7 @@ enum Theme: String {
     var textFieldTextColor: UIColor {
         switch self {
         case .light:
-            return UIColor.black
+            return UIColor(named: "textColor")!
         case .dark:
             return UIColor.white
         }
@@ -195,7 +195,9 @@ class ThemeManager {
     static let cornerRadius: CGFloat = 6.0
     static let borderWidth: CGFloat = 1.0
     static let smallText = UIFont(name: "Avenir-Book", size: 12)!
+    static let navBarTitle = UIFont(name: "Avenir-Heavy", size: 16)!
     static let barButtonItemFont = UIFont(name: "Avenir-Heavy", size: 16)!
+    static let topTabbarItemFont = UIFont(name: "Avenir-Medium", size: 12)!
     static let largeTitleFont = UIFont(name: "Avenir-Heavy", size: 32)!
 
     static func applyTheme(theme: Theme) {
