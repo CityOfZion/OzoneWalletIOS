@@ -88,6 +88,7 @@ class HalfModalPresentationController: UIPresentationController {
                 self.presentingViewController.view.transform = CGAffineTransform.identity
             }, completion: { (_) -> Void in
                 print("done dismiss animation")
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "halfModalDismissed"), object: nil)
             })
 
         }
