@@ -139,7 +139,7 @@ class SendTableViewController: ThemedTableViewController, AddressSelectDelegate,
 
         //validate amount
         if amount!.decimalValue > self.selectedAsset!.balance! {
-            let balanceDecimal = self.selectedAsset!.balance / pow(10, self.selectedAsset!.decimal)
+            let balanceDecimal = self.selectedAsset!.balance
             let formatter = NumberFormatter()
             formatter.minimumFractionDigits = 0
             formatter.maximumFractionDigits = self.selectedAsset!.decimal
