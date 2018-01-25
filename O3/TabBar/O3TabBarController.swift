@@ -120,6 +120,7 @@ class O3TabBarController: UITabBarController {
 
         }
         actionSheet.addAction(cancel)
+        actionSheet.popoverPresentationController?.sourceView = sender
         present(actionSheet, animated: true, completion: nil)
     }
 
