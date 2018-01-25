@@ -57,7 +57,7 @@ class NetworkTypeCell: UITableViewCell {
         optionMenu.addAction(testNetAction)
         optionMenu.addAction(mainNetAction)
         optionMenu.addAction(cancelAction)
-
+        optionMenu.popoverPresentationController?.sourceView = networkTypeButton
         delegate?.present(optionMenu, animated: true, completion: nil)
 
     }

@@ -36,29 +36,7 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
         setNeedsStatusBarAppearanceUpdate()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "cameraAlt"), style: .plain, target: self, action: #selector(qrScanTapped(_:)))
         self.wifTextField.delegate = self
-        // let keychain = Keychain(service: "network.o3.neo.wallet")
-        //        DispatchQueue.global().async {
-        //            do {
-        //                let key = try keychain
-        //                    .accessibility(.whenPasscodeSetThisDeviceOnly, authenticationPolicy: .userPresence)
-        //                    .authenticationPrompt("Log in to your existing wallet stored on this device")
-        //                    .get("ozonePrivateKey")
-        //                if key == nil {
-        //                    return
-        //                }
-        //                guard let account = Account(wif: key!) else {
-        //                    return
-        //                }
-        //               //O3HUD.start()
-        //                Authenticated.account = account
-        //                account.network = UserDefaultsManager.network
-        //                O3HUD.stop {
-        //                    DispatchQueue.main.async { self.performSegue(withIdentifier: "segueToMainFromLogin", sender: nil) }
-        //                }
-        //            } catch _ {
-       self.checkToProceed()
-        //            }
-        //        }
+        self.checkToProceed()
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -116,7 +94,10 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
     }
 
     func qrScanned(data: String) {
-        DispatchQueue.main.async { self.wifTextField.text = data }
+        DispatchQueue.main.async {
+            self.wifTextField.text = data
+            self.checkToProceed()
+        }
     }
 
     @IBAction func checkToProceed() {

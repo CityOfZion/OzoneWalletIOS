@@ -112,6 +112,8 @@ class AddressBookViewController: ThemedViewController, UITableViewDelegate, UITa
 
         }
         actionSheet.addAction(cancel)
+        let cell = tableView.cellForRow(at: indexPath)
+        actionSheet.popoverPresentationController?.sourceView = cell
         present(actionSheet, animated: true, completion: nil)
     }
 

@@ -75,6 +75,7 @@ class MyAddressViewController: UIViewController {
 
         }
         alert.addAction(cancel)
+        alert.popoverPresentationController?.sourceView = addressLabel
         present(alert, animated: true, completion: nil)
     }
 
