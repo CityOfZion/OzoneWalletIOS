@@ -146,7 +146,7 @@ class AccountAssetTableViewController: ThemedTableViewController {
             return
         }
 
-        Neo.client.getClaims(address: (Authenticated.account?.address)!) { result in
+        NeoClient(seed: UserDefaultsManager.seed).getClaims(address: (Authenticated.account?.address)!) { result in
             switch result {
             case .failure:
                 return
@@ -207,7 +207,7 @@ class AccountAssetTableViewController: ThemedTableViewController {
     }
 
     func loadAccountState() {
-        Neo.client.getAccountState(for: Authenticated.account?.address ?? "") { result in
+        NeoClient(seed: UserDefaultsManager.seed).getAccountState(for: Authenticated.account?.address ?? "") { result in
             switch result {
             case .failure:
                 DispatchQueue.main.async {
@@ -273,8 +273,7 @@ class AccountAssetTableViewController: ThemedTableViewController {
         guard let address =  Authenticated.account?.address else {
             return
         }
-
-        Neo.client.getTokenBalanceUInt(token.tokenHash, address: address) { result in
+        NeoClient(seed: UserDefaultsManager.seed).getTokenBalanceUInt(token.tokenHash, address: address) { result in
             switch result {
             case .failure:
                 DispatchQueue.main.async {

@@ -100,6 +100,7 @@ class SettingsMenuTableViewController: ThemedTableViewController, HalfModalPrese
         optionMenu.addAction(darkThemeAction)
         optionMenu.addAction(cancelAction)
 
+        optionMenu.popoverPresentationController?.sourceView = themeView
         present(optionMenu, animated: true, completion: nil)
     }
 
