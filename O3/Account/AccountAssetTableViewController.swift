@@ -146,7 +146,7 @@ class AccountAssetTableViewController: ThemedTableViewController {
             return
         }
 
-        NeoClient(seed: UserDefaultsManager.seed).getClaims(address: (Authenticated.account?.address)!) { result in
+        NeoClient.sharedMain.getClaims(address: (Authenticated.account?.address)!) { result in
             switch result {
             case .failure:
                 return
@@ -196,10 +196,10 @@ class AccountAssetTableViewController: ThemedTableViewController {
             for asset in accountState.balances {
                 if asset.id.contains(NeoSwift.AssetId.neoAssetId.rawValue) {
                     self.neoBalance =  Int(asset.value) ?? 0
-                    cellNEO.amountLabel.text = String(format:"%ld", Int(asset.value) ?? 0)
+                    cellNEO.amountLabel.text = String(format: "%ld", Int(asset.value) ?? 0)
                 } else if asset.id.contains(NeoSwift.AssetId.gasAssetId.rawValue) {
                     self.gasBalance = Double(asset.value) ?? 0.0
-                    cellGAS.amountLabel.text = String(format:"%.8f", Double(asset.value) ?? 0.0)
+                    cellGAS.amountLabel.text = String(format: "%.8f", Double(asset.value) ?? 0.0)
                 }
             }
 
