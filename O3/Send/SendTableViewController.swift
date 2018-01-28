@@ -58,61 +58,55 @@ class SendTableViewController: ThemedTableViewController, AddressSelectDelegate,
         DispatchQueue.main.async {
             let message = "Are you sure you want to send \(amount) \(assetName) to \(toAddress) on the \(Authenticated.account?.neoClient.network.rawValue ?? "Unknown")Net"
             OzoneAlert.confirmDialog(message: message, cancelTitle: "Cancel", confirmTitle: "Confirm", didCancel: {}) {
-                let keychain = Keychain(service: "network.o3.neo.wallet")
-                DispatchQueue.global().async {
-                    do {
-                        _ = try keychain
-                            .authenticationPrompt("Authenticate to send transaction")
-                            .get("ozonePrivateKey")
-                        O3HUD.start()
-                        if let bestNode = NEONetworkMonitor.autoSelectBestNode() {
-                            UserDefaultsManager.seed = bestNode
-                            UserDefaultsManager.useDefaultSeed = false
-                        }
-                        Authenticated.account?.sendNep5Token(tokenContractHash: tokenHash, amount: amount, toAddress: toAddress, completion: { (completed, _) in
-
-                            O3HUD.stop {
-                                self.transactionCompleted = completed ?? false
-                                self.performSegue(withIdentifier: "segueToTransactionComplete", sender: nil)
-                            }
-
-                        })
-
-                    } catch _ {
+            let keychain = Keychain(service: "network.o3.neo.wallet")
+                do {
+                    _ = try keychain
+                        .authenticationPrompt("Authenticate to send transaction")
+                        .get("ozonePrivateKey")
+                    O3HUD.start()
+                    if let bestNode = NEONetworkMonitor.autoSelectBestNode() {
+                        UserDefaultsManager.seed = bestNode
+                        UserDefaultsManager.useDefaultSeed = false
                     }
+                    Authenticated.account?.sendNep5Token(tokenContractHash: tokenHash, amount: amount, toAddress: toAddress, completion: { (completed, _) in
+
+                        O3HUD.stop {
+                            self.transactionCompleted = completed ?? false
+                            self.performSegue(withIdentifier: "segueToTransactionComplete", sender: nil)
+                        }
+
+                    })
+
+                } catch _ {
                 }
             }
         }
-
     }
 
     func sendNativeAsset(assetId: AssetId, assetName: String, amount: Double, toAddress: String) {
         DispatchQueue.main.async {
             let message = "Are you sure you want to send \(amount) \(assetName) to \(toAddress) on the \(Authenticated.account?.neoClient.network.rawValue ?? "Unknown")Net"
             OzoneAlert.confirmDialog(message: message, cancelTitle: "Cancel", confirmTitle: "Confirm", didCancel: {}) {
-                let keychain = Keychain(service: "network.o3.neo.wallet")
-                DispatchQueue.global().async {
-                    do {
-                        _ = try keychain
-                            .authenticationPrompt("Authenticate to send transaction")
-                            .get("ozonePrivateKey")
-                        O3HUD.start()
-                        if let bestNode = NEONetworkMonitor.autoSelectBestNode() {
-                            UserDefaultsManager.seed = bestNode
-                            UserDefaultsManager.useDefaultSeed = false
-                        }
-                        Authenticated.account?.sendAssetTransaction(asset: assetId, amount: amount, toAddress: toAddress) { completed, _ in
-                            O3HUD.stop {
-                                self.transactionCompleted = completed ?? false
-                                self.performSegue(withIdentifier: "segueToTransactionComplete", sender: nil)
-                            }
-                        }
-                    } catch _ {
+            let keychain = Keychain(service: "network.o3.neo.wallet")
+                do {
+                    _ = try keychain
+                        .authenticationPrompt("Authenticate to send transaction")
+                        .get("ozonePrivateKey")
+                    O3HUD.start()
+                    if let bestNode = NEONetworkMonitor.autoSelectBestNode() {
+                        UserDefaultsManager.seed = bestNode
+                        UserDefaultsManager.useDefaultSeed = false
                     }
+                    Authenticated.account?.sendAssetTransaction(asset: assetId, amount: amount, toAddress: toAddress) { completed, _ in
+                        O3HUD.stop {
+                            self.transactionCompleted = completed ?? false
+                            self.performSegue(withIdentifier: "segueToTransactionComplete", sender: nil)
+                        }
+                    }
+                } catch _ {
                 }
             }
         }
-
     }
 
     @IBAction func sendButtonTapped() {
@@ -146,7 +140,7 @@ class SendTableViewController: ThemedTableViewController, AddressSelectDelegate,
             formatter.numberStyle = .decimal
             let balanceString = formatter.string(for: balanceDecimal)
 
-            let message = String(format:"You don't have enough %@. Your balance is %@", assetName, balanceString!)
+            let message = String(format: "You don't have enough %@. Your balance is %@", assetName, balanceString!)
             OzoneAlert.alertDialog(message: message, dismissTitle: "OK", didDismiss: {
                 self.amountField.becomeFirstResponder()
             })
@@ -165,9 +159,9 @@ class SendTableViewController: ThemedTableViewController, AddressSelectDelegate,
                 }
             }
 
-            if self.selectedAsset?.assetType == AssetType.NativeAsset {
+            if self.selectedAsset?.assetType == AssetType.nativeAsset {
                 self.sendNativeAsset(assetId: NeoSwift.AssetId(rawValue: assetId)!, assetName: assetName, amount: amount!.doubleValue, toAddress: toAddress)
-            } else if self.selectedAsset?.assetType == AssetType.NEP5Token {
+            } else if self.selectedAsset?.assetType == AssetType.nep5Token {
                 self.sendNEP5Token(tokenHash: assetId, assetName: assetName, amount: amount!.doubleValue, toAddress: toAddress)
             }
 
@@ -251,7 +245,7 @@ extension SendTableViewController: AssetSelectorDelegate {
     func assetSelected(selected: TransferableAsset) {
         DispatchQueue.main.async {
             self.selectedAsset = selected
-            self.assetLabel.text = selected.assetType == AssetType.NativeAsset ? "Asset" : "NEP5 Token"
+            self.assetLabel.text = selected.assetType == AssetType.nativeAsset ? "Asset" : "NEP5 Token"
             self.selectedAssetLabel.text = selected.symbol
             self.enableSendButton()
         }
