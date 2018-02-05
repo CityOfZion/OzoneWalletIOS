@@ -10,7 +10,7 @@ import UIKit
 import NeoSwift
 
 protocol AssetSelectorDelegate {
-    func assetSelected(selected: TransferableAsset)
+    func assetSelected(selected: TransferableAsset, gasBalance: Decimal)
 }
 
 class AssetSelectorTableViewController: ThemedTableViewController {
@@ -172,16 +172,16 @@ class AssetSelectorTableViewController: ThemedTableViewController {
         if indexPath.section == sections.nativeAssets.rawValue {
             if indexPath.row == 0 {
                 //neo
-                delegate?.assetSelected(selected: self.transferableNEO)
+                delegate?.assetSelected(selected: self.transferableNEO, gasBalance: self.transferableGAS.balance)
             } else if indexPath.row == 1 {
                 //gas
-                delegate?.assetSelected(selected: self.transferableGAS)
+                delegate?.assetSelected(selected: self.transferableGAS, gasBalance: self.transferableGAS.balance)
             }
         } else if indexPath.section == sections.nep5Tokens.rawValue {
             let list = Array(selectedNEP5Tokens.values)
             let token = list[indexPath.row]
             if self.assets[token.tokenHash] != nil {
-                delegate?.assetSelected(selected: self.assets[token.tokenHash]!)
+                delegate?.assetSelected(selected: self.assets[token.tokenHash]!, gasBalance: self.transferableGAS.balance)
             }
         }
         self.dismiss(animated: true, completion: nil)

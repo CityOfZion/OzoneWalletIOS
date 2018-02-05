@@ -24,6 +24,7 @@ class SendTableViewController: ThemedTableViewController, AddressSelectDelegate,
     @IBOutlet weak var selectedAssetLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
 
+    var gasBalance: Decimal = 0
     var transactionCompleted: Bool!
     var selectedAsset: TransferableAsset?
 
@@ -145,6 +146,11 @@ class SendTableViewController: ThemedTableViewController, AddressSelectDelegate,
                     self.amountField.becomeFirstResponder()
             })
             return
+        } else if selectedAsset?.assetType == AssetType.nep5Token && gasBalance == 0.0 {
+            OzoneAlert.alertDialog(message: "When Sending a NEP5 Token you must have at least 0.00000001 GAS in your wallet. This GAS is not used, but still required to be in your wallet.", dismissTitle: "Ok", didDismiss: {
+                self.amountField.becomeFirstResponder()
+            })
+            return
         }
         let toAddress = toAddressField.text?.trim() ?? ""
 
@@ -242,8 +248,9 @@ class SendTableViewController: ThemedTableViewController, AddressSelectDelegate,
 }
 
 extension SendTableViewController: AssetSelectorDelegate {
-    func assetSelected(selected: TransferableAsset) {
+    func assetSelected(selected: TransferableAsset, gasBalance: Decimal) {
         DispatchQueue.main.async {
+            self.gasBalance = gasBalance
             self.selectedAsset = selected
             self.assetLabel.text = selected.assetType == AssetType.nativeAsset ? "Asset" : "NEP5 Token"
             self.selectedAssetLabel.text = selected.symbol
