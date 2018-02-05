@@ -197,7 +197,6 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="UuV-yW-jgY" firstAttribute="leading" secondItem="gKJ-Ri-6MS" secondAttribute="leading" id="7Pr-Lt-J9v"/>
                                                 <constraint firstItem="gKJ-Ri-6MS" firstAttribute="leading" secondItem="VgG-da-0mV" secondAttribute="leading" constant="16" id="VXN-1f-CUc"/>
@@ -218,6 +217,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="amountLabel" destination="UuV-yW-jgY" id="8L7-Oi-Vdm"/>
+                                    <outlet property="cardView" destination="VgG-da-0mV" id="F3c-3r-fJi"/>
                                     <outlet property="claimButton" destination="7xp-al-1Xo" id="E73-P7-2jR"/>
                                     <outlet property="headerLabel" destination="gKJ-Ri-6MS" id="zdn-Ww-4rH"/>
                                 </connections>
@@ -245,7 +245,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="6er-ue-7n8" secondAttribute="bottom" id="19e-mZ-GJr"/>
                                                 <constraint firstAttribute="trailing" secondItem="dej-Kq-nq9" secondAttribute="trailing" constant="16" id="4gL-NK-ek9"/>
@@ -265,6 +265,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="amountLabel" destination="dej-Kq-nq9" id="k15-iJ-Eer"/>
+                                    <outlet property="cardView" destination="RPh-7d-ElB" id="0TC-8f-QjA"/>
                                     <outlet property="titleLabel" destination="6er-ue-7n8" id="Iqj-DJ-UG8"/>
                                 </connections>
                             </tableViewCell>
@@ -323,6 +324,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="amountLabel" destination="vbL-i5-rf2" id="HlF-cR-LtE"/>
+                                    <outlet property="cardView" destination="Low-27-Yrf" id="4CB-tR-ftZ"/>
                                     <outlet property="loadingView" destination="Fp7-Ry-gUR" id="hqk-64-Twh"/>
                                     <outlet property="subtitleLabel" destination="Zcj-Lg-OlY" id="j7f-DT-lGL"/>
                                     <outlet property="titleLabel" destination="JW8-eN-YP0" id="vU2-C7-0T7"/>
