@@ -52,12 +52,12 @@ enum Currency: String {
 }
 
 enum PriceInterval: Int {
-    case fiveMinutes = 5
-    case fifteenMinutes = 15
-    case thirtyMinutes = 30
-    case sixtyMinutes = 60
-    case oneDay = 1440
-    case all = 1500
+    case sixHours = 5
+    case oneDay = 20
+    case oneWeek = 140
+    case oneMonth = 560
+    case threeMonths = 1680
+    case all = 2000
 }
 
 enum PortfolioType {

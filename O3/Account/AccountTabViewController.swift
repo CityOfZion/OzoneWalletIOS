@@ -42,7 +42,7 @@ class AccountTabViewController: TabmanViewController, PageboyViewControllerDataS
                           Item(title: "TRANSACTIONS"),
                           Item(title: "CONTACTS")]
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"qrCode-button"), style: .plain, target: self, action: #selector(myAddressTapped(_:)))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "qrCode-button"), style: .plain, target: self, action: #selector(myAddressTapped(_:)))
 
     }
 

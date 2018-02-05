@@ -127,7 +127,7 @@ class ContactsTableViewController: ThemedTableViewController, AddressAddDelegate
 
     func configureCell(cell: AddressBookEntryTableViewCell, indexPath: IndexPath) {
         if let contact = fetchedResultsController?.object(at: indexPath) {
-            cell.data = AddressBookEntryTableViewCell.Data(addressName:contact.nickName ?? "",
+            cell.data = AddressBookEntryTableViewCell.Data(addressName: contact.nickName ?? "",
                                                            address: contact.address ?? "")
             cell.selectionStyle = .none
         }

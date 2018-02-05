@@ -19,7 +19,7 @@ class UnclaimedGASTableViewCell: ThemedTableCell {
     @IBOutlet var amountLabel: UILabel!
     @IBOutlet var claimButton: ShadowedButton! {
         didSet {
-            claimButton.addTarget(self, action:#selector(buttonTapped(_:)), for: .touchUpInside)
+            claimButton.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
         }
     }
     @IBOutlet var headerLabel: UILabel!

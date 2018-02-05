@@ -36,7 +36,7 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
 
     var graphView: ScrollableGraphView!
     var portfolio: PortfolioValue?
-    var selectedInterval: PriceInterval = .fifteenMinutes
+    var selectedInterval: PriceInterval = .oneDay
     var activatedIndex = 1
     var panView: GraphPanView!
     var selectedAsset = "neo"
