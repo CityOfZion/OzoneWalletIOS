@@ -705,10 +705,21 @@
                             <outlet property="delegate" destination="MUo-8Q-6Yl" id="ueA-ul-6vt"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="plp-in-MTG" kind="show" identifier="segueToSendFromContacts" id="z6R-VB-6Ze"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b2j-j0-Gnt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6407" y="-581"/>
+        </scene>
+        <!--Send-->
+        <scene sceneID="spK-il-X9s">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Send" id="plp-in-MTG" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cMQ-z0-TgH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7112" y="-920"/>
         </scene>
         <!--AddressEntryTableViewController-->
         <scene sceneID="MrB-wd-dPe">

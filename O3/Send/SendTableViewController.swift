@@ -27,6 +27,7 @@ class SendTableViewController: ThemedTableViewController, AddressSelectDelegate,
     var gasBalance: Decimal = 0
     var transactionCompleted: Bool!
     var selectedAsset: TransferableAsset?
+    var preselectedAddress = ""
 
     func addThemedElements() {
         themedTitleLabels = [toLabel, assetLabel, amountLabel]
@@ -42,6 +43,7 @@ class SendTableViewController: ThemedTableViewController, AddressSelectDelegate,
         networkButton.isEnabled = false
         self.navigationItem.rightBarButtonItem = networkButton
         self.enableSendButton()
+        self.toAddressField.text = preselectedAddress.trim()
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -1561,11 +1561,20 @@
                     <connections>
                         <outlet property="tableView" destination="cly-dv-rBW" id="m7D-7M-PD6"/>
                         <segue destination="ZJi-SS-XK7" kind="presentation" identifier="showAddContact" id="wao-17-bwB"/>
+                        <segue destination="heS-DQ-9bf" kind="show" identifier="sendFromAddressBook" id="lrr-DD-5MO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sMw-tB-i5f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3372" y="1050"/>
+        </scene>
+        <!--Send-->
+        <scene sceneID="gUH-3o-BWB">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Send" id="heS-DQ-9bf" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aG4-Jn-uo3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3979" y="827"/>
         </scene>
     </scenes>
     <resources>
