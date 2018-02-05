@@ -17,7 +17,7 @@ extension String {
         guard let date = dateFormatter.date(from: self) else {
             return ""
         }
-        if interval.rawValue < 60 {
+        if interval.minuteValue() < 60 {
             dateFormatter.dateFormat = "hh:mm"
         } else {
             dateFormatter.dateFormat = "MMM d, hh:mm"

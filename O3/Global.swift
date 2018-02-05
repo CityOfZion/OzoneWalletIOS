@@ -51,13 +51,25 @@ enum Currency: String {
     case usd
 }
 
-enum PriceInterval: Int {
-    case sixHours = 5
-    case oneDay = 20
-    case oneWeek = 140
-    case oneMonth = 560
-    case threeMonths = 1680
-    case all = 2000
+enum PriceInterval: String {
+    case sixHours = "6h"
+    case oneDay = "24h"
+    case oneWeek = "1w"
+    case oneMonth = "1m"
+    case threeMonths = "3m"
+    case all = "all"
+
+    func minuteValue() -> Int {
+        switch rawValue {
+        case "6h": return 5
+        case "24h": return 20
+        case "1w": return 140
+        case "1m": return 560
+        case "3m": return 1680
+        case "all": return 2000
+        default: return 0
+        }
+    }
 }
 
 enum PortfolioType {

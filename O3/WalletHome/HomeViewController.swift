@@ -315,7 +315,7 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
                 self.activatedLineLeftConstraint?.constant = sender.frame.origin.x
                 self.view.layoutIfNeeded()
             }, completion: { (_) in
-                self.selectedInterval = PriceInterval(rawValue: sender.tag)!
+                self.selectedInterval = PriceInterval(rawValue: sender.tag.tagToPriceIntervalString())!
                 self.loadPortfolio()
             })
         }

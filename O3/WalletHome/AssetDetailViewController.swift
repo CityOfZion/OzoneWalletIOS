@@ -166,7 +166,7 @@ class AssetDetailViewController: ThemedViewController, GraphPanDelegate, Scrolla
                 self.activatedLineCenterXAnchor?.isActive = true
                 self.view.layoutIfNeeded()
             }, completion: { (_) in
-                self.selectedInterval = PriceInterval(rawValue: sender.tag)!
+                self.selectedInterval = PriceInterval(rawValue: sender.tag.tagToPriceIntervalString())!
                 self.loadPriceHistory(asset: self.selectedAsset)
             })
         }
