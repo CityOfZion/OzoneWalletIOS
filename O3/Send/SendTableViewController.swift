@@ -140,6 +140,11 @@ class SendTableViewController: ThemedTableViewController, AddressSelectDelegate,
                 self.amountField.becomeFirstResponder()
             })
             return
+        } else if selectedAsset?.name.lowercased() == "gas" && self.selectedAsset!.balance! - amount!.decimalValue <= 0.00000001 {
+            OzoneAlert.alertDialog(message: "When sending all GAS, please subtract 0.00000001 from the total amount. This prevents rounding errors which can cause the transaction to not process", dismissTitle: "Ok", didDismiss: {
+                    self.amountField.becomeFirstResponder()
+            })
+            return
         }
         let toAddress = toAddressField.text?.trim() ?? ""
 
