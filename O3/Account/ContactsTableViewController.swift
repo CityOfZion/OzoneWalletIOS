@@ -109,6 +109,11 @@ class ContactsTableViewController: ThemedTableViewController, AddressAddDelegate
         }
         actionSheet.addAction(send)
 
+        let copy = UIAlertAction(title: "Copy Address", style: .default) { _ in
+            UIPasteboard.general.string = self.fetchedResultsController?.object(at: indexPath).address ?? ""
+        }
+        actionSheet.addAction(copy)
+
         let delete = UIAlertAction(title: "Delete", style: .destructive) { _ in
             self.tappedRemoveAddress(indexPath.row)
         }

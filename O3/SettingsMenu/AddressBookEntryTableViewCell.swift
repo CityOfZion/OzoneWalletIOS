@@ -2,10 +2,11 @@
 //  AddressBookEntryTableViewCell.swift
 //  O3
 //
-//  Created by Andrei Terentiev on 9/26/17.
-//  Copyright © 2017 drei. All rights reserved.
+//  Created by Andrei Terentiev on 2/5/18.
+//  Copyright © 2018 drei. All rights reserved.
 //
 
+import Foundation
 import Foundation
 import UIKit
 
