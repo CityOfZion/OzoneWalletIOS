@@ -18,21 +18,18 @@ class SendTableViewController: ThemedTableViewController, AddressSelectDelegate,
 
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var amountField: UITextField!
-    @IBOutlet weak var noteTextView: UITextView!
     @IBOutlet weak var toAddressField: UITextField!
     @IBOutlet weak var toLabel: UILabel!
     @IBOutlet weak var assetLabel: UILabel!
     @IBOutlet weak var selectedAssetLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
-    @IBOutlet weak var noteLabel: UILabel!
 
     var transactionCompleted: Bool!
     var selectedAsset: TransferableAsset?
 
     func addThemedElements() {
-        themedTitleLabels = [toLabel, assetLabel, amountLabel, noteLabel]
+        themedTitleLabels = [toLabel, assetLabel, amountLabel]
         themedTextFields = [toAddressField, amountField]
-        themedTextViews = [noteTextView]
     }
 
     override func viewDidLoad() {
@@ -49,8 +46,6 @@ class SendTableViewController: ThemedTableViewController, AddressSelectDelegate,
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 2 {
             amountField.becomeFirstResponder()
-        } else if indexPath.row == 3 {
-            noteTextView.becomeFirstResponder()
         }
     }
     func sendNEP5Token(tokenHash: String, assetName: String, amount: Double, toAddress: String) {
