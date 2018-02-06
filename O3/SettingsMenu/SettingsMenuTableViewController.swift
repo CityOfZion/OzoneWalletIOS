@@ -19,7 +19,6 @@ class SettingsMenuTableViewController: ThemedTableViewController, HalfModalPrese
     @IBOutlet weak var themeCell: UITableViewCell!
     @IBOutlet weak var themeView: UIView!
     @IBOutlet weak var privateKeyLabel: UILabel!
-    @IBOutlet weak var addressBookLabel: UILabel!
     @IBOutlet weak var watchOnlyLabel: UILabel!
     @IBOutlet weak var netLabel: UILabel!
     @IBOutlet weak var shareLabel: UILabel!
@@ -55,7 +54,7 @@ class SettingsMenuTableViewController: ThemedTableViewController, HalfModalPrese
     }
 
     func setThemedElements() {
-        themedTitleLabels = [privateKeyLabel, addressBookLabel, watchOnlyLabel, netLabel, shareLabel, contactLabel, themeLabel, logoutLabel, versionLabel]
+        themedTitleLabels = [privateKeyLabel, watchOnlyLabel, netLabel, shareLabel, contactLabel, themeLabel, logoutLabel, versionLabel]
         themedLabels = [versionLabel]
     }
 
@@ -147,7 +146,7 @@ class SettingsMenuTableViewController: ThemedTableViewController, HalfModalPrese
     //properly implement cell did tap
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.row == 7 {
+        if indexPath.row == 6 {
             OzoneAlert.confirmDialog(message: "Log out?", cancelTitle: "Cancel", confirmTitle: "Log out", didCancel: {
 
             }, didConfirm: {

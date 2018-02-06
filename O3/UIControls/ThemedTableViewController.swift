@@ -30,7 +30,7 @@ class ThemedTableViewController: UITableViewController {
 
     @objc func changedTheme(_ sender: Any) {
         applyTheme()
-        tableView.reloadData()
+        DispatchQueue.main.async { self.tableView.reloadData() }
     }
 
     func setupNavBar() {
@@ -54,13 +54,15 @@ class ThemedTableViewController: UITableViewController {
     }
 
     func applyTheme() {
-        addThemeObserver()
         setupNavBar()
         DispatchQueue.main.async {
             self.view.backgroundColor = UserDefaultsManager.theme.backgroundColor
             self.tableView.backgroundColor = UserDefaultsManager.theme.backgroundColor
             for cell in self.tableView.visibleCells {
                 cell.contentView.backgroundColor = UserDefaultsManager.theme.backgroundColor
+                if let themedCell = cell as? ThemedTableCell {
+                    themedCell.applyTheme()
+                }
             }
             for button in self.themedPrimaryButtons {
                 button.backgroundColor = UserDefaultsManager.theme.backgroundColor
@@ -114,6 +116,7 @@ class ThemedTableViewController: UITableViewController {
     }
 
     override func viewDidLoad() {
+        addThemeObserver()
         applyTheme()
         super.viewDidLoad()
     }

@@ -8,10 +8,12 @@
 
 import UIKit
 import CoreData
+import DeckTransition
 class ContactsTableViewController: ThemedTableViewController, AddressAddDelegate {
 
     let appDelegate: AppDelegate? = UIApplication.shared.delegate as? AppDelegate
     var fetchedResultsController: NSFetchedResultsController<Contact>?
+    var selectedAddress = ""
 
     @objc func loadData() {
         self.tableView.refreshControl?.beginRefreshing()
@@ -39,10 +41,11 @@ class ContactsTableViewController: ThemedTableViewController, AddressAddDelegate
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let dest = segue.destination as? AddressEntryTableViewController                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               else {
-            fatalError("Undefined segue performed")
+        if let dest = segue.destination as? AddressEntryTableViewController {
+            dest.delegate = self
+        } else if let dest = segue.destination as? SendTableViewController {
+            dest.preselectedAddress = selectedAddress
         }
-        dest.delegate = self
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -64,6 +67,25 @@ class ContactsTableViewController: ThemedTableViewController, AddressAddDelegate
         UIApplication.appDelegate.saveContext()
     }
 
+    @IBAction func tappedLeftBarButtonItem(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
+
+    func sendTapped() {
+        guard let modal = UIStoryboard(name: "Send", bundle: nil).instantiateViewController(withIdentifier: "SendTableViewController") as? SendTableViewController else {
+            fatalError("Unsupported Segue")
+        }
+        modal.preselectedAddress = selectedAddress
+        let nav = WalletHomeNavigationController(rootViewController: modal)
+        nav.navigationBar.prefersLargeTitles = true
+        nav.navigationItem.largeTitleDisplayMode = .automatic
+        modal.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "times"), style: .plain, target: self, action: #selector(tappedLeftBarButtonItem(_:)))
+        let transitionDelegate = DeckTransitioningDelegate()
+        nav.transitioningDelegate = transitionDelegate
+        nav.modalPresentationStyle = .custom
+        present(nav, animated: true, completion: nil)
+    }
+
     func tappedRemoveAddress(_ index: Int) {
         OzoneAlert.confirmDialog(message: "Are you sure you want to delete", cancelTitle: "Cancel", confirmTitle: "OK", didCancel: {
 
@@ -80,6 +102,17 @@ class ContactsTableViewController: ThemedTableViewController, AddressAddDelegate
             self.tappedEditWatchOnlyAddress(indexPath.row)
         }
         actionSheet.addAction(edit)
+
+        let send = UIAlertAction(title: "Send to Address", style: .default) { _ in
+            self.selectedAddress = self.fetchedResultsController?.object(at: indexPath).address ?? ""
+            self.sendTapped()
+        }
+        actionSheet.addAction(send)
+
+        let copy = UIAlertAction(title: "Copy Address", style: .default) { _ in
+            UIPasteboard.general.string = self.fetchedResultsController?.object(at: indexPath).address ?? ""
+        }
+        actionSheet.addAction(copy)
 
         let delete = UIAlertAction(title: "Delete", style: .destructive) { _ in
             self.tappedRemoveAddress(indexPath.row)
@@ -127,7 +160,7 @@ class ContactsTableViewController: ThemedTableViewController, AddressAddDelegate
 
     func configureCell(cell: AddressBookEntryTableViewCell, indexPath: IndexPath) {
         if let contact = fetchedResultsController?.object(at: indexPath) {
-            cell.data = AddressBookEntryTableViewCell.Data(addressName:contact.nickName ?? "",
+            cell.data = AddressBookEntryTableViewCell.Data(addressName: contact.nickName ?? "",
                                                            address: contact.address ?? "")
             cell.selectionStyle = .none
         }

@@ -15,16 +15,17 @@ protocol UnclaimGASDelegate {
 class UnclaimedGASTableViewCell: ThemedTableCell {
 
     var delegate: UnclaimGASDelegate?
-
+    @IBOutlet weak var cardView: CardView!
     @IBOutlet var amountLabel: UILabel!
     @IBOutlet var claimButton: ShadowedButton! {
         didSet {
-            claimButton.addTarget(self, action:#selector(buttonTapped(_:)), for: .touchUpInside)
+            claimButton.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
         }
     }
     @IBOutlet var headerLabel: UILabel!
     override func awakeFromNib() {
         titleLabels = [amountLabel]
+        backgroundViews = [cardView]
         super.awakeFromNib()
     }
 
@@ -32,5 +33,10 @@ class UnclaimedGASTableViewCell: ThemedTableCell {
         if delegate != nil {
             delegate?.claimButtonTapped()
         }
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        applyTheme()
     }
 }

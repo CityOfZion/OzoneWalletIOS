@@ -105,6 +105,11 @@ class WatchOnlyAddressViewController: ThemedViewController, UITableViewDelegate,
         }
         actionSheet.addAction(edit)
 
+        let copy = UIAlertAction(title: "Copy", style: .default) { _ in
+             UIPasteboard.general.string = self.watchAddresses[indexPath.row].address ?? ""
+        }
+        actionSheet.addAction(copy)
+
         let delete = UIAlertAction(title: "Delete", style: .destructive) { _ in
             self.tappedRemoveAddress(indexPath.row)
         }

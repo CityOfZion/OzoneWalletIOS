@@ -44,7 +44,7 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
     }
 
     @IBAction func loginButtonTapped(_ sender: Any) {
-        guard let account = Account(wif: self.wifTextField.text ?? "") else {
+        guard let account = Account(wif: self.wifTextField.text.trim()) else {
             return
         }
         let keychain = Keychain(service: "network.o3.neo.wallet")

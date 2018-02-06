@@ -1,6 +1,6 @@
 binary "https://raw.githubusercontent.com/Building42/Specs/master/Carthage/Crashlytics.json" "3.9.3"
 binary "https://raw.githubusercontent.com/Building42/Specs/master/Carthage/Fabric.json" "1.7.2"
-github "CityOfZion/neo-swift" "e5ef0235ffafaa5465028c2ed7923f1e6f141030"
+github "CityOfZion/neo-swift" "df4d3c0dc7a46edd1e9f4a522b65839168f2dba4"
 github "HarshilShah/DeckTransition" "1.4.2"
 github "airbnb/lottie-ios" "961877ed686ddd44c4f19bd49c286b2ce06ffaf6"
 github "ashleymills/Reachability.swift" "v4.1.0"

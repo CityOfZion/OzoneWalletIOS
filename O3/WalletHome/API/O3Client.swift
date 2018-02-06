@@ -35,8 +35,8 @@ public enum O3ClientResult<T> {
 public class O3Client {
 
     enum O3Endpoints: String {
-        case getPriceHistory = "/v1/history/"
-        case getPortfolioValue = "/v1/portfolio"
+        case getPriceHistory = "/v1/price/"
+        case getPortfolioValue = "/v1/historical"
         case getNewsFeed = "/v1/feed/"
     }
 
@@ -79,8 +79,8 @@ public class O3Client {
         task.resume()
     }
 
-    func getPriceHistory(_ symbol: String, interval: Int, completion: @escaping (O3ClientResult<History>) -> Void) {
-        let endpoint = O3Endpoints.getPriceHistory.rawValue + symbol + String(format: "?i=%d", interval)
+    func getPriceHistory(_ symbol: String, interval: String, completion: @escaping (O3ClientResult<History>) -> Void) {
+        let endpoint = O3Endpoints.getPriceHistory.rawValue + symbol + String(format: "?i=%@", interval)
         sendRequest(endpoint, method: .GET, data: nil) { result in
             switch result {
             case .failure(let error):
@@ -101,9 +101,14 @@ public class O3Client {
         }
     }
 
-    func getPortfolioValue(_ neo: Int, gas: Double, interval: Int, completion: @escaping (O3ClientResult<PortfolioValue>) -> Void) {
+    func getPortfolioValue(_ assets: [TransferableAsset], interval: String, completion: @escaping (O3ClientResult<PortfolioValue>) -> Void) {
 
-        let endpoint = O3Endpoints.getPortfolioValue.rawValue + String(format: "?i=%d&neo=%d&gas=%f", interval, neo, gas)
+        var queryString = String(format: "?i=%@", interval)
+        for asset in assets {
+            queryString += String(format: "&%@=%@", asset.symbol, asset.balance.description)
+        }
+
+        let endpoint = O3Endpoints.getPortfolioValue.rawValue + queryString
         print (endpoint)
         sendRequest(endpoint, method: .GET, data: nil) { result in
             switch result {
