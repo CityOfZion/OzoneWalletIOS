@@ -18,21 +18,20 @@ class SendTableViewController: ThemedTableViewController, AddressSelectDelegate,
 
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var amountField: UITextField!
-    @IBOutlet weak var noteTextView: UITextView!
     @IBOutlet weak var toAddressField: UITextField!
     @IBOutlet weak var toLabel: UILabel!
     @IBOutlet weak var assetLabel: UILabel!
     @IBOutlet weak var selectedAssetLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
-    @IBOutlet weak var noteLabel: UILabel!
 
+    var gasBalance: Decimal = 0
     var transactionCompleted: Bool!
     var selectedAsset: TransferableAsset?
+    var preselectedAddress = ""
 
     func addThemedElements() {
-        themedTitleLabels = [toLabel, assetLabel, amountLabel, noteLabel]
+        themedTitleLabels = [toLabel, assetLabel, amountLabel]
         themedTextFields = [toAddressField, amountField]
-        themedTextViews = [noteTextView]
     }
 
     override func viewDidLoad() {
@@ -44,13 +43,12 @@ class SendTableViewController: ThemedTableViewController, AddressSelectDelegate,
         networkButton.isEnabled = false
         self.navigationItem.rightBarButtonItem = networkButton
         self.enableSendButton()
+        self.toAddressField.text = preselectedAddress.trim()
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 2 {
             amountField.becomeFirstResponder()
-        } else if indexPath.row == 3 {
-            noteTextView.becomeFirstResponder()
         }
     }
     func sendNEP5Token(tokenHash: String, assetName: String, amount: Double, toAddress: String) {
@@ -142,6 +140,16 @@ class SendTableViewController: ThemedTableViewController, AddressSelectDelegate,
 
             let message = String(format: "You don't have enough %@. Your balance is %@", assetName, balanceString!)
             OzoneAlert.alertDialog(message: message, dismissTitle: "OK", didDismiss: {
+                self.amountField.becomeFirstResponder()
+            })
+            return
+        } else if selectedAsset?.name.lowercased() == "gas" && self.selectedAsset!.balance! - amount!.decimalValue <= 0.00000001 {
+            OzoneAlert.alertDialog(message: "When sending all GAS, please subtract 0.00000001 from the total amount. This prevents rounding errors which can cause the transaction to not process", dismissTitle: "Ok", didDismiss: {
+                    self.amountField.becomeFirstResponder()
+            })
+            return
+        } else if selectedAsset?.assetType == AssetType.nep5Token && gasBalance == 0.0 {
+            OzoneAlert.alertDialog(message: "When Sending a NEP5 Token you must have at least 0.00000001 GAS in your wallet. This GAS is not used, but still required to be in your wallet.", dismissTitle: "Ok", didDismiss: {
                 self.amountField.becomeFirstResponder()
             })
             return
@@ -242,8 +250,9 @@ class SendTableViewController: ThemedTableViewController, AddressSelectDelegate,
 }
 
 extension SendTableViewController: AssetSelectorDelegate {
-    func assetSelected(selected: TransferableAsset) {
+    func assetSelected(selected: TransferableAsset, gasBalance: Decimal) {
         DispatchQueue.main.async {
+            self.gasBalance = gasBalance
             self.selectedAsset = selected
             self.assetLabel.text = selected.assetType == AssetType.nativeAsset ? "Asset" : "NEP5 Token"
             self.selectedAssetLabel.text = selected.symbol

@@ -15,9 +15,9 @@ extension String {
         dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         guard let date = dateFormatter.date(from: self) else {
-            fatalError("Invalid posix formatted string")
+            return ""
         }
-        if interval.rawValue < 60 {
+        if interval.minuteValue() < 60 {
             dateFormatter.dateFormat = "hh:mm"
         } else {
             dateFormatter.dateFormat = "MMM d, hh:mm"
@@ -32,7 +32,7 @@ extension String {
         dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         guard let date = dateFormatter.date(from: self) else {
-            fatalError("Invalid posix formatted string")
+            return ""
         }
         dateFormatter.dateFormat = "YYYY-MM-dd"
         dateFormatter.locale = tempLocale

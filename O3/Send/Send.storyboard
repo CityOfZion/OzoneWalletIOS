@@ -176,39 +176,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="noteCell" rowHeight="65" id="RT2-KF-tgv" customClass="NoteCell" customModule="O3" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="178" width="375" height="65"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RT2-KF-tgv" id="FbU-tt-wtU">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2sr-74-96e">
-                                                    <rect key="frame" x="20" y="11" width="38" height="22"/>
-                                                    <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="16"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GLS-bH-Ps3">
-                                                    <rect key="frame" x="98" y="0.0" width="257" height="64.5"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                </textView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="GLS-bH-Ps3" secondAttribute="bottom" id="0wf-X7-WHt"/>
-                                                <constraint firstItem="2sr-74-96e" firstAttribute="top" secondItem="FbU-tt-wtU" secondAttribute="top" constant="11" id="1lS-Je-OsP"/>
-                                                <constraint firstItem="GLS-bH-Ps3" firstAttribute="centerY" secondItem="FbU-tt-wtU" secondAttribute="centerY" id="3zl-Fn-m4X"/>
-                                                <constraint firstItem="2sr-74-96e" firstAttribute="leading" secondItem="FbU-tt-wtU" secondAttribute="leading" constant="20" id="aoy-LE-mmp"/>
-                                                <constraint firstItem="GLS-bH-Ps3" firstAttribute="leading" secondItem="2sr-74-96e" secondAttribute="trailing" constant="40" id="bPQ-Au-xcG"/>
-                                                <constraint firstAttribute="trailing" secondItem="GLS-bH-Ps3" secondAttribute="trailing" constant="20" id="fMW-ld-SPj"/>
-                                                <constraint firstItem="GLS-bH-Ps3" firstAttribute="top" secondItem="FbU-tt-wtU" secondAttribute="top" id="icw-Ks-H0a"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="sendButtonCell" rowHeight="60" id="huZ-IT-9N8" customClass="SendButtonCell" customModule="O3" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="243" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="178" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="huZ-IT-9N8" id="yun-0h-FhA">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
@@ -253,8 +222,6 @@
                         <outlet property="amountField" destination="bGg-fs-bbW" id="ZIh-qB-VjE"/>
                         <outlet property="amountLabel" destination="8C1-08-qRh" id="brl-Nf-fHX"/>
                         <outlet property="assetLabel" destination="UzJ-KV-tT0" id="w9Z-yO-rL4"/>
-                        <outlet property="noteLabel" destination="2sr-74-96e" id="XIt-qy-dcf"/>
-                        <outlet property="noteTextView" destination="GLS-bH-Ps3" id="qPE-U7-pFZ"/>
                         <outlet property="selectedAssetLabel" destination="X2N-SH-LmH" id="nCU-Po-Ugj"/>
                         <outlet property="sendButton" destination="hc8-Fj-ahK" id="PuG-1n-UTv"/>
                         <outlet property="toAddressField" destination="vaJ-pL-bR0" id="v9r-AF-obl"/>
@@ -356,7 +323,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Token name" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cqp-DR-dL0">
                                                     <rect key="frame" x="16" y="29.5" width="65.5" height="17"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="12"/>
-                                                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWx-ml-ClM">
@@ -573,9 +540,6 @@
         <image name="paste" width="14" height="15"/>
         <namedColor name="grey">
             <color red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="lightThemePrimary">
-            <color red="0.0" green="0.41176470588235292" blue="0.85098039215686272" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="lightThemePrimary">
             <color red="0.0" green="0.41176470588235292" blue="0.85098039215686272" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

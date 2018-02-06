@@ -30,18 +30,22 @@ class AssetDetailViewController: ThemedViewController, GraphPanDelegate, Scrolla
     var panView: GraphPanView!
     var graphView: ScrollableGraphView!
     var selectedAsset: String!
-    var selectedInterval: PriceInterval = .fifteenMinutes
+    var selectedInterval: PriceInterval = .oneDay
     var priceHistory: History?
     var referenceCurrency: Currency = .btc
 
     func selectedPriceIntervalString() -> String {
         switch selectedInterval {
-        case .fiveMinutes, .fifteenMinutes, .thirtyMinutes:
-             return String(format: "Past %d minutes".uppercased(), selectedInterval.rawValue)
-        case .sixtyMinutes:
-            return "Past hour".uppercased()
-        case .oneDay:
+        case .sixHours:
+            return "Past six hours".uppercased()
+        case.oneDay:
             return "Past day".uppercased()
+        case .oneWeek:
+             return "Past week".uppercased()
+        case .oneMonth:
+            return "Past month".uppercased()
+        case .threeMonths:
+            return "Past three motnhs".uppercased()
         case .all:
             return ""
         }
@@ -162,7 +166,7 @@ class AssetDetailViewController: ThemedViewController, GraphPanDelegate, Scrolla
                 self.activatedLineCenterXAnchor?.isActive = true
                 self.view.layoutIfNeeded()
             }, completion: { (_) in
-                self.selectedInterval = PriceInterval(rawValue: sender.tag)!
+                self.selectedInterval = PriceInterval(rawValue: sender.tag.tagToPriceIntervalString())!
                 self.loadPriceHistory(asset: self.selectedAsset)
             })
         }
