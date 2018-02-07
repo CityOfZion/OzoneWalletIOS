@@ -16,6 +16,8 @@
 		353F365020037DFB002B4FE1 /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 353F364E20037DFB002B4FE1 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		353F36522003842F002B4FE1 /* NewsItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353F36512003842F002B4FE1 /* NewsItemViewController.swift */; };
 		358E95D9200358AA00A1878B /* NewsFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358E95D8200358AA00A1878B /* NewsFeed.swift */; };
+		35E5F60C20283AA600D65BEA /* AddressBookEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5F60B20283AA600D65BEA /* AddressBookEntryTableViewCell.swift */; };
+		35E5F60E20285CB800D65BEA /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5F60D20285CB800D65BEA /* Int.swift */; };
 		6E1BBF7F1F77BEE30095F466 /* WalletHomeAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E1BBF7E1F77BEE30095F466 /* WalletHomeAssets.xcassets */; };
 		6E3E381A1FA4436E004965F8 /* FirstTimeLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3E38191FA4436E004965F8 /* FirstTimeLoginViewController.swift */; };
 		6E3E381C1FA4437A004965F8 /* PreCreateWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3E381B1FA4437A004965F8 /* PreCreateWalletViewController.swift */; };
@@ -131,9 +133,6 @@
 		75DA59051F7A6CFB0065FE0D /* AddAddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DA59041F7A6CFB0065FE0D /* AddAddressTableViewCell.swift */; };
 		75DA59091F7A815E0065FE0D /* OzoneAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DA59081F7A815E0065FE0D /* OzoneAlert.swift */; };
 		75DA590B1F7A83940065FE0D /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DA590A1F7A83940065FE0D /* UIViewController.swift */; };
-		75DA590F1F7A89E00065FE0D /* AddressBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DA590E1F7A89E00065FE0D /* AddressBookViewController.swift */; };
-		75DA59111F7A89F70065FE0D /* AddressBookEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DA59101F7A89F70065FE0D /* AddressBookEntryTableViewCell.swift */; };
-		75DA59131F7A8A070065FE0D /* AddContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DA59121F7A8A070065FE0D /* AddContactTableViewCell.swift */; };
 		75E14E541F7D27F900BEAE22 /* O3.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 75E14E521F7D27F900BEAE22 /* O3.xcdatamodeld */; };
 		75E14E571F7D2AEC00BEAE22 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E14E561F7D2AEC00BEAE22 /* UIApplication.swift */; };
 		75E28F2B1F9B2241006C6E37 /* NetworkTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E28F2A1F9B2241006C6E37 /* NetworkTableViewController.swift */; };
@@ -175,6 +174,8 @@
 		353F364E20037DFB002B4FE1 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		353F36512003842F002B4FE1 /* NewsItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItemViewController.swift; sourceTree = "<group>"; };
 		358E95D8200358AA00A1878B /* NewsFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeed.swift; sourceTree = "<group>"; };
+		35E5F60B20283AA600D65BEA /* AddressBookEntryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressBookEntryTableViewCell.swift; sourceTree = "<group>"; };
+		35E5F60D20285CB800D65BEA /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		6E1BBF7E1F77BEE30095F466 /* WalletHomeAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = WalletHomeAssets.xcassets; sourceTree = "<group>"; };
 		6E3E38191FA4436E004965F8 /* FirstTimeLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTimeLoginViewController.swift; sourceTree = "<group>"; };
 		6E3E381B1FA4437A004965F8 /* PreCreateWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreCreateWalletViewController.swift; sourceTree = "<group>"; };
@@ -282,9 +283,6 @@
 		75DA59041F7A6CFB0065FE0D /* AddAddressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressTableViewCell.swift; sourceTree = "<group>"; };
 		75DA59081F7A815E0065FE0D /* OzoneAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OzoneAlert.swift; sourceTree = "<group>"; };
 		75DA590A1F7A83940065FE0D /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
-		75DA590E1F7A89E00065FE0D /* AddressBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressBookViewController.swift; sourceTree = "<group>"; };
-		75DA59101F7A89F70065FE0D /* AddressBookEntryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressBookEntryTableViewCell.swift; sourceTree = "<group>"; };
-		75DA59121F7A8A070065FE0D /* AddContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContactTableViewCell.swift; sourceTree = "<group>"; };
 		75E14E531F7D27F900BEAE22 /* O3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = O3.xcdatamodel; sourceTree = "<group>"; };
 		75E14E561F7D2AEC00BEAE22 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		75E28F2A1F9B2241006C6E37 /* NetworkTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTableViewController.swift; sourceTree = "<group>"; };
@@ -529,6 +527,7 @@
 				757FEB721F77F07B0099E26F /* String.swift */,
 				6E7C92731F7A5FBA00F8D7AA /* UINavigationController.swift */,
 				75E14E561F7D2AEC00BEAE22 /* UIApplication.swift */,
+				35E5F60D20285CB800D65BEA /* Int.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -613,9 +612,9 @@
 				7501C0261F7BBFF400B4B2FF /* AddressEntryTableViewController.swift */,
 				7501E8421F79536300123EA8 /* SettingsMenuTableViewController.swift */,
 				75E28F291F9B222C006C6E37 /* Network */,
-				75DA590D1F7A87090065FE0D /* AddressBook */,
 				75DA590C1F7A86EA0065FE0D /* WatchOnlyAddresses */,
 				7520068B1F7F8AC400D19B5F /* PrivateKeyViewController.swift */,
+				35E5F60B20283AA600D65BEA /* AddressBookEntryTableViewCell.swift */,
 			);
 			path = SettingsMenu;
 			sourceTree = "<group>";
@@ -628,16 +627,6 @@
 				75DA59041F7A6CFB0065FE0D /* AddAddressTableViewCell.swift */,
 			);
 			path = WatchOnlyAddresses;
-			sourceTree = "<group>";
-		};
-		75DA590D1F7A87090065FE0D /* AddressBook */ = {
-			isa = PBXGroup;
-			children = (
-				75DA590E1F7A89E00065FE0D /* AddressBookViewController.swift */,
-				75DA59101F7A89F70065FE0D /* AddressBookEntryTableViewCell.swift */,
-				75DA59121F7A8A070065FE0D /* AddContactTableViewCell.swift */,
-			);
-			path = AddressBook;
 			sourceTree = "<group>";
 		};
 		75E28F291F9B222C006C6E37 /* Network */ = {
@@ -685,7 +674,7 @@
 				TargetAttributes = {
 					7575ADC11F6006AC0077007B = {
 						CreatedOnToolsVersion = 9.0;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -790,6 +779,7 @@
 				752006891F7F6F5D00D19B5F /* HalfModalInteractiveTransition.swift in Sources */,
 				6E4E6F7F20146086001A5844 /* AccountTabViewController.swift in Sources */,
 				7520068A1F7F6F5D00D19B5F /* HalfModalTransitionAnimator.swift in Sources */,
+				35E5F60E20285CB800D65BEA /* Int.swift in Sources */,
 				6EFF839A20148CD700BDBE52 /* CardView.swift in Sources */,
 				7518C0001F8B49D500FBA0BA /* UserDefaultsManager.swift in Sources */,
 				6E4E6F872014652B001A5844 /* UnclaimedGASTableViewCell.swift in Sources */,
@@ -829,15 +819,14 @@
 				6EA7F9281F6E2F7F00E31B78 /* O3Client.swift in Sources */,
 				7513FAD71F6952B8003450ED /* TransactionCell.swift in Sources */,
 				7546DB451F765295001DF5A2 /* AssetDetailViewController.swift in Sources */,
-				75DA59131F7A8A070065FE0D /* AddContactTableViewCell.swift in Sources */,
 				7501C0271F7BBFF400B4B2FF /* AddressEntryTableViewController.swift in Sources */,
 				75D5BFC71F6D1D4600E64855 /* ShadowedButton.swift in Sources */,
 				751666B01F80C190009ACC07 /* TransactionWebViewController.swift in Sources */,
 				7550940D1F779EEE00127B4F /* WalletHeaderCollectionCell.swift in Sources */,
 				6E4E6F9420146BEC001A5844 /* TransactionHistoryTableViewController.swift in Sources */,
 				358E95D9200358AA00A1878B /* NewsFeed.swift in Sources */,
+				35E5F60C20283AA600D65BEA /* AddressBookEntryTableViewCell.swift in Sources */,
 				755D8F5A1F66606C00058434 /* GasAssetCell.swift in Sources */,
-				75DA59111F7A89F70065FE0D /* AddressBookEntryTableViewCell.swift in Sources */,
 				75E28F311F9B3B34006C6E37 /* ThemeManager.swift in Sources */,
 				752006861F7F698300D19B5F /* O3TabBarController.swift in Sources */,
 				6E4E6F89201465BE001A5844 /* NativeAssetTableViewCell.swift in Sources */,
@@ -848,7 +837,6 @@
 				75DA59031F7A6CEF0065FE0D /* WatchOnlyAddressTableViewCell.swift in Sources */,
 				752586B11F77DD9800ED5312 /* OzoneGraphView.swift in Sources */,
 				75CEACEC1F66B750005974CE /* AccountViewController.swift in Sources */,
-				75DA590F1F7A89E00065FE0D /* AddressBookViewController.swift in Sources */,
 				6E97C4B51F7FBAA300526FF0 /* AssetView.swift in Sources */,
 				75DA59011F7A6C7D0065FE0D /* WatchOnlyAddressViewController.swift in Sources */,
 				6E4E6F9A20147ABB001A5844 /* AccentButton.swift in Sources */,
@@ -1010,8 +998,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = O3/O3.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = DS5S7EUZRZ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1027,8 +1016,8 @@
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-D DEBUG -Xfrontend -warn-long-expression-type-checking=200 -Xfrontend -warn-long-function-bodies=200";
 				PRODUCT_BUNDLE_IDENTIFIER = network.o3.ios.neo.wallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f7005197-6a29-4d95-b085-ff57c6eb3dd9";
-				PROVISIONING_PROFILE_SPECIFIER = "network.o3.ios.neo.wallet AppStore 1515027167";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRIP_BITCODE_FROM_COPIED_FILES = NO;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1041,8 +1030,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = O3/O3.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DS5S7EUZRZ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1057,8 +1046,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = network.o3.ios.neo.wallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f7005197-6a29-4d95-b085-ff57c6eb3dd9";
-				PROVISIONING_PROFILE_SPECIFIER = "network.o3.ios.neo.wallet AppStore 1515027167";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRIP_BITCODE_FROM_COPIED_FILES = NO;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

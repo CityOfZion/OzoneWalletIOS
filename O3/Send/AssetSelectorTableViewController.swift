@@ -10,7 +10,7 @@ import UIKit
 import NeoSwift
 
 protocol AssetSelectorDelegate {
-    func assetSelected(selected: TransferableAsset)
+    func assetSelected(selected: TransferableAsset, gasBalance: Decimal)
 }
 
 class AssetSelectorTableViewController: ThemedTableViewController {
@@ -27,9 +27,9 @@ class AssetSelectorTableViewController: ThemedTableViewController {
     var selectedNEP5Tokens: [String: NEP5Token] = [:]
 
     var assets: [String: TransferableAsset]! = [:]
-    var transferableNEO: TransferableAsset! = TransferableAsset(assetID: NeoSwift.AssetId.neoAssetId.rawValue, name: "NEO", symbol: "NEO", assetType: AssetType.NativeAsset, decimal: 0, balance: 0.0)
+    var transferableNEO: TransferableAsset! = TransferableAsset(assetID: NeoSwift.AssetId.neoAssetId.rawValue, name: "NEO", symbol: "NEO", assetType: AssetType.nativeAsset, decimal: 0, balance: 0.0)
 
-    var transferableGAS: TransferableAsset! = TransferableAsset(assetID: NeoSwift.AssetId.gasAssetId.rawValue, name: "GAS", symbol: "GAS", assetType: AssetType.NativeAsset, decimal: 0, balance: 0.0)
+    var transferableGAS: TransferableAsset! = TransferableAsset(assetID: NeoSwift.AssetId.gasAssetId.rawValue, name: "GAS", symbol: "GAS", assetType: AssetType.nativeAsset, decimal: 0, balance: 0.0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +37,7 @@ class AssetSelectorTableViewController: ThemedTableViewController {
         selectedNEP5Tokens = UserDefaultsManager.selectedNEP5Token!
         for token in selectedNEP5Tokens {
             let nep5 = token.value
-            let a = TransferableAsset(assetID: nep5.tokenHash, name: nep5.name, symbol: nep5.symbol, assetType: AssetType.NEP5Token, decimal: nep5.decimal, balance: 0.0)
+            let a = TransferableAsset(assetID: nep5.tokenHash, name: nep5.name, symbol: nep5.symbol, assetType: AssetType.nep5Token, decimal: nep5.decimal, balance: 0.0)
             //update max amount from server
             assets[nep5.tokenHash] = a
         }
@@ -57,12 +57,12 @@ class AssetSelectorTableViewController: ThemedTableViewController {
             for asset in accountState.balances {
                 if asset.id.contains(NeoSwift.AssetId.neoAssetId.rawValue) {
                     self.neoBalance =  Int(asset.value) ?? 0
-                    cellNEO.amountLabel.text = String(format:"%ld", Int(asset.value) ?? 0)
+                    cellNEO.amountLabel.text = String(format: "%ld", Int(asset.value) ?? 0)
                     self.transferableNEO.balance = Decimal(self.neoBalance!)
                 } else if asset.id.contains(NeoSwift.AssetId.gasAssetId.rawValue) {
                     self.gasBalance = Double(asset.value) ?? 0.0
                     self.transferableGAS.balance = Decimal(self.gasBalance!)
-                    cellGAS.amountLabel.text = String(format:"%.8f", Double(asset.value) ?? 0.0)
+                    cellGAS.amountLabel.text = String(format: "%.8f", Double(asset.value) ?? 0.0)
                 }
             }
         }
@@ -172,16 +172,16 @@ class AssetSelectorTableViewController: ThemedTableViewController {
         if indexPath.section == sections.nativeAssets.rawValue {
             if indexPath.row == 0 {
                 //neo
-                delegate?.assetSelected(selected: self.transferableNEO)
+                delegate?.assetSelected(selected: self.transferableNEO, gasBalance: self.transferableGAS.balance)
             } else if indexPath.row == 1 {
                 //gas
-                delegate?.assetSelected(selected: self.transferableGAS)
+                delegate?.assetSelected(selected: self.transferableGAS, gasBalance: self.transferableGAS.balance)
             }
         } else if indexPath.section == sections.nep5Tokens.rawValue {
             let list = Array(selectedNEP5Tokens.values)
             let token = list[indexPath.row]
             if self.assets[token.tokenHash] != nil {
-                delegate?.assetSelected(selected: self.assets[token.tokenHash]!)
+                delegate?.assetSelected(selected: self.assets[token.tokenHash]!, gasBalance: self.transferableGAS.balance)
             }
         }
         self.dismiss(animated: true, completion: nil)

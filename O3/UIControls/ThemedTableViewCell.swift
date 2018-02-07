@@ -12,6 +12,7 @@ import UIKit
 class ThemedTableCell: UITableViewCell {
     var titleLabels = [UILabel]()
     var subtitleLabels = [UILabel]()
+    var backgroundViews = [UIView]()
 
     func addThemeObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.changedTheme), name: Notification.Name("ChangedTheme"), object: nil)
@@ -33,6 +34,10 @@ class ThemedTableCell: UITableViewCell {
 
             for label in self.subtitleLabels {
                 label.textColor = UserDefaultsManager.theme.lightTextColor
+            }
+
+            for view in self.backgroundViews {
+                view.backgroundColor = UserDefaultsManager.theme.backgroundColor
             }
             self.contentView.backgroundColor = UserDefaultsManager.theme.backgroundColor
         }

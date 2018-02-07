@@ -9,15 +9,15 @@
 import UIKit
 
 enum AssetType: Int {
-    case NativeAsset = 0
-    case NEP5Token
+    case nativeAsset = 0
+    case nep5Token
 }
 
 struct TransferableAsset {
     var assetID: String!
     var name: String!
     var symbol: String!
-    var assetType: AssetType! = AssetType.NativeAsset //default to this
+    var assetType: AssetType! = AssetType.nativeAsset //default to this
     var decimal: Int!
     var balance: Decimal! = 0.0
 }
