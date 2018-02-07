@@ -833,6 +833,7 @@
 				6E4E6F9420146BEC001A5844 /* TransactionHistoryTableViewController.swift in Sources */,
 				358E95D9200358AA00A1878B /* NewsFeed.swift in Sources */,
 				35E5F60C20283AA600D65BEA /* AddressBookEntryTableViewCell.swift in Sources */,
+				755D8F5A1F66606C00058434 /* GasAssetCell.swift in Sources */,
 				75E28F311F9B3B34006C6E37 /* ThemeManager.swift in Sources */,
 				752006861F7F698300D19B5F /* O3TabBarController.swift in Sources */,
 				6E4E6F89201465BE001A5844 /* NativeAssetTableViewCell.swift in Sources */,
