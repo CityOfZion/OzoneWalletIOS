@@ -57,7 +57,7 @@ class AvailableNEP5TokensTableViewController: ThemedTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? NEP5TokenTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? NEP5TokenSelectorTableViewCell else {
             return UITableViewCell()
         }
         let token = tokens[indexPath.row]

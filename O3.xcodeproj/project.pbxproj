@@ -18,6 +18,10 @@
 		358E95D9200358AA00A1878B /* NewsFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358E95D8200358AA00A1878B /* NewsFeed.swift */; };
 		35E5F60C20283AA600D65BEA /* AddressBookEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5F60B20283AA600D65BEA /* AddressBookEntryTableViewCell.swift */; };
 		35E5F60E20285CB800D65BEA /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5F60D20285CB800D65BEA /* Int.swift */; };
+		35E5F6102029412900D65BEA /* PortfolioAssetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5F60F2029412900D65BEA /* PortfolioAssetCell.swift */; };
+		35E5F6122029477400D65BEA /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5F6112029477400D65BEA /* HomeViewModel.swift */; };
+		35E5F614202ADE4300D65BEA /* NativeAssetSelectorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5F613202ADE4300D65BEA /* NativeAssetSelectorTableViewCell.swift */; };
+		35E5F616202ADF1E00D65BEA /* NEP5TokenSelectorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5F615202ADF1E00D65BEA /* NEP5TokenSelectorTableViewCell.swift */; };
 		6E1BBF7F1F77BEE30095F466 /* WalletHomeAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E1BBF7E1F77BEE30095F466 /* WalletHomeAssets.xcassets */; };
 		6E3E381A1FA4436E004965F8 /* FirstTimeLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3E38191FA4436E004965F8 /* FirstTimeLoginViewController.swift */; };
 		6E3E381C1FA4437A004965F8 /* PreCreateWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3E381B1FA4437A004965F8 /* PreCreateWalletViewController.swift */; };
@@ -97,8 +101,6 @@
 		7546DB451F765295001DF5A2 /* AssetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7546DB441F765295001DF5A2 /* AssetDetailViewController.swift */; };
 		7550940D1F779EEE00127B4F /* WalletHeaderCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7550940C1F779EEE00127B4F /* WalletHeaderCollectionCell.swift */; };
 		755D8F561F665F8200058434 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755D8F551F665F8200058434 /* HomeViewController.swift */; };
-		755D8F581F66605B00058434 /* NeoAssetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755D8F571F66605B00058434 /* NeoAssetCell.swift */; };
-		755D8F5A1F66606C00058434 /* GasAssetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755D8F591F66606C00058434 /* GasAssetCell.swift */; };
 		755D8F601F66743A00058434 /* ScrollableGraphView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 755D8F5F1F66743A00058434 /* ScrollableGraphView.framework */; };
 		755D8F621F66747A00058434 /* ScrollableGraphView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 755D8F5F1F66743A00058434 /* ScrollableGraphView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		756AC1941F7FD1B1003BF8F7 /* AddressSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756AC1931F7FD1B1003BF8F7 /* AddressSelectionCell.swift */; };
@@ -176,6 +178,10 @@
 		358E95D8200358AA00A1878B /* NewsFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeed.swift; sourceTree = "<group>"; };
 		35E5F60B20283AA600D65BEA /* AddressBookEntryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressBookEntryTableViewCell.swift; sourceTree = "<group>"; };
 		35E5F60D20285CB800D65BEA /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
+		35E5F60F2029412900D65BEA /* PortfolioAssetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioAssetCell.swift; sourceTree = "<group>"; };
+		35E5F6112029477400D65BEA /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		35E5F613202ADE4300D65BEA /* NativeAssetSelectorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeAssetSelectorTableViewCell.swift; sourceTree = "<group>"; };
+		35E5F615202ADF1E00D65BEA /* NEP5TokenSelectorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEP5TokenSelectorTableViewCell.swift; sourceTree = "<group>"; };
 		6E1BBF7E1F77BEE30095F466 /* WalletHomeAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = WalletHomeAssets.xcassets; sourceTree = "<group>"; };
 		6E3E38191FA4436E004965F8 /* FirstTimeLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTimeLoginViewController.swift; sourceTree = "<group>"; };
 		6E3E381B1FA4437A004965F8 /* PreCreateWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreCreateWalletViewController.swift; sourceTree = "<group>"; };
@@ -246,8 +252,6 @@
 		7546DB441F765295001DF5A2 /* AssetDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDetailViewController.swift; sourceTree = "<group>"; };
 		7550940C1F779EEE00127B4F /* WalletHeaderCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletHeaderCollectionCell.swift; sourceTree = "<group>"; };
 		755D8F551F665F8200058434 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		755D8F571F66605B00058434 /* NeoAssetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeoAssetCell.swift; sourceTree = "<group>"; };
-		755D8F591F66606C00058434 /* GasAssetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasAssetCell.swift; sourceTree = "<group>"; };
 		755D8F5F1F66743A00058434 /* ScrollableGraphView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScrollableGraphView.framework; path = Carthage/Build/iOS/ScrollableGraphView.framework; sourceTree = "<group>"; };
 		756AC1931F7FD1B1003BF8F7 /* AddressSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSelectionCell.swift; sourceTree = "<group>"; };
 		756AC1951F80A888003BF8F7 /* DeckTransition.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DeckTransition.framework; path = Carthage/Build/iOS/DeckTransition.framework; sourceTree = "<group>"; };
@@ -343,7 +347,9 @@
 			children = (
 				6E4E6F862014652B001A5844 /* UnclaimedGASTableViewCell.swift */,
 				6E4E6F88201465BE001A5844 /* NativeAssetTableViewCell.swift */,
+				35E5F613202ADE4300D65BEA /* NativeAssetSelectorTableViewCell.swift */,
 				6E4E6F8A20146627001A5844 /* NEP5TokenTableViewCell.swift */,
+				35E5F615202ADF1E00D65BEA /* NEP5TokenSelectorTableViewCell.swift */,
 				6E4E6F9B20147FBC001A5844 /* HeaderTableViewCell.swift */,
 			);
 			path = Views;
@@ -419,10 +425,10 @@
 				7550940C1F779EEE00127B4F /* WalletHeaderCollectionCell.swift */,
 				755D8F551F665F8200058434 /* HomeViewController.swift */,
 				7546DB441F765295001DF5A2 /* AssetDetailViewController.swift */,
-				755D8F571F66605B00058434 /* NeoAssetCell.swift */,
-				755D8F591F66606C00058434 /* GasAssetCell.swift */,
 				6ED6001F1F765C9C006760E6 /* WalletHomeNavigationController.swift */,
 				6E1BBF7E1F77BEE30095F466 /* WalletHomeAssets.xcassets */,
+				35E5F60F2029412900D65BEA /* PortfolioAssetCell.swift */,
+				35E5F6112029477400D65BEA /* HomeViewModel.swift */,
 			);
 			path = WalletHome;
 			sourceTree = "<group>";
@@ -790,6 +796,7 @@
 				752017341F72980A00090C4F /* SendCompleteViewController.swift in Sources */,
 				756AC1941F7FD1B1003BF8F7 /* AddressSelectionCell.swift in Sources */,
 				75D5BFB41F6CEF2E00E64855 /* OnboardingCollectionCell.swift in Sources */,
+				35E5F616202ADF1E00D65BEA /* NEP5TokenSelectorTableViewCell.swift in Sources */,
 				7513FADB1F69541F003450ED /* TransactionsHeaderCell.swift in Sources */,
 				75CEACE81F66B683005974CE /* SendTableViewController.swift in Sources */,
 				75E14E571F7D2AEC00BEAE22 /* UIApplication.swift in Sources */,
@@ -838,7 +845,9 @@
 				752586B11F77DD9800ED5312 /* OzoneGraphView.swift in Sources */,
 				75CEACEC1F66B750005974CE /* AccountViewController.swift in Sources */,
 				6E97C4B51F7FBAA300526FF0 /* AssetView.swift in Sources */,
+				35E5F6102029412900D65BEA /* PortfolioAssetCell.swift in Sources */,
 				75DA59011F7A6C7D0065FE0D /* WatchOnlyAddressViewController.swift in Sources */,
+				35E5F6122029477400D65BEA /* HomeViewModel.swift in Sources */,
 				6E4E6F9A20147ABB001A5844 /* AccentButton.swift in Sources */,
 				6ED600201F765C9C006760E6 /* WalletHomeNavigationController.swift in Sources */,
 				750E17431F6FD560001F62FD /* GraphPanView.swift in Sources */,
@@ -856,10 +865,10 @@
 				353F364D2003755B002B4FE1 /* NewsFeedCell.swift in Sources */,
 				75E28F2D1F9B249F006C6E37 /* NetworkTypeCell.swift in Sources */,
 				75CEACE61F6678C0005974CE /* Color.swift in Sources */,
+				35E5F614202ADE4300D65BEA /* NativeAssetSelectorTableViewCell.swift in Sources */,
 				353F36522003842F002B4FE1 /* NewsItemViewController.swift in Sources */,
 				6E4E6F9820147868001A5844 /* ContactsTableViewController.swift in Sources */,
 				75CEACF61F66BEEE005974CE /* SendButtonCell.swift in Sources */,
-				755D8F581F66605B00058434 /* NeoAssetCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
