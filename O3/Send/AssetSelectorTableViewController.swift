@@ -46,11 +46,11 @@ class AssetSelectorTableViewController: ThemedTableViewController {
     }
 
     func showAccountState(accountState: AccountState) {
-        guard let cellNEO = tableView.cellForRow(at: IndexPath(row: 0, section: sections.nativeAssets.rawValue)) as? NativeAssetTableViewCell else {
+        guard let cellNEO = tableView.cellForRow(at: IndexPath(row: 0, section: sections.nativeAssets.rawValue)) as? NativeAssetSelectorTableViewCell else {
             return
         }
 
-        guard let cellGAS = tableView.cellForRow(at: IndexPath(row: 1, section: sections.nativeAssets.rawValue)) as? NativeAssetTableViewCell else {
+        guard let cellGAS = tableView.cellForRow(at: IndexPath(row: 1, section: sections.nativeAssets.rawValue)) as? NativeAssetSelectorTableViewCell else {
             return
         }
         DispatchQueue.main.async {
@@ -105,7 +105,7 @@ class AssetSelectorTableViewController: ThemedTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         if indexPath.section == sections.nativeAssets.rawValue {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell-nativeasset") as? NativeAssetTableViewCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell-nativeasset") as? NativeAssetSelectorTableViewCell else {
                 return UITableViewCell()
             }
 
@@ -123,7 +123,7 @@ class AssetSelectorTableViewController: ThemedTableViewController {
             return cell
         }
 
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell-nep5token") as? NEP5TokenTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell-nep5token") as? NEP5TokenSelectorTableViewCell else {
             return UITableViewCell()
         }
         let list = Array(selectedNEP5Tokens.values)
@@ -136,7 +136,7 @@ class AssetSelectorTableViewController: ThemedTableViewController {
         return cell
     }
 
-    func loadTokenBalance(cell: NEP5TokenTableViewCell, token: NEP5Token) {
+    func loadTokenBalance(cell: NEP5TokenSelectorTableViewCell, token: NEP5Token) {
         guard let address =  Authenticated.account?.address else {
             return
         }

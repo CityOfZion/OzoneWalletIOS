@@ -236,8 +236,6 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
                 self.activatedLineCenterXAnchor = self.activatedLine.centerXAnchor.constraint(equalTo: sender.centerXAnchor, constant: 0)
                 self.activatedLineCenterXAnchor?.isActive = true
                 self.view.layoutIfNeeded()
-                /*self.activatedLineLeftConstraint?.constant = sender.frame.origin.x
-                self.view.layoutIfNeeded()*/
             }, completion: { (_) in
                 self.homeviewModel?.setInterval(PriceInterval(rawValue: sender.tag.tagToPriceIntervalString())!)
             })

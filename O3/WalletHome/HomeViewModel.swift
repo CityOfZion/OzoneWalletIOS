@@ -94,6 +94,8 @@ class HomeViewModel {
         do {
             watchAddresses = try UIApplication.appDelegate.persistentContainer.viewContext.fetch(WatchAddress.fetchRequest())
         } catch {}
+        assetsWriteable = []
+        assetsReadOnly = []
 
         fetchAssetBalances(address: (Authenticated.account?.address)!, isReadOnly: false)
         for watchAddress in watchAddresses {
