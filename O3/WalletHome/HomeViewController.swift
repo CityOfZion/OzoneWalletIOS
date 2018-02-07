@@ -33,6 +33,7 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
     @IBOutlet var activatedLineLeftConstraint: NSLayoutConstraint?
     var group: DispatchGroup?
     @IBOutlet weak var activatedLine: UIView!
+    var activatedLineCenterXAnchor: NSLayoutConstraint?
 
     var graphView: ScrollableGraphView!
     var portfolio: PortfolioValue?
@@ -47,7 +48,7 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
     var readOnlyNeoBalance = 0
     var readOnlyGasBalance = 0.0
 
-    var homeviewModel: HomeViewModel?
+    var homeviewModel: HomeViewModel!
 
     var selectedPrice: PriceData?
 
@@ -80,25 +81,7 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
      * on the portfolio you wish to display read, write, or read + write
      */
     @objc func getBalance() {
-        /*
-        self.readOnlyNeoBalance = 0
-        self.readOnlyGasBalance = 0
-        self.tabBarController?.tabBar.isUserInteractionEnabled = false
-        self.group = DispatchGroup()
-        if let address = Authenticated.account?.address {
-            group?.enter()
-            loadBalanceData(fromReadOnly: false, address: address)
-        }
-
-        for watchAddress in self.loadWatchAddresses() {
-            self.group?.enter()
-            self.loadBalanceData(fromReadOnly: true, address: watchAddress.address!)
-        }
-
-        /*group?.notify(queue: .main) {
-            self.tabBarController?.tabBar.isUserInteractionEnabled = true
-            self.loadPortfolio()
-        }*/*/
+        homeviewModel.reloadBalances()
     }
 
     @objc func updateGraphAppearance(_ sender: Any) {
@@ -119,14 +102,14 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
     }
 
     func panDataIndexUpdated(index: Int, timeLabel: UILabel) {
-        /*DispatchQueue.main.async {
+        DispatchQueue.main.async {
             self.selectedPrice = self.portfolio?.data.reversed()[index]
             self.walletHeaderCollectionView.reloadData()
 
             let posixString = self.portfolio?.data.reversed()[index].time ?? ""
-            timeLabel.text = posixString.intervaledDateString(self.selectedInterval)
+            timeLabel.text = posixString.intervaledDateString(self.homeviewModel.selectedInterval)
             timeLabel.sizeToFit()
-        }*/
+        }
     }
 
     func panEnded() {
@@ -150,7 +133,8 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
         addThemedElements()
         super.viewDidLoad()
         addObservers()
-
+        activatedLineCenterXAnchor = activatedLine.centerXAnchor.constraint(equalTo: fifteenMinButton.centerXAnchor, constant: 0)
+        activatedLineCenterXAnchor?.isActive = true
         homeviewModel = HomeViewModel(delegate: self)
 
         if UserDefaults.standard.string(forKey: "subscribedAddress") != Authenticated.account?.address {
@@ -230,7 +214,7 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedAsset = indexPath.row == 0 ? "neo": "gas"
+        selectedAsset = homeviewModel.getTransferableAssets()[indexPath.row].symbol
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "segueToAssetDetail", sender: nil)
         }
@@ -248,8 +232,12 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
         DispatchQueue.main.async {
             self.view.needsUpdateConstraints()
             UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveEaseInOut, animations: {
-                self.activatedLineLeftConstraint?.constant = sender.frame.origin.x
+                self.activatedLineCenterXAnchor?.isActive = false
+                self.activatedLineCenterXAnchor = self.activatedLine.centerXAnchor.constraint(equalTo: sender.centerXAnchor, constant: 0)
+                self.activatedLineCenterXAnchor?.isActive = true
                 self.view.layoutIfNeeded()
+                /*self.activatedLineLeftConstraint?.constant = sender.frame.origin.x
+                self.view.layoutIfNeeded()*/
             }, completion: { (_) in
                 self.homeviewModel?.setInterval(PriceInterval(rawValue: sender.tag.tagToPriceIntervalString())!)
             })
@@ -328,6 +316,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if scrollView == assetsTable {
+            return
+        }
         var visibleRect = CGRect()
 
         visibleRect.origin = walletHeaderCollectionView.contentOffset
@@ -345,9 +336,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch (homeviewModel?.referenceCurrency)! {
         case .btc:
-            homeviewModel?.setReferenceCurrency(.btc)
-        case .usd:
             homeviewModel?.setReferenceCurrency(.usd)
+        case .usd:
+            homeviewModel?.setReferenceCurrency(.btc)
         }
         collectionView.reloadData()
         assetsTable.reloadData()

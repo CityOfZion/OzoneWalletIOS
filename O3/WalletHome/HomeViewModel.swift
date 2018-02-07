@@ -87,10 +87,10 @@ class HomeViewModel {
 
     init(delegate: HomeViewModelDelegate) {
         self.delegate = delegate
-        realoadBalances()
+        reloadBalances()
     }
 
-    func realoadBalances() {
+    func reloadBalances() {
         do {
             watchAddresses = try UIApplication.appDelegate.persistentContainer.viewContext.fetch(WatchAddress.fetchRequest())
         } catch {}

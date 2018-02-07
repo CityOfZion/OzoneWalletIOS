@@ -216,7 +216,7 @@
                                             </constraints>
                                         </stackView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xPp-QI-GoT">
-                                            <rect key="frame" x="0.0" y="265" width="62.5" height="2"/>
+                                            <rect key="frame" x="62.5" y="265" width="62.5" height="2"/>
                                             <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="2" id="Ble-TR-p4p"/>
@@ -231,13 +231,13 @@
                                         <constraint firstItem="zy3-or-vYp" firstAttribute="leading" secondItem="jYl-dS-zJf" secondAttribute="leading" id="FMP-08-oEb"/>
                                         <constraint firstItem="xPp-QI-GoT" firstAttribute="bottom" secondItem="zy3-or-vYp" secondAttribute="bottom" id="Jrh-Ax-Ohn"/>
                                         <constraint firstAttribute="trailing" secondItem="4aB-pR-7EX" secondAttribute="trailing" id="NyR-7t-Maq"/>
+                                        <constraint firstItem="xPp-QI-GoT" firstAttribute="centerX" secondItem="pLk-Y2-e6W" secondAttribute="centerX" placeholder="YES" id="R2D-8Q-kuE"/>
                                         <constraint firstItem="xPp-QI-GoT" firstAttribute="width" secondItem="pLk-Y2-e6W" secondAttribute="width" id="ZNN-Mg-esJ"/>
                                         <constraint firstItem="9Rm-30-S8j" firstAttribute="top" secondItem="jYl-dS-zJf" secondAttribute="top" constant="10" id="ifj-mX-Aii"/>
                                         <constraint firstItem="4aB-pR-7EX" firstAttribute="leading" secondItem="jYl-dS-zJf" secondAttribute="leading" id="jsY-Ps-TYG"/>
                                         <constraint firstAttribute="trailing" secondItem="9Rm-30-S8j" secondAttribute="trailing" id="kS2-yj-INl"/>
                                         <constraint firstItem="4aB-pR-7EX" firstAttribute="top" secondItem="9Rm-30-S8j" secondAttribute="bottom" id="m24-te-agn"/>
                                         <constraint firstItem="9Rm-30-S8j" firstAttribute="leading" secondItem="jYl-dS-zJf" secondAttribute="leading" id="m2M-Gh-NSz"/>
-                                        <constraint firstItem="xPp-QI-GoT" firstAttribute="leading" secondItem="zy3-or-vYp" secondAttribute="leading" id="x1F-2C-cQ7"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
@@ -315,7 +315,6 @@
                     <navigationItem key="navigationItem" title="Portfolio" id="5vG-EF-lAG"/>
                     <connections>
                         <outlet property="activatedLine" destination="xPp-QI-GoT" id="0mP-2I-21v"/>
-                        <outlet property="activatedLineLeftConstraint" destination="x1F-2C-cQ7" id="f8B-Os-sty"/>
                         <outlet property="allButton" destination="zNK-oY-pqW" id="Q3I-Jk-4JO"/>
                         <outlet property="assetsTable" destination="3yr-Aq-3ZN" id="TIe-36-wGP"/>
                         <outlet property="fifteenMinButton" destination="pLk-Y2-e6W" id="48y-O8-d7w"/>
