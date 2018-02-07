@@ -18,6 +18,7 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
     // Settings for price graph interval
     @IBOutlet weak var walletHeaderCollectionView: UICollectionView!
 
+    @IBOutlet weak var graphLoadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var assetsTable: UITableView!
 
     // Xcode 9 beta issue with outlet connections gonna just hook up two buttons for now
@@ -41,13 +42,7 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
     var panView: GraphPanView!
     var selectedAsset = "neo"
     var firstTimeGraphLoad = true
-
-    var writeableNeoBalance = 0
-    var writeableGasBalance = 0.0
-
-    var readOnlyNeoBalance = 0
-    var readOnlyGasBalance = 0.0
-
+    var firstTimeViewLoad = true
     var homeviewModel: HomeViewModel!
 
     var selectedPrice: PriceData?
@@ -158,7 +153,23 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.getBalance()
+        if !firstTimeViewLoad {
+            self.getBalance()
+        }
+        firstTimeViewLoad = false
+    }
+
+    func showLoadingIndicator() {
+        DispatchQueue.main.async {
+            self.graphLoadingIndicator.layer.zPosition = 1
+            self.graphLoadingIndicator.startAnimating()
+        }
+    }
+
+    func hideLoadingIndicator() {
+        DispatchQueue.main.async {
+            self.graphLoadingIndicator.stopAnimating()
+        }
     }
 
     func updateWithBalanceData(_ assets: [TransferableAsset]) {
@@ -173,8 +184,9 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
             self.selectedPrice = portfolio.data.first
             self.walletHeaderCollectionView.reloadData()
             self.assetsTable.reloadData()
+
             if self.firstTimeGraphLoad {
-                self.getBalance()
+                self.graphView.reload()
                 self.firstTimeGraphLoad = false
             }
         }
@@ -366,7 +378,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func didTapRight(index: Int, portfolioType: PortfolioType) {
         DispatchQueue.main.async {
             self.walletHeaderCollectionView.scrollToItem(at: IndexPath(row: index + 1, section: 0), at: .right, animated: true)
-            self.homeviewModel?.setPortfolioType(self.indexToPortfolioType(index - 1))
+            self.homeviewModel?.setPortfolioType(self.indexToPortfolioType(index + 1))
         }
     }
 }

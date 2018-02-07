@@ -44,8 +44,8 @@ class ThemedTableCell: UITableViewCell {
     }
 
     override func awakeFromNib() {
-        super.awakeFromNib()
         addThemeObserver()
         applyTheme()
+        super.awakeFromNib()
     }
 }

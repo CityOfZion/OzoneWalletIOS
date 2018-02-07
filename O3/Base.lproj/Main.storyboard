@@ -132,8 +132,17 @@
                                         </collectionView>
                                         <view clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4aB-pR-7EX">
                                             <rect key="frame" x="0.0" y="85" width="375" height="137"/>
+                                            <subviews>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ebK-hs-vfc">
+                                                    <rect key="frame" x="177" y="58" width="20" height="20"/>
+                                                </activityIndicatorView>
+                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="ebK-hs-vfc" firstAttribute="centerY" secondItem="4aB-pR-7EX" secondAttribute="centerY" id="0T6-pC-vO6"/>
+                                                <constraint firstItem="ebK-hs-vfc" firstAttribute="centerX" secondItem="4aB-pR-7EX" secondAttribute="centerX" id="sdq-oG-89V"/>
+                                            </constraints>
                                         </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="zy3-or-vYp">
                                             <rect key="frame" x="0.0" y="222" width="375" height="45"/>
@@ -319,6 +328,7 @@
                         <outlet property="assetsTable" destination="3yr-Aq-3ZN" id="TIe-36-wGP"/>
                         <outlet property="fifteenMinButton" destination="pLk-Y2-e6W" id="48y-O8-d7w"/>
                         <outlet property="fiveMinButton" destination="KsM-vb-KhS" id="R3V-SY-BQL"/>
+                        <outlet property="graphLoadingIndicator" destination="ebK-hs-vfc" id="mTz-OX-8m3"/>
                         <outlet property="graphViewContainer" destination="4aB-pR-7EX" id="0UT-Q0-CeW"/>
                         <outlet property="oneDayButton" destination="BNe-mO-iaG" id="fkI-ep-z5M"/>
                         <outlet property="sixtyMinButton" destination="SmA-oL-BYF" id="koQ-1u-6Mb"/>
