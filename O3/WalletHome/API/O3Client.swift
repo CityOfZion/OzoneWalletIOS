@@ -43,7 +43,7 @@ public class O3Client {
     enum HTTPMethod: String {
         case GET
     }
-    var baseURL = "https://staging-api.o3.network"
+    var baseURL = "https://api.o3.network"
 
     public static let shared = O3Client()
 
@@ -101,9 +101,14 @@ public class O3Client {
         }
     }
 
-    func getPortfolioValue(_ neo: Int, gas: Double, interval: String, completion: @escaping (O3ClientResult<PortfolioValue>) -> Void) {
+    func getPortfolioValue(_ assets: [TransferableAsset], interval: String, completion: @escaping (O3ClientResult<PortfolioValue>) -> Void) {
 
-        let endpoint = O3Endpoints.getPortfolioValue.rawValue + String(format: "?i=%@&neo=%d&gas=%f", interval, neo, gas)
+        var queryString = String(format: "?i=%@", interval)
+        for asset in assets {
+            queryString += String(format: "&%@=%@", asset.symbol, asset.balance.description)
+        }
+
+        let endpoint = O3Endpoints.getPortfolioValue.rawValue + queryString
         print (endpoint)
         sendRequest(endpoint, method: .GET, data: nil) { result in
             switch result {

@@ -13,7 +13,7 @@ import NeoSwift
 import Channel
 import PKHUD
 
-class HomeViewController: ThemedViewController, UITableViewDelegate, UITableViewDataSource, GraphPanDelegate, ScrollableGraphViewDataSource {
+class HomeViewController: ThemedViewController, UITableViewDelegate, UITableViewDataSource, GraphPanDelegate, ScrollableGraphViewDataSource, HomeViewModelDelegate {
 
     // Settings for price graph interval
     @IBOutlet weak var walletHeaderCollectionView: UICollectionView!
@@ -33,10 +33,10 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
     @IBOutlet var activatedLineLeftConstraint: NSLayoutConstraint?
     var group: DispatchGroup?
     @IBOutlet weak var activatedLine: UIView!
+    var activatedLineCenterXAnchor: NSLayoutConstraint?
 
     var graphView: ScrollableGraphView!
     var portfolio: PortfolioValue?
-    var selectedInterval: PriceInterval = .oneDay
     var activatedIndex = 1
     var panView: GraphPanView!
     var selectedAsset = "neo"
@@ -48,42 +48,17 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
     var readOnlyNeoBalance = 0
     var readOnlyGasBalance = 0.0
 
+    var homeviewModel: HomeViewModel!
+
     var selectedPrice: PriceData?
-    var referenceCurrency: Currency = .btc
+
+    var displayedAssets = [TransferableAsset]()
 
     func addThemedElements() {
         themedTableViews = [assetsTable]
         themedCollectionViews = [walletHeaderCollectionView]
         themedTransparentButtons = [fiveMinButton, fifteenMinButton, thirtyMinButton, sixtyMinButton, oneDayButton, allButton]
         themedBackgroundViews = [graphViewContainer]
-    }
-
-    var portfolioType: PortfolioType = .writable {
-        didSet {
-            self.loadPortfolio()
-        }
-    }
-
-    var displayedNeoAmount: Int {
-        switch portfolioType {
-        case .readOnly:
-            return readOnlyNeoBalance
-        case .writable:
-            return writeableNeoBalance
-        case .readOnlyAndWritable:
-            return readOnlyNeoBalance + writeableNeoBalance
-        }
-    }
-
-    var displayedGasAmount: Double {
-        switch portfolioType {
-        case .readOnly:
-            return readOnlyGasBalance
-        case .writable:
-            return writeableGasBalance
-        case .readOnlyAndWritable:
-            return readOnlyGasBalance + writeableGasBalance
-        }
     }
 
     func loadWatchAddresses() -> [WatchAddress] {
@@ -96,51 +71,7 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
         }
     }
 
-    func loadPortfolio() {
-        O3Client.shared.getPortfolioValue(self.displayedNeoAmount, gas: self.displayedGasAmount, interval: self.selectedInterval.rawValue) {result in
-            switch result {
-            case .failure:
-                print(result)
-            case .success(let portfolio):
-                DispatchQueue.main.async {
-                    self.portfolio = portfolio
-                    self.graphView.reload()
-                    self.selectedPrice = portfolio.data.first
-                    self.walletHeaderCollectionView.reloadData()
-                    self.assetsTable.reloadData()
-                    if self.firstTimeGraphLoad {
-                        self.getBalance()
-                        self.firstTimeGraphLoad = false
-                    }
-                }
-            }
-        }
-    }
-
     func loadBalanceData(fromReadOnly: Bool, address: String) {
-        Neo.client.getAccountState(for: address) { result in
-            switch result {
-            case .failure:
-                self.group?.leave()
-            case .success(let accountState):
-                for asset in accountState.balances {
-                    if !fromReadOnly {
-                        if asset.id.contains(NeoSwift.AssetId.neoAssetId.rawValue) {
-                            self.writeableNeoBalance = Int(asset.value) ?? 0
-                        } else if asset.id.contains(NeoSwift.AssetId.gasAssetId.rawValue) {
-                            self.writeableGasBalance = Double(asset.value) ?? 0
-                        }
-                    } else {
-                        if asset.id.contains(NeoSwift.AssetId.neoAssetId.rawValue) {
-                            self.readOnlyNeoBalance += (Int(asset.value) ?? 0)
-                        } else if asset.id.contains(NeoSwift.AssetId.gasAssetId.rawValue) {
-                            self.readOnlyGasBalance += (Double(asset.value) ?? 0)
-                        }
-                    }
-                }
-                self.group?.leave()
-            }
-        }
     }
 
     /*
@@ -150,24 +81,7 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
      * on the portfolio you wish to display read, write, or read + write
      */
     @objc func getBalance() {
-        self.readOnlyNeoBalance = 0
-        self.readOnlyGasBalance = 0
-        self.tabBarController?.tabBar.isUserInteractionEnabled = false
-        self.group = DispatchGroup()
-        if let address = Authenticated.account?.address {
-            group?.enter()
-            loadBalanceData(fromReadOnly: false, address: address)
-        }
-
-        for watchAddress in self.loadWatchAddresses() {
-            self.group?.enter()
-            self.loadBalanceData(fromReadOnly: true, address: watchAddress.address!)
-        }
-
-        group?.notify(queue: .main) {
-            self.tabBarController?.tabBar.isUserInteractionEnabled = true
-            self.loadPortfolio()
-        }
+        homeviewModel.reloadBalances()
     }
 
     @objc func updateGraphAppearance(_ sender: Any) {
@@ -175,7 +89,6 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
             self.graphView.removeFromSuperview()
             self.panView.removeFromSuperview()
             self.setupGraphView()
-            self.loadPortfolio()
         }
     }
 
@@ -194,7 +107,7 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
             self.walletHeaderCollectionView.reloadData()
 
             let posixString = self.portfolio?.data.reversed()[index].time ?? ""
-            timeLabel.text = posixString.intervaledDateString(self.selectedInterval)
+            timeLabel.text = posixString.intervaledDateString(self.homeviewModel.selectedInterval)
             timeLabel.sizeToFit()
         }
     }
@@ -220,6 +133,9 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
         addThemedElements()
         super.viewDidLoad()
         addObservers()
+        activatedLineCenterXAnchor = activatedLine.centerXAnchor.constraint(equalTo: fifteenMinButton.centerXAnchor, constant: 0)
+        activatedLineCenterXAnchor?.isActive = true
+        homeviewModel = HomeViewModel(delegate: self)
 
         if UserDefaults.standard.string(forKey: "subscribedAddress") != Authenticated.account?.address {
             Channel.shared().unsubscribe(fromTopic: "*") {
@@ -245,41 +161,45 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
         self.getBalance()
     }
 
+    func updateWithBalanceData(_ assets: [TransferableAsset]) {
+        self.displayedAssets = assets
+        DispatchQueue.main.async { self.assetsTable.reloadData() }
+    }
+
+    func updateWithPortfolioData(_ portfolio: PortfolioValue) {
+        DispatchQueue.main.async {
+            self.portfolio = portfolio
+            self.graphView.reload()
+            self.selectedPrice = portfolio.data.first
+            self.walletHeaderCollectionView.reloadData()
+            self.assetsTable.reloadData()
+            if self.firstTimeGraphLoad {
+                self.getBalance()
+                self.firstTimeGraphLoad = false
+            }
+        }
+    }
+
     /*
      * Although we have only two assets right now we expect the asset list to be of arbitrary
      * length as new tokens are introduced, we must be flexible enough to support that
      */
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            guard let cell = assetsTable.dequeueReusableCell(withIdentifier: "neoAssetCell") as? NeoAssetCell else {
-                fatalError("undefined table view behavior")
-            }
-            guard let latestPrice = portfolio?.price["neo"],
-                let firstPrice = portfolio?.firstPrice["neo"] else {
-                    return UITableViewCell()
-            }
-
-            cell.data = NeoAssetCell.Data(amount: displayedNeoAmount,
-                                          referenceCurrency: referenceCurrency,
-                                          latestPrice: latestPrice,
-                                          firstPrice: firstPrice)
-            cell.selectionStyle = .none
-            return cell
+        guard let cell = assetsTable.dequeueReusableCell(withIdentifier: "portfolioAssetCell") as? PortfolioAssetCell else {
+            fatalError("Undefined Table Cell Behavior")
         }
-        guard let cell = assetsTable.dequeueReusableCell(withIdentifier: "gasAssetCell") as? GasAssetCell else {
-            fatalError("undefined table view behavior")
-        }
-
-        guard let latestPrice = portfolio?.price["gas"],
-            let firstPrice = portfolio?.firstPrice["gas"] else {
+        let asset = self.displayedAssets[indexPath.row]
+        guard let latestPrice = portfolio?.price[asset.symbol ?? ""],
+            let firstPrice = portfolio?.firstPrice[asset.symbol ?? ""] else {
                 return UITableViewCell()
         }
 
-        cell.data = GasAssetCell.Data(amount: displayedGasAmount,
-                                      referenceCurrency: referenceCurrency,
-                                      latestPrice: latestPrice,
-                                      firstPrice: firstPrice)
+        cell.data = PortfolioAssetCell.Data(assetName: asset.symbol ?? "",
+                                            amount: Double((asset.balance ?? 0) as NSNumber),
+                                            referenceCurrency: (homeviewModel?.referenceCurrency)!,
+                                            latestPrice: latestPrice,
+                                            firstPrice: firstPrice)
         cell.selectionStyle = .none
         return cell
     }
@@ -294,7 +214,7 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedAsset = indexPath.row == 0 ? "neo": "gas"
+        selectedAsset = homeviewModel.getTransferableAssets()[indexPath.row].symbol
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "segueToAssetDetail", sender: nil)
         }
@@ -305,18 +225,19 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return self.displayedAssets.count
     }
 
     @IBAction func tappedIntervalButton(_ sender: UIButton) {
         DispatchQueue.main.async {
             self.view.needsUpdateConstraints()
             UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveEaseInOut, animations: {
-                self.activatedLineLeftConstraint?.constant = sender.frame.origin.x
+                self.activatedLineCenterXAnchor?.isActive = false
+                self.activatedLineCenterXAnchor = self.activatedLine.centerXAnchor.constraint(equalTo: sender.centerXAnchor, constant: 0)
+                self.activatedLineCenterXAnchor?.isActive = true
                 self.view.layoutIfNeeded()
             }, completion: { (_) in
-                self.selectedInterval = PriceInterval(rawValue: sender.tag.tagToPriceIntervalString())!
-                self.loadPortfolio()
+                self.homeviewModel?.setInterval(PriceInterval(rawValue: sender.tag.tagToPriceIntervalString())!)
             })
         }
     }
@@ -328,7 +249,7 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
         if pointIndex > portfolio!.data.count {
             return 0
         }
-        return referenceCurrency == .btc ? portfolio!.data.reversed()[pointIndex].averageBTC : portfolio!.data.reversed()[pointIndex].averageUSD
+        return homeviewModel?.referenceCurrency == .btc ? portfolio!.data.reversed()[pointIndex].averageBTC : portfolio!.data.reversed()[pointIndex].averageUSD
     }
 
     func label(atIndex pointIndex: Int) -> String {
@@ -345,7 +266,7 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, WalletHeaderCellDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return portfolio == nil ? 0 : 3
+        return 3
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -364,20 +285,24 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         default: fatalError("Undefined wallet header cell")
         }
 
-        guard let latestPrice = selectedPrice,
-            let previousPrice = portfolio?.data.last else {
-                fatalError("Undefined wallet header cell")
-        }
-
-        let data = WalletHeaderCollectionCell.Data (
+        var data = WalletHeaderCollectionCell.Data (
             portfolioType: portfolioType,
             index: indexPath.row,
-            latestPrice: latestPrice,
-            previousPrice: previousPrice,
-            referenceCurrency: referenceCurrency,
-            selectedInterval: selectedInterval
+            latestPrice: PriceData(averageUSD: 0, averageBTC: 0, time: "24h"),
+            previousPrice: PriceData(averageUSD: 0, averageBTC: 0, time: "24h"),
+            referenceCurrency: (homeviewModel?.referenceCurrency)!,
+            selectedInterval: (homeviewModel?.selectedInterval)!
         )
+
+        guard let latestPrice = selectedPrice,
+            let previousPrice = portfolio?.data.last else {
+                cell.data = data
+                return cell
+        }
+        data.latestPrice = latestPrice
+        data.previousPrice = previousPrice
         cell.data = data
+
         return cell
     }
 
@@ -389,6 +314,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if scrollView == assetsTable {
+            return
+        }
         var visibleRect = CGRect()
 
         visibleRect.origin = walletHeaderCollectionView.contentOffset
@@ -399,16 +327,16 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let visibleIndexPath: IndexPath? = walletHeaderCollectionView.indexPathForItem(at: visiblePoint)
 
         if visibleIndexPath != nil {
-            self.portfolioType = self.indexToPortfolioType(visibleIndexPath!.row)
+            self.homeviewModel?.setPortfolioType(self.indexToPortfolioType(visibleIndexPath!.row))
         }
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        switch referenceCurrency {
+        switch (homeviewModel?.referenceCurrency)! {
         case .btc:
-            referenceCurrency = .usd
+            homeviewModel?.setReferenceCurrency(.usd)
         case .usd:
-            referenceCurrency = .btc
+            homeviewModel?.setReferenceCurrency(.btc)
         }
         collectionView.reloadData()
         assetsTable.reloadData()
@@ -431,14 +359,14 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func didTapLeft(index: Int, portfolioType: PortfolioType) {
         DispatchQueue.main.async {
             self.walletHeaderCollectionView.scrollToItem(at: IndexPath(row: index - 1, section: 0), at: .left, animated: true)
-            self.portfolioType = self.indexToPortfolioType(index - 1)
+            self.homeviewModel?.setPortfolioType(self.indexToPortfolioType(index - 1))
         }
     }
 
     func didTapRight(index: Int, portfolioType: PortfolioType) {
         DispatchQueue.main.async {
             self.walletHeaderCollectionView.scrollToItem(at: IndexPath(row: index + 1, section: 0), at: .right, animated: true)
-            self.portfolioType = self.indexToPortfolioType(index + 1)
+            self.homeviewModel?.setPortfolioType(self.indexToPortfolioType(index - 1))
         }
     }
 }
