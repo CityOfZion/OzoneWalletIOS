@@ -78,7 +78,7 @@ class AvailableNEP5TokensTableViewController: ThemedTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? NEP5TokenTableViewCell  else {
+        guard let cell = tableView.cellForRow(at: indexPath) as? NEP5TokenSelectorTableViewCell  else {
             return
         }
         tableView.deselectRow(at: indexPath, animated: false)
@@ -93,7 +93,7 @@ class AvailableNEP5TokensTableViewController: ThemedTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? NEP5TokenTableViewCell  else {
+        guard let cell = tableView.cellForRow(at: indexPath) as? NEP5TokenSelectorTableViewCell  else {
             return
         }
         let token = tokens[indexPath.row]
