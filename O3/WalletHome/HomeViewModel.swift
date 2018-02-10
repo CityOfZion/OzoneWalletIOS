@@ -13,6 +13,8 @@ import UIKit
 protocol HomeViewModelDelegate: class {
     func updateWithBalanceData(_ assets: [TransferableAsset])
     func updateWithPortfolioData(_ portfolio: PortfolioValue)
+    func showLoadingIndicator()
+    func hideLoadingIndicator()
 }
 
 class HomeViewModel {
@@ -187,12 +189,15 @@ class HomeViewModel {
     }
 
     func loadPortfolioValue() {
+        delegate?.showLoadingIndicator()
         DispatchQueue.global().async {
             O3Client.shared.getPortfolioValue(self.getTransferableAssets(), interval: self.selectedInterval.rawValue) {result in
                 switch result {
                 case .failure:
+                    self.delegate?.hideLoadingIndicator()
                     print(result)
                 case .success(let portfolio):
+                    self.delegate?.hideLoadingIndicator()
                     self.delegate?.updateWithPortfolioData(portfolio)
                 }
             }
