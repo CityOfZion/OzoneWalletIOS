@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import AVFoundation
+import NeoSwift
 
 protocol AddressAddDelegate: class {
     func addressAdded(_ address: String, nickName: String)
@@ -30,15 +31,13 @@ class AddressEntryTableViewController: UITableViewController, AVCaptureMetadataO
     @IBAction func addButtonTapped(_ sender: Any) {
         //validate address here
         let address = addressTextView.text.trim()
-        address.validNEOAddress { (valid) in
-            if valid == false {
-                DispatchQueue.main.async {
-                    OzoneAlert.alertDialog(message: "Invalid Address", dismissTitle: "OK", didDismiss: {
-                        self.addressTextView.becomeFirstResponder()
-                    })
-                    return
-                }
+        if !NEOValidator.validateNEOAddress(address) {
+            DispatchQueue.main.async {
+                OzoneAlert.alertDialog(message: "Invalid Address", dismissTitle: "OK", didDismiss: {
+                    self.addressTextView.becomeFirstResponder()
+                })
             }
+        } else {
             DispatchQueue.main.async {
                 self.delegate?.addressAdded(self.addressTextView.text.trim(), nickName: self.nicknameField.text?.trim() ?? "")
                 DispatchQueue.main.async { self.dismiss(animated: true) }
