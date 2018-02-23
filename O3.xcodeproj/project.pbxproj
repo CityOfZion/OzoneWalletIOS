@@ -22,6 +22,9 @@
 		35494575203C030A00332E53 /* Tabman.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35494573203C02B800332E53 /* Tabman.framework */; };
 		35494577203C03DC00332E53 /* AutoInsetter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35494576203C03DC00332E53 /* AutoInsetter.framework */; };
 		35494578203C03DC00332E53 /* AutoInsetter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 35494576203C03DC00332E53 /* AutoInsetter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3549458B203FD02B00332E53 /* Cache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3549458A203FD02B00332E53 /* Cache.framework */; };
+		3549458C203FD02B00332E53 /* Cache.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3549458A203FD02B00332E53 /* Cache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3549458E203FD4D000332E53 /* Decimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3549458D203FD4D000332E53 /* Decimal.swift */; };
 		358E95D9200358AA00A1878B /* NewsFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358E95D8200358AA00A1878B /* NewsFeed.swift */; };
 		35A6390F203517BB0054EA20 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35A6390E203517BB0054EA20 /* CloudKit.framework */; };
 		35E5F60C20283AA600D65BEA /* AddressBookEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5F60B20283AA600D65BEA /* AddressBookEntryTableViewCell.swift */; };
@@ -162,6 +165,7 @@
 				6ED600141F76219D006760E6 /* Channel.framework in Embed Frameworks */,
 				6ECF0E2B1FAED7BF00884F38 /* Reachability.framework in Embed Frameworks */,
 				6E6BD24C1FFC69330049098A /* PKHUD.framework in Embed Frameworks */,
+				3549458C203FD02B00332E53 /* Cache.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -179,6 +183,8 @@
 		3549456B203BF0A400332E53 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		35494573203C02B800332E53 /* Tabman.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Tabman.framework; path = Carthage/Build/iOS/Tabman.framework; sourceTree = "<group>"; };
 		35494576203C03DC00332E53 /* AutoInsetter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AutoInsetter.framework; path = Carthage/Build/iOS/AutoInsetter.framework; sourceTree = "<group>"; };
+		3549458A203FD02B00332E53 /* Cache.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cache.framework; path = Carthage/Build/iOS/Cache.framework; sourceTree = "<group>"; };
+		3549458D203FD4D000332E53 /* Decimal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decimal.swift; sourceTree = "<group>"; };
 		358E95D8200358AA00A1878B /* NewsFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeed.swift; sourceTree = "<group>"; };
 		35A6390E203517BB0054EA20 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		35E5F60B20283AA600D65BEA /* AddressBookEntryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressBookEntryTableViewCell.swift; sourceTree = "<group>"; };
@@ -316,6 +322,7 @@
 				6ECF0E251FAED3D800884F38 /* Reachability.framework in Frameworks */,
 				7537438B1F7F572500803A6C /* KeychainAccess.framework in Frameworks */,
 				35A6390F203517BB0054EA20 /* CloudKit.framework in Frameworks */,
+				3549458B203FD02B00332E53 /* Cache.framework in Frameworks */,
 				353F364F20037DFB002B4FE1 /* Kingfisher.framework in Frameworks */,
 				6ECF0E2A1FAED7BF00884F38 /* Reachability.framework in Frameworks */,
 				6ED600131F76219D006760E6 /* Channel.framework in Frameworks */,
@@ -457,6 +464,7 @@
 		7575ADB91F6006AB0077007B = {
 			isa = PBXGroup;
 			children = (
+				3549458A203FD02B00332E53 /* Cache.framework */,
 				35494576203C03DC00332E53 /* AutoInsetter.framework */,
 				35494573203C02B800332E53 /* Tabman.framework */,
 				6E4E6F9020146A14001A5844 /* Pageboy.framework */,
@@ -544,6 +552,7 @@
 				6E7C92731F7A5FBA00F8D7AA /* UINavigationController.swift */,
 				75E14E561F7D2AEC00BEAE22 /* UIApplication.swift */,
 				35E5F60D20285CB800D65BEA /* Int.swift */,
+				3549458D203FD4D000332E53 /* Decimal.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -877,6 +886,7 @@
 				75263DD11F9C8B930068EC4D /* ThemedViewController.swift in Sources */,
 				6E61BBD11F729D3B00D2B30B /* Money.swift in Sources */,
 				7513FADD1F695433003450ED /* AssetsHeaderCell.swift in Sources */,
+				3549458E203FD4D000332E53 /* Decimal.swift in Sources */,
 				353F364D2003755B002B4FE1 /* NewsFeedCell.swift in Sources */,
 				75E28F2D1F9B249F006C6E37 /* NetworkTypeCell.swift in Sources */,
 				75CEACE61F6678C0005974CE /* Color.swift in Sources */,
