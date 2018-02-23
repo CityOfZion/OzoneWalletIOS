@@ -115,6 +115,7 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
     func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.getBalance), name: Notification.Name("ChangedNetwork"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.getBalance), name: Notification.Name("UpdatedWatchOnlyAddress"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.getBalance), name: Notification.Name("AddedNewToken"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateGraphAppearance), name: Notification.Name("ChangedTheme"), object: nil)
     }
 
@@ -122,6 +123,7 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
         NotificationCenter.default.removeObserver(self, name: Notification.Name("ChangedNetwork"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("UpdatedWatchOnlyAddress"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("ChangedTheme"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("AddedNewToken"), object: nil)
     }
 
     override func viewDidLoad() {

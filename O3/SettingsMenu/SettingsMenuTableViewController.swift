@@ -104,7 +104,7 @@ class SettingsMenuTableViewController: ThemedTableViewController, HalfModalPrese
     }
 
     @objc func sendMail() {
-        let email = "O3WalletApp@gmail.com"
+        let email = "support@o3.network"
         if let url = URL(string: "mailto:\(email)") {
             UIApplication.shared.open(url)
         }

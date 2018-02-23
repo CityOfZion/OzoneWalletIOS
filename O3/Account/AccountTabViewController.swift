@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Tabman_Carthage
+import Tabman
 import Pageboy
 import DeckTransition
 

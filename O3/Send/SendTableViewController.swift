@@ -157,24 +157,20 @@ class SendTableViewController: ThemedTableViewController, AddressSelectDelegate,
         let toAddress = toAddressField.text?.trim() ?? ""
 
         //validate address first
-        toAddress.validNEOAddress { (valid) in
-            if valid == false {
-                DispatchQueue.main.async {
-                    OzoneAlert.alertDialog(message: "Invalid Address", dismissTitle: "OK", didDismiss: {
-                        self.toAddressField.becomeFirstResponder()
-                    })
-                    return
-                }
+        if NEOValidator.validateNEOAddress(toAddress) == false {
+            DispatchQueue.main.async {
+                OzoneAlert.alertDialog(message: "Invalid Address", dismissTitle: "OK", didDismiss: {
+                    self.toAddressField.becomeFirstResponder()
+                })
+                return
             }
-
-            if self.selectedAsset?.assetType == AssetType.nativeAsset {
-                self.sendNativeAsset(assetId: NeoSwift.AssetId(rawValue: assetId)!, assetName: assetName, amount: amount!.doubleValue, toAddress: toAddress)
-            } else if self.selectedAsset?.assetType == AssetType.nep5Token {
-                self.sendNEP5Token(tokenHash: assetId, assetName: assetName, amount: amount!.doubleValue, toAddress: toAddress)
-            }
-
         }
 
+        if self.selectedAsset?.assetType == AssetType.nativeAsset {
+            self.sendNativeAsset(assetId: NeoSwift.AssetId(rawValue: assetId)!, assetName: assetName, amount: amount!.doubleValue, toAddress: toAddress)
+        } else if self.selectedAsset?.assetType == AssetType.nep5Token {
+            self.sendNEP5Token(tokenHash: assetId, assetName: assetName, amount: amount!.doubleValue, toAddress: toAddress)
+        }
     }
 
     @IBAction func pasteTapped(_ sender: Any) {

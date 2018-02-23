@@ -99,9 +99,12 @@ class HomeViewModel {
         assetsWriteable = []
         assetsReadOnly = []
 
+        selectedNEP5Tokens = UserDefaultsManager.selectedNEP5Token!
         fetchAssetBalances(address: (Authenticated.account?.address)!, isReadOnly: false)
         for watchAddress in watchAddresses {
-            fetchAssetBalances(address: (watchAddress.address)!, isReadOnly: true)
+            if NEOValidator.validateNEOAddress(watchAddress.address ?? "") {
+                self.fetchAssetBalances(address: (watchAddress.address)!, isReadOnly: true)
+            }
         }
         group.notify(queue: .main) {
             self.loadPortfolioValue()
