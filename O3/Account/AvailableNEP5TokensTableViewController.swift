@@ -93,14 +93,4 @@ class AvailableNEP5TokensTableViewController: ThemedTableViewController {
             cell.accessoryType = .checkmark
         }
     }
-/*
-    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? NEP5TokenSelectorTableViewCell  else {
-            return
-        }
-        let token = tokens[indexPath.row]
-        UserDefaultsManager.selectedNEP5Token?.removeValue(forKey: token.tokenHash)
-        NotificationCenter.default.post(name: Notification.Name("AddedNewToken"), object: nil)
-        cell.accessoryType = .none
-    }*/
 }
