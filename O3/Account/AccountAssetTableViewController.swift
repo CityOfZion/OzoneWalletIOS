@@ -32,14 +32,17 @@ class AccountAssetTableViewController: ThemedTableViewController {
     var cachedNEOBalance: Int = 0
     var cachedGASBalance: Double = 0.0
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    func initiateCache() {
         if let storage =  try? Storage(diskConfig: DiskConfig(name: "O3")) {
             tokensCache = (try? storage.object(ofType: [NEP5Token: Decimal].self, forKey: "tokenBalances")) ?? [:]
             cachedNEOBalance = (try? storage.object(ofType: Int.self, forKey: "neoBalance")) ?? 0
             cachedGASBalance = (try? storage.object(ofType: Double.self, forKey: "gasBalance")) ?? 0.0
         }
+    }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        initiateCache()
         loadSelectedNEP5Tokens()
         loadClaimableGAS()
         loadAccountState()

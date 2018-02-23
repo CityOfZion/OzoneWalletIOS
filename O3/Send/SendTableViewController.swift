@@ -37,6 +37,14 @@ class SendTableViewController: ThemedTableViewController, AddressSelectDelegate,
     override func viewDidLoad() {
         addThemedElements()
         super.viewDidLoad()
+        //select best node
+        DispatchQueue.global().async {
+            if let bestNode = NEONetworkMonitor.autoSelectBestNode() {
+                UserDefaultsManager.seed = bestNode
+                UserDefaultsManager.useDefaultSeed = false
+            }
+        }
+
         tableView.tableFooterView = UIView(frame: .zero)
         self.navigationController?.navigationItem.largeTitleDisplayMode = .automatic
         let networkButton = UIBarButtonItem(title: (Authenticated.account?.neoClient.network.rawValue)! + "Net", style: .plain, target: nil, action: nil)
