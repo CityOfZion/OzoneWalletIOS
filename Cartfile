@@ -6,6 +6,7 @@ github "ashleymills/Reachability.swift"
 github "pkluz/PKHUD" ~> 4.0
 github "onevcat/Kingfisher" ~> 4.0
 github "uias/Tabman" ~> 1.0
+github "hyperoslo/Cache"
 binary "https://raw.githubusercontent.com/Building42/Specs/master/Carthage/Fabric.json"
 binary "https://raw.githubusercontent.com/Building42/Specs/master/Carthage/Crashlytics.json"
 

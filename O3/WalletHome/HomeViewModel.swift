@@ -9,6 +9,7 @@
 import Foundation
 import NeoSwift
 import UIKit
+import Cache
 
 protocol HomeViewModelDelegate: class {
     func updateWithBalanceData(_ assets: [TransferableAsset])
@@ -20,6 +21,8 @@ protocol HomeViewModelDelegate: class {
 class HomeViewModel {
     weak var delegate: HomeViewModelDelegate?
 
+    var cachedWritableAssets: [TransferableAsset] = []
+    var cachedReadOnlyAssets: [TransferableAsset] = []
     var assetsReadOnly: [TransferableAsset] = []
     var assetsWriteable: [TransferableAsset] = []
     var selectedNEP5Tokens = UserDefaultsManager.selectedNEP5Token!
@@ -87,8 +90,16 @@ class HomeViewModel {
         return sortedAssets + transferableAssetsToReturn
     }
 
+    func initiateCache() {
+        if let storage =  try? Storage(diskConfig: DiskConfig(name: "O3")) {
+            cachedWritableAssets = (try? storage.object(ofType: [TransferableAsset].self, forKey: "writableAssets")) ?? []
+            cachedReadOnlyAssets = (try? storage.object(ofType: [TransferableAsset].self, forKey: "readOnlyAssets")) ?? []
+        }
+    }
+
     init(delegate: HomeViewModelDelegate) {
         self.delegate = delegate
+        initiateCache()
         reloadBalances()
     }
 
@@ -114,6 +125,16 @@ class HomeViewModel {
 
     func addWritableAsset(_ asset: TransferableAsset) {
         assetsWriteable.append(asset)
+
+        //Add to writable assets cache
+        let index = cachedWritableAssets.index(where: { (item) -> Bool in
+            item.name == asset.name
+        })
+        if index == nil {
+            cachedWritableAssets.append(asset)
+        } else {
+            cachedWritableAssets[index!] = asset
+        }
     }
 
     func addReadOnlyAsset(_ asset: TransferableAsset) {
@@ -125,6 +146,58 @@ class HomeViewModel {
         } else {
             assetsReadOnly[index!].balance = assetsReadOnly[index!].balance + asset.balance
         }
+
+        //update the cache to match
+        let cacheIndex = cachedReadOnlyAssets.index(where: { (item) -> Bool in
+            item.name == asset.name
+        })
+        if cacheIndex == nil {
+            cachedReadOnlyAssets.append(asset)
+        } else {
+            cachedReadOnlyAssets[cacheIndex!] = asset
+        }
+    }
+
+    func fetchTokenFromCache(_ tokenHash: String, isReadOnly: Bool) -> TransferableAsset? {
+        if isReadOnly {
+            let cacheIndex = cachedReadOnlyAssets.index(where: { (item) -> Bool in
+                item.assetID == tokenHash
+            })
+            if cacheIndex != nil {
+                return cachedReadOnlyAssets[cacheIndex!]
+            } else {
+                return nil
+            }
+        } else {
+            let cacheIndex = cachedWritableAssets.index(where: { (item) -> Bool in
+                item.assetID == tokenHash
+            })
+            if cacheIndex != nil {
+                return cachedWritableAssets[cacheIndex!]
+            } else {
+                return nil
+            }
+        }
+    }
+
+    func fetchNativeAssetsFromCache(isReadOnly: Bool) {
+        let cachedNEO = self.fetchTokenFromCache(NeoSwift.AssetId.neoAssetId.rawValue, isReadOnly: isReadOnly)
+        if cachedNEO != nil {
+            if isReadOnly {
+                self.addReadOnlyAsset(cachedNEO!)
+            } else {
+                self.addWritableAsset(cachedNEO!)
+            }
+        }
+
+        let cachedGAS = self.fetchTokenFromCache(NeoSwift.AssetId.gasAssetId.rawValue, isReadOnly: isReadOnly)
+        if cachedGAS != nil {
+            if isReadOnly {
+                self.addReadOnlyAsset(cachedGAS!)
+            } else {
+                self.addWritableAsset(cachedGAS!)
+            }
+        }
     }
 
     func fetchAssetBalances(address: String, isReadOnly: Bool) {
@@ -133,6 +206,7 @@ class HomeViewModel {
             Neo.client.getAccountState(for: address) { result in
                 switch result {
                 case .failure:
+                    self.fetchNativeAssetsFromCache(isReadOnly: isReadOnly)
                     self.group.leave()
                 case .success(let accountState):
                     for asset in accountState.balances {
@@ -170,6 +244,14 @@ class HomeViewModel {
                 NeoClient(seed: UserDefaultsManager.seed).getTokenBalanceUInt(token.tokenHash, address: address) { result in
                     switch result {
                     case .failure:
+                        let cachedAsset = self.fetchTokenFromCache(token.tokenHash, isReadOnly: isReadOnly)
+                        if cachedAsset != nil {
+                            if isReadOnly {
+                                self.addReadOnlyAsset(cachedAsset!)
+                            } else {
+                                self.addWritableAsset(cachedAsset!)
+                            }
+                        }
                         self.group.leave()
                     case .success(let balance):
                         let balanceDecimal = Decimal(balance) / pow(10, token.decimal)
