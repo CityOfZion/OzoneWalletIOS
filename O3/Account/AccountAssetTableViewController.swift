@@ -9,6 +9,7 @@
 import UIKit
 import NeoSwift
 import PKHUD
+import Cache
 
 class AccountAssetTableViewController: ThemedTableViewController {
 
@@ -26,17 +27,34 @@ class AccountAssetTableViewController: ThemedTableViewController {
     var gasBalance: Double?
     var refreshClaimableGasTimer: Timer?
 
+    var storage: Storage?
+    var tokensCache = [NEP5Token: Decimal]()
+    var cachedNEOBalance: Int = 0
+    var cachedGASBalance: Double = 0.0
+
+    func initiateCache() {
+        if let storage =  try? Storage(diskConfig: DiskConfig(name: "O3")) {
+            tokensCache = (try? storage.object(ofType: [NEP5Token: Decimal].self, forKey: "tokenBalances")) ?? [:]
+            cachedNEOBalance = (try? storage.object(ofType: Int.self, forKey: "neoBalance")) ?? 0
+            cachedGASBalance = (try? storage.object(ofType: Double.self, forKey: "gasBalance")) ?? 0.0
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        initiateCache()
         loadSelectedNEP5Tokens()
         loadClaimableGAS()
         loadAccountState()
         NotificationCenter.default.addObserver(self, selector: #selector(reloadNEP5TokensSection), name: NSNotification.Name(rawValue: "halfModalDismissed"), object: nil)
         refreshClaimableGasTimer = Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(AccountAssetTableViewController.loadClaimableGAS), userInfo: nil, repeats: true)
         refreshClaimableGasTimer?.fire()
-
         tableView.refreshControl = UIRefreshControl()
         tableView.refreshControl?.addTarget(self, action: #selector(reloadAllData), for: .valueChanged)
+    }
+
+    func updateTokenCache() {
+        try? storage?.setObject(tokensCache, forKey: "tokenBalances")
     }
 
     @objc func reloadAllData() {
@@ -184,7 +202,7 @@ class AccountAssetTableViewController: ThemedTableViewController {
         }
     }
 
-    func showAccountState(accountState: AccountState) {
+    func showAccountState(accountState: AccountState?) {
         guard let cellNEO = tableView.cellForRow(at: IndexPath(row: 0, section: sections.nativeAssets.rawValue)) as? NativeAssetTableViewCell else {
             return
         }
@@ -192,13 +210,22 @@ class AccountAssetTableViewController: ThemedTableViewController {
         guard let cellGAS = tableView.cellForRow(at: IndexPath(row: 1, section: sections.nativeAssets.rawValue)) as? NativeAssetTableViewCell else {
             return
         }
+
+        guard let accountState = accountState else {
+            cellNEO.amountLabel.text = String(format: "%ld", Int(cachedNEOBalance))
+            cellGAS.amountLabel.text = String(format: "%.8f", Double(cachedGASBalance))
+            return
+        }
+
         DispatchQueue.main.async {
             for asset in accountState.balances {
                 if asset.id.contains(NeoSwift.AssetId.neoAssetId.rawValue) {
                     self.neoBalance =  Int(asset.value) ?? 0
+                    self.cachedNEOBalance = self.neoBalance ?? 0
                     cellNEO.amountLabel.text = String(format: "%ld", Int(asset.value) ?? 0)
                 } else if asset.id.contains(NeoSwift.AssetId.gasAssetId.rawValue) {
                     self.gasBalance = Double(asset.value) ?? 0.0
+                    self.cachedGASBalance = self.gasBalance ?? 0.0
                     cellGAS.amountLabel.text = String(format: "%.8f", Double(asset.value) ?? 0.0)
                 }
             }
@@ -212,6 +239,7 @@ class AccountAssetTableViewController: ThemedTableViewController {
             case .failure:
                 DispatchQueue.main.async {
                     self.tableView.refreshControl?.endRefreshing()
+                    self.showAccountState(accountState: nil)
                     return
                 }
             case .success(let accountState):
@@ -278,21 +306,20 @@ class AccountAssetTableViewController: ThemedTableViewController {
             case .failure:
                 DispatchQueue.main.async {
                     cell.loadingView?.stopAnimating()
+                    if let cachedBalance = self.tokensCache[token] {
+                        cell.amountLabel.text = cachedBalance.formattedBalance(decimals: token.decimal)
+                    }
                 }
                 return
             case .success(let balance):
                 DispatchQueue.main.async {
                     cell.loadingView?.stopAnimating()
-                    let balanceDecimal = Decimal(balance) / pow(10, token.decimal)
-                    let formatter = NumberFormatter()
-                    formatter.minimumFractionDigits = 0
-                    formatter.maximumFractionDigits = token.decimal
-                    formatter.numberStyle = .decimal
-                    cell.amountLabel.text = formatter.string(for: balanceDecimal)
+                    self.tokensCache[token] = Decimal(balance)
+                    self.updateTokenCache()
+                    cell.amountLabel.text = Decimal(balance).formattedBalance(decimals: token.decimal)
                 }
             }
         }
-
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

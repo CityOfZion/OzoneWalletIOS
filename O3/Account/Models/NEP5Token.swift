@@ -7,13 +7,21 @@
 //
 
 import UIKit
-struct NEP5Token: Codable {
+struct NEP5Token: Codable, Hashable {
 
     var tokenHash: String!
     var name: String!
     var symbol: String!
     var decimal: Int!
     var totalSupply: Int!
+
+    var hashValue: Int {
+        return tokenHash.hashValue
+    }
+
+    static func == (lhs: NEP5Token, rhs: NEP5Token) -> Bool {
+        return lhs.tokenHash == rhs.tokenHash
+    }
 
     enum CodingKeys: String, CodingKey {
         case tokenHash
