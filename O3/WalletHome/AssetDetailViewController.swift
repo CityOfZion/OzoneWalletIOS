@@ -105,8 +105,8 @@ class AssetDetailViewController: ThemedViewController, GraphPanDelegate, Scrolla
         switch referenceCurrency {
         case .btc:
             amountLabel.text = String(format: "%.8fBTC", latestPrice.averageBTC)
-        case .usd:
-            amountLabel.text = USD(amount: Float(latestPrice.averageUSD)).formattedString()
+        default:
+            amountLabel.text = latestPrice.averageFiatMoney().formattedString()
         }
         percentChangeLabel.text = String.percentChangeString(latestPrice: latestPrice, previousPrice: earliestPrice,
                                                              with: selectedInterval, referenceCurrency: referenceCurrency)
@@ -142,10 +142,10 @@ class AssetDetailViewController: ThemedViewController, GraphPanDelegate, Scrolla
                 referenceCurrencyCurrentValue = currentValue.averageBTC
                 referenceCurrencyOriginalValue = originalValue.averageBTC
                 self.amountLabel.text = String(format: "%@BTC", referenceCurrencyCurrentValue.string(Precision.btc))
-            case .usd:
-                referenceCurrencyCurrentValue = currentValue.averageUSD
-                referenceCurrencyOriginalValue = originalValue.averageUSD
-                self.amountLabel.text = USD(amount: Float(referenceCurrencyCurrentValue)).formattedString()
+            default:
+                referenceCurrencyCurrentValue = currentValue.average
+                referenceCurrencyOriginalValue = originalValue.average
+                self.amountLabel.text = Fiat(amount: Float(referenceCurrencyCurrentValue)).formattedString()
             }
             let percentChange = 0 < referenceCurrencyOriginalValue ? ((referenceCurrencyCurrentValue - referenceCurrencyOriginalValue) / referenceCurrencyOriginalValue * 100) : 0
             self.percentChangeLabel.text = String(format: "%.2f%@", percentChange, "%")
@@ -181,7 +181,7 @@ class AssetDetailViewController: ThemedViewController, GraphPanDelegate, Scrolla
         if referenceCurrency == .btc {
             return priceHistory!.data.reversed()[pointIndex].averageBTC
         }
-        return priceHistory!.data.reversed()[pointIndex].averageUSD
+        return priceHistory!.data.reversed()[pointIndex].average
     }
 
     func label(atIndex pointIndex: Int) -> String {

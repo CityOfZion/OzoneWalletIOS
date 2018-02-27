@@ -94,6 +94,19 @@ class UserDefaultsManager {
         }
     }
 
+    private static let referenceFiatCurrencyKey = "referenceCurrencyKey"
+    static var referenceFiatCurrency: Currency {
+        get {
+            let stringValue = UserDefaults.standard.string(forKey: referenceFiatCurrencyKey)
+            return Currency(rawValue: stringValue!)!
+        }
+        set {
+            UserDefaults.standard.set(newValue.rawValue, forKey: referenceFiatCurrencyKey)
+            UserDefaults.standard.synchronize()
+            NotificationCenter.default.post(name: Notification.Name("ChangedReferenceCurrency"), object: nil)
+        }
+    }
+
     private static let selectedNEP5TokensKey = "selectedNEP5TokensKey"
     static var selectedNEP5Token: [String: NEP5Token]? {
         get {

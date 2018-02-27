@@ -44,14 +44,14 @@ class PortfolioAssetCell: ThemedTableCell {
             assetAmountLabel.text = amount.description
 
             let precision = referenceCurrency == .btc ? Precision.btc : Precision.usd
-            let referencePrice = referenceCurrency == .btc ? latestPrice.averageBTC : latestPrice.averageUSD
-            let referenceFirstPrice = referenceCurrency == .btc ? firstPrice.averageBTC : firstPrice.averageUSD
+            let referencePrice = referenceCurrency == .btc ? latestPrice.averageBTC : latestPrice.average
+            let referenceFirstPrice = referenceCurrency == .btc ? firstPrice.averageBTC : firstPrice.average
 
             assetFiatPriceLabel.text = referencePrice.string(precision)
             assetFiatAmountLabel.text = (referencePrice * Double(amount)).string(precision)
             //format USD properly
             if referenceCurrency == .usd {
-                assetFiatPriceLabel.text = USD(amount: Float(referencePrice)).formattedString()
+                assetFiatPriceLabel.text = Fiat(amount: Float(referencePrice)).formattedString()
             }
 
             assetPercentChangeLabel.text = String.percentChangeStringShort(latestPrice: latestPrice, previousPrice: firstPrice,

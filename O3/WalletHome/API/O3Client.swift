@@ -107,6 +107,7 @@ public class O3Client {
         for asset in assets {
             queryString += String(format: "&%@=%@", asset.symbol, asset.balance.description)
         }
+        queryString += String(format: "&currency=%@", UserDefaultsManager.referenceFiatCurrency.rawValue)
 
         let endpoint = O3Endpoints.getPortfolioValue.rawValue + queryString
         print (endpoint)

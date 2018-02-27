@@ -13,19 +13,19 @@ import UIKit
 class SettingsMenuTableViewController: ThemedTableViewController, HalfModalPresentable {
     @IBOutlet weak var showPrivateKeyView: UIView!
     @IBOutlet weak var contactView: UIView!
-    @IBOutlet weak var shareView: UIView!
     @IBOutlet weak var networkView: UIView!
     @IBOutlet weak var networkCell: UITableViewCell!
     @IBOutlet weak var themeCell: UITableViewCell!
+    @IBOutlet weak var currencyView: UIView!
     @IBOutlet weak var themeView: UIView!
     @IBOutlet weak var privateKeyLabel: UILabel!
     @IBOutlet weak var watchOnlyLabel: UILabel!
     @IBOutlet weak var netLabel: UILabel!
-    @IBOutlet weak var shareLabel: UILabel!
     @IBOutlet weak var contactLabel: UILabel!
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var themeLabel: UILabel!
     @IBOutlet weak var logoutLabel: UILabel!
+    @IBOutlet weak var currencyLabel: UILabel!
 
     var netString = UserDefaultsManager.network == .test ? "Network: Test Network": "Network: Main Network" {
         didSet {
@@ -54,7 +54,7 @@ class SettingsMenuTableViewController: ThemedTableViewController, HalfModalPrese
     }
 
     func setThemedElements() {
-        themedTitleLabels = [privateKeyLabel, watchOnlyLabel, netLabel, shareLabel, contactLabel, themeLabel, logoutLabel, versionLabel]
+        themedTitleLabels = [privateKeyLabel, watchOnlyLabel, netLabel, contactLabel, themeLabel, currencyLabel, logoutLabel, versionLabel]
         themedLabels = [versionLabel]
     }
 
@@ -65,7 +65,6 @@ class SettingsMenuTableViewController: ThemedTableViewController, HalfModalPrese
         navigationItem.rightBarButtonItem = rightBarButton
         showPrivateKeyView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showPrivateKey)))
         contactView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(sendMail)))
-        shareView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(share)))
         themeView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(changeTheme)))
         setNetLabel()
         setThemeLabel()
@@ -73,6 +72,11 @@ class SettingsMenuTableViewController: ThemedTableViewController, HalfModalPrese
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
             self.versionLabel.text = String(format: "Version: %@", version)
         }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        currencyLabel.text = "Currency: " + UserDefaultsManager.referenceFiatCurrency.rawValue.uppercased()
     }
 
     @objc func maximize(_ sender: Any) {
@@ -108,14 +112,6 @@ class SettingsMenuTableViewController: ThemedTableViewController, HalfModalPrese
         if let url = URL(string: "mailto:\(email)") {
             UIApplication.shared.open(url)
         }
-    }
-
-    @objc func share() {
-        let shareURL = URL(string: "https://o3.network/")
-        let activityViewController = UIActivityViewController(activityItems: [shareURL], applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view
-
-        self.present(activityViewController, animated: true, completion: nil)
     }
 
     @IBAction func closeTapped(_ sender: Any) {

@@ -41,6 +41,10 @@ class Neo {
 
 struct Precision {
     static let usd = 2
+    static let jpy = 2
+    static let eur = 2
+    static let cny = 2
+    static let krw = 2
     static let btc = 8
     static let gas = 8
     static let percent = 2
@@ -49,6 +53,38 @@ struct Precision {
 enum Currency: String {
     case btc
     case usd
+    case jpy
+    case eur
+    case cny
+    case krw
+    case aud
+    case gbp
+
+    var symbol: String {
+        switch self {
+        case .btc: return "btc"
+        case .usd: return "$"
+        case .jpy: return "¥"
+        case .eur: return "€"
+        case .cny: return "¥"
+        case .krw: return "₩"
+        case .aud: return "$"
+        case .gbp: return "£"
+        }
+    }
+
+    var locale: String {
+        switch self {
+        case .btc: return "en_US"
+        case .usd: return "en_US"
+        case .jpy: return "ja_JP"
+        case .eur: return "de_DE"
+        case .cny: return "zh_Hans_CN"
+        case .krw: return "ko_KR"
+        case .aud: return "en_AU"
+        case .gbp: return "en_GB"
+        }
+    }
 }
 
 enum PriceInterval: String {

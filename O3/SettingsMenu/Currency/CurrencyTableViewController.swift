@@ -1,0 +1,78 @@
+//
+//  CurrencyTableViewController.swift
+//  O3
+//
+//  Created by Andrei Terentiev on 2/26/18.
+//  Copyright © 2018 drei. All rights reserved.
+//
+
+import Foundation
+import UIKit
+
+class CurrencyTableViewController: ThemedTableViewController {
+    @IBOutlet weak var usdLabel: UILabel!
+    @IBOutlet weak var jpyLabel: UILabel!
+    @IBOutlet weak var eurLabel: UILabel!
+    @IBOutlet weak var krwLabel: UILabel!
+    @IBOutlet weak var cnyLabel: UILabel!
+    @IBOutlet weak var audLabel: UILabel!
+    @IBOutlet weak var gbpLabel: UILabel!
+
+    @IBOutlet weak var usdSymbol: UILabel!
+    @IBOutlet weak var jpySymbol: UILabel!
+    @IBOutlet weak var eurSymbol: UILabel!
+    @IBOutlet weak var krwSymbol: UILabel!
+    @IBOutlet weak var cnySymbol: UILabel!
+    @IBOutlet weak var audSymbol: UILabel!
+    @IBOutlet weak var gbpSymbol: UILabel!
+
+    var currentlySelectedIndex = 0
+
+    func setSelectedCell(index: Int) {
+        let cell = self.tableView.cellForRow(at: IndexPath(item: index, section: 0))
+        cell?.accessoryType = .checkmark
+        currentlySelectedIndex = index
+    }
+
+    func setThemedElements() {
+        themedTitleLabels = [usdLabel, usdSymbol, jpyLabel, jpySymbol, eurLabel, eurSymbol, krwLabel, krwSymbol, cnyLabel, cnySymbol, audLabel, audSymbol, gbpLabel, gbpSymbol]
+    }
+
+    override func viewDidLoad() {
+        setThemedElements()
+        super.viewDidLoad()
+        navigationItem.title = "Currency"
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        var selectedRow = 0
+        switch UserDefaultsManager.referenceFiatCurrency {
+        case .usd: selectedRow = 0
+        case .jpy: selectedRow = 1
+        case .eur: selectedRow = 2
+        case .krw: selectedRow = 3
+        case .cny: selectedRow = 4
+        case .aud: selectedRow = 5
+        case .gbp: selectedRow = 6
+        default: selectedRow = 0
+        }
+        tableView.reloadData()
+        setSelectedCell(index: selectedRow)
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        switch indexPath.row {
+        case 0: UserDefaultsManager.referenceFiatCurrency = Currency.usd
+        case 1: UserDefaultsManager.referenceFiatCurrency = Currency.jpy
+        case 2: UserDefaultsManager.referenceFiatCurrency = Currency.eur
+        case 3: UserDefaultsManager.referenceFiatCurrency = Currency.krw
+        case 4: UserDefaultsManager.referenceFiatCurrency = Currency.cny
+        case 5: UserDefaultsManager.referenceFiatCurrency = Currency.aud
+        case 6: UserDefaultsManager.referenceFiatCurrency = Currency.gbp
+        default: return
+        }
+        self.tableView.cellForRow(at: IndexPath(item: currentlySelectedIndex, section: 0))?.accessoryType = .none
+        setSelectedCell(index: indexPath.row)
+    }
+}
