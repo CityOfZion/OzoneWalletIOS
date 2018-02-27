@@ -12,6 +12,7 @@ import CoreData
 import Reachability
 import Fabric
 import Crashlytics
+import SwiftTheme
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -30,6 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().largeTitleTextAttributes = [
             NSAttributedStringKey.foregroundColor: UserDefaultsManager.theme.textColor,
             NSAttributedStringKey.font: UIFont(name: "Avenir-Heavy", size: 32) as Any]
+        SwiftTheme.ThemeManager.setTheme(index: UserDefaultsManager.theme == .light ? 0 : 1)
+
     }
 
     func registerDefaults() {

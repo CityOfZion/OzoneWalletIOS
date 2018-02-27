@@ -23,12 +23,13 @@ extension ScrollableGraphView {
         linePlot.fillGradientStartColor = UIColor.clear
         linePlot.fillGradientEndColor = UIColor.clear
         linePlot.adaptAnimationType = ScrollableGraphViewAnimationType.elastic
+        linePlot.animationDuration = 1.5
 
-        graphView.backgroundFillColor = UserDefaultsManager.theme.backgroundColor
+        graphView.backgroundFillColor = UserDefaultsManager.theme == .light ? O3.Theme.light.backgroundColor : O3.Theme.dark.backgroundColor
         graphView.dataPointSpacing = UIScreen.main.bounds.size.width / 71
         graphView.rightmostPointPadding = 0
         graphView.leftmostPointPadding = 0
-        graphView.shouldAnimateOnStartup = false
+        graphView.shouldAnimateOnStartup = true
         graphView.shouldAdaptRange = true
         graphView.shouldRangeAlwaysStartAtZero = false
         graphView.addPlot(plot: linePlot)

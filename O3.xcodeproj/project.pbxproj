@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		350100F220441B53000F6648 /* CurrencyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350100F120441B53000F6648 /* CurrencyTableViewController.swift */; };
+		350100F4204541A6000F6648 /* SwiftTheme.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 350100F3204541A6000F6648 /* SwiftTheme.framework */; };
+		350100F5204541A6000F6648 /* SwiftTheme.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 350100F3204541A6000F6648 /* SwiftTheme.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		35051B1C1FFDB10800F9AD30 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35051B151FFDAD9300F9AD30 /* Crashlytics.framework */; };
 		35051B1D1FFDB10800F9AD30 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35051B131FFDAD9200F9AD30 /* Fabric.framework */; };
 		353F364920037062002B4FE1 /* NewsFeed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 353F364820037062002B4FE1 /* NewsFeed.storyboard */; };
@@ -158,6 +160,7 @@
 				35494574203C02B800332E53 /* Tabman.framework in Embed Frameworks */,
 				35494572203C01F500332E53 /* Pageboy.framework in Embed Frameworks */,
 				35494578203C03DC00332E53 /* AutoInsetter.framework in Embed Frameworks */,
+				350100F5204541A6000F6648 /* SwiftTheme.framework in Embed Frameworks */,
 				6E97C4BA1F7FCB4000526FF0 /* DeckTransition.framework in Embed Frameworks */,
 				7537438C1F7F572500803A6C /* KeychainAccess.framework in Embed Frameworks */,
 				755D8F621F66747A00058434 /* ScrollableGraphView.framework in Embed Frameworks */,
@@ -175,6 +178,7 @@
 
 /* Begin PBXFileReference section */
 		350100F120441B53000F6648 /* CurrencyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTableViewController.swift; sourceTree = "<group>"; };
+		350100F3204541A6000F6648 /* SwiftTheme.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftTheme.framework; path = Carthage/Build/iOS/SwiftTheme.framework; sourceTree = "<group>"; };
 		35051B131FFDAD9200F9AD30 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = Carthage/Build/iOS/Fabric.framework; sourceTree = "<group>"; };
 		35051B151FFDAD9300F9AD30 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Carthage/Build/iOS/Crashlytics.framework; sourceTree = "<group>"; };
 		353F364820037062002B4FE1 /* NewsFeed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewsFeed.storyboard; sourceTree = "<group>"; };
@@ -313,6 +317,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				350100F4204541A6000F6648 /* SwiftTheme.framework in Frameworks */,
 				35494575203C030A00332E53 /* Tabman.framework in Frameworks */,
 				3549456D203BF1F700332E53 /* Pageboy.framework in Frameworks */,
 				6E97C4B91F7FCB4000526FF0 /* DeckTransition.framework in Frameworks */,
@@ -474,6 +479,7 @@
 		7575ADB91F6006AB0077007B = {
 			isa = PBXGroup;
 			children = (
+				350100F3204541A6000F6648 /* SwiftTheme.framework */,
 				3549458A203FD02B00332E53 /* Cache.framework */,
 				35494576203C03DC00332E53 /* AutoInsetter.framework */,
 				35494573203C02B800332E53 /* Tabman.framework */,

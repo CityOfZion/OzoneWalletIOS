@@ -33,28 +33,7 @@ class ThemedTableViewController: UITableViewController {
         DispatchQueue.main.async { self.tableView.reloadData() }
     }
 
-    func setupNavBar() {
-        DispatchQueue.main.async {
-            UIApplication.shared.statusBarStyle = UserDefaultsManager.theme.statusBarStyle
-            self.setNeedsStatusBarAppearanceUpdate()
-            self.navigationController?.hideHairline()
-            self.navigationController?.navigationItem.largeTitleDisplayMode = .automatic
-            self.navigationController?.navigationBar.barTintColor = UserDefaultsManager.theme.backgroundColor
-
-            self.navigationController?.navigationBar.isTranslucent = false
-            self.navigationController?.navigationBar.backgroundColor = UserDefaultsManager.theme.backgroundColor
-            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UserDefaultsManager.theme.titleTextColor,
-                                                                                 NSAttributedStringKey.font:
-                                                                                    ThemeManager.navBarTitle]
-
-            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UserDefaultsManager.theme.titleTextColor,
-                                                                                 NSAttributedStringKey.font:
-                                                                                    ThemeManager.largeTitleFont]
-        }
-    }
-
     func applyTheme() {
-        setupNavBar()
         DispatchQueue.main.async {
             self.view.backgroundColor = UserDefaultsManager.theme.backgroundColor
             self.tableView.backgroundColor = UserDefaultsManager.theme.backgroundColor

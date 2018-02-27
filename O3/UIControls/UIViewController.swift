@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftTheme
 
 extension UIViewController {
     func presentFromEmbedded(_ toPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?) {
@@ -29,5 +30,26 @@ extension UIViewController {
 
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+
+    func applyNavBarTheme() {
+        DispatchQueue.main.async {
+            UIApplication.shared.theme_setStatusBarStyle(ThemeStatusBarStylePicker(styles: Theme.light.statusBarStyle, Theme.dark.statusBarStyle), animated: true)
+            self.setNeedsStatusBarAppearanceUpdate()
+            self.navigationController?.hideHairline()
+            self.navigationController?.navigationItem.largeTitleDisplayMode = .automatic
+            self.navigationController?.navigationBar.theme_barTintColor = ThemeColorPicker(colors: Theme.light.backgroundColor.hexString(false), Theme.dark.backgroundColor.hexString(false))
+            self.navigationController?.navigationBar.isTranslucent = false
+            self.navigationController?.navigationBar.theme_backgroundColor = ThemeColorPicker(colors: Theme.light.backgroundColor.hexString(false), Theme.dark.backgroundColor.hexString(false))
+            self.navigationController?.navigationBar.theme_largeTitleTextAttributes = ThemeDictionaryPicker(arrayLiteral: [
+                NSAttributedStringKey.foregroundColor.rawValue: UIColor.black,
+                NSAttributedStringKey.font.rawValue: ThemeManager.largeTitleFont],
+                [NSAttributedStringKey.foregroundColor.rawValue: UIColor.white,
+                 NSAttributedStringKey.font.rawValue: ThemeManager.largeTitleFont])
+            self.navigationController?.navigationBar.theme_titleTextAttributes = ThemeDictionaryPicker(arrayLiteral: [NSAttributedStringKey.foregroundColor.rawValue: UIColor.black,
+                NSAttributedStringKey.font.rawValue: ThemeManager.navBarTitle],
+                [NSAttributedStringKey.foregroundColor.rawValue: UIColor.white,
+                 NSAttributedStringKey.font.rawValue: ThemeManager.navBarTitle])
+        }
     }
 }

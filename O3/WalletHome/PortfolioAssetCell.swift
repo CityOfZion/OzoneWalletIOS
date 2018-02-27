@@ -8,8 +8,9 @@
 
 import Foundation
 import UIKit
+import SwiftTheme
 
-class PortfolioAssetCell: ThemedTableCell {
+class PortfolioAssetCell: UITableViewCell {
     @IBOutlet weak var assetTitleLabel: UILabel!
     @IBOutlet weak var assetAmountLabel: UILabel!
     @IBOutlet weak var assetFiatPriceLabel: UILabel!
@@ -25,14 +26,17 @@ class PortfolioAssetCell: ThemedTableCell {
     }
 
     override func awakeFromNib() {
-        titleLabels = [assetTitleLabel, assetAmountLabel, assetFiatAmountLabel]
-        subtitleLabels = [assetFiatPriceLabel]
+        let titleLabels = [assetTitleLabel, assetAmountLabel, assetFiatAmountLabel]
+        contentView.theme_backgroundColor = ThemeColorPicker(colors: Theme.light.backgroundColor.hexString(false), Theme.dark.backgroundColor.hexString(false))
+        for label in titleLabels {
+            label?.theme_textColor = ThemeColorPicker(colors: Theme.light.titleTextColor.hexString(false), Theme.dark.titleTextColor.hexString(false))
+        }
+         assetFiatPriceLabel.theme_textColor = ThemeColorPicker(colors: Theme.light.lightTextColor.hexString(false), Theme.dark.lightTextColor.hexString(false))
         super.awakeFromNib()
     }
 
     var data: PortfolioAssetCell.Data? {
         didSet {
-            applyTheme()
             guard let assetName = data?.assetName,
                 let amount = data?.amount,
                 let referenceCurrency = data?.referenceCurrency,

@@ -9,6 +9,7 @@
 import Foundation
 import KeychainAccess
 import UIKit
+import SwiftTheme
 
 class SettingsMenuTableViewController: ThemedTableViewController, HalfModalPresentable {
     @IBOutlet weak var showPrivateKeyView: UIView!
@@ -87,11 +88,13 @@ class SettingsMenuTableViewController: ThemedTableViewController, HalfModalPrese
         let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         let lightThemeAction = UIAlertAction(title: "Classic Theme", style: .default) { _ in
+            SwiftTheme.ThemeManager.setTheme(index: 0)
             UserDefaultsManager.theme = .light
             self.themeString = "Theme: Classic"
         }
 
         let darkThemeAction = UIAlertAction(title: "Dark Theme", style: .default) { _ in
+            SwiftTheme.ThemeManager.setTheme(index: 1)
             UserDefaultsManager.theme = .dark
             self.themeString = "Theme: Dark"
         }
