@@ -17,6 +17,7 @@ class CurrencyTableViewController: ThemedTableViewController {
     @IBOutlet weak var cnyLabel: UILabel!
     @IBOutlet weak var audLabel: UILabel!
     @IBOutlet weak var gbpLabel: UILabel!
+    @IBOutlet weak var rubLabel: UILabel!
 
     @IBOutlet weak var usdSymbol: UILabel!
     @IBOutlet weak var jpySymbol: UILabel!
@@ -25,6 +26,7 @@ class CurrencyTableViewController: ThemedTableViewController {
     @IBOutlet weak var cnySymbol: UILabel!
     @IBOutlet weak var audSymbol: UILabel!
     @IBOutlet weak var gbpSymbol: UILabel!
+    @IBOutlet weak var rubSymbol: UILabel!
 
     var currentlySelectedIndex = 0
 
@@ -35,7 +37,7 @@ class CurrencyTableViewController: ThemedTableViewController {
     }
 
     func setThemedElements() {
-        themedTitleLabels = [usdLabel, usdSymbol, jpyLabel, jpySymbol, eurLabel, eurSymbol, krwLabel, krwSymbol, cnyLabel, cnySymbol, audLabel, audSymbol, gbpLabel, gbpSymbol]
+        themedTitleLabels = [usdLabel, usdSymbol, jpyLabel, jpySymbol, eurLabel, eurSymbol, krwLabel, krwSymbol, cnyLabel, cnySymbol, audLabel, audSymbol, gbpLabel, gbpSymbol, rubLabel, rubSymbol]
     }
 
     override func viewDidLoad() {
@@ -54,6 +56,7 @@ class CurrencyTableViewController: ThemedTableViewController {
         case .cny: selectedRow = 4
         case .aud: selectedRow = 5
         case .gbp: selectedRow = 6
+        case .rub: selectedRow = 7
         default: selectedRow = 0
         }
         tableView.reloadData()
@@ -70,6 +73,7 @@ class CurrencyTableViewController: ThemedTableViewController {
         case 4: UserDefaultsManager.referenceFiatCurrency = Currency.cny
         case 5: UserDefaultsManager.referenceFiatCurrency = Currency.aud
         case 6: UserDefaultsManager.referenceFiatCurrency = Currency.gbp
+        case 7: UserDefaultsManager.referenceFiatCurrency = Currency.rub
         default: return
         }
         self.tableView.cellForRow(at: IndexPath(item: currentlySelectedIndex, section: 0))?.accessoryType = .none
