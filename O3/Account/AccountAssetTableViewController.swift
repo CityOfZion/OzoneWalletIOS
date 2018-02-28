@@ -11,7 +11,7 @@ import NeoSwift
 import PKHUD
 import Cache
 
-class AccountAssetTableViewController: ThemedTableViewController {
+class AccountAssetTableViewController: UITableViewController {
 
     private enum sections: Int {
         case unclaimedGAS = 0
@@ -42,6 +42,9 @@ class AccountAssetTableViewController: ThemedTableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        applyNavBarTheme()
+        self.view.theme_backgroundColor = O3Theme.backgroundColorPicker
+        self.tableView.theme_backgroundColor = O3Theme.backgroundColorPicker
         initiateCache()
         loadSelectedNEP5Tokens()
         loadClaimableGAS()
@@ -326,7 +329,9 @@ class AccountAssetTableViewController: ThemedTableViewController {
         if indexPath.section == sections.unclaimedGAS.rawValue {
 
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell-unclaimedgas") as? UnclaimedGASTableViewCell else {
-                return UITableViewCell()
+                let cell =  UITableViewCell()
+                cell.theme_backgroundColor = O3Theme.backgroundColorPicker
+                return cell
             }
             cell.delegate = self
             return cell
@@ -334,7 +339,9 @@ class AccountAssetTableViewController: ThemedTableViewController {
 
         if indexPath.section == sections.nativeAssets.rawValue {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell-nativeasset") as? NativeAssetTableViewCell else {
-                return UITableViewCell()
+                let cell =  UITableViewCell()
+                cell.theme_backgroundColor = O3Theme.backgroundColorPicker
+                return cell
             }
 
             //NEO
@@ -352,7 +359,9 @@ class AccountAssetTableViewController: ThemedTableViewController {
         }
 
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell-nep5token") as? NEP5TokenTableViewCell else {
-            return UITableViewCell()
+            let cell =  UITableViewCell()
+            cell.theme_backgroundColor = O3Theme.backgroundColorPicker
+            return cell
         }
         let list = Array(selectedNEP5Tokens.values)
         let token = list[indexPath.row]

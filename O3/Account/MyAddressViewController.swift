@@ -14,29 +14,9 @@ class MyAddressViewController: UIViewController {
     @IBOutlet var addressLabel: UILabel!
     @IBOutlet var qrCodeContainerView: UIView!
 
-    func setupNavBar() {
-        DispatchQueue.main.async {
-            UIApplication.shared.statusBarStyle = UserDefaultsManager.theme.statusBarStyle
-            self.setNeedsStatusBarAppearanceUpdate()
-            self.navigationController?.hideHairline()
-            self.navigationController?.navigationItem.largeTitleDisplayMode = .automatic
-            self.navigationController?.navigationBar.barTintColor = UserDefaultsManager.theme.backgroundColor
-
-            self.navigationController?.navigationBar.isTranslucent = false
-            self.navigationController?.navigationBar.backgroundColor = UserDefaultsManager.theme.backgroundColor
-            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UserDefaultsManager.theme.titleTextColor,
-                                                                                 NSAttributedStringKey.font:
-                                                                                    O3Theme.largeTitleFont]
-        }
-    }
-
     func configureView() {
-        navigationController?.navigationBar.largeTitleTextAttributes = [
-            NSAttributedStringKey.foregroundColor: UserDefaultsManager.theme.textColor,
-            NSAttributedStringKey.font: O3Theme.largeTitleFont as Any]
-        self.navigationController?.hideHairline()
-        view.backgroundColor = UserDefaultsManager.theme.backgroundColor
-        setupNavBar()
+        applyNavBarTheme()
+        view.theme_backgroundColor = O3Theme.backgroundColorPicker
         addressLabel.text = Authenticated.account?.address
         qrImageView.image = UIImage.init(qrData: (Authenticated.account?.address)!, width: qrImageView.bounds.size.width, height: qrImageView.bounds.size.height)
     }

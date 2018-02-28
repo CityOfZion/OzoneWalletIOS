@@ -55,7 +55,6 @@
 		6E6BD24C1FFC69330049098A /* PKHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6E6BD24A1FFC67E10049098A /* PKHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6E7C92741F7A5FBA00F8D7AA /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C92731F7A5FBA00F8D7AA /* UINavigationController.swift */; };
 		6E7C927C1F7A6B1400F8D7AA /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E7C927B1F7A6B1400F8D7AA /* Account.storyboard */; };
-		6E97C4B31F7FB91000526FF0 /* AssetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E97C4B21F7FB91000526FF0 /* AssetCollectionViewCell.swift */; };
 		6E97C4B51F7FBAA300526FF0 /* AssetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E97C4B41F7FBAA300526FF0 /* AssetView.swift */; };
 		6E97C4B71F7FC6FC00526FF0 /* MyAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E97C4B61F7FC6FC00526FF0 /* MyAddressViewController.swift */; };
 		6E97C4B91F7FCB4000526FF0 /* DeckTransition.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E97C4B81F7FC92B00526FF0 /* DeckTransition.framework */; };
@@ -126,7 +125,6 @@
 		75C246FE1F9C985800D52CE4 /* ThemedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C246FD1F9C985800D52CE4 /* ThemedTableViewCell.swift */; };
 		75CEACE61F6678C0005974CE /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CEACE51F6678C0005974CE /* Color.swift */; };
 		75CEACE81F66B683005974CE /* SendTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CEACE71F66B683005974CE /* SendTableViewController.swift */; };
-		75CEACEC1F66B750005974CE /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CEACEB1F66B750005974CE /* AccountViewController.swift */; };
 		75CEACF61F66BEEE005974CE /* SendButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CEACF51F66BEEE005974CE /* SendButtonCell.swift */; };
 		75D5BFAF1F6CE8AB00E64855 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75D5BFAE1F6CE8AB00E64855 /* Onboarding.storyboard */; };
 		75D5BFB21F6CED5900E64855 /* OnboardingHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D5BFB11F6CED5900E64855 /* OnboardingHomeViewController.swift */; };
@@ -219,7 +217,6 @@
 		6E6BD24A1FFC67E10049098A /* PKHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PKHUD.framework; path = Carthage/Build/iOS/PKHUD.framework; sourceTree = "<group>"; };
 		6E7C92731F7A5FBA00F8D7AA /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		6E7C927B1F7A6B1400F8D7AA /* Account.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Account.storyboard; sourceTree = "<group>"; };
-		6E97C4B21F7FB91000526FF0 /* AssetCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCollectionViewCell.swift; sourceTree = "<group>"; };
 		6E97C4B41F7FBAA300526FF0 /* AssetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetView.swift; sourceTree = "<group>"; };
 		6E97C4B61F7FC6FC00526FF0 /* MyAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAddressViewController.swift; sourceTree = "<group>"; };
 		6E97C4B81F7FC92B00526FF0 /* DeckTransition.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DeckTransition.framework; path = Carthage/Build/iOS/DeckTransition.framework; sourceTree = "<group>"; };
@@ -288,7 +285,6 @@
 		75C246FD1F9C985800D52CE4 /* ThemedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemedTableViewCell.swift; sourceTree = "<group>"; };
 		75CEACE51F6678C0005974CE /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		75CEACE71F66B683005974CE /* SendTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTableViewController.swift; sourceTree = "<group>"; };
-		75CEACEB1F66B750005974CE /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		75CEACF51F66BEEE005974CE /* SendButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendButtonCell.swift; sourceTree = "<group>"; };
 		75D5BFAE1F6CE8AB00E64855 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		75D5BFB11F6CED5900E64855 /* OnboardingHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingHomeViewController.swift; sourceTree = "<group>"; };
@@ -597,10 +593,8 @@
 				7513FAD61F6952B8003450ED /* TransactionCell.swift */,
 				7513FADA1F69541F003450ED /* TransactionsHeaderCell.swift */,
 				7513FADC1F695433003450ED /* AssetsHeaderCell.swift */,
-				75CEACEB1F66B750005974CE /* AccountViewController.swift */,
 				751666AF1F80C190009ACC07 /* TransactionWebViewController.swift */,
 				6EF8D8E51F7A732C005CC24D /* AccountAssets.xcassets */,
-				6E97C4B21F7FB91000526FF0 /* AssetCollectionViewCell.swift */,
 				6E97C4B61F7FC6FC00526FF0 /* MyAddressViewController.swift */,
 				6E4E6F7E20146086001A5844 /* AccountTabViewController.swift */,
 				6E4E6F802014611E001A5844 /* AccountAssetTableViewController.swift */,
@@ -863,7 +857,6 @@
 				75E28F2F1F9B24B4006C6E37 /* NetworkSeedCell.swift in Sources */,
 				75D5BFB21F6CED5900E64855 /* OnboardingHomeViewController.swift in Sources */,
 				350100F220441B53000F6648 /* CurrencyTableViewController.swift in Sources */,
-				6E97C4B31F7FB91000526FF0 /* AssetCollectionViewCell.swift in Sources */,
 				7520174B1F74071900090C4F /* QRScannerController.swift in Sources */,
 				75D5BFB61F6CF59C00E64855 /* LoginTableViewController.swift in Sources */,
 				6EA7F9281F6E2F7F00E31B78 /* O3Client.swift in Sources */,
@@ -885,7 +878,6 @@
 				6E7C92741F7A5FBA00F8D7AA /* UINavigationController.swift in Sources */,
 				75DA59031F7A6CEF0065FE0D /* WatchOnlyAddressTableViewCell.swift in Sources */,
 				752586B11F77DD9800ED5312 /* OzoneGraphView.swift in Sources */,
-				75CEACEC1F66B750005974CE /* AccountViewController.swift in Sources */,
 				6E97C4B51F7FBAA300526FF0 /* AssetView.swift in Sources */,
 				35E5F6102029412900D65BEA /* PortfolioAssetCell.swift in Sources */,
 				75DA59011F7A6C7D0065FE0D /* WatchOnlyAddressViewController.swift in Sources */,

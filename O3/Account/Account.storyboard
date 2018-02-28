@@ -143,7 +143,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="gm8-zz-UU2" firstAttribute="top" secondItem="Fuw-MK-zk1" secondAttribute="top" constant="16" id="Vq9-zS-IM9"/>
                                 <constraint firstAttribute="trailing" secondItem="gm8-zz-UU2" secondAttribute="trailing" constant="16" id="bBD-nv-u1c"/>

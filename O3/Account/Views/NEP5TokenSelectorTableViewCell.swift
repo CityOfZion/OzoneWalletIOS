@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class NEP5TokenSelectorTableViewCell: ThemedTableCell {
+class NEP5TokenSelectorTableViewCell: UITableViewCell {
 
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var subtitleLabel: UILabel!
@@ -17,12 +17,13 @@ class NEP5TokenSelectorTableViewCell: ThemedTableCell {
     @IBOutlet var loadingView: UIActivityIndicatorView?
 
     override func awakeFromNib() {
-        titleLabels = [titleLabel, amountLabel]
+        titleLabel.theme_textColor = O3Theme.titleColorPicker
+        amountLabel.theme_textColor = O3Theme.titleColorPicker
+        contentView.theme_backgroundColor = O3Theme.backgroundColorPicker
         super.awakeFromNib()
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        applyTheme()
     }
 }
