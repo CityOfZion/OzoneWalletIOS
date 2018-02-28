@@ -23,6 +23,10 @@ class AddressEntryTableViewController: UITableViewController, AVCaptureMetadataO
     weak var delegate: AddressAddDelegate?
     @IBOutlet var proceedButton: ShadowedButton!
 
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var nicknameLabel: UILabel!
+
+    @IBOutlet weak var addressInfoCell: UITableViewCell!
     var captureSession: AVCaptureSession!
     var videoPreviewLayer: AVCaptureVideoPreviewLayer!
     let supportedCodeTypes = [
@@ -51,7 +55,24 @@ class AddressEntryTableViewController: UITableViewController, AVCaptureMetadataO
         }
     }
 
+    func setThemedElements() {
+        tableView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        tableView.theme_separatorColor = O3Theme.tableSeparatorColorPicker
+        view.theme_backgroundColor = O3Theme.backgroundColorPicker
+        addressInfoCell.contentView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        addressLabel.theme_textColor = O3Theme.titleColorPicker
+        nicknameLabel.theme_textColor = O3Theme.titleColorPicker
+        nicknameField.theme_backgroundColor = O3Theme.textFieldBackgroundColorPicker
+        nicknameField.theme_textColor = O3Theme.textFieldTextColorPicker
+        nicknameField.theme_keyboardAppearance = O3Theme.keyboardPicker
+        addressTextView.theme_backgroundColor = O3Theme.textFieldBackgroundColorPicker
+        addressTextView.theme_textColor = O3Theme.textFieldTextColorPicker
+        addressTextView.theme_keyboardAppearance = O3Theme.keyboardPicker
+        applyNavBarTheme()
+    }
+
     override func viewDidLoad() {
+        setThemedElements()
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         addressTextView.delegate = self

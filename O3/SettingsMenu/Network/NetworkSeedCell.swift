@@ -14,11 +14,16 @@ protocol NetworkSeedCellDelegate: class {
     func highestBlockCount() -> UInt
 }
 
-class NetworkSeedCell: ThemedTableCell {
+class NetworkSeedCell: UITableViewCell {
     @IBOutlet weak var seedNameLabel: UILabel!
     @IBOutlet weak var blockCountLabel: UILabel!
     @IBOutlet weak var peersLabel: UILabel!
     weak var delegate: NetworkSeedCellDelegate?
+
+    override func awakeFromNib() {
+        contentView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        super.awakeFromNib()
+    }
 
     var node: NEONode? {
         didSet {

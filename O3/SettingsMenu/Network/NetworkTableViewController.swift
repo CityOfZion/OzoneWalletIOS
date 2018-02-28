@@ -77,11 +77,13 @@ class NetworkTableViewController: ThemedTableViewController, NetworkSeedCellDele
             cell.delegate = self
             cell.networkTypeButton.setTitle(UserDefaultsManager.network.rawValue, for: UIControlState())
             cell.seedTypeButton.setTitle(UserDefaultsManager.useDefaultSeed == true ? "Default": "Custom", for: UIControlState())
+            cell.selectionStyle = .none
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "networkSeedCell") as? NetworkSeedCell else {
                 fatalError("Undefined cell behavior")
             }
+            cell.selectionStyle = .none
             cell.delegate = self
             cell.node = tableNodes[indexPath.row]
             return cell

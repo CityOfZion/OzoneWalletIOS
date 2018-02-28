@@ -41,7 +41,7 @@ class WalletHeaderCollectionCell: UICollectionViewCell {
             }
             switch portfolio {
             case .readOnly:
-                walletHeaderLabel.text = "OZONE WALLET"
+                walletHeaderLabel.text = "O3 WALLET"
                 leftButton.isHidden = true
                 rightButton.isHidden = false
             case .readOnlyAndWritable:

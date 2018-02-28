@@ -51,6 +51,7 @@ class LoginToCurrentWalletViewController: UIViewController {
         }
     }
     override func viewDidLoad() {
+        view.theme_backgroundColor = O3Theme.backgroundColorPicker
         super.viewDidLoad()
         if #available(iOS 8.0, *) {
             var error: NSError?

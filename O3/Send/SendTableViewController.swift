@@ -53,7 +53,7 @@ class SendTableViewController: UITableViewController, AddressSelectDelegate, QRS
                 string: field!.placeholder ?? "",
                 attributes: [NSAttributedStringKey.foregroundColor: placeHolderColor])
             field?.theme_keyboardAppearance = O3Theme.keyboardPicker
-            field?.theme_backgroundColor = O3Theme.textFieldBackgroundColorPicker
+            field?.theme_backgroundColor = O3Theme.clearTextFieldBackgroundColorPicker
             field?.theme_textColor = O3Theme.textFieldTextColorPicker
         }
     }

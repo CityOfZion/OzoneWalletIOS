@@ -52,6 +52,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     func addThemedElements() {
         applyNavBarTheme()
+        graphLoadingIndicator.theme_activityIndicatorViewStyle = O3Theme.activityIndicatorColorPicker
         view.theme_backgroundColor = O3Theme.backgroundColorPicker
         assetsTable.theme_separatorColor = O3Theme.tableSeparatorColorPicker
         walletHeaderCollectionView.theme_backgroundColor = O3Theme.backgroundColorPicker

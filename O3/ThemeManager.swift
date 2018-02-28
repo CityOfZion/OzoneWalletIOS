@@ -169,7 +169,7 @@ enum Theme: String {
         case .light:
             return .white
         case .dark:
-            return self.backgroundColor
+            return UIColor(named: "darkThemeSecondaryBackground")!
         }
     }
 
@@ -221,12 +221,16 @@ class O3Theme {
         NSAttributedStringKey.font.rawValue: O3Theme.navBarTitle])
 
     //text fields
+    static let clearTextFieldBackgroundColorPicker = ThemeColorPicker(colors: Theme.light.backgroundColor.hexString(false), Theme.dark.backgroundColor.hexString(false))
     static let textFieldBackgroundColorPicker = ThemeColorPicker(colors: Theme.light.textFieldBackgroundColor.hexString(false), Theme.dark.textFieldBackgroundColor.hexString(false))
     static let textFieldTextColorPicker = ThemeColorPicker(colors: Theme.light.textFieldTextColor.hexString(false), Theme.dark.textFieldTextColor.hexString(false))
     static let keyboardPicker = ThemeKeyboardAppearancePicker(styles: .default, .dark)
 
     //tableSeparator
     static let tableSeparatorColorPicker = ThemeColorPicker(colors: Theme.light.seperatorColor.hexString(false), Theme.dark.seperatorColor.hexString(false))
+
+    //activity indicator
+    static let activityIndicatorColorPicker = ThemeActivityIndicatorViewStylePicker(styles: .gray, .white)
 
     static func applyTheme(theme: Theme) {
         // First persist the selected theme using NSUserDefaults.

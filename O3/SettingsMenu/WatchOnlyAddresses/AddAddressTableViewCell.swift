@@ -15,6 +15,11 @@ protocol AddAddressCellDelegate: class {
 
 class AddAddressTableViewCell: UITableViewCell {
     weak var delegate: AddAddressCellDelegate?
+    override func awakeFromNib() {
+        contentView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        super.awakeFromNib()
+    }
+
     @IBAction func addAddressTapped(_ sender: Any) {
         delegate?.segueToAdd()
     }
