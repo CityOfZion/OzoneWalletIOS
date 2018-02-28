@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 import DeckTransition
-class ContactsTableViewController: ThemedTableViewController, AddressAddDelegate {
+class ContactsTableViewController: UITableViewController, AddressAddDelegate {
 
     let appDelegate: AppDelegate? = UIApplication.shared.delegate as? AppDelegate
     var fetchedResultsController: NSFetchedResultsController<Contact>?
@@ -36,7 +36,8 @@ class ContactsTableViewController: ThemedTableViewController, AddressAddDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        tableView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        view.theme_backgroundColor = O3Theme.backgroundColorPicker
         loadData()
     }
 

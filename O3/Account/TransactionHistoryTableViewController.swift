@@ -9,7 +9,7 @@
 import UIKit
 import NeoSwift
 
-class TransactionHistoryTableViewController: ThemedTableViewController {
+class TransactionHistoryTableViewController: UITableViewController {
 
     var transactionHistory = [TransactionHistoryEntry]()
     func loadTransactionHistory() {
@@ -32,6 +32,7 @@ class TransactionHistoryTableViewController: ThemedTableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.theme_backgroundColor = O3Theme.backgroundColorPicker
         self.loadTransactionHistory()
         tableView.refreshControl = UIRefreshControl()
         tableView.refreshControl?.addTarget(self, action: #selector(reloadData), for: .valueChanged)

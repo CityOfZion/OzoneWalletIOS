@@ -10,6 +10,7 @@ import UIKit
 import NeoSwift
 import PKHUD
 import Cache
+import SwiftTheme
 
 class AccountAssetTableViewController: UITableViewController {
 
@@ -40,16 +41,30 @@ class AccountAssetTableViewController: UITableViewController {
         }
     }
 
+    @objc func reloadCells() {
+        DispatchQueue.main.async { self.tableView.reloadData() }
+    }
+
+    func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadNEP5TokensSection), name: NSNotification.Name(rawValue: "halfModalDismissed"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadCells), name: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil)
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name(rawValue: ThemeUpdateNotification), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name(rawValue: "halfModalDismissed"), object: nil)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        applyNavBarTheme()
+        addObservers()
         self.view.theme_backgroundColor = O3Theme.backgroundColorPicker
         self.tableView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        applyNavBarTheme()
         initiateCache()
         loadSelectedNEP5Tokens()
         loadClaimableGAS()
         loadAccountState()
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadNEP5TokensSection), name: NSNotification.Name(rawValue: "halfModalDismissed"), object: nil)
         refreshClaimableGasTimer = Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(AccountAssetTableViewController.loadClaimableGAS), userInfo: nil, repeats: true)
         refreshClaimableGasTimer?.fire()
         tableView.refreshControl = UIRefreshControl()

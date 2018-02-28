@@ -25,6 +25,7 @@ class NEP5TokenTableViewCell: UITableViewCell {
     }
 
     override func layoutSubviews() {
+        cardView.theme_backgroundColor = O3Theme.backgroundColorPicker
         super.layoutSubviews()
     }
 }

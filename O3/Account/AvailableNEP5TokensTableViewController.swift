@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AvailableNEP5TokensTableViewController: ThemedTableViewController {
+class AvailableNEP5TokensTableViewController: UITableViewController {
 
     var tokens: [NEP5Token]! = []
     func loadTokens() {
@@ -37,7 +37,8 @@ class AvailableNEP5TokensTableViewController: ThemedTableViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.hideHairline()
+        applyNavBarTheme()
+        tableView.theme_backgroundColor = O3Theme.backgroundColorPicker
         self.title = NSLocalizedString("NEP5 Tokens", comment: "")
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: "Done bar button item"), style: .done, target: self, action: #selector(doneTapped(_:)))
         self.loadTokens()
@@ -58,7 +59,9 @@ class AvailableNEP5TokensTableViewController: ThemedTableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? NEP5TokenSelectorTableViewCell else {
-            return UITableViewCell()
+            let cell =  UITableViewCell()
+            cell.theme_backgroundColor = O3Theme.backgroundColorPicker
+            return cell
         }
         let token = tokens[indexPath.row]
         cell.titleLabel.text = token.symbol
@@ -91,6 +94,7 @@ class AvailableNEP5TokensTableViewController: ThemedTableViewController {
             UserDefaultsManager.selectedNEP5Token![token.tokenHash] = token
             NotificationCenter.default.post(name: Notification.Name("AddedNewToken"), object: nil)
             cell.accessoryType = .checkmark
+
         }
     }
 }

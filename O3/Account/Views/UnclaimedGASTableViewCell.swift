@@ -37,6 +37,7 @@ class UnclaimedGASTableViewCell: UITableViewCell {
     }
 
     override func layoutSubviews() {
+        cardView.theme_backgroundColor = O3Theme.backgroundColorPicker
         super.layoutSubviews()
     }
 }
