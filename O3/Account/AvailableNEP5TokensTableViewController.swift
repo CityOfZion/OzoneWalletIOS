@@ -39,6 +39,7 @@ class AvailableNEP5TokensTableViewController: UITableViewController {
         super.viewDidLoad()
         applyNavBarTheme()
         tableView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        tableView.theme_separatorColor = O3Theme.tableSeparatorColorPicker
         self.title = NSLocalizedString("NEP5 Tokens", comment: "")
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: "Done bar button item"), style: .done, target: self, action: #selector(doneTapped(_:)))
         self.loadTokens()

@@ -202,7 +202,7 @@ class O3Theme {
     static let topTabbarItemFont = UIFont(name: "Avenir-Medium", size: 12)!
     static let largeTitleFont = UIFont(name: "Avenir-Heavy", size: 32)!
 
-    //colors
+    //standard text and backgrounds
     static let backgroundColorPicker = ThemeColorPicker(colors: Theme.light.backgroundColor.hexString(false), Theme.dark.backgroundColor.hexString(false))
     static let primaryColorPicker = ThemeColorPicker(colors: Theme.light.primaryColor.hexString(false), Theme.dark.primaryColor.hexString(false))
     static let titleColorPicker = ThemeColorPicker(colors: Theme.light.titleTextColor.hexString(false), Theme.dark.titleTextColor.hexString(false))
@@ -219,6 +219,14 @@ class O3Theme {
         NSAttributedStringKey.font.rawValue: O3Theme.navBarTitle],
         [NSAttributedStringKey.foregroundColor.rawValue: UIColor.white,
         NSAttributedStringKey.font.rawValue: O3Theme.navBarTitle])
+
+    //text fields
+    static let textFieldBackgroundColorPicker = ThemeColorPicker(colors: Theme.light.textFieldBackgroundColor.hexString(false), Theme.dark.textFieldBackgroundColor.hexString(false))
+    static let textFieldTextColorPicker = ThemeColorPicker(colors: Theme.light.textFieldTextColor.hexString(false), Theme.dark.textFieldTextColor.hexString(false))
+    static let keyboardPicker = ThemeKeyboardAppearancePicker(styles: .default, .dark)
+
+    //tableSeparator
+    static let tableSeparatorColorPicker = ThemeColorPicker(colors: Theme.light.seperatorColor.hexString(false), Theme.dark.seperatorColor.hexString(false))
 
     static func applyTheme(theme: Theme) {
         // First persist the selected theme using NSUserDefaults.

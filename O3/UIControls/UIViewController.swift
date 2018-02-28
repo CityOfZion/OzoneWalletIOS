@@ -37,6 +37,7 @@ extension UIViewController {
             UIApplication.shared.theme_setStatusBarStyle(ThemeStatusBarStylePicker(styles: Theme.light.statusBarStyle, Theme.dark.statusBarStyle), animated: true)
             self.setNeedsStatusBarAppearanceUpdate()
             self.navigationController?.hideHairline()
+            self.navigationController?.navigationBar.prefersLargeTitles = true
             self.navigationController?.navigationItem.largeTitleDisplayMode = .automatic
             self.navigationController?.navigationBar.theme_barTintColor = O3Theme.backgroundColorPicker
             self.navigationController?.navigationBar.isTranslucent = false

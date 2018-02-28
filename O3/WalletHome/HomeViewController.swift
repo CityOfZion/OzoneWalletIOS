@@ -53,13 +53,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func addThemedElements() {
         applyNavBarTheme()
         view.theme_backgroundColor = O3Theme.backgroundColorPicker
+        assetsTable.theme_separatorColor = O3Theme.tableSeparatorColorPicker
         walletHeaderCollectionView.theme_backgroundColor = O3Theme.backgroundColorPicker
         let themedTransparentButtons = [fiveMinButton, fifteenMinButton, thirtyMinButton, sixtyMinButton, oneDayButton, allButton]
         for button in themedTransparentButtons {
             button?.theme_backgroundColor = O3Theme.backgroundColorPicker
             button?.theme_setTitleColor(O3Theme.primaryColorPicker, forState: UIControlState())
         }
-        super.viewDidLoad()
     }
 
     func loadWatchAddresses() -> [WatchAddress] {
