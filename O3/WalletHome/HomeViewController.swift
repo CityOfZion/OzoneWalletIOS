@@ -52,22 +52,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     func addThemedElements() {
         applyNavBarTheme()
-        assetsTable.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: assetsTable.frame.size.width, height: 1))
+        view.theme_backgroundColor = O3Theme.backgroundColorPicker
+        walletHeaderCollectionView.theme_backgroundColor = O3Theme.backgroundColorPicker
         let themedTransparentButtons = [fiveMinButton, fifteenMinButton, thirtyMinButton, sixtyMinButton, oneDayButton, allButton]
         for button in themedTransparentButtons {
-            button?.theme_backgroundColor = ThemeColorPicker(colors: Theme.light.backgroundColor.hexString(false), Theme.dark.backgroundColor.hexString(false))
-            button?.theme_setTitleColor(ThemeColorPicker(colors: Theme.light.primaryColor.hexString(false), Theme.dark.primaryColor.hexString(false)), forState: UIControlState())
+            button?.theme_backgroundColor = O3Theme.backgroundColorPicker
+            button?.theme_setTitleColor(O3Theme.primaryColorPicker, forState: UIControlState())
         }
-        //graphViewContainer?.theme_backgroundColor = ThemeColorPicker(colors: Theme.light.backgroundColor.hexString(false), Theme.dark.backgroundColor.hexString(false))
-
-        //assetsTable.theme_backgroundColor = ThemeColorPicker(colors: Theme.light.backgroundColor.hexString(false), Theme.dark.backgroundColor.hexString(false))
-        view.theme_backgroundColor = ThemeColorPicker(colors: Theme.light.backgroundColor.hexString(false), Theme.dark.backgroundColor.hexString(false))
-
-        walletHeaderCollectionView.theme_backgroundColor = ThemeColorPicker(colors: Theme.light.backgroundColor.hexString(false), Theme.dark.backgroundColor.hexString(false))
-        /*themedTableViews = [assetsTable]
-        themedCollectionViews = [walletHeaderCollectionView]
-        themedTransparentButtons = [fiveMinButton, fifteenMinButton, thirtyMinButton, sixtyMinButton, oneDayButton, allButton]
-        themedBackgroundViews = [graphViewContainer]*/
+        super.viewDidLoad()
     }
 
     func loadWatchAddresses() -> [WatchAddress] {
@@ -230,7 +222,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         guard let latestPrice = portfolio?.price[asset.symbol ?? ""],
             let firstPrice = portfolio?.firstPrice[asset.symbol ?? ""] else {
                 let blankCell =  UITableViewCell()
-                blankCell.theme_backgroundColor = ThemeColorPicker(colors: Theme.light.backgroundColor.hexString(false), Theme.dark.backgroundColor.hexString(false))
+                blankCell.theme_backgroundColor = O3Theme.backgroundColorPicker
                 return blankCell
         }
 

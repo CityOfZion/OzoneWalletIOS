@@ -47,7 +47,7 @@ class ThemedViewController: UIViewController {
             self.navigationController?.navigationBar.backgroundColor = UserDefaultsManager.theme.backgroundColor
             self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UserDefaultsManager.theme.titleTextColor,
                                                                         NSAttributedStringKey.font:
-                                                                        ThemeManager.largeTitleFont]
+                                                                        O3Theme.largeTitleFont]
         }
     }
 

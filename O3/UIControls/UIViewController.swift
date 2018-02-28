@@ -38,18 +38,11 @@ extension UIViewController {
             self.setNeedsStatusBarAppearanceUpdate()
             self.navigationController?.hideHairline()
             self.navigationController?.navigationItem.largeTitleDisplayMode = .automatic
-            self.navigationController?.navigationBar.theme_barTintColor = ThemeColorPicker(colors: Theme.light.backgroundColor.hexString(false), Theme.dark.backgroundColor.hexString(false))
+            self.navigationController?.navigationBar.theme_barTintColor = O3Theme.backgroundColorPicker
             self.navigationController?.navigationBar.isTranslucent = false
-            self.navigationController?.navigationBar.theme_backgroundColor = ThemeColorPicker(colors: Theme.light.backgroundColor.hexString(false), Theme.dark.backgroundColor.hexString(false))
-            self.navigationController?.navigationBar.theme_largeTitleTextAttributes = ThemeDictionaryPicker(arrayLiteral: [
-                NSAttributedStringKey.foregroundColor.rawValue: UIColor.black,
-                NSAttributedStringKey.font.rawValue: ThemeManager.largeTitleFont],
-                [NSAttributedStringKey.foregroundColor.rawValue: UIColor.white,
-                 NSAttributedStringKey.font.rawValue: ThemeManager.largeTitleFont])
-            self.navigationController?.navigationBar.theme_titleTextAttributes = ThemeDictionaryPicker(arrayLiteral: [NSAttributedStringKey.foregroundColor.rawValue: UIColor.black,
-                NSAttributedStringKey.font.rawValue: ThemeManager.navBarTitle],
-                [NSAttributedStringKey.foregroundColor.rawValue: UIColor.white,
-                 NSAttributedStringKey.font.rawValue: ThemeManager.navBarTitle])
+            self.navigationController?.navigationBar.theme_backgroundColor = O3Theme.backgroundColorPicker
+            self.navigationController?.navigationBar.theme_largeTitleTextAttributes = O3Theme.largeTitleAttributesPicker
+            self.navigationController?.navigationBar.theme_titleTextAttributes = O3Theme.regularTitleAttributesPicker
         }
     }
 }

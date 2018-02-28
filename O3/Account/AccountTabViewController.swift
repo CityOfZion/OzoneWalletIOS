@@ -28,7 +28,7 @@ class AccountTabViewController: TabmanViewController, PageboyViewControllerDataS
             appearance.state.selectedColor = UserDefaultsManager.theme.primaryColor
             appearance.state.color = UserDefaultsManager.theme.lightTextColor
             appearance.layout.edgeInset = 0
-            appearance.text.font = ThemeManager.topTabbarItemFont
+            appearance.text.font = O3Theme.topTabbarItemFont
             appearance.style.background = .solid(color:  UserDefaultsManager.theme.backgroundColor)
         })
     }
@@ -52,7 +52,7 @@ class AccountTabViewController: TabmanViewController, PageboyViewControllerDataS
             appearance.state.selectedColor = UserDefaultsManager.theme.primaryColor
             appearance.state.color = UserDefaultsManager.theme.lightTextColor
             appearance.layout.edgeInset = 0
-            appearance.text.font = ThemeManager.topTabbarItemFont
+            appearance.text.font = O3Theme.topTabbarItemFont
             appearance.style.background = .solid(color:  UserDefaultsManager.theme.backgroundColor)
         })
         self.bar.location = .top

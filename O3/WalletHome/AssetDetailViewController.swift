@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import ScrollableGraphView
 
-class AssetDetailViewController: ThemedViewController, GraphPanDelegate, ScrollableGraphViewDataSource {
+class AssetDetailViewController: UIViewController, GraphPanDelegate, ScrollableGraphViewDataSource {
 
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var percentChangeLabel: UILabel!
@@ -52,8 +52,14 @@ class AssetDetailViewController: ThemedViewController, GraphPanDelegate, Scrolla
     }
 
     func addThemedElements() {
-        themedTransparentButtons = [fiveMinButton, fifteenMinButton, thirtyMinButton, sixtyMinButton, oneDayButton, allButton]
-        themedBackgroundViews = [graphContainerView]
+        applyNavBarTheme()
+        let themedTransparentButtons = [fiveMinButton, fifteenMinButton, thirtyMinButton, sixtyMinButton, oneDayButton, allButton]
+        view.theme_backgroundColor = O3Theme.backgroundColorPicker
+
+        for button in themedTransparentButtons {
+            button?.theme_backgroundColor = O3Theme.backgroundColorPicker
+            button?.theme_setTitleColor(O3Theme.primaryColorPicker, forState: UIControlState())
+        }
     }
 
     func setupGraphView() {

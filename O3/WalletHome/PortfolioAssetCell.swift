@@ -27,11 +27,11 @@ class PortfolioAssetCell: UITableViewCell {
 
     override func awakeFromNib() {
         let titleLabels = [assetTitleLabel, assetAmountLabel, assetFiatAmountLabel]
-        contentView.theme_backgroundColor = ThemeColorPicker(colors: Theme.light.backgroundColor.hexString(false), Theme.dark.backgroundColor.hexString(false))
+        contentView.theme_backgroundColor = O3Theme.backgroundColorPicker
         for label in titleLabels {
-            label?.theme_textColor = ThemeColorPicker(colors: Theme.light.titleTextColor.hexString(false), Theme.dark.titleTextColor.hexString(false))
+            label?.theme_textColor = O3Theme.titleColorPicker
         }
-         assetFiatPriceLabel.theme_textColor = ThemeColorPicker(colors: Theme.light.lightTextColor.hexString(false), Theme.dark.lightTextColor.hexString(false))
+        assetFiatPriceLabel.theme_textColor = O3Theme.lightTextColorPicker
         super.awakeFromNib()
     }
 

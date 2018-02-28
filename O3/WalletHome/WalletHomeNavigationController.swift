@@ -21,6 +21,6 @@ class WalletHomeNavigationController: UINavigationController {
         self.navigationBar.isTranslucent = false
         self.navigationBar.backgroundColor = UserDefaultsManager.theme.backgroundColor
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white,
-                                                                        NSAttributedStringKey.font: ThemeManager.largeTitleFont]
+                                                                        NSAttributedStringKey.font: O3Theme.largeTitleFont]
     }
 }

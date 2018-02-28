@@ -30,7 +30,7 @@ class GraphPanView: UIView {
         timeLabel.text = ""
         timeLabel.textAlignment = .center
         timeLabel.textColor = UserDefaultsManager.theme.lightTextColor
-        timeLabel.font = ThemeManager.smallText
+        timeLabel.font = O3Theme.smallText
         timeLabel.center  = CGPoint(x: verticalLineView.center.x, y: 5)
         self.addSubview(verticalLineView)
         self.addSubview(timeLabel)

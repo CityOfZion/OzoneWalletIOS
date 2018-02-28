@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func setupApperances() {
         UIBarButtonItem.appearance().setTitleTextAttributes([
-            NSAttributedStringKey.font: ThemeManager.barButtonItemFont,
+            NSAttributedStringKey.font: O3Theme.barButtonItemFont,
             NSAttributedStringKey.foregroundColor: UserDefaultsManager.theme.primaryColor], for: .normal)
         UINavigationBar.appearance().largeTitleTextAttributes = [
             NSAttributedStringKey.foregroundColor: UserDefaultsManager.theme.textColor,

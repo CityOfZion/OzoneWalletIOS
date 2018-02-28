@@ -7,6 +7,8 @@
 //
 import UIKit
 import Foundation
+import SwiftTheme
+
 /*
 struct Theme {
     struct Light {
@@ -191,7 +193,7 @@ enum Theme: String {
 }
 
 // This will let you use a theme in the app.
-class ThemeManager {
+class O3Theme {
     static let cornerRadius: CGFloat = 6.0
     static let borderWidth: CGFloat = 1.0
     static let smallText = UIFont(name: "Avenir-Book", size: 12)!
@@ -199,6 +201,24 @@ class ThemeManager {
     static let barButtonItemFont = UIFont(name: "Avenir-Heavy", size: 16)!
     static let topTabbarItemFont = UIFont(name: "Avenir-Medium", size: 12)!
     static let largeTitleFont = UIFont(name: "Avenir-Heavy", size: 32)!
+
+    //colors
+    static let backgroundColorPicker = ThemeColorPicker(colors: Theme.light.backgroundColor.hexString(false), Theme.dark.backgroundColor.hexString(false))
+    static let primaryColorPicker = ThemeColorPicker(colors: Theme.light.primaryColor.hexString(false), Theme.dark.primaryColor.hexString(false))
+    static let titleColorPicker = ThemeColorPicker(colors: Theme.light.titleTextColor.hexString(false), Theme.dark.titleTextColor.hexString(false))
+    static let lightTextColorPicker = ThemeColorPicker(colors: Theme.light.lightTextColor.hexString(false), Theme.dark.lightTextColor.hexString(false))
+
+    //title attributes
+    static let largeTitleAttributesPicker = ThemeDictionaryPicker(arrayLiteral:
+        [NSAttributedStringKey.foregroundColor.rawValue: UIColor.black,
+        NSAttributedStringKey.font.rawValue: O3Theme.largeTitleFont],
+        [NSAttributedStringKey.foregroundColor.rawValue: UIColor.white,
+        NSAttributedStringKey.font.rawValue: O3Theme.largeTitleFont])
+
+    static let regularTitleAttributesPicker = ThemeDictionaryPicker(arrayLiteral: [NSAttributedStringKey.foregroundColor.rawValue: UIColor.black,
+        NSAttributedStringKey.font.rawValue: O3Theme.navBarTitle],
+        [NSAttributedStringKey.foregroundColor.rawValue: UIColor.white,
+        NSAttributedStringKey.font.rawValue: O3Theme.navBarTitle])
 
     static func applyTheme(theme: Theme) {
         // First persist the selected theme using NSUserDefaults.

@@ -8,6 +8,7 @@
 
 import Foundation
 import ScrollableGraphView
+import SwiftTheme
 
 extension ScrollableGraphView {
     static func ozoneTheme(frame: CGRect, dataSource: ScrollableGraphViewDataSource) -> ScrollableGraphView {
@@ -22,10 +23,10 @@ extension ScrollableGraphView {
         linePlot.fillGradientType = ScrollableGraphViewGradientType.linear
         linePlot.fillGradientStartColor = UIColor.clear
         linePlot.fillGradientEndColor = UIColor.clear
-        linePlot.adaptAnimationType = ScrollableGraphViewAnimationType.elastic
-        linePlot.animationDuration = 1.5
+        linePlot.adaptAnimationType = ScrollableGraphViewAnimationType.easeOut
+        linePlot.animationDuration = 0.5
 
-        graphView.backgroundFillColor = UserDefaultsManager.theme == .light ? O3.Theme.light.backgroundColor : O3.Theme.dark.backgroundColor
+        graphView.backgroundFillColor = ThemeManager.currentThemeIndex == 0 ? O3.Theme.light.backgroundColor : O3.Theme.dark.backgroundColor
         graphView.dataPointSpacing = UIScreen.main.bounds.size.width / 71
         graphView.rightmostPointPadding = 0
         graphView.leftmostPointPadding = 0

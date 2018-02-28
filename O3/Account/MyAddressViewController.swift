@@ -26,14 +26,14 @@ class MyAddressViewController: UIViewController {
             self.navigationController?.navigationBar.backgroundColor = UserDefaultsManager.theme.backgroundColor
             self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UserDefaultsManager.theme.titleTextColor,
                                                                                  NSAttributedStringKey.font:
-                                                                                    ThemeManager.largeTitleFont]
+                                                                                    O3Theme.largeTitleFont]
         }
     }
 
     func configureView() {
         navigationController?.navigationBar.largeTitleTextAttributes = [
             NSAttributedStringKey.foregroundColor: UserDefaultsManager.theme.textColor,
-            NSAttributedStringKey.font: ThemeManager.largeTitleFont as Any]
+            NSAttributedStringKey.font: O3Theme.largeTitleFont as Any]
         self.navigationController?.hideHairline()
         view.backgroundColor = UserDefaultsManager.theme.backgroundColor
         setupNavBar()
