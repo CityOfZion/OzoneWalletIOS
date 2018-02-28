@@ -9,14 +9,15 @@
 import Foundation
 import UIKit
 
-class NewsFeedCell: ThemedTableCell {
+class NewsFeedCell: UITableViewCell {
     @IBOutlet weak var newsRowImageView: UIImageView!
     @IBOutlet weak var newsTitleLabel: UILabel!
     @IBOutlet weak var newsDateLabel: UILabel!
 
     override func awakeFromNib() {
-        titleLabels = [newsTitleLabel]
-        subtitleLabels = [newsDateLabel]
+        newsTitleLabel.theme_textColor = O3Theme.titleColorPicker
+        newsDateLabel.theme_textColor = O3Theme.lightTextColorPicker
+        contentView.theme_backgroundColor = O3Theme.backgroundColorPicker
         super.awakeFromNib()
     }
 }

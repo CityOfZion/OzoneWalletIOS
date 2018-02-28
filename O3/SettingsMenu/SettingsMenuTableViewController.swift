@@ -11,12 +11,18 @@ import KeychainAccess
 import UIKit
 import SwiftTheme
 
-class SettingsMenuTableViewController: ThemedTableViewController, HalfModalPresentable {
+class SettingsMenuTableViewController: UITableViewController, HalfModalPresentable {
     @IBOutlet weak var showPrivateKeyView: UIView!
     @IBOutlet weak var contactView: UIView!
     @IBOutlet weak var networkView: UIView!
     @IBOutlet weak var networkCell: UITableViewCell!
     @IBOutlet weak var themeCell: UITableViewCell!
+    @IBOutlet weak var privateKeyCell: UITableViewCell!
+    @IBOutlet weak var watchOnlyCell: UITableViewCell!
+    @IBOutlet weak var currencyCell: UITableViewCell!
+    @IBOutlet weak var contactCell: UITableViewCell!
+    @IBOutlet weak var logoutCell: UITableViewCell!
+
     @IBOutlet weak var currencyView: UIView!
     @IBOutlet weak var themeView: UIView!
     @IBOutlet weak var privateKeyLabel: UILabel!
@@ -55,12 +61,23 @@ class SettingsMenuTableViewController: ThemedTableViewController, HalfModalPrese
     }
 
     func setThemedElements() {
-        themedTitleLabels = [privateKeyLabel, watchOnlyLabel, netLabel, contactLabel, themeLabel, currencyLabel, logoutLabel, versionLabel]
-        themedLabels = [versionLabel]
+        let themedTitleLabels = [privateKeyLabel, watchOnlyLabel, netLabel, contactLabel, themeLabel, currencyLabel, logoutLabel, versionLabel]
+        let themedCells = [networkCell, themeCell, privateKeyCell, watchOnlyCell, currencyCell, contactCell, logoutCell]
+        for cell in themedCells {
+            cell?.contentView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        }
+
+        for label in themedTitleLabels {
+            label?.theme_textColor = O3Theme.titleColorPicker
+        }
+        versionLabel?.theme_textColor = O3Theme.lightTextColorPicker
+        tableView.theme_separatorColor = O3Theme.tableSeparatorColorPicker
+        tableView.theme_backgroundColor = O3Theme.backgroundColorPicker
     }
 
     override func viewDidLoad() {
         setThemedElements()
+        applyNavBarTheme()
         super.viewDidLoad()
         let rightBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "angle-up"), style: .plain, target: self, action: #selector(SettingsMenuTableViewController.maximize(_:)))
         navigationItem.rightBarButtonItem = rightBarButton

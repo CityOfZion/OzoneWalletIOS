@@ -885,20 +885,25 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="contactCell" destination="283-pc-Ro7" id="v4o-QB-oSO"/>
                         <outlet property="contactLabel" destination="JnV-5q-g4u" id="mmC-06-gRK"/>
                         <outlet property="contactView" destination="wZZ-Zg-S0l" id="eH5-ww-cbX"/>
+                        <outlet property="currencyCell" destination="1zf-um-hpK" id="WhO-ZN-paC"/>
                         <outlet property="currencyLabel" destination="VAd-JC-Q5E" id="OJT-F2-JOL"/>
                         <outlet property="currencyView" destination="h1P-bs-h7b" id="jV6-DM-zmq"/>
+                        <outlet property="logoutCell" destination="yVa-Bn-CxE" id="N73-Ko-jl1"/>
                         <outlet property="logoutLabel" destination="Pqq-De-3i3" id="3kr-n2-HMT"/>
                         <outlet property="netLabel" destination="5bw-KM-Kj0" id="IIS-m0-Zcb"/>
                         <outlet property="networkCell" destination="gcC-jA-3pg" id="Yud-99-vqH"/>
                         <outlet property="networkView" destination="dye-OC-KVR" id="dI5-CP-WTu"/>
+                        <outlet property="privateKeyCell" destination="XOD-O4-r8d" id="bD3-KZ-fot"/>
                         <outlet property="privateKeyLabel" destination="o2f-oG-zrn" id="Ruo-CI-soc"/>
                         <outlet property="showPrivateKeyView" destination="zyP-RY-vcZ" id="DKS-xE-t8U"/>
                         <outlet property="themeCell" destination="WsQ-LW-dmG" id="PZZ-8h-Y7o"/>
                         <outlet property="themeLabel" destination="ttz-PX-ZLR" id="nwl-S0-bFH"/>
                         <outlet property="themeView" destination="SaM-gg-w4c" id="xca-gq-oaG"/>
                         <outlet property="versionLabel" destination="We1-HS-Cs2" id="ocL-ba-unv"/>
+                        <outlet property="watchOnlyCell" destination="blh-qH-eu2" id="QYK-9c-Uqy"/>
                         <outlet property="watchOnlyLabel" destination="F6B-dL-e29" id="k8o-M3-0kB"/>
                         <segue destination="4nu-8p-E2h" kind="show" identifier="segueToPrivateKey" id="edS-I1-jRk"/>
                     </connections>
