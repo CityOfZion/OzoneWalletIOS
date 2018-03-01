@@ -167,6 +167,7 @@ class SettingsMenuTableViewController: UITableViewController, HalfModalPresentab
 
             }, didConfirm: {
                 Authenticated.account = nil
+                AppDelegate.updateNavbarAppearance(isOnboarding: true)
                 UIApplication.shared.keyWindow?.rootViewController = UIStoryboard(name: "Onboarding", bundle: nil).instantiateInitialViewController()
             })
 

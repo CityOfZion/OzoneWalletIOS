@@ -65,6 +65,7 @@ class TransactionHistoryTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "transactionCell") as? TransactionCell else {
             fatalError("Undefined table view behavior")
         }
+        cell.selectionStyle = .none
         cell.data = transactionCellData
         return cell
 

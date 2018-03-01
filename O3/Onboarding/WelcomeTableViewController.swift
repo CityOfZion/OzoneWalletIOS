@@ -53,6 +53,7 @@ class WelcomeTableViewController: UITableViewController {
                             UserDefaultsManager.seed = bestNode!
                             UserDefaultsManager.useDefaultSeed = false
                         }
+                        AppDelegate.updateNavbarAppearance(isOnboarding: false)
                         DispatchQueue.main.async { self.performSegue(withIdentifier: "segueToMainFromWelcome", sender: nil) }
                     }
                 }

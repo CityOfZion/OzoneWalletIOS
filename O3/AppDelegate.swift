@@ -24,15 +24,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Channel.setup(withApplicationId: "app_gUHDmimXT8oXRSpJvCxrz5DZvUisko_mliB61uda9iY")
     }
 
-    func setupApperances() {
+    static func updateNavbarAppearance(isOnboarding: Bool) {
         UIBarButtonItem.appearance().setTitleTextAttributes([
             NSAttributedStringKey.font: O3Theme.barButtonItemFont,
             NSAttributedStringKey.foregroundColor: UserDefaultsManager.theme.primaryColor], for: .normal)
         UINavigationBar.appearance().largeTitleTextAttributes = [
             NSAttributedStringKey.foregroundColor: UserDefaultsManager.theme.textColor,
             NSAttributedStringKey.font: UIFont(name: "Avenir-Heavy", size: 32) as Any]
-        SwiftTheme.ThemeManager.setTheme(index: UserDefaultsManager.theme == .light ? 0 : 1)
+        UINavigationBar.appearance().isTranslucent = false
 
+        if isOnboarding {
+            UINavigationBar.appearance().theme_barTintColor = O3Theme.primaryColorPicker
+            UINavigationBar.appearance().theme_barTintColor = O3Theme.primaryColorPicker
+        } else {
+            UINavigationBar.appearance().theme_barTintColor = O3Theme.backgroundColorPicker
+            UINavigationBar.appearance().theme_barTintColor = O3Theme.backgroundColorPicker
+        }
+    }
+
+    func setupApperances() {
+        SwiftTheme.ThemeManager.setTheme(index: UserDefaultsManager.theme == .light ? 0 : 1)
     }
 
     func registerDefaults() {
@@ -40,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             "networkKey": "main",
             "usedDefaultSeedKey": false,
             "selectedThemeKey": Theme.light.rawValue,
-            "referenceFiatCurrencyKey": Currency.usd.rawValue
+            "referenceCurrencyKey": Currency.usd.rawValue
         ]
         UserDefaults.standard.register(defaults: userDefaultsDefaults)
     }

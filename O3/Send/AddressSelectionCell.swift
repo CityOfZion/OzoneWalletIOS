@@ -15,6 +15,8 @@ class AddressSelectionCell: UITableViewCell {
 
     override func awakeFromNib() {
         contentView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        theme_backgroundColor = O3Theme.backgroundColorPicker
+        selectionStyle = .none
         super.awakeFromNib()
     }
 }

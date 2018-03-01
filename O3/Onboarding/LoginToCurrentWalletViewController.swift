@@ -41,6 +41,7 @@ class LoginToCurrentWalletViewController: UIViewController {
                             UserDefaultsManager.useDefaultSeed = false
                         }
                         O3HUD.stop {
+                            AppDelegate.updateNavbarAppearance(isOnboarding: false)
                             DispatchQueue.main.async { self.performSegue(withIdentifier: "loggedin", sender: nil) }
                         }
                     }
@@ -70,6 +71,7 @@ class LoginToCurrentWalletViewController: UIViewController {
     }
 
     @IBAction func didTapCancel(_ sender: Any) {
+        AppDelegate.updateNavbarAppearance(isOnboarding: true)
         UIApplication.shared.keyWindow?.rootViewController = UIStoryboard(name: "Onboarding", bundle: nil).instantiateInitialViewController()
     }
 }

@@ -60,6 +60,7 @@ class AddressEntryTableViewController: UITableViewController, AVCaptureMetadataO
         tableView.theme_separatorColor = O3Theme.tableSeparatorColorPicker
         view.theme_backgroundColor = O3Theme.backgroundColorPicker
         addressInfoCell.contentView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        addressInfoCell.theme_backgroundColor = O3Theme.backgroundColorPicker
         addressLabel.theme_textColor = O3Theme.titleColorPicker
         nicknameLabel.theme_textColor = O3Theme.titleColorPicker
         nicknameField.theme_backgroundColor = O3Theme.textFieldBackgroundColorPicker

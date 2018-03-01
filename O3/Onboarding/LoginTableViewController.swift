@@ -69,6 +69,7 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
                     try keychain
                         .accessibility(.whenPasscodeSetThisDeviceOnly, authenticationPolicy: .userPresence)
                         .set(account.wif, key: "ozonePrivateKey")
+                    AppDelegate.updateNavbarAppearance(isOnboarding: false)
                     DispatchQueue.main.async { self.performSegue(withIdentifier: "segueToMainFromLogin", sender: nil) }
                 } catch _ {
                     return

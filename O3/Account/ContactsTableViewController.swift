@@ -37,6 +37,7 @@ class ContactsTableViewController: UITableViewController, AddressAddDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        tableView.theme_separatorColor = O3Theme.tableSeparatorColorPicker
         view.theme_backgroundColor = O3Theme.backgroundColorPicker
         loadData()
     }
