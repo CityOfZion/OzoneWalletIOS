@@ -65,10 +65,10 @@ extension String {
             if amountChange == 0 {
                 percentChange = 0
             }
-        case .usd:
-            amountChange = latestPrice.averageUSD - previousPrice.averageUSD
+        default:
+            amountChange = latestPrice.average - previousPrice.average
             amountChangeString = String.formattedAmountChange(amount: amountChange, currency: .usd)
-            percentChange = 0 < previousPrice.averageUSD ? (amountChange / previousPrice.averageUSD) * 100 : 0
+            percentChange = 0 < previousPrice.average ? (amountChange / previousPrice.average) * 100 : 0
             if amountChange == 0 {
                 percentChange = 0
             }
@@ -85,9 +85,9 @@ extension String {
         case .btc:
             amountChange = latestPrice.averageBTC - previousPrice.averageBTC
             percentChange = 0 < previousPrice.averageBTC ? (amountChange / previousPrice.averageBTC) * 100 : 0
-        case .usd:
-            amountChange = latestPrice.averageUSD - previousPrice.averageUSD
-            percentChange = 0 < previousPrice.averageUSD ? (amountChange / previousPrice.averageUSD) * 100 : 0
+        default:
+            amountChange = latestPrice.average - previousPrice.average
+            percentChange = 0 < previousPrice.average ? (amountChange / previousPrice.average) * 100 : 0
         }
         return String(format: "%.2f%@", percentChange, "%")
     }

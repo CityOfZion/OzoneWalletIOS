@@ -114,6 +114,7 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
 
     func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.getBalance), name: Notification.Name("ChangedNetwork"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.getBalance), name: Notification.Name("ChangedReferenceCurrency"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.getBalance), name: Notification.Name("UpdatedWatchOnlyAddress"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.getBalance), name: Notification.Name("AddedNewToken"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateGraphAppearance), name: Notification.Name("ChangedTheme"), object: nil)
@@ -123,6 +124,7 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
         NotificationCenter.default.removeObserver(self, name: Notification.Name("ChangedNetwork"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("UpdatedWatchOnlyAddress"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("ChangedTheme"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("ChangedReferenceCurrency"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("AddedNewToken"), object: nil)
     }
 
@@ -263,7 +265,7 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
         if pointIndex > portfolio!.data.count {
             return 0
         }
-        return homeviewModel?.referenceCurrency == .btc ? portfolio!.data.reversed()[pointIndex].averageBTC : portfolio!.data.reversed()[pointIndex].averageUSD
+        return homeviewModel?.referenceCurrency == .btc ? portfolio!.data.reversed()[pointIndex].averageBTC : portfolio!.data.reversed()[pointIndex].average
     }
 
     func label(atIndex pointIndex: Int) -> String {
@@ -302,8 +304,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         var data = WalletHeaderCollectionCell.Data (
             portfolioType: portfolioType,
             index: indexPath.row,
-            latestPrice: PriceData(averageUSD: 0, averageBTC: 0, time: "24h"),
-            previousPrice: PriceData(averageUSD: 0, averageBTC: 0, time: "24h"),
+            latestPrice: PriceData(average: 0, averageBTC: 0, time: "24h"),
+            previousPrice: PriceData(average: 0, averageBTC: 0, time: "24h"),
             referenceCurrency: (homeviewModel?.referenceCurrency)!,
             selectedInterval: (homeviewModel?.selectedInterval)!
         )
@@ -348,8 +350,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch (homeviewModel?.referenceCurrency)! {
         case .btc:
-            homeviewModel?.setReferenceCurrency(.usd)
-        case .usd:
+            homeviewModel?.setReferenceCurrency(UserDefaultsManager.referenceFiatCurrency)
+        default:
             homeviewModel?.setReferenceCurrency(.btc)
         }
         collectionView.reloadData()

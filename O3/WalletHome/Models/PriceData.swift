@@ -9,34 +9,34 @@
 import UIKit
 
 public struct PriceData: Codable {
-    var averageUSD: Double
+    var average: Double
     var averageBTC: Double
     var time: String
 
     enum CodingKeys: String, CodingKey {
-        case averageUSD
+        case average
         case averageBTC
         case time
     }
 
-    public init(averageUSD: Double, averageBTC: Double, time: String) {
-        self.averageUSD = averageUSD
+    public init(average: Double, averageBTC: Double, time: String) {
+        self.average = average
         self.averageBTC = averageBTC
         self.time = time
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let averageUSD: Double = try container.decode(Double.self, forKey: .averageUSD)
+        let average: Double = try container.decode(Double.self, forKey: .average)
         let averageBTC: Double = try container.decode(Double.self, forKey: .averageBTC)
         let time: String = try container.decode(String.self, forKey: .time)
-        self.init(averageUSD: averageUSD, averageBTC: averageBTC, time: time)
+        self.init(average: average, averageBTC: averageBTC, time: time)
     }
 }
 
 extension PriceData {
-    func averageUSDMoney() -> Money {
-        return USD(amount: Float(self.averageUSD))
+    func averageFiatMoney() -> Money {
+        return Fiat(amount: Float(self.average))
     }
 }
 
