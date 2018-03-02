@@ -9,23 +9,31 @@
 import Foundation
 import KeychainAccess
 import UIKit
+import SwiftTheme
+import KeychainAccess
 
-class SettingsMenuTableViewController: ThemedTableViewController, HalfModalPresentable {
+class SettingsMenuTableViewController: UITableViewController, HalfModalPresentable {
     @IBOutlet weak var showPrivateKeyView: UIView!
     @IBOutlet weak var contactView: UIView!
-    @IBOutlet weak var shareView: UIView!
     @IBOutlet weak var networkView: UIView!
     @IBOutlet weak var networkCell: UITableViewCell!
     @IBOutlet weak var themeCell: UITableViewCell!
+    @IBOutlet weak var privateKeyCell: UITableViewCell!
+    @IBOutlet weak var watchOnlyCell: UITableViewCell!
+    @IBOutlet weak var currencyCell: UITableViewCell!
+    @IBOutlet weak var contactCell: UITableViewCell!
+    @IBOutlet weak var logoutCell: UITableViewCell!
+
+    @IBOutlet weak var currencyView: UIView!
     @IBOutlet weak var themeView: UIView!
     @IBOutlet weak var privateKeyLabel: UILabel!
     @IBOutlet weak var watchOnlyLabel: UILabel!
     @IBOutlet weak var netLabel: UILabel!
-    @IBOutlet weak var shareLabel: UILabel!
     @IBOutlet weak var contactLabel: UILabel!
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var themeLabel: UILabel!
     @IBOutlet weak var logoutLabel: UILabel!
+    @IBOutlet weak var currencyLabel: UILabel!
 
     var netString = UserDefaultsManager.network == .test ? "Network: Test Network": "Network: Main Network" {
         didSet {
@@ -33,7 +41,7 @@ class SettingsMenuTableViewController: ThemedTableViewController, HalfModalPrese
         }
     }
 
-    var themeString = UserDefaultsManager.theme == .light ? "Theme: Classic": "Theme: Dark" {
+    var themeString = UserDefaultsManager.themeIndex == 0 ? "Theme: Classic": "Theme: Dark" {
         didSet {
             self.setThemeLabel()
         }
@@ -54,18 +62,28 @@ class SettingsMenuTableViewController: ThemedTableViewController, HalfModalPrese
     }
 
     func setThemedElements() {
-        themedTitleLabels = [privateKeyLabel, watchOnlyLabel, netLabel, shareLabel, contactLabel, themeLabel, logoutLabel, versionLabel]
-        themedLabels = [versionLabel]
+        let themedTitleLabels = [privateKeyLabel, watchOnlyLabel, netLabel, contactLabel, themeLabel, currencyLabel, logoutLabel, versionLabel]
+        let themedCells = [networkCell, themeCell, privateKeyCell, watchOnlyCell, currencyCell, contactCell, logoutCell]
+        for cell in themedCells {
+            cell?.contentView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        }
+
+        for label in themedTitleLabels {
+            label?.theme_textColor = O3Theme.titleColorPicker
+        }
+        versionLabel?.theme_textColor = O3Theme.lightTextColorPicker
+        tableView.theme_separatorColor = O3Theme.tableSeparatorColorPicker
+        tableView.theme_backgroundColor = O3Theme.backgroundColorPicker
     }
 
     override func viewDidLoad() {
         setThemedElements()
+        applyNavBarTheme()
         super.viewDidLoad()
         let rightBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "angle-up"), style: .plain, target: self, action: #selector(SettingsMenuTableViewController.maximize(_:)))
         navigationItem.rightBarButtonItem = rightBarButton
         showPrivateKeyView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showPrivateKey)))
         contactView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(sendMail)))
-        shareView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(share)))
         themeView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(changeTheme)))
         setNetLabel()
         setThemeLabel()
@@ -73,6 +91,11 @@ class SettingsMenuTableViewController: ThemedTableViewController, HalfModalPrese
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
             self.versionLabel.text = String(format: "Version: %@", version)
         }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        currencyLabel.text = "Currency: " + UserDefaultsManager.referenceFiatCurrency.rawValue.uppercased()
     }
 
     @objc func maximize(_ sender: Any) {
@@ -83,12 +106,14 @@ class SettingsMenuTableViewController: ThemedTableViewController, HalfModalPrese
         let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         let lightThemeAction = UIAlertAction(title: "Classic Theme", style: .default) { _ in
-            UserDefaultsManager.theme = .light
+            UserDefaultsManager.themeIndex = 0
+            ThemeManager.setTheme(index: 0)
             self.themeString = "Theme: Classic"
         }
 
         let darkThemeAction = UIAlertAction(title: "Dark Theme", style: .default) { _ in
-            UserDefaultsManager.theme = .dark
+            UserDefaultsManager.themeIndex = 1
+            ThemeManager.setTheme(index: 1)
             self.themeString = "Theme: Dark"
         }
 
@@ -108,14 +133,6 @@ class SettingsMenuTableViewController: ThemedTableViewController, HalfModalPrese
         if let url = URL(string: "mailto:\(email)") {
             UIApplication.shared.open(url)
         }
-    }
-
-    @objc func share() {
-        let shareURL = URL(string: "https://o3.network/")
-        let activityViewController = UIActivityViewController(activityItems: [shareURL], applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view
-
-        self.present(activityViewController, animated: true, completion: nil)
     }
 
     @IBAction func closeTapped(_ sender: Any) {
@@ -143,15 +160,32 @@ class SettingsMenuTableViewController: ThemedTableViewController, HalfModalPrese
 
     }
 
+    func performLogoutCleanup() {
+        try? Keychain(service: "network.o3.neo.wallet").remove("ozonePrivateKey")
+        Authenticated.account = nil
+        UserDefaultsManager.o3WalletAddress = nil
+        NotificationCenter.default.post(name: Notification.Name("loggedOut"), object: nil)
+        self.dismiss(animated: false)
+        let o3tab =  UIApplication.shared.keyWindow?.rootViewController as? O3TabBarController
+
+        //Chance these aren't nil yet which leads to reference cycke
+        o3tab?.halfModalTransitioningDelegate?.viewController = nil
+        o3tab?.halfModalTransitioningDelegate?.presentingViewController = nil
+        o3tab?.halfModalTransitioningDelegate?.interactionController = nil
+        o3tab?.halfModalTransitioningDelegate = nil
+    }
+
     //properly implement cell did tap
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.row == 6 {
-            OzoneAlert.confirmDialog(message: "Log out?", cancelTitle: "Cancel", confirmTitle: "Log out", didCancel: {
+            OzoneAlert.confirmDialog(message: "Logging out will remove the private key from your device. You will need to restore it from your backup to reenter the application.", cancelTitle: "Cancel", confirmTitle: "Log out", didCancel: {
 
             }, didConfirm: {
-                Authenticated.account = nil
+                self.performLogoutCleanup()
+                self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
                 UIApplication.shared.keyWindow?.rootViewController = UIStoryboard(name: "Onboarding", bundle: nil).instantiateInitialViewController()
+
             })
 
         }

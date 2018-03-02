@@ -11,8 +11,9 @@ import UIKit
 import NeoSwift
 import Lottie
 import KeychainAccess
+import SwiftTheme
 
-class SendTableViewController: ThemedTableViewController, AddressSelectDelegate, QRScanDelegate {
+class SendTableViewController: UITableViewController, AddressSelectDelegate, QRScanDelegate {
 
     var halfModalTransitioningDelegate: HalfModalTransitioningDelegate?
 
@@ -24,18 +25,42 @@ class SendTableViewController: ThemedTableViewController, AddressSelectDelegate,
     @IBOutlet weak var selectedAssetLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
 
+    @IBOutlet weak var recipientCell: UITableViewCell!
+    @IBOutlet weak var sendAmountCell: UITableViewCell!
+    @IBOutlet weak var sendAssetCell: UITableViewCell!
+
     var gasBalance: Decimal = 0
     var transactionCompleted: Bool!
     var selectedAsset: TransferableAsset?
     var preselectedAddress = ""
 
     func addThemedElements() {
-        themedTitleLabels = [toLabel, assetLabel, amountLabel]
-        themedTextFields = [toAddressField, amountField]
+        let themedTitleLabels = [toLabel, assetLabel, amountLabel]
+        for label in themedTitleLabels {
+            label?.theme_textColor = O3Theme.titleColorPicker
+        }
+        recipientCell.contentView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        sendAmountCell.contentView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        sendAssetCell.contentView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        view.theme_backgroundColor = O3Theme.backgroundColorPicker
+        tableView.tableFooterView = UIView(frame: .zero)
+        tableView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        tableView.theme_separatorColor = O3Theme.tableSeparatorColorPicker
+        let themedTextFields = [toAddressField, amountField]
+        let placeHolderColor = ThemeManager.currentThemeIndex == 0 ? Theme.light.textFieldPlaceHolderColor : Theme.dark.textFieldPlaceHolderColor
+        for field in themedTextFields {
+            field!.attributedPlaceholder = NSAttributedString(
+                string: field!.placeholder ?? "",
+                attributes: [NSAttributedStringKey.foregroundColor: placeHolderColor])
+            field?.theme_keyboardAppearance = O3Theme.keyboardPicker
+            field?.theme_backgroundColor = O3Theme.clearTextFieldBackgroundColorPicker
+            field?.theme_textColor = O3Theme.textFieldTextColorPicker
+        }
     }
 
     override func viewDidLoad() {
         addThemedElements()
+        applyNavBarTheme()
         super.viewDidLoad()
         //select best node
         DispatchQueue.global().async {

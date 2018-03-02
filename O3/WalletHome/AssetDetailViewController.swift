@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import ScrollableGraphView
 
-class AssetDetailViewController: ThemedViewController, GraphPanDelegate, ScrollableGraphViewDataSource {
+class AssetDetailViewController: UIViewController, GraphPanDelegate, ScrollableGraphViewDataSource {
 
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var percentChangeLabel: UILabel!
@@ -52,8 +52,14 @@ class AssetDetailViewController: ThemedViewController, GraphPanDelegate, Scrolla
     }
 
     func addThemedElements() {
-        themedTransparentButtons = [fiveMinButton, fifteenMinButton, thirtyMinButton, sixtyMinButton, oneDayButton, allButton]
-        themedBackgroundViews = [graphContainerView]
+        applyNavBarTheme()
+        let themedTransparentButtons = [fiveMinButton, fifteenMinButton, thirtyMinButton, sixtyMinButton, oneDayButton, allButton]
+        view.theme_backgroundColor = O3Theme.backgroundColorPicker
+
+        for button in themedTransparentButtons {
+            button?.theme_backgroundColor = O3Theme.backgroundColorPicker
+            button?.theme_setTitleColor(O3Theme.primaryColorPicker, forState: UIControlState())
+        }
     }
 
     func setupGraphView() {
@@ -105,12 +111,12 @@ class AssetDetailViewController: ThemedViewController, GraphPanDelegate, Scrolla
         switch referenceCurrency {
         case .btc:
             amountLabel.text = String(format: "%.8fBTC", latestPrice.averageBTC)
-        case .usd:
-            amountLabel.text = USD(amount: Float(latestPrice.averageUSD)).formattedString()
+        default:
+            amountLabel.text = latestPrice.averageFiatMoney().formattedString()
         }
         percentChangeLabel.text = String.percentChangeString(latestPrice: latestPrice, previousPrice: earliestPrice,
                                                              with: selectedInterval, referenceCurrency: referenceCurrency)
-        percentChangeLabel.textColor = latestPrice.averageBTC >= earliestPrice.averageBTC ? UserDefaultsManager.theme.positiveGainColor : UserDefaultsManager.theme.negativeLossColor
+        percentChangeLabel.theme_textColor = latestPrice.averageBTC >= earliestPrice.averageBTC ? O3Theme.positiveGainColorPicker : O3Theme.negativeLossColorPicker
     }
 
     @objc func referenceCurrencyTapped(_ sender: UITapGestureRecognizer) {
@@ -142,14 +148,15 @@ class AssetDetailViewController: ThemedViewController, GraphPanDelegate, Scrolla
                 referenceCurrencyCurrentValue = currentValue.averageBTC
                 referenceCurrencyOriginalValue = originalValue.averageBTC
                 self.amountLabel.text = String(format: "%@BTC", referenceCurrencyCurrentValue.string(Precision.btc))
-            case .usd:
-                referenceCurrencyCurrentValue = currentValue.averageUSD
-                referenceCurrencyOriginalValue = originalValue.averageUSD
-                self.amountLabel.text = USD(amount: Float(referenceCurrencyCurrentValue)).formattedString()
+            default:
+                referenceCurrencyCurrentValue = currentValue.average
+                referenceCurrencyOriginalValue = originalValue.average
+                self.amountLabel.text = Fiat(amount: Float(referenceCurrencyCurrentValue)).formattedString()
             }
             let percentChange = 0 < referenceCurrencyOriginalValue ? ((referenceCurrencyCurrentValue - referenceCurrencyOriginalValue) / referenceCurrencyOriginalValue * 100) : 0
             self.percentChangeLabel.text = String(format: "%.2f%@", percentChange, "%")
-            self.percentChangeLabel.textColor = percentChange >= 0 ? UserDefaultsManager.theme.positiveGainColor : UserDefaultsManager.theme.negativeLossColor
+            self.percentChangeLabel.theme_textColor = percentChange >= 0 ? O3Theme.positiveGainColorPicker :
+                O3Theme.negativeLossColorPicker
 
             let posixString = self.priceHistory?.data.reversed()[index].time ?? ""
             timeLabel.text = posixString.intervaledDateString(self.selectedInterval)
@@ -181,7 +188,7 @@ class AssetDetailViewController: ThemedViewController, GraphPanDelegate, Scrolla
         if referenceCurrency == .btc {
             return priceHistory!.data.reversed()[pointIndex].averageBTC
         }
-        return priceHistory!.data.reversed()[pointIndex].averageUSD
+        return priceHistory!.data.reversed()[pointIndex].average
     }
 
     func label(atIndex pointIndex: Int) -> String {

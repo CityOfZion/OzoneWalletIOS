@@ -10,33 +10,35 @@ import UIKit
 import Tabman
 import Pageboy
 import DeckTransition
+import SwiftTheme
 
 class AccountTabViewController: TabmanViewController, PageboyViewControllerDataSource {
 
     var viewControllers: [UIViewController] = []
 
     func addThemeObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.changedTheme), name: Notification.Name("ChangedTheme"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.changedTheme), name: Notification.Name(rawValue: ThemeUpdateNotification), object: nil)
     }
 
     deinit {
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("ChangedTheme"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name(rawValue: ThemeUpdateNotification), object: nil)
     }
 
     @objc func changedTheme(_ sender: Any) {
+        let textColor = UserDefaultsManager.themeIndex == 0 ? Theme.light.lightTextColor : Theme.dark.lightTextColor
+
         self.bar.appearance = TabmanBar.Appearance({ (appearance) in
-            appearance.state.selectedColor = UserDefaultsManager.theme.primaryColor
-            appearance.state.color = UserDefaultsManager.theme.lightTextColor
+            appearance.state.selectedColor = UserDefaultsManager.themeIndex == 0 ? Theme.light.primaryColor : Theme.dark.primaryColor
+            appearance.state.color = UserDefaultsManager.themeIndex == 0 ? Theme.light.lightTextColor : Theme.dark.lightTextColor
             appearance.layout.edgeInset = 0
-            appearance.text.font = ThemeManager.topTabbarItemFont
-            appearance.style.background = .solid(color:  UserDefaultsManager.theme.backgroundColor)
+            appearance.text.font = O3Theme.topTabbarItemFont
+            appearance.style.background = .solid(color: ThemeManager.currentThemeIndex == 0 ? Theme.light.backgroundColor : Theme.dark.backgroundColor)
         })
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         addThemeObserver()
-        self.navigationController?.hideHairline()
 
         let accountAssetViewController = UIStoryboard(name: "Account", bundle: nil).instantiateViewController(withIdentifier: "AccountAssetTableViewController")
         let transactionHistory = UIStoryboard(name: "Account", bundle: nil).instantiateViewController(withIdentifier: "TransactionHistoryTableViewController")
@@ -49,20 +51,25 @@ class AccountTabViewController: TabmanViewController, PageboyViewControllerDataS
         self.dataSource = self
 
         self.bar.appearance = TabmanBar.Appearance({ (appearance) in
-            appearance.state.selectedColor = UserDefaultsManager.theme.primaryColor
-            appearance.state.color = UserDefaultsManager.theme.lightTextColor
+            appearance.state.selectedColor = UserDefaultsManager.themeIndex == 0 ? Theme.light.primaryColor : Theme.dark.primaryColor
+            appearance.state.color = UserDefaultsManager.themeIndex == 0 ? Theme.light.lightTextColor : Theme.dark.lightTextColor
+            appearance.text.font = O3Theme.topTabbarItemFont
             appearance.layout.edgeInset = 0
-            appearance.text.font = ThemeManager.topTabbarItemFont
-            appearance.style.background = .solid(color:  UserDefaultsManager.theme.backgroundColor)
+            appearance.style.background = .solid(color: ThemeManager.currentThemeIndex == 0 ? Theme.light.backgroundColor : Theme.dark.backgroundColor)
         })
         self.bar.location = .top
         self.bar.style = .buttonBar
         self.bar.items = [Item(title: "ASSETS"),
                           Item(title: "TRANSACTIONS"),
                           Item(title: "CONTACTS")]
-
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "qrCode-button"), style: .plain, target: self, action: #selector(myAddressTapped(_:)))
+        self.view.theme_backgroundColor = O3Theme.backgroundColorPicker
 
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        applyNavBarTheme()
+        super.viewWillAppear(animated)
     }
 
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {

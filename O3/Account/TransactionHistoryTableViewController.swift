@@ -9,7 +9,7 @@
 import UIKit
 import NeoSwift
 
-class TransactionHistoryTableViewController: ThemedTableViewController {
+class TransactionHistoryTableViewController: UITableViewController {
 
     var transactionHistory = [TransactionHistoryEntry]()
     func loadTransactionHistory() {
@@ -32,6 +32,8 @@ class TransactionHistoryTableViewController: ThemedTableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        tableView.theme_separatorColor = O3Theme.tableSeparatorColorPicker
         self.loadTransactionHistory()
         tableView.refreshControl = UIRefreshControl()
         tableView.refreshControl?.addTarget(self, action: #selector(reloadData), for: .valueChanged)
@@ -63,6 +65,7 @@ class TransactionHistoryTableViewController: ThemedTableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "transactionCell") as? TransactionCell else {
             fatalError("Undefined table view behavior")
         }
+        cell.selectionStyle = .none
         cell.data = transactionCellData
         return cell
 

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class TransactionCell: ThemedTableCell {
+class TransactionCell: UITableViewCell {
     enum TransactionType: String {
         case send = "Sent"
         case claim = "Claimed"
@@ -32,18 +32,18 @@ class TransactionCell: ThemedTableCell {
     @IBOutlet weak var amountLabel: UILabel!
 
     override func awakeFromNib() {
-        titleLabels = [assetLabel]
-        subtitleLabels = [addressLabel]
+        assetLabel.theme_textColor = O3Theme.titleColorPicker
+        addressLabel.theme_textColor = O3Theme.lightTextColorPicker
+        contentView.theme_backgroundColor = O3Theme.backgroundColorPicker
         super.awakeFromNib()
     }
 
     var data: TransactionData? {
         didSet {
-            applyTheme()
             assetLabel.text = data?.asset.uppercased()
             addressLabel.text = data?.address
             amountLabel.text = data?.amount.stringWithSign((data?.precision)!)
-            amountLabel.textColor = data?.amount ?? 0 <= 0 ? UserDefaultsManager.theme.negativeLossColor : UserDefaultsManager.theme.positiveGainColor
+            amountLabel.theme_textColor = data?.amount ?? 0 <= 0 ? O3Theme.negativeLossColorPicker : O3Theme.positiveGainColorPicker
         }
     }
 }

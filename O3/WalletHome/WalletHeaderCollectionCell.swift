@@ -41,7 +41,7 @@ class WalletHeaderCollectionCell: UICollectionViewCell {
             }
             switch portfolio {
             case .readOnly:
-                walletHeaderLabel.text = "OZONE WALLET"
+                walletHeaderLabel.text = "O3 WALLET"
                 leftButton.isHidden = true
                 rightButton.isHidden = false
             case .readOnlyAndWritable:
@@ -56,10 +56,10 @@ class WalletHeaderCollectionCell: UICollectionViewCell {
             switch referenceCurrency {
             case .btc:
                 portfolioValueLabel.text = String(format: "%.8fBTC", latestPrice.averageBTC)
-                percentChangeLabel.textColor = latestPrice.averageBTC >= previousPrice.averageBTC ? UserDefaultsManager.theme.positiveGainColor : UserDefaultsManager.theme.negativeLossColor
-            case .usd:
-                portfolioValueLabel.text = USD(amount: Float(latestPrice.averageUSD)).formattedString()
-                percentChangeLabel.textColor = latestPrice.averageUSD >= previousPrice.averageUSD ? UserDefaultsManager.theme.positiveGainColor : UserDefaultsManager.theme.negativeLossColor
+                percentChangeLabel.theme_textColor = latestPrice.averageBTC >= previousPrice.averageBTC ? O3Theme.positiveGainColorPicker : O3Theme.negativeLossColorPicker
+            default:
+                portfolioValueLabel.text = latestPrice.averageFiatMoney().formattedString()
+                percentChangeLabel.theme_textColor = latestPrice.average >= previousPrice.average ? O3Theme.positiveGainColorPicker : O3Theme.negativeLossColorPicker
             }
             percentChangeLabel.text = String.percentChangeString(latestPrice: latestPrice, previousPrice: previousPrice,
                                                                  with: selectedInterval, referenceCurrency: referenceCurrency)

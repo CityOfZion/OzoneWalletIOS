@@ -8,21 +8,23 @@
 
 import UIKit
 
-class NativeAssetTableViewCell: ThemedTableCell {
+class NativeAssetTableViewCell: UITableViewCell {
 
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var amountLabel: UILabel!
     @IBOutlet weak var cardView: UIView!
 
     override func awakeFromNib() {
-        titleLabels = [titleLabel, amountLabel]
-        backgroundViews = [cardView]
+        titleLabel.theme_textColor = O3Theme.titleColorPicker
+        amountLabel.theme_textColor = O3Theme.titleColorPicker
+        cardView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        contentView.theme_backgroundColor = O3Theme.backgroundColorPicker
         super.awakeFromNib()
     }
 
     override func layoutSubviews() {
+        cardView.theme_backgroundColor = O3Theme.backgroundColorPicker
         super.layoutSubviews()
-        applyTheme()
     }
 
 }

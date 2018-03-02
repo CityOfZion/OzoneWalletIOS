@@ -10,18 +10,22 @@ import Foundation
 import UIKit
 import Kingfisher
 
-class NewsFeedViewController: ThemedViewController, UITableViewDelegate, UITableViewDataSource {
+class NewsFeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var newsFeedTableView: UITableView!
     var feedData: FeedData?
     var urlToLoad = ""
 
     func setThemedElements() {
-        themedTableViews = [newsFeedTableView]
-        themedBackgroundViews = [view]
+        applyNavBarTheme()
+        newsFeedTableView.theme_separatorColor = O3Theme.tableSeparatorColorPicker
+        newsFeedTableView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        view.theme_backgroundColor = O3Theme.backgroundColorPicker
+
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setThemedElements()
         newsFeedTableView.dataSource = self
         newsFeedTableView.delegate = self
         newsFeedTableView.tableFooterView = UIView(frame: .zero)

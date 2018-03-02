@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NEP5TokenTableViewCell: ThemedTableCell {
+class NEP5TokenTableViewCell: UITableViewCell {
 
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var subtitleLabel: UILabel!
@@ -17,13 +17,16 @@ class NEP5TokenTableViewCell: ThemedTableCell {
     @IBOutlet weak var cardView: CardView!
 
     override func awakeFromNib() {
-        titleLabels = [titleLabel, amountLabel]
-        backgroundViews = [cardView]
+        titleLabel.theme_textColor = O3Theme.titleColorPicker
+        amountLabel.theme_textColor = O3Theme.titleColorPicker
+        cardView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        contentView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        loadingView?.theme_activityIndicatorViewStyle = O3Theme.activityIndicatorColorPicker
         super.awakeFromNib()
     }
 
     override func layoutSubviews() {
+        cardView.theme_backgroundColor = O3Theme.backgroundColorPicker
         super.layoutSubviews()
-        applyTheme()
     }
 }

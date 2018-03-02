@@ -8,16 +8,16 @@
 
 import UIKit
 
-class HeaderTableViewCell: ThemedTableCell {
+class HeaderTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
 
     override func awakeFromNib() {
-        titleLabels = [titleLabel]
+        titleLabel.theme_textColor = O3Theme.titleColorPicker
+        contentView.theme_backgroundColor = O3Theme.backgroundColorPicker
         super.awakeFromNib()
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        applyTheme()
     }
 }

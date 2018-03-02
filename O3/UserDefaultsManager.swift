@@ -57,16 +57,18 @@ class UserDefaultsManager {
         }
     }
 
-    private static let selectedThemeKey = "selectedThemeKey"
-    static var theme: Theme {
+    private static let selectedThemeIndexKey = "selectedThemeIndex"
+    static var themeIndex: Int {
         get {
-            let stringValue = UserDefaults.standard.string(forKey: selectedThemeKey)!
-            return Theme(rawValue: stringValue)!
+            let intValue = UserDefaults.standard.integer(forKey: selectedThemeIndexKey)
+            if intValue != 0 && intValue != 1 {
+                return 0
+            }
+            return intValue
         }
         set {
-            UserDefaults.standard.set(newValue.rawValue, forKey: selectedThemeKey)
+            UserDefaults.standard.set(newValue, forKey: selectedThemeIndexKey)
             UserDefaults.standard.synchronize()
-            NotificationCenter.default.post(name: Notification.Name("ChangedTheme"), object: nil)
         }
     }
 
@@ -91,6 +93,19 @@ class UserDefaultsManager {
         set {
             UserDefaults.standard.set(newValue, forKey: o3WalletAddressKey)
             UserDefaults.standard.synchronize()
+        }
+    }
+
+    private static let referenceFiatCurrencyKey = "referenceCurrencyKey"
+    static var referenceFiatCurrency: Currency {
+        get {
+            let stringValue = UserDefaults.standard.string(forKey: referenceFiatCurrencyKey)
+            return Currency(rawValue: stringValue!)!
+        }
+        set {
+            UserDefaults.standard.set(newValue.rawValue, forKey: referenceFiatCurrencyKey)
+            UserDefaults.standard.synchronize()
+            NotificationCenter.default.post(name: Notification.Name("ChangedReferenceCurrency"), object: nil)
         }
     }
 

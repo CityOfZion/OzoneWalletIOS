@@ -12,6 +12,7 @@ import CoreData
 import Reachability
 import Fabric
 import Crashlytics
+import SwiftTheme
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,20 +24,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Channel.setup(withApplicationId: "app_gUHDmimXT8oXRSpJvCxrz5DZvUisko_mliB61uda9iY")
     }
 
-    func setupApperances() {
-        UIBarButtonItem.appearance().setTitleTextAttributes([
-            NSAttributedStringKey.font: ThemeManager.barButtonItemFont,
-            NSAttributedStringKey.foregroundColor: UserDefaultsManager.theme.primaryColor], for: .normal)
-        UINavigationBar.appearance().largeTitleTextAttributes = [
-            NSAttributedStringKey.foregroundColor: UserDefaultsManager.theme.textColor,
-            NSAttributedStringKey.font: UIFont(name: "Avenir-Heavy", size: 32) as Any]
+    static func setNavbarAppearance() {
+        UINavigationBar.appearance().theme_largeTitleTextAttributes = O3Theme.largeTitleAttributesPicker
+        UINavigationBar.appearance().theme_titleTextAttributes =
+            O3Theme.regularTitleAttributesPicker
+        UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().theme_barTintColor = O3Theme.navBarColorPicker
+        UINavigationBar.appearance().theme_backgroundColor = O3Theme.navBarColorPicker
+        UIApplication.shared.theme_setStatusBarStyle(O3Theme.statusBarStylePicker, animated: true)
     }
 
     func registerDefaults() {
         let userDefaultsDefaults: [String: Any] = [
             "networkKey": "main",
             "usedDefaultSeedKey": false,
-            "selectedThemeKey": Theme.light.rawValue
+            "selectedThemeKey": Theme.light.rawValue,
+            "referenceCurrencyKey": Currency.usd.rawValue
         ]
         UserDefaults.standard.register(defaults: userDefaultsDefaults)
     }
@@ -70,8 +73,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.with([Crashlytics.self])
         self.registerDefaults()
         self.setupChannel()
-        self.setupApperances()
         self.setupReachability()
+        AppDelegate.setNavbarAppearance()
 
         //check if there is an existing wallet in keychain
         //if so, present LoginToCurrentWalletViewController
@@ -82,7 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 window.rootViewController = login
             }
         }
-
+        //Onboarding Theme
         return true
     }
 

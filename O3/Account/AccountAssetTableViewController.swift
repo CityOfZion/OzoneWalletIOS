@@ -10,8 +10,9 @@ import UIKit
 import NeoSwift
 import PKHUD
 import Cache
+import SwiftTheme
 
-class AccountAssetTableViewController: ThemedTableViewController {
+class AccountAssetTableViewController: UITableViewController {
 
     private enum sections: Int {
         case unclaimedGAS = 0
@@ -40,13 +41,30 @@ class AccountAssetTableViewController: ThemedTableViewController {
         }
     }
 
+    @objc func reloadCells() {
+        DispatchQueue.main.async { self.tableView.reloadData() }
+    }
+
+    func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadNEP5TokensSection), name: NSNotification.Name(rawValue: "halfModalDismissed"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadCells), name: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil)
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name(rawValue: ThemeUpdateNotification), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name(rawValue: "halfModalDismissed"), object: nil)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        addObservers()
+        self.view.theme_backgroundColor = O3Theme.backgroundColorPicker
+        self.tableView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        applyNavBarTheme()
         initiateCache()
         loadSelectedNEP5Tokens()
         loadClaimableGAS()
         loadAccountState()
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadNEP5TokensSection), name: NSNotification.Name(rawValue: "halfModalDismissed"), object: nil)
         refreshClaimableGasTimer = Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(AccountAssetTableViewController.loadClaimableGAS), userInfo: nil, repeats: true)
         refreshClaimableGasTimer?.fire()
         tableView.refreshControl = UIRefreshControl()
@@ -326,7 +344,9 @@ class AccountAssetTableViewController: ThemedTableViewController {
         if indexPath.section == sections.unclaimedGAS.rawValue {
 
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell-unclaimedgas") as? UnclaimedGASTableViewCell else {
-                return UITableViewCell()
+                let cell =  UITableViewCell()
+                cell.theme_backgroundColor = O3Theme.backgroundColorPicker
+                return cell
             }
             cell.delegate = self
             return cell
@@ -334,7 +354,9 @@ class AccountAssetTableViewController: ThemedTableViewController {
 
         if indexPath.section == sections.nativeAssets.rawValue {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell-nativeasset") as? NativeAssetTableViewCell else {
-                return UITableViewCell()
+                let cell =  UITableViewCell()
+                cell.theme_backgroundColor = O3Theme.backgroundColorPicker
+                return cell
             }
 
             //NEO
@@ -352,7 +374,9 @@ class AccountAssetTableViewController: ThemedTableViewController {
         }
 
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell-nep5token") as? NEP5TokenTableViewCell else {
-            return UITableViewCell()
+            let cell =  UITableViewCell()
+            cell.theme_backgroundColor = O3Theme.backgroundColorPicker
+            return cell
         }
         let list = Array(selectedNEP5Tokens.values)
         let token = list[indexPath.row]

@@ -19,9 +19,9 @@ class Money: NSObject {
     }
 }
 
-class USD: Money {
+class Fiat: Money {
     init(amount: Float) {
-        super.init(amount: amount, locale: "en_US")
+        super.init(amount: amount, locale: UserDefaultsManager.referenceFiatCurrency.locale)
     }
 }
 

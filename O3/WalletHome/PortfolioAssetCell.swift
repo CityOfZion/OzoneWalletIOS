@@ -8,8 +8,9 @@
 
 import Foundation
 import UIKit
+import SwiftTheme
 
-class PortfolioAssetCell: ThemedTableCell {
+class PortfolioAssetCell: UITableViewCell {
     @IBOutlet weak var assetTitleLabel: UILabel!
     @IBOutlet weak var assetAmountLabel: UILabel!
     @IBOutlet weak var assetFiatPriceLabel: UILabel!
@@ -25,14 +26,17 @@ class PortfolioAssetCell: ThemedTableCell {
     }
 
     override func awakeFromNib() {
-        titleLabels = [assetTitleLabel, assetAmountLabel, assetFiatAmountLabel]
-        subtitleLabels = [assetFiatPriceLabel]
+        let titleLabels = [assetTitleLabel, assetAmountLabel, assetFiatAmountLabel]
+        contentView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        for label in titleLabels {
+            label?.theme_textColor = O3Theme.titleColorPicker
+        }
+        assetFiatPriceLabel.theme_textColor = O3Theme.lightTextColorPicker
         super.awakeFromNib()
     }
 
     var data: PortfolioAssetCell.Data? {
         didSet {
-            applyTheme()
             guard let assetName = data?.assetName,
                 let amount = data?.amount,
                 let referenceCurrency = data?.referenceCurrency,
@@ -44,19 +48,19 @@ class PortfolioAssetCell: ThemedTableCell {
             assetAmountLabel.text = amount.description
 
             let precision = referenceCurrency == .btc ? Precision.btc : Precision.usd
-            let referencePrice = referenceCurrency == .btc ? latestPrice.averageBTC : latestPrice.averageUSD
-            let referenceFirstPrice = referenceCurrency == .btc ? firstPrice.averageBTC : firstPrice.averageUSD
+            let referencePrice = referenceCurrency == .btc ? latestPrice.averageBTC : latestPrice.average
+            let referenceFirstPrice = referenceCurrency == .btc ? firstPrice.averageBTC : firstPrice.average
 
             assetFiatPriceLabel.text = referencePrice.string(precision)
             assetFiatAmountLabel.text = (referencePrice * Double(amount)).string(precision)
             //format USD properly
             if referenceCurrency == .usd {
-                assetFiatPriceLabel.text = USD(amount: Float(referencePrice)).formattedString()
+                assetFiatPriceLabel.text = Fiat(amount: Float(referencePrice)).formattedString()
             }
 
             assetPercentChangeLabel.text = String.percentChangeStringShort(latestPrice: latestPrice, previousPrice: firstPrice,
                                                                            referenceCurrency: referenceCurrency)
-            assetPercentChangeLabel.textColor = referencePrice >= referenceFirstPrice ? UserDefaultsManager.theme.positiveGainColor : UserDefaultsManager.theme.negativeLossColor
+            assetPercentChangeLabel.theme_textColor = referencePrice >= referenceFirstPrice ? O3Theme.positiveGainColorPicker : O3Theme.negativeLossColorPicker
         }
     }
 }
