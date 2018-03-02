@@ -12,8 +12,9 @@ import ScrollableGraphView
 import NeoSwift
 import Channel
 import PKHUD
+import SwiftTheme
 
-class HomeViewController: ThemedViewController, UITableViewDelegate, UITableViewDataSource, GraphPanDelegate, ScrollableGraphViewDataSource, HomeViewModelDelegate {
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, GraphPanDelegate, ScrollableGraphViewDataSource, HomeViewModelDelegate {
 
     // Settings for price graph interval
     @IBOutlet weak var walletHeaderCollectionView: UICollectionView!
@@ -50,10 +51,16 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
     var displayedAssets = [TransferableAsset]()
 
     func addThemedElements() {
-        themedTableViews = [assetsTable]
-        themedCollectionViews = [walletHeaderCollectionView]
-        themedTransparentButtons = [fiveMinButton, fifteenMinButton, thirtyMinButton, sixtyMinButton, oneDayButton, allButton]
-        themedBackgroundViews = [graphViewContainer]
+        applyNavBarTheme()
+        graphLoadingIndicator.theme_activityIndicatorViewStyle = O3Theme.activityIndicatorColorPicker
+        view.theme_backgroundColor = O3Theme.backgroundColorPicker
+        assetsTable.theme_separatorColor = O3Theme.tableSeparatorColorPicker
+        walletHeaderCollectionView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        let themedTransparentButtons = [fiveMinButton, fifteenMinButton, thirtyMinButton, sixtyMinButton, oneDayButton, allButton]
+        for button in themedTransparentButtons {
+            button?.theme_backgroundColor = O3Theme.backgroundColorPicker
+            button?.theme_setTitleColor(O3Theme.primaryColorPicker, forState: UIControlState())
+        }
     }
 
     func loadWatchAddresses() -> [WatchAddress] {
@@ -84,6 +91,7 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
             self.graphView.removeFromSuperview()
             self.panView.removeFromSuperview()
             self.setupGraphView()
+            self.getBalance()
         }
     }
 
@@ -109,7 +117,7 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
 
     func panEnded() {
         selectedPrice = self.portfolio?.data.first
-        walletHeaderCollectionView.reloadData()
+        DispatchQueue.main.async { self.walletHeaderCollectionView.reloadData() }
     }
 
     func addObservers() {
@@ -117,20 +125,26 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
         NotificationCenter.default.addObserver(self, selector: #selector(self.getBalance), name: Notification.Name("ChangedReferenceCurrency"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.getBalance), name: Notification.Name("UpdatedWatchOnlyAddress"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.getBalance), name: Notification.Name("AddedNewToken"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.updateGraphAppearance), name: Notification.Name("ChangedTheme"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.removeObservers), name: Notification.Name("loggedOut"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateGraphAppearance(_:)), name: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil)
+    }
+
+    @objc func removeObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.removeObservers), name: Notification.Name("loggedOut"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("ChangedNetwork"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("UpdatedWatchOnlyAddress"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("ChangedReferenceCurrency"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("AddedNewToken"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name(rawValue: ThemeUpdateNotification), object: nil)
     }
 
     deinit {
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("ChangedNetwork"), object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("UpdatedWatchOnlyAddress"), object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("ChangedTheme"), object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("ChangedReferenceCurrency"), object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("AddedNewToken"), object: nil)
+        removeObservers()
     }
 
     override func viewDidLoad() {
+        ThemeManager.setTheme(index: UserDefaultsManager.themeIndex)
         addThemedElements()
-        super.viewDidLoad()
         addObservers()
         activatedLineCenterXAnchor = activatedLine.centerXAnchor.constraint(equalTo: fifteenMinButton.centerXAnchor, constant: 0)
         activatedLineCenterXAnchor?.isActive = true
@@ -153,6 +167,12 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
         //control the size of the graph area here
         self.assetsTable.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height * 0.5)
         setupGraphView()
+        super.viewDidLoad()
+
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -184,11 +204,11 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
     func updateWithPortfolioData(_ portfolio: PortfolioValue) {
         DispatchQueue.main.async {
             self.portfolio = portfolio
-            self.graphView.reload()
             self.selectedPrice = portfolio.data.first
             self.walletHeaderCollectionView.reloadData()
             self.assetsTable.reloadData()
 
+            self.graphView.reload()
             if self.firstTimeGraphLoad {
                 self.graphView.reload()
                 self.firstTimeGraphLoad = false
@@ -208,7 +228,9 @@ class HomeViewController: ThemedViewController, UITableViewDelegate, UITableView
         let asset = self.displayedAssets[indexPath.row]
         guard let latestPrice = portfolio?.price[asset.symbol ?? ""],
             let firstPrice = portfolio?.firstPrice[asset.symbol ?? ""] else {
-                return UITableViewCell()
+                let blankCell =  UITableViewCell()
+                blankCell.theme_backgroundColor = O3Theme.backgroundColorPicker
+                return blankCell
         }
 
         cell.data = PortfolioAssetCell.Data(assetName: asset.symbol ?? "",
@@ -354,9 +376,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         default:
             homeviewModel?.setReferenceCurrency(.btc)
         }
-        collectionView.reloadData()
-        assetsTable.reloadData()
-        graphView.reload()
+        DispatchQueue.main.async {
+            collectionView.reloadData()
+            self.assetsTable.reloadData()
+            self.graphView.reload()
+        }
     }
 
     func indexToPortfolioType(_ index: Int) -> PortfolioType {

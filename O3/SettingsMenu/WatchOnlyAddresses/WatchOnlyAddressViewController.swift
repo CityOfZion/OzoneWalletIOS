@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Channel
 
-class WatchOnlyAddressViewController: ThemedViewController, UITableViewDelegate, UITableViewDataSource, AddressAddDelegate, AddAddressCellDelegate, HalfModalPresentable {
+class WatchOnlyAddressViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddressAddDelegate, AddAddressCellDelegate, HalfModalPresentable {
     @IBOutlet weak var tableView: UITableView!
     var watchAddresses = [WatchAddress]()
 
@@ -23,7 +23,10 @@ class WatchOnlyAddressViewController: ThemedViewController, UITableViewDelegate,
     }
 
     func setThemedElements() {
-        themedTableViews = [tableView]
+        tableView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        tableView.theme_separatorColor = O3Theme.tableSeparatorColorPicker
+        view.theme_backgroundColor = O3Theme.backgroundColorPicker
+        applyNavBarTheme()
     }
 
     override func viewDidLoad() {

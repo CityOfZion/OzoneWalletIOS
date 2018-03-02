@@ -10,12 +10,14 @@ import Foundation
 import Foundation
 import UIKit
 
-class AddressBookEntryTableViewCell: ThemedTableCell {
+class AddressBookEntryTableViewCell: UITableViewCell {
     @IBOutlet weak var addressNameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
 
     override func awakeFromNib() {
-        subtitleLabels = [addressLabel]
+        addressLabel.theme_textColor = O3Theme.lightTextColorPicker
+        contentView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        theme_backgroundColor = O3Theme.backgroundColorPicker
         super.awakeFromNib()
     }
 
@@ -26,7 +28,6 @@ class AddressBookEntryTableViewCell: ThemedTableCell {
 
     var data: AddressBookEntryTableViewCell.Data? {
         didSet {
-            applyTheme()
             addressNameLabel.text = data?.addressName ?? ""
             addressLabel.text = data?.address ?? ""
         }

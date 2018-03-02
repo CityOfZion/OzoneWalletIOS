@@ -7,20 +7,16 @@
 //
 
 import UIKit
+import SwiftTheme
 
 class WalletHomeNavigationController: UINavigationController {
-
     override func viewDidLoad() {
+        DispatchQueue.main.async {
+            UIApplication.shared.theme_setStatusBarStyle(ThemeStatusBarStylePicker(styles: Theme.light.statusBarStyle, Theme.dark.statusBarStyle), animated: true)
+            self.setNeedsStatusBarAppearanceUpdate()
+            self.navigationController?.hideHairline()
+            self.navigationController?.navigationItem.largeTitleDisplayMode = .automatic
+        }
         super.viewDidLoad()
-        UIApplication.shared.statusBarStyle = UserDefaultsManager.theme.statusBarStyle
-        setNeedsStatusBarAppearanceUpdate()
-        self.hideHairline()
-        self.navigationItem.largeTitleDisplayMode = .automatic
-        self.navigationBar.barTintColor = UserDefaultsManager.theme.backgroundColor
-
-        self.navigationBar.isTranslucent = false
-        self.navigationBar.backgroundColor = UserDefaultsManager.theme.backgroundColor
-        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white,
-                                                                        NSAttributedStringKey.font: ThemeManager.largeTitleFont]
     }
 }

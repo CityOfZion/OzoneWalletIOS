@@ -9,33 +9,14 @@
 import Foundation
 import UIKit
 import DeckTransition
+import SwiftTheme
 
 class O3TabBarController: UITabBarController {
     var halfModalTransitioningDelegate: HalfModalTransitioningDelegate?
 
-    func addThemeObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.updateAppearance), name: Notification.Name("ChangedTheme"), object: nil)
-    }
-
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("ChangedTheme"), object: nil)
-    }
-
-    @objc func updateAppearance(_ sender: Any?) {
-        DispatchQueue.main.async {
-            if UserDefaultsManager.theme == .dark {
-                self.tabBar.barStyle = .black
-            } else {
-                self.tabBar.barStyle = .default
-            }
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        addThemeObserver()
-
-        updateAppearance(nil)
+        tabBar.theme_barStyle = O3Theme.tabBarStylePicker
         tabBar.items?[4].image = UIImage(named: "cog")?.withRenderingMode(.alwaysOriginal)
         tabBar.items?[4].title = ""
         tabBar.items?[4].imageInsets = UIEdgeInsets(top: 0, left: 0, bottom: -10, right: 0)
@@ -63,7 +44,7 @@ class O3TabBarController: UITabBarController {
         menuButtonFrame.origin.x = tabBar.bounds.width/2 - menuButtonFrame.size.width/2
         menuButton.frame = menuButtonFrame
 
-        menuButton.backgroundColor = UserDefaultsManager.theme.lightTextColor
+        menuButton.theme_backgroundColor = O3Theme.lightTextColorPicker
         menuButton.tintColor = UIColor.white
         menuButton.layer.cornerRadius = menuButtonFrame.height/2
 
@@ -125,13 +106,13 @@ class O3TabBarController: UITabBarController {
     }
 
     @objc func tappedSettingsTab() {
-        self.performSegue(withIdentifier: "segueToSettings", sender: nil)
+       self.performSegue(withIdentifier: "segueToSettings", sender: nil)
     }
 
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         guard let index = tabBar.items?.index(of: item) else { return }
         if index == 4 {
-            self.performSegue(withIdentifier: "segueToSettings", sender: nil)
+           self.performSegue(withIdentifier: "segueToSettings", sender: nil)
         }
     }
 

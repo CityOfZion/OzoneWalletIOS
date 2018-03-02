@@ -13,7 +13,7 @@ protocol AssetSelectorDelegate {
     func assetSelected(selected: TransferableAsset, gasBalance: Decimal)
 }
 
-class AssetSelectorTableViewController: ThemedTableViewController {
+class AssetSelectorTableViewController: UITableViewController {
 
     var accountState: AccountState!
     var delegate: AssetSelectorDelegate?
@@ -31,8 +31,15 @@ class AssetSelectorTableViewController: ThemedTableViewController {
 
     var transferableGAS: TransferableAsset! = TransferableAsset(assetID: NeoSwift.AssetId.gasAssetId.rawValue, name: "GAS", symbol: "GAS", assetType: AssetType.nativeAsset, decimal: 0, balance: 0.0)
 
+    func addThemedElements() {
+        applyNavBarTheme()
+        tableView.theme_separatorColor = O3Theme.tableSeparatorColorPicker
+        view.theme_backgroundColor = O3Theme.backgroundColorPicker
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        addThemedElements()
         self.title = NSLocalizedString("Select Asset", comment: "")
         selectedNEP5Tokens = UserDefaultsManager.selectedNEP5Token!
         for token in selectedNEP5Tokens {

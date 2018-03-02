@@ -14,6 +14,7 @@ class FirstTimeLoginViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Login"
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.hideHairline()
         setNeedsStatusBarAppearanceUpdate()
     }
 

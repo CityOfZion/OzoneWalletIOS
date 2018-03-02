@@ -9,12 +9,14 @@
 import Foundation
 import UIKit
 
-class WatchOnlyAddressTableViewCell: ThemedTableCell {
+class WatchOnlyAddressTableViewCell: UITableViewCell {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var nicknameLabel: UILabel!
 
     override func awakeFromNib() {
-        subtitleLabels = [addressLabel]
+        addressLabel.theme_textColor = O3Theme.lightTextColorPicker
+        contentView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        theme_backgroundColor = O3Theme.backgroundColorPicker
         super.awakeFromNib()
     }
 
@@ -25,7 +27,6 @@ class WatchOnlyAddressTableViewCell: ThemedTableCell {
 
     var data: Data? {
         didSet {
-            applyTheme()
             addressLabel.text = data?.address ?? ""
             nicknameLabel.text = data?.addressName ?? ""
         }

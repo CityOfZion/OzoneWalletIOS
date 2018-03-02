@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import NeoSwift
 
-class NetworkTableViewController: ThemedTableViewController, NetworkSeedCellDelegate {
+class NetworkTableViewController: UITableViewController, NetworkSeedCellDelegate {
     var testNodes = (NEONetworkMonitor.sharedInstance.network?.testNet.nodes)!
     var mainNodes = (NEONetworkMonitor.sharedInstance.network?.mainNet.nodes)!
     var tableNodes: [NEONode] {
@@ -52,6 +52,7 @@ class NetworkTableViewController: ThemedTableViewController, NetworkSeedCellDele
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.theme_separatorColor = O3Theme.tableSeparatorColorPicker
         navigationItem.title = "Network"
         updateNodeData()
 
@@ -77,11 +78,13 @@ class NetworkTableViewController: ThemedTableViewController, NetworkSeedCellDele
             cell.delegate = self
             cell.networkTypeButton.setTitle(UserDefaultsManager.network.rawValue, for: UIControlState())
             cell.seedTypeButton.setTitle(UserDefaultsManager.useDefaultSeed == true ? "Default": "Custom", for: UIControlState())
+            cell.selectionStyle = .none
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "networkSeedCell") as? NetworkSeedCell else {
                 fatalError("Undefined cell behavior")
             }
+            cell.selectionStyle = .none
             cell.delegate = self
             cell.node = tableNodes[indexPath.row]
             return cell

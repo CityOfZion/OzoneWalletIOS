@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftTheme
 
 extension UIViewController {
     func presentFromEmbedded(_ toPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?) {
@@ -29,5 +30,14 @@ extension UIViewController {
 
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+
+    func applyNavBarTheme() {
+        DispatchQueue.main.async {
+            UIApplication.shared.theme_setStatusBarStyle(ThemeStatusBarStylePicker(styles: Theme.light.statusBarStyle, Theme.dark.statusBarStyle), animated: true)
+            self.setNeedsStatusBarAppearanceUpdate()
+            self.navigationController?.hideHairline()
+            self.navigationController?.navigationItem.largeTitleDisplayMode = .automatic
+        }
     }
 }

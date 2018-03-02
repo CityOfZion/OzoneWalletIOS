@@ -12,6 +12,7 @@ import NeoSwift
 import Channel
 import KeychainAccess
 import PKHUD
+import SwiftTheme
 
 class LoginTableViewController: UITableViewController, QRScanDelegate {
     @IBOutlet weak var wifTextField: UITextView!
@@ -32,8 +33,9 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 1))
+        self.navigationController?.hideHairline()
         setNeedsStatusBarAppearanceUpdate()
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 1))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "cameraAlt"), style: .plain, target: self, action: #selector(qrScanTapped(_:)))
         self.wifTextField.delegate = self
         self.checkToProceed()
@@ -69,11 +71,20 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
                     try keychain
                         .accessibility(.whenPasscodeSetThisDeviceOnly, authenticationPolicy: .userPresence)
                         .set(account.wif, key: "ozonePrivateKey")
-                    DispatchQueue.main.async { self.performSegue(withIdentifier: "segueToMainFromLogin", sender: nil) }
+                    SwiftTheme.ThemeManager.setTheme(index: UserDefaultsManager.themeIndex)
+                    self.instantiateMainAsNewRoot()
                 } catch _ {
                     return
                 }
             }
+        }
+    }
+
+    func instantiateMainAsNewRoot() {
+        loadWatchAddresses()
+        Authenticated.watchOnlyAddresses = watchAddresses.map {$0.address ?? ""}
+        DispatchQueue.main.async {
+            UIApplication.shared.keyWindow?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
         }
     }
 
@@ -87,9 +98,6 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
                 fatalError("Undefined segue behavior")
             }
             dest.delegate = self
-        } else {
-            loadWatchAddresses()
-            Authenticated.watchOnlyAddresses = watchAddresses.map {$0.address ?? ""}
         }
     }
 

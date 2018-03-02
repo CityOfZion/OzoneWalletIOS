@@ -25,11 +25,18 @@ class AddressSelectTableViewController: UITableViewController, HalfModalPresenta
         }
     }
 
+    func addTheme() {
+        tableView.theme_separatorColor = O3Theme.tableSeparatorColorPicker
+        tableView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        applyNavBarTheme()
+    }
+
     override func viewDidLoad() {
+        addTheme()
         super.viewDidLoad()
-        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
         loadContacts()
         tableView.reloadData()
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

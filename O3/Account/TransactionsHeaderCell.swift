@@ -9,17 +9,17 @@
 import Foundation
 import UIKit
 
-class TransactionsHeaderCell: ThemedTableCell {
+class TransactionsHeaderCell: UITableViewCell {
     @IBOutlet weak var historyTitleLabel: UILabel!
 
     override func awakeFromNib() {
-        titleLabels = [historyTitleLabel]
+        historyTitleLabel.theme_textColor = O3Theme.titleColorPicker
+        contentView.theme_backgroundColor = O3Theme.backgroundColorPicker
         super.awakeFromNib()
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        applyTheme()
         historyTitleLabel.text = "Transaction history"
     }
 }

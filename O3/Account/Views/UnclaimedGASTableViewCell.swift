@@ -12,7 +12,7 @@ protocol UnclaimGASDelegate {
     func claimButtonTapped()
 }
 
-class UnclaimedGASTableViewCell: ThemedTableCell {
+class UnclaimedGASTableViewCell: UITableViewCell {
 
     var delegate: UnclaimGASDelegate?
     @IBOutlet weak var cardView: CardView!
@@ -24,8 +24,9 @@ class UnclaimedGASTableViewCell: ThemedTableCell {
     }
     @IBOutlet var headerLabel: UILabel!
     override func awakeFromNib() {
-        titleLabels = [amountLabel]
-        backgroundViews = [cardView]
+        amountLabel.theme_textColor = O3Theme.titleColorPicker
+        cardView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        contentView.theme_backgroundColor = O3Theme.backgroundColorPicker
         super.awakeFromNib()
     }
 
@@ -36,7 +37,7 @@ class UnclaimedGASTableViewCell: ThemedTableCell {
     }
 
     override func layoutSubviews() {
+        cardView.theme_backgroundColor = O3Theme.backgroundColorPicker
         super.layoutSubviews()
-        applyTheme()
     }
 }

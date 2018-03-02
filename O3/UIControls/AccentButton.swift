@@ -14,22 +14,22 @@ class AccentButton: UIButton {
 
     override var isEnabled: Bool {
         didSet {
-            self.backgroundColor = isEnabled == true ?  UserDefaultsManager.theme.accentColor : UserDefaultsManager.theme.disabledColor
+            self.theme_backgroundColor = isEnabled == true ?  O3Theme.accentColorPicker : O3Theme.disabledColorPicker
             if shadowLayer != nil {
                 shadowLayer.shadowOpacity = isEnabled == true ? 0.8 : 0
-                shadowLayer.fillColor = isEnabled == true ? UserDefaultsManager.theme.accentColor.cgColor : UIColor.clear.cgColor
+                shadowLayer.fillColor = isEnabled == true ? Theme.light.accentColor.cgColor : UIColor.clear.cgColor
             }
         }
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.backgroundColor = isEnabled == true ? UserDefaultsManager.theme.accentColor : UserDefaultsManager.theme.disabledColor
+        self.theme_backgroundColor = isEnabled == true ? O3Theme.accentColorPicker : O3Theme.disabledColorPicker
         if shadowLayer == nil {
             shadowLayer = CAShapeLayer()
             shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: self.cornerRadius).cgPath
-            shadowLayer.fillColor = isEnabled == true ? UserDefaultsManager.theme.accentColor.cgColor : UIColor.clear.cgColor
-            shadowLayer.shadowColor = UserDefaultsManager.theme.disabledColor.cgColor
+            shadowLayer.fillColor = isEnabled == true ? Theme.light.accentColor.cgColor : UIColor.clear.cgColor
+            shadowLayer.shadowColor = Theme.light.disabledColor.cgColor
             shadowLayer.shadowPath = shadowLayer.path
             shadowLayer.shadowOffset = CGSize(width: 2.0, height: 2.0)
             shadowLayer.shadowOpacity =  isEnabled == true ? 0.8 : 0

@@ -9,7 +9,17 @@
 import Foundation
 import UIKit
 
-class CurrencyTableViewController: ThemedTableViewController {
+class CurrencyTableViewController: UITableViewController {
+
+    @IBOutlet weak var usdCell: UITableViewCell!
+    @IBOutlet weak var jpyCell: UITableViewCell!
+    @IBOutlet weak var eurCell: UITableViewCell!
+    @IBOutlet weak var krwCell: UITableViewCell!
+    @IBOutlet weak var cnyCell: UITableViewCell!
+    @IBOutlet weak var audCell: UITableViewCell!
+    @IBOutlet weak var gbpCell: UITableViewCell!
+    @IBOutlet weak var rubCell: UITableViewCell!
+
     @IBOutlet weak var usdLabel: UILabel!
     @IBOutlet weak var jpyLabel: UILabel!
     @IBOutlet weak var eurLabel: UILabel!
@@ -37,7 +47,17 @@ class CurrencyTableViewController: ThemedTableViewController {
     }
 
     func setThemedElements() {
-        themedTitleLabels = [usdLabel, usdSymbol, jpyLabel, jpySymbol, eurLabel, eurSymbol, krwLabel, krwSymbol, cnyLabel, cnySymbol, audLabel, audSymbol, gbpLabel, gbpSymbol, rubLabel, rubSymbol]
+        tableView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        tableView.theme_separatorColor = O3Theme.tableSeparatorColorPicker
+        let themedTitleLabels = [usdLabel, usdSymbol, jpyLabel, jpySymbol, eurLabel, eurSymbol, krwLabel, krwSymbol, cnyLabel, cnySymbol, audLabel, audSymbol, gbpLabel, gbpSymbol, rubLabel, rubSymbol]
+        for label in themedTitleLabels {
+            label?.theme_textColor = O3Theme.titleColorPicker
+        }
+        let themedCells = [usdCell, jpyCell, eurCell, krwCell, cnyCell, audCell, gbpCell, rubCell]
+        for cell in themedCells {
+            cell?.theme_backgroundColor = O3Theme.backgroundColorPicker
+            cell?.contentView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        }
     }
 
     override func viewDidLoad() {

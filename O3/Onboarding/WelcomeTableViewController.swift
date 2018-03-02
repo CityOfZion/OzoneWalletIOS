@@ -11,6 +11,7 @@ import UIKit
 import KeychainAccess
 import PKHUD
 import NeoSwift
+import SwiftTheme
 
 class WelcomeTableViewController: UITableViewController {
     @IBOutlet weak var privateKeyQR: UIImageView!
@@ -36,12 +37,15 @@ class WelcomeTableViewController: UITableViewController {
         }
     }
 
+    deinit {
+        print ("hello")
+    }
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
 
     @IBAction func startTapped(_ sender: Any) {
-
         OzoneAlert.confirmDialog(message: "I confirm that I have read the warning text and have backed up my private key in another secure location.", cancelTitle: "Not yet.", confirmTitle: "Confirm", didCancel: {}) {
             DispatchQueue.main.async {
                 HUD.show(.labeledProgress(title: nil, subtitle: "Selecting best node..."))
@@ -53,11 +57,11 @@ class WelcomeTableViewController: UITableViewController {
                             UserDefaultsManager.seed = bestNode!
                             UserDefaultsManager.useDefaultSeed = false
                         }
-                        DispatchQueue.main.async { self.performSegue(withIdentifier: "segueToMainFromWelcome", sender: nil) }
+                        ThemeManager.setTheme(index: UserDefaultsManager.themeIndex)
+                        UIApplication.shared.keyWindow?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
                     }
                 }
             }
         }
-
     }
 }

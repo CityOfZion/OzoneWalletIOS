@@ -7,6 +7,8 @@
 //
 import UIKit
 import Foundation
+import SwiftTheme
+
 /*
 struct Theme {
     struct Light {
@@ -167,7 +169,7 @@ enum Theme: String {
         case .light:
             return .white
         case .dark:
-            return self.backgroundColor
+            return UIColor(named: "darkThemeSecondaryBackground")!
         }
     }
 
@@ -191,7 +193,7 @@ enum Theme: String {
 }
 
 // This will let you use a theme in the app.
-class ThemeManager {
+class O3Theme {
     static let cornerRadius: CGFloat = 6.0
     static let borderWidth: CGFloat = 1.0
     static let smallText = UIFont(name: "Avenir-Book", size: 12)!
@@ -200,13 +202,77 @@ class ThemeManager {
     static let topTabbarItemFont = UIFont(name: "Avenir-Medium", size: 12)!
     static let largeTitleFont = UIFont(name: "Avenir-Heavy", size: 32)!
 
-    static func applyTheme(theme: Theme) {
-        // First persist the selected theme using NSUserDefaults.
-        UserDefaultsManager.theme = theme
-        UserDefaults.standard.synchronize()
+    //standard text and backgrounds
+    static let navBarColorPicker = ThemeColorPicker(colors: Theme.light.backgroundColor.hexString(false),
+        Theme.dark.backgroundColor.hexString(false),
+        "#2C68D2FF")
+    static let backgroundColorPicker = ThemeColorPicker(colors: Theme.light.backgroundColor.hexString(false),
+        Theme.dark.backgroundColor.hexString(false),
+        Theme.light.backgroundColor.hexString(false))
+    static let primaryColorPicker = ThemeColorPicker(colors: Theme.light.primaryColor.hexString(false),
+        Theme.dark.primaryColor.hexString(false),
+        Theme.dark.primaryColor.hexString(false))
+    static let accentColorPicker = ThemeColorPicker(colors:
+        Theme.light.accentColor.hexString(false),
+        Theme.dark.accentColor.hexString(false),
+        Theme.dark.accentColor.hexString(false))
+    static let errorColorPicker = ThemeColorPicker(colors:
+        Theme.light.errorColor.hexString(false),
+        Theme.dark.errorColor.hexString(false),
+        Theme.dark.errorColor.hexString(false))
+    static let disabledColorPicker = ThemeColorPicker(colors:
+        Theme.light.disabledColor.hexString(false),
+        Theme.dark.disabledColor.hexString(false),
+        Theme.dark.disabledColor.hexString(false))
+    static let titleColorPicker = ThemeColorPicker(colors: Theme.light.titleTextColor.hexString(false),
+        Theme.dark.titleTextColor.hexString(false),
+        Theme.dark.titleTextColor.hexString(false))
+    static let lightTextColorPicker = ThemeColorPicker(colors: Theme.light.lightTextColor.hexString(false), Theme.dark.lightTextColor.hexString(false),
+        Theme.dark.lightTextColor.hexString(false))
 
-        // You get your current (selected) theme and apply the main color to the tintColor property of your application’s window.
-        let sharedApplication = UIApplication.shared
-        sharedApplication.delegate?.window??.tintColor = UserDefaultsManager.theme.primaryColor
-    }
+    static let negativeLossColorPicker = ThemeColorPicker(colors:
+        Theme.light.negativeLossColor.hexString(false),
+        Theme.dark.negativeLossColor.hexString(false),
+        Theme.dark.negativeLossColor.hexString(false))
+
+    static let positiveGainColorPicker = ThemeColorPicker(colors:
+        Theme.light.positiveGainColor.hexString(false),
+        Theme.dark.positiveGainColor.hexString(false),
+        Theme.dark.positiveGainColor.hexString(false))
+
+    static let cardColorPicker = ThemeColorPicker(colors:
+        Theme.light.cardColor.hexString(false),
+        Theme.dark.cardColor.hexString(false),
+        Theme.dark.cardColor.hexString(false))
+
+    //title attributes
+    static let largeTitleAttributesPicker = ThemeDictionaryPicker(arrayLiteral:
+        [NSAttributedStringKey.foregroundColor.rawValue: UIColor.black,
+        NSAttributedStringKey.font.rawValue: O3Theme.largeTitleFont],
+        [NSAttributedStringKey.foregroundColor.rawValue: UIColor.white,
+        NSAttributedStringKey.font.rawValue: O3Theme.largeTitleFont],
+        [NSAttributedStringKey.foregroundColor.rawValue: UIColor.white,
+         NSAttributedStringKey.font.rawValue: O3Theme.largeTitleFont])
+
+    static let regularTitleAttributesPicker = ThemeDictionaryPicker(arrayLiteral: [NSAttributedStringKey.foregroundColor.rawValue: UIColor.black,
+        NSAttributedStringKey.font.rawValue: O3Theme.navBarTitle],
+        [NSAttributedStringKey.foregroundColor.rawValue: UIColor.white,
+        NSAttributedStringKey.font.rawValue: O3Theme.navBarTitle],
+        [NSAttributedStringKey.foregroundColor.rawValue: UIColor.white,
+         NSAttributedStringKey.font.rawValue: O3Theme.navBarTitle])
+
+    //text fields
+    static let clearTextFieldBackgroundColorPicker = ThemeColorPicker(colors: Theme.light.backgroundColor.hexString(false), Theme.dark.backgroundColor.hexString(false))
+    static let textFieldBackgroundColorPicker = ThemeColorPicker(colors: Theme.light.textFieldBackgroundColor.hexString(false), Theme.dark.textFieldBackgroundColor.hexString(false))
+    static let textFieldTextColorPicker = ThemeColorPicker(colors: Theme.light.textFieldTextColor.hexString(false), Theme.dark.textFieldTextColor.hexString(false))
+    static let keyboardPicker = ThemeKeyboardAppearancePicker(styles: .default, .dark)
+
+    //tableSeparator
+    static let tableSeparatorColorPicker = ThemeColorPicker(colors: Theme.light.seperatorColor.hexString(false), Theme.dark.seperatorColor.hexString(false))
+
+    //activity indicator
+    static let activityIndicatorColorPicker = ThemeActivityIndicatorViewStylePicker(styles: .gray, .white)
+
+    static let statusBarStylePicker = ThemeStatusBarStylePicker(styles: .default, .lightContent, .lightContent)
+    static let tabBarStylePicker = ThemeBarStylePicker(styles: .default, .black)
 }

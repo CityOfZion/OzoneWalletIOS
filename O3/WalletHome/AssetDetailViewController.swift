@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import ScrollableGraphView
 
-class AssetDetailViewController: ThemedViewController, GraphPanDelegate, ScrollableGraphViewDataSource {
+class AssetDetailViewController: UIViewController, GraphPanDelegate, ScrollableGraphViewDataSource {
 
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var percentChangeLabel: UILabel!
@@ -52,8 +52,14 @@ class AssetDetailViewController: ThemedViewController, GraphPanDelegate, Scrolla
     }
 
     func addThemedElements() {
-        themedTransparentButtons = [fiveMinButton, fifteenMinButton, thirtyMinButton, sixtyMinButton, oneDayButton, allButton]
-        themedBackgroundViews = [graphContainerView]
+        applyNavBarTheme()
+        let themedTransparentButtons = [fiveMinButton, fifteenMinButton, thirtyMinButton, sixtyMinButton, oneDayButton, allButton]
+        view.theme_backgroundColor = O3Theme.backgroundColorPicker
+
+        for button in themedTransparentButtons {
+            button?.theme_backgroundColor = O3Theme.backgroundColorPicker
+            button?.theme_setTitleColor(O3Theme.primaryColorPicker, forState: UIControlState())
+        }
     }
 
     func setupGraphView() {
@@ -110,7 +116,7 @@ class AssetDetailViewController: ThemedViewController, GraphPanDelegate, Scrolla
         }
         percentChangeLabel.text = String.percentChangeString(latestPrice: latestPrice, previousPrice: earliestPrice,
                                                              with: selectedInterval, referenceCurrency: referenceCurrency)
-        percentChangeLabel.textColor = latestPrice.averageBTC >= earliestPrice.averageBTC ? UserDefaultsManager.theme.positiveGainColor : UserDefaultsManager.theme.negativeLossColor
+        percentChangeLabel.theme_textColor = latestPrice.averageBTC >= earliestPrice.averageBTC ? O3Theme.positiveGainColorPicker : O3Theme.negativeLossColorPicker
     }
 
     @objc func referenceCurrencyTapped(_ sender: UITapGestureRecognizer) {
@@ -149,7 +155,8 @@ class AssetDetailViewController: ThemedViewController, GraphPanDelegate, Scrolla
             }
             let percentChange = 0 < referenceCurrencyOriginalValue ? ((referenceCurrencyCurrentValue - referenceCurrencyOriginalValue) / referenceCurrencyOriginalValue * 100) : 0
             self.percentChangeLabel.text = String(format: "%.2f%@", percentChange, "%")
-            self.percentChangeLabel.textColor = percentChange >= 0 ? UserDefaultsManager.theme.positiveGainColor : UserDefaultsManager.theme.negativeLossColor
+            self.percentChangeLabel.theme_textColor = percentChange >= 0 ? O3Theme.positiveGainColorPicker :
+                O3Theme.negativeLossColorPicker
 
             let posixString = self.priceHistory?.data.reversed()[index].time ?? ""
             timeLabel.text = posixString.intervaledDateString(self.selectedInterval)
