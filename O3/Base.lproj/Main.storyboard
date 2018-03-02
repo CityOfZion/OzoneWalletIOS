@@ -359,7 +359,7 @@
                         <segue destination="nwB-AY-Qhc" kind="relationship" relationship="viewControllers" id="pfm-AG-37V"/>
                         <segue destination="Szf-fr-gzU" kind="relationship" relationship="viewControllers" id="CgQ-D0-n9n"/>
                         <segue destination="Yal-Kt-dC0" kind="relationship" relationship="viewControllers" id="YUK-jF-Bcb"/>
-                        <segue destination="dgW-vt-Uop" kind="relationship" relationship="viewControllers" id="dIa-be-Gyn"/>
+                        <segue destination="SsO-1K-mdK" kind="relationship" relationship="viewControllers" id="i2q-NR-Dzt"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nZe-SP-xuA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1157,20 +1157,28 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="audCell" destination="xAu-rI-DFc" id="wi9-fr-0jO"/>
                         <outlet property="audLabel" destination="B1I-Kb-0JI" id="nar-l9-xNP"/>
                         <outlet property="audSymbol" destination="4BW-YL-8bQ" id="2lJ-fQ-bOg"/>
+                        <outlet property="cnyCell" destination="347-Aj-d9A" id="LW8-fk-qXD"/>
                         <outlet property="cnyLabel" destination="8wt-f9-fQh" id="92R-KQ-dDB"/>
                         <outlet property="cnySymbol" destination="Vrq-F2-gEO" id="4AF-l2-vgZ"/>
+                        <outlet property="eurCell" destination="5RH-g0-jim" id="hjr-bQ-TDR"/>
                         <outlet property="eurLabel" destination="Lph-y9-tQp" id="7w9-u2-bre"/>
                         <outlet property="eurSymbol" destination="Rj1-mK-nnp" id="y38-h9-8qI"/>
+                        <outlet property="gbpCell" destination="1W7-xc-9kn" id="nng-yI-eBp"/>
                         <outlet property="gbpLabel" destination="XDR-Iv-PVz" id="UXu-QD-VFh"/>
                         <outlet property="gbpSymbol" destination="bDt-8Z-00j" id="ycy-hD-kmn"/>
+                        <outlet property="jpyCell" destination="ul3-Ff-sSr" id="iuY-QL-9DY"/>
                         <outlet property="jpyLabel" destination="n09-au-T99" id="iqQ-6o-bLE"/>
                         <outlet property="jpySymbol" destination="nfH-BX-FfY" id="u0Z-Z8-iGc"/>
+                        <outlet property="krwCell" destination="t9E-nQ-aDA" id="S84-pb-WbL"/>
                         <outlet property="krwLabel" destination="0zz-po-y7r" id="GUZ-mV-YSH"/>
                         <outlet property="krwSymbol" destination="Sjz-Mk-j64" id="Dfk-iG-8hI"/>
+                        <outlet property="rubCell" destination="um0-qV-FFX" id="NYr-1Y-BJl"/>
                         <outlet property="rubLabel" destination="GhF-ey-Wzd" id="OcY-om-lV9"/>
                         <outlet property="rubSymbol" destination="IUW-5m-DOI" id="b6U-jG-lKL"/>
+                        <outlet property="usdCell" destination="gff-WX-PhJ" id="sVf-yR-Qpn"/>
                         <outlet property="usdLabel" destination="KDi-jq-URU" id="AyK-dw-OTq"/>
                         <outlet property="usdSymbol" destination="u8E-hV-M17" id="lmr-AR-890"/>
                     </connections>
@@ -1623,7 +1631,23 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4VA-yM-EWQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1764" y="752"/>
+            <point key="canvasLocation" x="1535" y="661"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="g9C-A5-Hgj">
+            <objects>
+                <viewController id="SsO-1K-mdK" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2HT-ik-8OJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="GOg-ug-kZX"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="T9x-76-qgS"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BqE-df-9DI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2226" y="623"/>
         </scene>
     </scenes>
     <resources>
@@ -1649,7 +1673,4 @@
             <color red="0.0" green="0.41176470588235292" blue="0.85098039215686272" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="dcc-db-Hi2"/>
-    </inferredMetricsTieBreakers>
 </document>

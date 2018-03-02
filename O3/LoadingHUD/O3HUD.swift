@@ -18,8 +18,10 @@ class O3HUD: UIViewController {
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
     override func viewDidLoad() {
-        if ThemeManager.currentThemeIndex == 0 {
-            let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+        SwiftTheme.ThemeManager.setTheme(index: UserDefaultsManager.themeIndex)
+        view.theme_backgroundColor = O3Theme.backgroundColorPicker
+        if UserDefaultsManager.themeIndex == 0 {
+            let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
             let visualEffectView = UIVisualEffectView(effect: blurEffect)
             visualEffectView.frame = view.bounds
             view.addSubview(visualEffectView)

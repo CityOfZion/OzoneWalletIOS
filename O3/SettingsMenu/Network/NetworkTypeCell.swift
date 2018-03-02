@@ -14,6 +14,12 @@ class NetworkTypeCell: UITableViewCell {
     @IBOutlet weak var seedTypeButton: UIButton!
     weak var delegate: NetworkTableViewController?
 
+    override func awakeFromNib() {
+        theme_backgroundColor = O3Theme.backgroundColorPicker
+        contentView.theme_backgroundColor = O3Theme.backgroundColorPicker
+        super.awakeFromNib()
+    }
+
     @IBAction func networkTypeTapped(_ sender: Any) {
         let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 

@@ -10,6 +10,7 @@ import UIKit
 import KeychainAccess
 import NeoSwift
 import LocalAuthentication
+import SwiftTheme
 
 class LoginToCurrentWalletViewController: UIViewController {
 
@@ -41,7 +42,7 @@ class LoginToCurrentWalletViewController: UIViewController {
                             UserDefaultsManager.useDefaultSeed = false
                         }
                         O3HUD.stop {
-                            AppDelegate.updateNavbarAppearance(isOnboarding: false)
+                            SwiftTheme.ThemeManager.setTheme(index: UserDefaultsManager.themeIndex)
                             DispatchQueue.main.async { self.performSegue(withIdentifier: "loggedin", sender: nil) }
                         }
                     }
@@ -71,7 +72,7 @@ class LoginToCurrentWalletViewController: UIViewController {
     }
 
     @IBAction func didTapCancel(_ sender: Any) {
-        AppDelegate.updateNavbarAppearance(isOnboarding: true)
+        SwiftTheme.ThemeManager.setTheme(index: 2)
         UIApplication.shared.keyWindow?.rootViewController = UIStoryboard(name: "Onboarding", bundle: nil).instantiateInitialViewController()
     }
 }

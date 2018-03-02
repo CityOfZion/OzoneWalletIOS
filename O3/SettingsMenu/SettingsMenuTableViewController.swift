@@ -10,6 +10,7 @@ import Foundation
 import KeychainAccess
 import UIKit
 import SwiftTheme
+import KeychainAccess
 
 class SettingsMenuTableViewController: UITableViewController, HalfModalPresentable {
     @IBOutlet weak var showPrivateKeyView: UIView!
@@ -40,7 +41,7 @@ class SettingsMenuTableViewController: UITableViewController, HalfModalPresentab
         }
     }
 
-    var themeString = UserDefaultsManager.theme == .light ? "Theme: Classic": "Theme: Dark" {
+    var themeString = UserDefaultsManager.themeIndex == 0 ? "Theme: Classic": "Theme: Dark" {
         didSet {
             self.setThemeLabel()
         }
@@ -105,14 +106,14 @@ class SettingsMenuTableViewController: UITableViewController, HalfModalPresentab
         let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         let lightThemeAction = UIAlertAction(title: "Classic Theme", style: .default) { _ in
-            SwiftTheme.ThemeManager.setTheme(index: 0)
-            UserDefaultsManager.theme = .light
+            UserDefaultsManager.themeIndex = 0
+            ThemeManager.setTheme(index: 0)
             self.themeString = "Theme: Classic"
         }
 
         let darkThemeAction = UIAlertAction(title: "Dark Theme", style: .default) { _ in
-            SwiftTheme.ThemeManager.setTheme(index: 1)
-            UserDefaultsManager.theme = .dark
+            UserDefaultsManager.themeIndex = 1
+            ThemeManager.setTheme(index: 1)
             self.themeString = "Theme: Dark"
         }
 
@@ -159,16 +160,32 @@ class SettingsMenuTableViewController: UITableViewController, HalfModalPresentab
 
     }
 
+    func performLogoutCleanup() {
+        try? Keychain(service: "network.o3.neo.wallet").remove("ozonePrivateKey")
+        Authenticated.account = nil
+        UserDefaultsManager.o3WalletAddress = nil
+        NotificationCenter.default.post(name: Notification.Name("loggedOut"), object: nil)
+        self.dismiss(animated: false)
+        let o3tab =  UIApplication.shared.keyWindow?.rootViewController as? O3TabBarController
+
+        //Chance these aren't nil yet which leads to reference cycke
+        o3tab?.halfModalTransitioningDelegate?.viewController = nil
+        o3tab?.halfModalTransitioningDelegate?.presentingViewController = nil
+        o3tab?.halfModalTransitioningDelegate?.interactionController = nil
+        o3tab?.halfModalTransitioningDelegate = nil
+    }
+
     //properly implement cell did tap
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.row == 6 {
-            OzoneAlert.confirmDialog(message: "Log out?", cancelTitle: "Cancel", confirmTitle: "Log out", didCancel: {
+            OzoneAlert.confirmDialog(message: "Logging out will remove the private key from your device. You will need to restore it from your backup to reenter the application.", cancelTitle: "Cancel", confirmTitle: "Log out", didCancel: {
 
             }, didConfirm: {
-                Authenticated.account = nil
-                AppDelegate.updateNavbarAppearance(isOnboarding: true)
+                self.performLogoutCleanup()
+                self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
                 UIApplication.shared.keyWindow?.rootViewController = UIStoryboard(name: "Onboarding", bundle: nil).instantiateInitialViewController()
+
             })
 
         }

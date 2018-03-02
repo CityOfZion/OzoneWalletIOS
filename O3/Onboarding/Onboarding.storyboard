@@ -23,25 +23,25 @@
             <objects>
                 <viewController id="tuA-sa-oFr" customClass="OnboardingViewController" customModule="O3" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Fb9-2J-rpx">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0DA-o6-FsB">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="330.5"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rectangle10" translatesAutoresizingMaskIntoConstraints="NO" id="TxJ-hu-bZH">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
-                                    </imageView>
                                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="vT9-4c-4Ez">
-                                        <rect key="frame" x="0.0" y="360" width="375" height="40"/>
+                                        <rect key="frame" x="0.0" y="290.5" width="375" height="40"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="J5Y-b2-fnb"/>
                                         </constraints>
+                                        <color key="pageIndicatorTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </pageControl>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ZTq-rt-rCN">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="330.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="71H-uA-e1s">
                                             <size key="itemSize" width="375" height="400"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -49,15 +49,15 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="onboardingCollectionCell" id="bVU-Eq-Tmx" customClass="OnboardingCollectionCell" customModule="O3" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
+                                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="onboardingCollectionCell" id="bVU-Eq-Tmx" customClass="OnboardingCollectionCell" customModule="O3" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="-35" width="375" height="400"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chart" translatesAutoresizingMaskIntoConstraints="NO" id="t4U-pY-Vaw">
-                                                            <rect key="frame" x="100" y="93" width="175" height="175"/>
+                                                            <rect key="frame" x="100" y="72.5" width="175" height="175"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <constraints>
@@ -65,27 +65,26 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Safely monitor your wallet on mobile" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JPO-Bh-sJN">
-                                                            <rect key="frame" x="20" y="310" width="335" height="22"/>
+                                                            <rect key="frame" x="20" y="289.5" width="335" height="22"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                                             <color key="textColor" red="0.98038554190000005" green="0.98038852210000005" blue="0.98039507869999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add- watch only address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cxG-cs-KZ9">
-                                                            <rect key="frame" x="95" y="288" width="185" height="22"/>
+                                                            <rect key="frame" x="95" y="267.5" width="185" height="22"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="16"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                 </view>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="t4U-pY-Vaw" secondAttribute="trailing" constant="100" id="1qp-Ca-c8F"/>
                                                     <constraint firstItem="t4U-pY-Vaw" firstAttribute="centerX" secondItem="bVU-Eq-Tmx" secondAttribute="centerX" id="NVb-cx-qng"/>
                                                     <constraint firstItem="JPO-Bh-sJN" firstAttribute="centerX" secondItem="bVU-Eq-Tmx" secondAttribute="centerX" id="Oi7-Mk-xXZ"/>
                                                     <constraint firstAttribute="trailing" secondItem="JPO-Bh-sJN" secondAttribute="trailing" constant="20" id="R0B-d7-XGv"/>
                                                     <constraint firstItem="cxG-cs-KZ9" firstAttribute="top" secondItem="t4U-pY-Vaw" secondAttribute="bottom" constant="20" id="i1E-xE-gu7"/>
-                                                    <constraint firstItem="t4U-pY-Vaw" firstAttribute="centerY" secondItem="bVU-Eq-Tmx" secondAttribute="centerY" constant="-20" id="omK-08-RDF"/>
+                                                    <constraint firstItem="t4U-pY-Vaw" firstAttribute="centerY" secondItem="bVU-Eq-Tmx" secondAttribute="centerY" constant="-40" id="omK-08-RDF"/>
                                                     <constraint firstItem="JPO-Bh-sJN" firstAttribute="top" secondItem="cxG-cs-KZ9" secondAttribute="bottom" id="pdL-YC-wjU"/>
                                                     <constraint firstItem="cxG-cs-KZ9" firstAttribute="centerX" secondItem="bVU-Eq-Tmx" secondAttribute="centerX" id="ps8-Ry-VdS"/>
                                                     <constraint firstItem="JPO-Bh-sJN" firstAttribute="leading" secondItem="bVU-Eq-Tmx" secondAttribute="leading" constant="20" id="s9f-Ck-MAh"/>
@@ -100,29 +99,24 @@
                                         </cells>
                                     </collectionView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="vT9-4c-4Ez" firstAttribute="leading" secondItem="0DA-o6-FsB" secondAttribute="leading" id="FMN-xf-taZ"/>
-                                    <constraint firstAttribute="trailing" secondItem="TxJ-hu-bZH" secondAttribute="trailing" id="O7J-fJ-ibi"/>
-                                    <constraint firstItem="TxJ-hu-bZH" firstAttribute="top" secondItem="0DA-o6-FsB" secondAttribute="top" id="UzJ-Bc-huv"/>
                                     <constraint firstItem="ZTq-rt-rCN" firstAttribute="top" secondItem="0DA-o6-FsB" secondAttribute="top" id="WZY-te-oss"/>
                                     <constraint firstItem="ZTq-rt-rCN" firstAttribute="leading" secondItem="0DA-o6-FsB" secondAttribute="leading" id="YGR-NG-FBJ"/>
-                                    <constraint firstItem="TxJ-hu-bZH" firstAttribute="leading" secondItem="0DA-o6-FsB" secondAttribute="leading" id="YKY-QH-Me3"/>
                                     <constraint firstAttribute="bottom" secondItem="ZTq-rt-rCN" secondAttribute="bottom" id="csO-Ef-kfM"/>
                                     <constraint firstAttribute="trailing" secondItem="ZTq-rt-rCN" secondAttribute="trailing" id="tDF-7l-AAB"/>
                                     <constraint firstAttribute="bottom" secondItem="vT9-4c-4Ez" secondAttribute="bottom" id="w0L-6Q-iO3"/>
                                     <constraint firstAttribute="trailing" secondItem="vT9-4c-4Ez" secondAttribute="trailing" id="xjY-Rh-RJA"/>
-                                    <constraint firstAttribute="bottom" secondItem="TxJ-hu-bZH" secondAttribute="bottom" id="zge-3l-v6u"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New to O3?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ej-aP-Hg8">
-                                <rect key="frame" x="20" y="523" width="335" height="17"/>
+                                <rect key="frame" x="20" y="453.5" width="335" height="17"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                 <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="custom" customColorSpace="adobeRGB1998"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aOA-TP-pz9" customClass="ShadowedButton" customModule="O3" customModuleProvider="target">
-                                <rect key="frame" x="20" y="450" width="335" height="44"/>
+                                <rect key="frame" x="20" y="380.5" width="335" height="44"/>
                                 <color key="backgroundColor" red="0.0" green="0.41176470588235292" blue="0.85098039215686272" alpha="1" colorSpace="custom" customColorSpace="adobeRGB1998"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="biJ-7Y-H4j"/>
@@ -141,7 +135,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U2y-eL-E2Y">
-                                <rect key="frame" x="20" y="534" width="335" height="44"/>
+                                <rect key="frame" x="20" y="464.5" width="335" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="UXW-cr-APa"/>
                                 </constraints>
@@ -175,7 +169,6 @@
                         <viewLayoutGuide key="safeArea" id="CTR-Kt-Y4r"/>
                     </view>
                     <navigationItem key="navigationItem" id="kJW-0R-laG"/>
-                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="collectionPageControl" destination="vT9-4c-4Ez" id="WoQ-di-fiu"/>
                         <outlet property="collectionView" destination="ZTq-rt-rCN" id="mMq-r6-2eY"/>
@@ -207,7 +200,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="qrLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Foa-Cs-0Cp">
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="logo-clear" translatesAutoresizingMaskIntoConstraints="NO" id="Foa-Cs-0Cp">
                                 <rect key="frame" x="157" y="293.5" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="cZd-1a-kya"/>
@@ -270,11 +263,11 @@
             <objects>
                 <viewController id="iy0-Jz-sHW" customClass="FirstTimeLoginViewController" customModule="O3" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="id8-M8-yPi">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3S6-Qi-MRL">
-                                <rect key="frame" x="20" y="60" width="335" height="20"/>
+                                <rect key="frame" x="20" y="40" width="335" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="ax8-kc-ZXT"/>
                                 </constraints>
@@ -283,7 +276,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Oa-pS-iez" customClass="ShadowedButton" customModule="O3" customModuleProvider="target">
-                                <rect key="frame" x="20" y="120" width="335" height="44"/>
+                                <rect key="frame" x="20" y="100" width="335" height="44"/>
                                 <color key="backgroundColor" red="0.0" green="0.41176470590000003" blue="0.85098039219999999" alpha="1" colorSpace="custom" customColorSpace="adobeRGB1998"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="PTG-ap-ubP"/>
@@ -324,7 +317,7 @@
             <objects>
                 <tableViewController title="Login" id="2cF-Xh-uiy" customClass="LoginTableViewController" customModule="O3" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="250" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Qno-fC-Drn">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
@@ -337,7 +330,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="249.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your private key (WIF)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6p0-gY-L30" customClass="O3Label" customModule="O3" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your private key (WIF)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6p0-gY-L30">
                                                     <rect key="frame" x="20" y="20" width="166" height="22"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="16"/>
                                                     <color key="textColor" red="0.058823529409999999" green="0.062745098040000002" blue="0.090196078430000007" alpha="1" colorSpace="custom" customColorSpace="adobeRGB1998"/>
@@ -434,11 +427,11 @@
             <objects>
                 <viewController id="VNX-u0-3hQ" customClass="PreCreateWalletViewController" customModule="O3" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6Fk-0s-jAE">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SEW-OK-L5T">
-                                <rect key="frame" x="20" y="60" width="335" height="131.5"/>
+                                <rect key="frame" x="20" y="40" width="335" height="131.5"/>
                                 <string key="text">Looks like you already have an existing wallet on this device.  
 Create a new wallet will write the new private key over the existing one. Please make sure you have your private key back up.</string>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
@@ -446,7 +439,7 @@ Create a new wallet will write the new private key over the existing one. Please
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JYL-wE-2wB" customClass="ShadowedButton" customModule="O3" customModuleProvider="target">
-                                <rect key="frame" x="20" y="231.5" width="335" height="44"/>
+                                <rect key="frame" x="20" y="211.5" width="335" height="44"/>
                                 <color key="backgroundColor" red="0.0" green="0.41176470590000003" blue="0.85098039219999999" alpha="1" colorSpace="custom" customColorSpace="adobeRGB1998"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="xCh-9a-7S0"/>
@@ -490,7 +483,7 @@ Create a new wallet will write the new private key over the existing one. Please
             <objects>
                 <tableViewController title="Welcome!" id="bCm-98-80m" customClass="WelcomeTableViewController" customModule="O3" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="0ZM-vy-OEP">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -511,7 +504,7 @@ Create a new wallet will write the new private key over the existing one. Please
                                                         <constraint firstAttribute="width" constant="120" id="vkh-YF-6jJ"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Private Key (WIF)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="urR-h0-O7b" customClass="O3Label" customModule="O3" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Private Key (WIF)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="urR-h0-O7b">
                                                     <rect key="frame" x="160" y="14" width="195" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="FVS-JM-oZf"/>
@@ -632,8 +625,7 @@ It is highly reccomended that you have a passcode set on your iPhone. Removing t
     </scenes>
     <resources>
         <image name="chart" width="169" height="133"/>
-        <image name="qrLogo" width="88" height="87"/>
-        <image name="rectangle10" width="375" height="400"/>
+        <image name="logo-clear" width="499" height="493"/>
         <namedColor name="grey">
             <color red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -642,8 +634,8 @@ It is highly reccomended that you have a passcode set on your iPhone. Removing t
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4F1-SI-Z13"/>
-        <segue reference="2cU-TJ-2tJ"/>
+        <segue reference="H33-T8-8WR"/>
+        <segue reference="1ME-Er-JZt"/>
         <segue reference="nDz-8f-fC4"/>
     </inferredMetricsTieBreakers>
 </document>

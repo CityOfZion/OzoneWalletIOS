@@ -1,6 +1,6 @@
 github "philackm/ScrollableGraphView" ~> 4.0.2
 github "kishikawakatsumi/KeychainAccess"
-github "HarshilShah/DeckTransition" ~> 1.0
+github "HarshilShah/DeckTransition"
 github "CityOfZion/neo-swift" "master"
 github "ashleymills/Reachability.swift"
 github "pkluz/PKHUD" ~> 4.0

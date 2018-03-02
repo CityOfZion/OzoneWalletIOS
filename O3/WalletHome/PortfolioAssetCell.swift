@@ -60,7 +60,7 @@ class PortfolioAssetCell: UITableViewCell {
 
             assetPercentChangeLabel.text = String.percentChangeStringShort(latestPrice: latestPrice, previousPrice: firstPrice,
                                                                            referenceCurrency: referenceCurrency)
-            assetPercentChangeLabel.textColor = referencePrice >= referenceFirstPrice ? UserDefaultsManager.theme.positiveGainColor : UserDefaultsManager.theme.negativeLossColor
+            assetPercentChangeLabel.theme_textColor = referencePrice >= referenceFirstPrice ? O3Theme.positiveGainColorPicker : O3Theme.negativeLossColorPicker
         }
     }
 }

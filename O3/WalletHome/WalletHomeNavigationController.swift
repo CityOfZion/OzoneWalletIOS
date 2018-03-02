@@ -16,11 +16,6 @@ class WalletHomeNavigationController: UINavigationController {
             self.setNeedsStatusBarAppearanceUpdate()
             self.navigationController?.hideHairline()
             self.navigationController?.navigationItem.largeTitleDisplayMode = .automatic
-            self.navigationController?.navigationBar.theme_barTintColor = O3Theme.backgroundColorPicker
-            self.navigationController?.navigationBar.isTranslucent = false
-            self.navigationController?.navigationBar.theme_backgroundColor = O3Theme.backgroundColorPicker
-            self.navigationController?.navigationBar.theme_largeTitleTextAttributes = O3Theme.largeTitleAttributesPicker
-            self.navigationController?.navigationBar.theme_titleTextAttributes = O3Theme.regularTitleAttributesPicker
         }
         super.viewDidLoad()
     }

@@ -9,17 +9,16 @@
 import UIKit
 
 class HalfModalTransitioningDelegate: NSObject, UIViewControllerTransitioningDelegate {
-    var viewController: UIViewController
-    var presentingViewController: UIViewController
-    var interactionController: HalfModalInteractiveTransition
+    var viewController: UIViewController?
+    var presentingViewController: UIViewController?
+    var interactionController: HalfModalInteractiveTransition?
 
     var interactiveDismiss = true
 
     init(viewController: UIViewController, presentingViewController: UIViewController) {
         self.viewController = viewController
         self.presentingViewController = presentingViewController
-        self.interactionController = HalfModalInteractiveTransition(viewController: self.viewController, withView: self.presentingViewController.view, presentingViewController: self.presentingViewController)
-
+        self.interactionController = HalfModalInteractiveTransition(viewController: self.viewController!, withView: (self.presentingViewController?.view)!, presentingViewController: self.presentingViewController)
         super.init()
     }
 

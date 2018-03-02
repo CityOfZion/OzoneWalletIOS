@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import NeoSwift
+import SwiftTheme
 
 class OnboardingViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
@@ -23,17 +24,11 @@ class OnboardingViewController: UIViewController, UICollectionViewDelegate, UICo
                                                      OnboardingCollectionCell.Data(imageName: "exchange", title: "Send & Receive", subtitle: "Send & receive assets on NEO")]
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.navigationController?.hideHairline()
+        ThemeManager.setTheme(index: 2)
         collectionView.delegate = self
         collectionView.dataSource = self
-        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white,
-                                                                        NSAttributedStringKey.font: UIFont(name: "Avenir-Heavy", size: 32) as Any]
-
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        collectionView.backgroundColor = UIColor(hexString: "#0069D9FF")!
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -46,6 +41,7 @@ class OnboardingViewController: UIViewController, UICollectionViewDelegate, UICo
         }
         let data = features[indexPath.row]
         cell.data = data
+        cell.backgroundColor = UIColor(hexString: "#0069D9FF")!
         cell.onboardingImage.image = UIImage(named: data.imageName)
         return cell
     }

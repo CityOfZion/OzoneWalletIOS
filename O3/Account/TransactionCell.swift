@@ -43,7 +43,7 @@ class TransactionCell: UITableViewCell {
             assetLabel.text = data?.asset.uppercased()
             addressLabel.text = data?.address
             amountLabel.text = data?.amount.stringWithSign((data?.precision)!)
-            amountLabel.textColor = data?.amount ?? 0 <= 0 ? UserDefaultsManager.theme.negativeLossColor : UserDefaultsManager.theme.positiveGainColor
+            amountLabel.theme_textColor = data?.amount ?? 0 <= 0 ? O3Theme.negativeLossColorPicker : O3Theme.positiveGainColorPicker
         }
     }
 }

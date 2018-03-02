@@ -56,10 +56,10 @@ class WalletHeaderCollectionCell: UICollectionViewCell {
             switch referenceCurrency {
             case .btc:
                 portfolioValueLabel.text = String(format: "%.8fBTC", latestPrice.averageBTC)
-                percentChangeLabel.textColor = latestPrice.averageBTC >= previousPrice.averageBTC ? UserDefaultsManager.theme.positiveGainColor : UserDefaultsManager.theme.negativeLossColor
+                percentChangeLabel.theme_textColor = latestPrice.averageBTC >= previousPrice.averageBTC ? O3Theme.positiveGainColorPicker : O3Theme.negativeLossColorPicker
             default:
                 portfolioValueLabel.text = latestPrice.averageFiatMoney().formattedString()
-                percentChangeLabel.textColor = latestPrice.average >= previousPrice.average ? UserDefaultsManager.theme.positiveGainColor : UserDefaultsManager.theme.negativeLossColor
+                percentChangeLabel.theme_textColor = latestPrice.average >= previousPrice.average ? O3Theme.positiveGainColorPicker : O3Theme.negativeLossColorPicker
             }
             percentChangeLabel.text = String.percentChangeString(latestPrice: latestPrice, previousPrice: previousPrice,
                                                                  with: selectedInterval, referenceCurrency: referenceCurrency)

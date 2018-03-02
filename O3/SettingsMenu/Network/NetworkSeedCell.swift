@@ -38,7 +38,7 @@ class NetworkSeedCell: UITableViewCell {
             DispatchQueue.main.async {
                 if self.node?.URL == Neo.sharedMain?.seed {
                     self.accessoryType = .checkmark
-                    self.accessoryView?.backgroundColor = UserDefaultsManager.theme.backgroundColor
+                    self.accessoryView?.theme_backgroundColor = O3Theme.backgroundColorPicker
                 } else {
                     self.accessoryType = .none
                 }
@@ -46,15 +46,15 @@ class NetworkSeedCell: UITableViewCell {
 
             if (delegate?.highestBlockCount() ?? 0) - (node?.blockCount ?? 0)  > 5 { //give a small amount of buffer for unaligned blocks
                 DispatchQueue.main.async {
-                    self.blockCountLabel.textColor = UserDefaultsManager.theme.errorColor
-                    self.seedNameLabel.textColor = UserDefaultsManager.theme.errorColor
-                    self.peersLabel.textColor = UserDefaultsManager.theme.errorColor
+                    self.blockCountLabel.theme_textColor = O3Theme.errorColorPicker
+                    self.seedNameLabel.theme_textColor = O3Theme.errorColorPicker
+                    self.peersLabel.theme_textColor = O3Theme.errorColorPicker
                 }
             } else {
                 DispatchQueue.main.async {
-                    self.blockCountLabel.textColor = UserDefaultsManager.theme.primaryColor
-                    self.peersLabel.textColor = UserDefaultsManager.theme.accentColor
-                    self.seedNameLabel.textColor = UserDefaultsManager.theme.titleTextColor
+                    self.blockCountLabel.theme_textColor = O3Theme.primaryColorPicker
+                    self.peersLabel.theme_textColor = O3Theme.accentColorPicker
+                    self.seedNameLabel.theme_textColor = O3Theme.titleColorPicker
                 }
             }
         }

@@ -16,7 +16,7 @@ extension ScrollableGraphView {
 
         let linePlot = LinePlot(identifier: "darkLine")
         linePlot.lineWidth = 1
-        linePlot.lineColor = UserDefaultsManager.theme.primaryColor
+        linePlot.lineColor = Theme.light.primaryColor
         linePlot.lineStyle = ScrollableGraphViewLineStyle.smooth
         linePlot.shouldFill = false
         linePlot.fillType = ScrollableGraphViewFillType.gradient
@@ -30,7 +30,7 @@ extension ScrollableGraphView {
         graphView.dataPointSpacing = UIScreen.main.bounds.size.width / 71
         graphView.rightmostPointPadding = 0
         graphView.leftmostPointPadding = 0
-        graphView.shouldAnimateOnStartup = true
+        graphView.shouldAnimateOnStartup = false
         graphView.shouldAdaptRange = true
         graphView.shouldRangeAlwaysStartAtZero = false
         graphView.addPlot(plot: linePlot)

@@ -116,7 +116,7 @@ class AssetDetailViewController: UIViewController, GraphPanDelegate, ScrollableG
         }
         percentChangeLabel.text = String.percentChangeString(latestPrice: latestPrice, previousPrice: earliestPrice,
                                                              with: selectedInterval, referenceCurrency: referenceCurrency)
-        percentChangeLabel.textColor = latestPrice.averageBTC >= earliestPrice.averageBTC ? UserDefaultsManager.theme.positiveGainColor : UserDefaultsManager.theme.negativeLossColor
+        percentChangeLabel.theme_textColor = latestPrice.averageBTC >= earliestPrice.averageBTC ? O3Theme.positiveGainColorPicker : O3Theme.negativeLossColorPicker
     }
 
     @objc func referenceCurrencyTapped(_ sender: UITapGestureRecognizer) {
@@ -155,7 +155,8 @@ class AssetDetailViewController: UIViewController, GraphPanDelegate, ScrollableG
             }
             let percentChange = 0 < referenceCurrencyOriginalValue ? ((referenceCurrencyCurrentValue - referenceCurrencyOriginalValue) / referenceCurrencyOriginalValue * 100) : 0
             self.percentChangeLabel.text = String(format: "%.2f%@", percentChange, "%")
-            self.percentChangeLabel.textColor = percentChange >= 0 ? UserDefaultsManager.theme.positiveGainColor : UserDefaultsManager.theme.negativeLossColor
+            self.percentChangeLabel.theme_textColor = percentChange >= 0 ? O3Theme.positiveGainColorPicker :
+                O3Theme.negativeLossColorPicker
 
             let posixString = self.priceHistory?.data.reversed()[index].time ?? ""
             timeLabel.text = posixString.intervaledDateString(self.selectedInterval)

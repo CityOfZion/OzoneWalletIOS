@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import NeoSwift
 
-class NetworkTableViewController: ThemedTableViewController, NetworkSeedCellDelegate {
+class NetworkTableViewController: UITableViewController, NetworkSeedCellDelegate {
     var testNodes = (NEONetworkMonitor.sharedInstance.network?.testNet.nodes)!
     var mainNodes = (NEONetworkMonitor.sharedInstance.network?.mainNet.nodes)!
     var tableNodes: [NEONode] {
@@ -52,6 +52,7 @@ class NetworkTableViewController: ThemedTableViewController, NetworkSeedCellDele
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.theme_separatorColor = O3Theme.tableSeparatorColorPicker
         navigationItem.title = "Network"
         updateNodeData()
 

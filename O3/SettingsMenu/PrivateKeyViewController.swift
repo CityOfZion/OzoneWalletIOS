@@ -15,7 +15,7 @@ class PrivateKeyViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UserDefaultsManager.theme.backgroundColor
+        view.theme_backgroundColor = O3Theme.backgroundColorPicker
         privateKeyLabel.text = Authenticated.account?.wif
         qrView.image = UIImage(qrData: Authenticated.account?.wif ?? "", width: qrView.frame.width, height: qrView.frame.height)
     }
