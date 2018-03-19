@@ -12,6 +12,8 @@
 		350100F5204541A6000F6648 /* SwiftTheme.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 350100F3204541A6000F6648 /* SwiftTheme.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		35051B1C1FFDB10800F9AD30 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35051B151FFDAD9300F9AD30 /* Crashlytics.framework */; };
 		35051B1D1FFDB10800F9AD30 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35051B131FFDAD9200F9AD30 /* Fabric.framework */; };
+		35061E47205F5CFE004E89EB /* FeaturedCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35061E46205F5CFE004E89EB /* FeaturedCollectionCell.swift */; };
+		35061E49205F6306004E89EB /* FeatureFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35061E48205F6306004E89EB /* FeatureFeed.swift */; };
 		353F364920037062002B4FE1 /* NewsFeed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 353F364820037062002B4FE1 /* NewsFeed.storyboard */; };
 		353F364B200370D6002B4FE1 /* NewsFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353F364A200370D6002B4FE1 /* NewsFeedViewController.swift */; };
 		353F364D2003755B002B4FE1 /* NewsFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353F364C2003755B002B4FE1 /* NewsFeedCell.swift */; };
@@ -175,6 +177,8 @@
 		350100F3204541A6000F6648 /* SwiftTheme.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftTheme.framework; path = Carthage/Build/iOS/SwiftTheme.framework; sourceTree = "<group>"; };
 		35051B131FFDAD9200F9AD30 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = Carthage/Build/iOS/Fabric.framework; sourceTree = "<group>"; };
 		35051B151FFDAD9300F9AD30 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Carthage/Build/iOS/Crashlytics.framework; sourceTree = "<group>"; };
+		35061E46205F5CFE004E89EB /* FeaturedCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedCollectionCell.swift; sourceTree = "<group>"; };
+		35061E48205F6306004E89EB /* FeatureFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureFeed.swift; sourceTree = "<group>"; };
 		353F364820037062002B4FE1 /* NewsFeed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewsFeed.storyboard; sourceTree = "<group>"; };
 		353F364A200370D6002B4FE1 /* NewsFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedViewController.swift; sourceTree = "<group>"; };
 		353F364C2003755B002B4FE1 /* NewsFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedCell.swift; sourceTree = "<group>"; };
@@ -345,6 +349,7 @@
 				353F364A200370D6002B4FE1 /* NewsFeedViewController.swift */,
 				353F364C2003755B002B4FE1 /* NewsFeedCell.swift */,
 				353F36512003842F002B4FE1 /* NewsItemViewController.swift */,
+				35061E46205F5CFE004E89EB /* FeaturedCollectionCell.swift */,
 			);
 			path = NewsFeed;
 			sourceTree = "<group>";
@@ -385,6 +390,7 @@
 				6EA7F9261F6E2F4E00E31B78 /* PriceData.swift */,
 				6E61BBD01F729D3B00D2B30B /* Money.swift */,
 				358E95D8200358AA00A1878B /* NewsFeed.swift */,
+				35061E48205F6306004E89EB /* FeatureFeed.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -818,9 +824,11 @@
 				752017481F73F30B00090C4F /* UIImage.swift in Sources */,
 				752017341F72980A00090C4F /* SendCompleteViewController.swift in Sources */,
 				756AC1941F7FD1B1003BF8F7 /* AddressSelectionCell.swift in Sources */,
+				35061E47205F5CFE004E89EB /* FeaturedCollectionCell.swift in Sources */,
 				75D5BFB41F6CEF2E00E64855 /* OnboardingCollectionCell.swift in Sources */,
 				35E5F616202ADF1E00D65BEA /* NEP5TokenSelectorTableViewCell.swift in Sources */,
 				7513FADB1F69541F003450ED /* TransactionsHeaderCell.swift in Sources */,
+				35061E49205F6306004E89EB /* FeatureFeed.swift in Sources */,
 				75CEACE81F66B683005974CE /* SendTableViewController.swift in Sources */,
 				75E14E571F7D2AEC00BEAE22 /* UIApplication.swift in Sources */,
 				75179F021F7620E700F4C67F /* Double.swift in Sources */,
