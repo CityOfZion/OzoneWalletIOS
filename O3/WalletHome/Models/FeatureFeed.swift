@@ -8,20 +8,6 @@
 
 import Foundation
 
-/*
- category": "featured",
- "title": "SPOTCOIN PUBLIC SALE",
- "subtitle": "SpotCoin delivers high volume fiat to cryptocurrency transaction services.",
- "imageURL": "https://cdn.o3.network/featured/this_image_is_16x9.jpg",
- "createdAt": "1521100225",
- "index": 0,
- "actionTitle": "Whitepaper",
- "actionURL": "https://www.spotcoin.com/?ref=o3.network"
- 
- 
- 
- */
-
 public struct FeatureFeed: Codable {
     var features: [Item]
 
