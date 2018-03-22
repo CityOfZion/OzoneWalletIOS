@@ -162,7 +162,7 @@ public class O3Client {
     }
 
     func getFeatures(completion: @escaping(O3ClientResult<FeatureFeed>) -> Void) {
-        let endpoint = "https://s3-ap-northeast-1.amazonaws.com/o3.network/_features/data.json"
+        let endpoint = "https://cdn.o3.network/data/featured.json"
         sendRequest(endpoint, method: .GET, data: nil, noBaseURL: true) { result in
             switch result {
             case .failure(let error):

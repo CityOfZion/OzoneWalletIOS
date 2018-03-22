@@ -10,4 +10,4 @@ github "hyperoslo/Cache"
 binary "https://raw.githubusercontent.com/Building42/Specs/master/Carthage/Fabric.json"
 binary "https://raw.githubusercontent.com/Building42/Specs/master/Carthage/Crashlytics.json"
 github "jiecao-fm/SwiftTheme"
-
+github "teambition/WebBrowser"

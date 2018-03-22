@@ -38,6 +38,9 @@
 		35E5F6122029477400D65BEA /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5F6112029477400D65BEA /* HomeViewModel.swift */; };
 		35E5F614202ADE4300D65BEA /* NativeAssetSelectorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5F613202ADE4300D65BEA /* NativeAssetSelectorTableViewCell.swift */; };
 		35E5F616202ADF1E00D65BEA /* NEP5TokenSelectorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5F615202ADF1E00D65BEA /* NEP5TokenSelectorTableViewCell.swift */; };
+		6E0BECC92063B41200FA0A03 /* WebBrowser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E0BECC82063B41200FA0A03 /* WebBrowser.framework */; };
+		6E0BECCA2063B47A00FA0A03 /* WebBrowser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E0BECC82063B41200FA0A03 /* WebBrowser.framework */; };
+		6E0BECCB2063B47A00FA0A03 /* WebBrowser.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6E0BECC82063B41200FA0A03 /* WebBrowser.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6E1BBF7F1F77BEE30095F466 /* WalletHomeAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E1BBF7E1F77BEE30095F466 /* WalletHomeAssets.xcassets */; };
 		6E3E381A1FA4436E004965F8 /* FirstTimeLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3E38191FA4436E004965F8 /* FirstTimeLoginViewController.swift */; };
 		6E3E381C1FA4437A004965F8 /* PreCreateWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3E381B1FA4437A004965F8 /* PreCreateWalletViewController.swift */; };
@@ -153,6 +156,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				6E0BECCB2063B47A00FA0A03 /* WebBrowser.framework in Embed Frameworks */,
 				35494574203C02B800332E53 /* Tabman.framework in Embed Frameworks */,
 				35494572203C01F500332E53 /* Pageboy.framework in Embed Frameworks */,
 				35494578203C03DC00332E53 /* AutoInsetter.framework in Embed Frameworks */,
@@ -197,6 +201,7 @@
 		35E5F6112029477400D65BEA /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		35E5F613202ADE4300D65BEA /* NativeAssetSelectorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeAssetSelectorTableViewCell.swift; sourceTree = "<group>"; };
 		35E5F615202ADF1E00D65BEA /* NEP5TokenSelectorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEP5TokenSelectorTableViewCell.swift; sourceTree = "<group>"; };
+		6E0BECC82063B41200FA0A03 /* WebBrowser.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebBrowser.framework; path = Carthage/Build/iOS/WebBrowser.framework; sourceTree = "<group>"; };
 		6E1BBF7E1F77BEE30095F466 /* WalletHomeAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = WalletHomeAssets.xcassets; sourceTree = "<group>"; };
 		6E3E38191FA4436E004965F8 /* FirstTimeLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTimeLoginViewController.swift; sourceTree = "<group>"; };
 		6E3E381B1FA4437A004965F8 /* PreCreateWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreCreateWalletViewController.swift; sourceTree = "<group>"; };
@@ -309,8 +314,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E0BECCA2063B47A00FA0A03 /* WebBrowser.framework in Frameworks */,
 				350100F4204541A6000F6648 /* SwiftTheme.framework in Frameworks */,
 				35494575203C030A00332E53 /* Tabman.framework in Frameworks */,
+				6E0BECC92063B41200FA0A03 /* WebBrowser.framework in Frameworks */,
 				3549456D203BF1F700332E53 /* Pageboy.framework in Frameworks */,
 				6E97C4B91F7FCB4000526FF0 /* DeckTransition.framework in Frameworks */,
 				35051B1C1FFDB10800F9AD30 /* Crashlytics.framework in Frameworks */,
@@ -473,6 +480,7 @@
 		7575ADB91F6006AB0077007B = {
 			isa = PBXGroup;
 			children = (
+				6E0BECC82063B41200FA0A03 /* WebBrowser.framework */,
 				350100F3204541A6000F6648 /* SwiftTheme.framework */,
 				3549458A203FD02B00332E53 /* Cache.framework */,
 				35494576203C03DC00332E53 /* AutoInsetter.framework */,

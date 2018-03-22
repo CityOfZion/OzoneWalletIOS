@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Kingfisher
+import WebBrowser
 
 class NewsFeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
@@ -66,6 +67,9 @@ class NewsFeedViewController: UIViewController, UITableViewDelegate, UITableView
         featuredCollectionView.dataSource = self
         featuredCollectionView.delegate = self
         newsFeedTableView.tableFooterView = UIView(frame: .zero)
+
+        featuredCollectionView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+
         self.edgesForExtendedLayout = UIRectEdge.bottom
         self.navigationController?.hideHairline()
         self.navigationItem.title = "News Feed"
@@ -88,9 +92,16 @@ class NewsFeedViewController: UIViewController, UITableViewDelegate, UITableView
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let item = feedData?.items[indexPath.row]
-        urlToLoad = item?.link ?? ""
-        self.performSegue(withIdentifier: "segueToNewsItem", sender: nil)
+        if item?.link == nil {
+            return
+        }
+        let webBrowserViewController = WebBrowserViewController()
+        webBrowserViewController.hidesBottomBarWhenPushed = true
+        webBrowserViewController.tintColor = Theme.light.primaryColor
+        webBrowserViewController.loadURLString((item?.link)!)
+        self.navigationController?.pushViewController(webBrowserViewController, animated: true)
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -102,8 +113,13 @@ class NewsFeedViewController: UIViewController, UITableViewDelegate, UITableView
             fatalError("Undefined Selection Behavior")
         }
         if let link = URL(string: featureItem.actionURL) {
-            UIApplication.shared.open(link)
+            let webBrowserViewController = WebBrowserViewController()
+            webBrowserViewController.tintColor = Theme.light.primaryColor
+            webBrowserViewController.loadURL(link)
+            let navigationWebBrowser = WebBrowserViewController.rootNavigationWebBrowser(webBrowser: webBrowserViewController)
+            present(navigationWebBrowser, animated: true, completion: nil)
         }
+
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -113,8 +129,9 @@ class NewsFeedViewController: UIViewController, UITableViewDelegate, UITableView
         }
 
         cell.featuredImage.kf.setImage(with: URL(string: featureItem.imageURL))
-        cell.titleLabel.text = featureItem.title
+        cell.titleLabel.text = featureItem.title.uppercased()
         cell.subtitleLabel.text = featureItem.subtitle
+        cell.actionButton.setTitle(featureItem.actionTitle.uppercased(), for: .normal)
         return cell
     }
 
@@ -122,7 +139,18 @@ class NewsFeedViewController: UIViewController, UITableViewDelegate, UITableView
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         let screenSize = UIScreen.main.bounds
-        return CGSize(width: screenSize.width - 35, height: (newsFeedTableView.frame.width * 9 / 16) + 45)
+        return CGSize(width: screenSize.width - 48, height: (newsFeedTableView.frame.width * 9.0 / 16.0) + 45)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        if section == 0 {
+                return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        }
+        return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.0
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

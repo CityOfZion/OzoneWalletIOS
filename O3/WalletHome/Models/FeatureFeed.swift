@@ -68,7 +68,7 @@ public struct FeatureFeed: Codable {
             let index: Int = try container.decode(Int.self, forKey: .index)
             let actionTitle: String = try container.decode(String.self, forKey: .actionTitle)
             let actionURL: String = try container.decode(String.self, forKey: .actionURL)
-            self.init(category: category, title: title, subtitle: title, imageURL: imageURL, createdAt: createdAt, index: index, actionTitle: actionTitle, actionURL: actionURL)
+            self.init(category: category, title: title, subtitle: subtitle, imageURL: imageURL, createdAt: createdAt, index: index, actionTitle: actionTitle, actionURL: actionURL)
         }
     }
 }
