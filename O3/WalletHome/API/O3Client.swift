@@ -38,6 +38,7 @@ public class O3Client {
         case getPriceHistory = "/v1/price/"
         case getPortfolioValue = "/v1/historical"
         case getNewsFeed = "/v1/feed/"
+        case getFeatureFeed = "/v1/features"
     }
 
     enum HTTPMethod: String {
@@ -47,8 +48,15 @@ public class O3Client {
 
     public static let shared = O3Client()
 
-    func sendRequest(_ endpointURL: String, method: HTTPMethod, data: [String: Any?]?, completion: @escaping (O3ClientResult<JSONDictionary>) -> Void) {
-        let url = URL(string: baseURL + endpointURL)
+    func sendRequest(_ endpointURL: String, method: HTTPMethod, data: [String: Any?]?,
+        noBaseURL: Bool = false, completion: @escaping (O3ClientResult<JSONDictionary>) -> Void) {
+        var urlString = ""
+        if noBaseURL {
+            urlString = endpointURL
+        } else {
+            urlString = baseURL + endpointURL
+        }
+        let url = URL(string: urlString)
         let request = NSMutableURLRequest(url: url!)
         request.httpMethod = "GET"
         request.setValue("application/json-rpc", forHTTPHeaderField: "Content-Type")
@@ -149,6 +157,23 @@ public class O3Client {
 
                 let clientResult = O3ClientResult.success(feedData)
                 completion(clientResult)
+            }
+        }
+    }
+
+    func getFeatures(completion: @escaping(O3ClientResult<FeatureFeed>) -> Void) {
+        let endpoint = "https://cdn.o3.network/data/featured.json"
+        sendRequest(endpoint, method: .GET, data: nil, noBaseURL: true) { result in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(let response):
+                let decoder = JSONDecoder()
+                guard let data = try? JSONSerialization.data(withJSONObject: response, options: .prettyPrinted),
+                    let featureFeed = try? decoder.decode(FeatureFeed.self, from: data) else {
+                        return
+                }
+                completion(.success(featureFeed))
             }
         }
     }
