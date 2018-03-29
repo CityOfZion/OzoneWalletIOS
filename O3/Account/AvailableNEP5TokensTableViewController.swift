@@ -12,7 +12,16 @@ class AvailableNEP5TokensTableViewController: UITableViewController {
 
     var tokens: [NEP5Token]! = []
     func loadTokens() {
-        let request = NSMutableURLRequest(url: URL(string: "https://o3.network/settings/nep5.json")!)
+        //default is mainnet
+        var request = NSMutableURLRequest(url: URL(string: "https://o3.network/settings/nep5.json")!)
+
+        #if TESTNET
+             request = NSMutableURLRequest(url: URL(string: "https://o3.network/settings/nep5.test.json")!)
+        #endif
+        #if PRIVATENET
+             request = NSMutableURLRequest(url: URL(string: "https://o3.network/settings/nep5.test.json")!)
+        #endif
+
         request.httpMethod = "GET"
         let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, _, err) in
             if err != nil {

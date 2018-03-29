@@ -15,6 +15,12 @@ class UserDefaultsManager {
 
     static var network: Network {
         get {
+            #if TESTNET
+                return .test
+            #endif
+            #if PRIVATENET
+                return .test //change this to private net or make NeoSwift able to overwrite coz api
+            #endif
             let stringValue = UserDefaults.standard.string(forKey: networkKey)!
             return Network(rawValue: stringValue)!
         }
@@ -28,6 +34,12 @@ class UserDefaultsManager {
     private static let useDefaultSeedKey = "usedDefaultSeedKey"
     static var useDefaultSeed: Bool {
         get {
+            #if TESTNET
+                return false
+            #endif
+            #if PRIVATENET
+                return false
+            #endif
             return UserDefaults.standard.bool(forKey: useDefaultSeedKey)
         }
         set {
@@ -46,11 +58,24 @@ class UserDefaultsManager {
     private static let seedKey = "seedKey"
     static var seed: String {
         get {
+            //TESTNET
+            #if TESTNET
+                return "http://seed2.neo.org:20332"
+            #endif
+            #if PRIVATENET
+                return "http://localhost:30333"
+            #endif
+
             return UserDefaults.standard.string(forKey: seedKey)!
         }
         set {
             Neo.client.seed = newValue
             Authenticated.account?.neoClient = NeoClient(network: UserDefaultsManager.network, seedURL: newValue)
+
+            #if TESTNET
+                Authenticated.account?.neoClient = NeoClient(network: .test)
+            #endif
+
             UserDefaults.standard.set(newValue, forKey: seedKey)
             UserDefaults.standard.synchronize()
             NotificationCenter.default.post(name: Notification.Name("ChangedNetwork"), object: nil)

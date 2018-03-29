@@ -56,6 +56,7 @@
 		6E4E6F9A20147ABB001A5844 /* AccentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4E6F9920147ABB001A5844 /* AccentButton.swift */; };
 		6E4E6F9C20147FBC001A5844 /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4E6F9B20147FBC001A5844 /* HeaderTableViewCell.swift */; };
 		6E61BBD11F729D3B00D2B30B /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E61BBD01F729D3B00D2B30B /* Money.swift */; };
+		6E68B6B0206CB771008C25E8 /* ICO.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E68B6AF206CB771008C25E8 /* ICO.storyboard */; };
 		6E6BD24B1FFC69330049098A /* PKHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E6BD24A1FFC67E10049098A /* PKHUD.framework */; };
 		6E6BD24C1FFC69330049098A /* PKHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6E6BD24A1FFC67E10049098A /* PKHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6E7C92741F7A5FBA00F8D7AA /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C92731F7A5FBA00F8D7AA /* UINavigationController.swift */; };
@@ -219,6 +220,7 @@
 		6E4E6F9920147ABB001A5844 /* AccentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentButton.swift; sourceTree = "<group>"; };
 		6E4E6F9B20147FBC001A5844 /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
 		6E61BBD01F729D3B00D2B30B /* Money.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Money.swift; sourceTree = "<group>"; };
+		6E68B6AF206CB771008C25E8 /* ICO.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ICO.storyboard; sourceTree = "<group>"; };
 		6E6BD24A1FFC67E10049098A /* PKHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PKHUD.framework; path = Carthage/Build/iOS/PKHUD.framework; sourceTree = "<group>"; };
 		6E7C92731F7A5FBA00F8D7AA /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		6E7C927B1F7A6B1400F8D7AA /* Account.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Account.storyboard; sourceTree = "<group>"; };
@@ -383,6 +385,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		6E68B6AE206CB75D008C25E8 /* TokenSale */ = {
+			isa = PBXGroup;
+			children = (
+				6E68B6AF206CB771008C25E8 /* ICO.storyboard */,
+			);
+			path = TokenSale;
+			sourceTree = "<group>";
+		};
 		6EA7F9221F6E2DC400E31B78 /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -511,6 +521,7 @@
 		7575ADC41F6006AC0077007B /* O3 */ = {
 			isa = PBXGroup;
 			children = (
+				6E68B6AE206CB75D008C25E8 /* TokenSale */,
 				6EE34B9F201605FC006558E9 /* oval.json */,
 				6ED600111F762189006760E6 /* O3.entitlements */,
 				75D5BFBB1F6D0EC400E64855 /* Global.swift */,
@@ -763,6 +774,7 @@
 				6E1BBF7F1F77BEE30095F466 /* WalletHomeAssets.xcassets in Resources */,
 				7520173F1F73ED1D00090C4F /* Send.storyboard in Resources */,
 				7575ADD01F6006AC0077007B /* LaunchScreen.storyboard in Resources */,
+				6E68B6B0206CB771008C25E8 /* ICO.storyboard in Resources */,
 				75B6E5C21F6D4E8A00F53CA8 /* QR.storyboard in Resources */,
 				7520068E1F7FC56400D19B5F /* SendAssets.xcassets in Resources */,
 				6ED6001E1F76559E006760E6 /* LogoAssets.xcassets in Resources */,
@@ -929,6 +941,184 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		6EE22EB420688F5C00E19600 /* TestNet */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = TestNet;
+		};
+		6EE22EB520688F5C00E19600 /* TestNet */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = O3/O3.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 2CBVZ5X783;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/O3",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
+				INFOPLIST_FILE = O3/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				"OTHER_SWIFT_FLAGS[arch=*]" = "-D DEBUG -Xfrontend -warn-long-expression-type-checking=200 -Xfrontend -warn-long-function-bodies=200 -DTESTNET";
+				PRODUCT_BUNDLE_IDENTIFIER = network.o3.wallet.ios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				STRIP_BITCODE_FROM_COPIED_FILES = NO;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = TestNet;
+		};
+		6EE22EB62069CBFD00E19600 /* PrivateNet */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = PrivateNet;
+		};
+		6EE22EB72069CBFD00E19600 /* PrivateNet */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = O3/O3.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 2CBVZ5X783;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/O3",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
+				INFOPLIST_FILE = O3/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				"OTHER_SWIFT_FLAGS[arch=*]" = "-D DEBUG -Xfrontend -warn-long-expression-type-checking=200 -Xfrontend -warn-long-function-bodies=200 -DPRIVATENET";
+				PRODUCT_BUNDLE_IDENTIFIER = network.o3.wallet.ios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				STRIP_BITCODE_FROM_COPIED_FILES = NO;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = PrivateNet;
+		};
 		7575ADD21F6006AC0077007B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1105,6 +1295,8 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7575ADD21F6006AC0077007B /* Debug */,
+				6EE22EB420688F5C00E19600 /* TestNet */,
+				6EE22EB62069CBFD00E19600 /* PrivateNet */,
 				7575ADD31F6006AC0077007B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1114,6 +1306,8 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7575ADD51F6006AC0077007B /* Debug */,
+				6EE22EB520688F5C00E19600 /* TestNet */,
+				6EE22EB72069CBFD00E19600 /* PrivateNet */,
 				7575ADD61F6006AC0077007B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;

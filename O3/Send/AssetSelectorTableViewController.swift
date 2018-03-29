@@ -41,6 +41,7 @@ class AssetSelectorTableViewController: UITableViewController {
         super.viewDidLoad()
         addThemedElements()
         self.title = NSLocalizedString("Select Asset", comment: "")
+
         selectedNEP5Tokens = UserDefaultsManager.selectedNEP5Token!
         for token in selectedNEP5Tokens {
             let nep5 = token.value
@@ -76,7 +77,12 @@ class AssetSelectorTableViewController: UITableViewController {
     }
 
     func loadAccountState() {
-        Neo.client.getAccountState(for: Authenticated.account?.address ?? "") { result in
+
+        #if TESTNET
+            Authenticated.account?.neoClient = NeoClient(network: .test)
+        #endif
+
+         Authenticated.account?.neoClient.getAccountState(for: Authenticated.account?.address ?? "") { result in
             switch result {
             case .failure:
                 DispatchQueue.main.async {
@@ -147,8 +153,11 @@ class AssetSelectorTableViewController: UITableViewController {
         guard let address =  Authenticated.account?.address else {
             return
         }
+        #if TESTNET
+            Authenticated.account?.neoClient = NeoClient(network: .test)
+        #endif
 
-        Neo.client.getTokenBalanceUInt(token.tokenHash, address: address) { result in
+        Authenticated.account?.neoClient.getTokenBalanceUInt(token.tokenHash, address: address) { result in
             switch result {
             case .failure:
                 DispatchQueue.main.async {

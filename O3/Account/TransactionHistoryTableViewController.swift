@@ -13,7 +13,7 @@ class TransactionHistoryTableViewController: UITableViewController {
 
     var transactionHistory = [TransactionHistoryEntry]()
     func loadTransactionHistory() {
-        Neo.client.getTransactionHistory(for: Authenticated.account?.address ?? "") { result in
+        Authenticated.account?.neoClient.getTransactionHistory(for: Authenticated.account?.address ?? "") { result in
             switch result {
             case .failure:
                 DispatchQueue.main.async {
