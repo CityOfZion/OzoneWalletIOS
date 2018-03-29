@@ -19,6 +19,7 @@ class CurrencyTableViewController: UITableViewController {
     @IBOutlet weak var audCell: UITableViewCell!
     @IBOutlet weak var gbpCell: UITableViewCell!
     @IBOutlet weak var rubCell: UITableViewCell!
+    @IBOutlet weak var cadCell: UITableViewCell!
 
     @IBOutlet weak var usdLabel: UILabel!
     @IBOutlet weak var jpyLabel: UILabel!
@@ -28,6 +29,7 @@ class CurrencyTableViewController: UITableViewController {
     @IBOutlet weak var audLabel: UILabel!
     @IBOutlet weak var gbpLabel: UILabel!
     @IBOutlet weak var rubLabel: UILabel!
+    @IBOutlet weak var cadLabel: UILabel!
 
     @IBOutlet weak var usdSymbol: UILabel!
     @IBOutlet weak var jpySymbol: UILabel!
@@ -37,7 +39,7 @@ class CurrencyTableViewController: UITableViewController {
     @IBOutlet weak var audSymbol: UILabel!
     @IBOutlet weak var gbpSymbol: UILabel!
     @IBOutlet weak var rubSymbol: UILabel!
-
+    @IBOutlet weak var cadSymbol: UILabel!
     var currentlySelectedIndex = 0
 
     func setSelectedCell(index: Int) {
@@ -49,11 +51,11 @@ class CurrencyTableViewController: UITableViewController {
     func setThemedElements() {
         tableView.theme_backgroundColor = O3Theme.backgroundColorPicker
         tableView.theme_separatorColor = O3Theme.tableSeparatorColorPicker
-        let themedTitleLabels = [usdLabel, usdSymbol, jpyLabel, jpySymbol, eurLabel, eurSymbol, krwLabel, krwSymbol, cnyLabel, cnySymbol, audLabel, audSymbol, gbpLabel, gbpSymbol, rubLabel, rubSymbol]
+        let themedTitleLabels = [usdLabel, usdSymbol, jpyLabel, jpySymbol, eurLabel, eurSymbol, krwLabel, krwSymbol, cnyLabel, cadLabel, cnySymbol, audLabel, audSymbol, gbpLabel, gbpSymbol, rubLabel, rubSymbol, cadSymbol]
         for label in themedTitleLabels {
             label?.theme_textColor = O3Theme.titleColorPicker
         }
-        let themedCells = [usdCell, jpyCell, eurCell, krwCell, cnyCell, audCell, gbpCell, rubCell]
+        let themedCells = [usdCell, jpyCell, eurCell, krwCell, cnyCell, audCell, gbpCell, rubCell, cadCell]
         for cell in themedCells {
             cell?.theme_backgroundColor = O3Theme.backgroundColorPicker
             cell?.contentView.theme_backgroundColor = O3Theme.backgroundColorPicker
@@ -77,6 +79,7 @@ class CurrencyTableViewController: UITableViewController {
         case .aud: selectedRow = 5
         case .gbp: selectedRow = 6
         case .rub: selectedRow = 7
+        case .cad: selectedRow = 8
         default: selectedRow = 0
         }
         tableView.reloadData()
@@ -94,6 +97,7 @@ class CurrencyTableViewController: UITableViewController {
         case 5: UserDefaultsManager.referenceFiatCurrency = Currency.aud
         case 6: UserDefaultsManager.referenceFiatCurrency = Currency.gbp
         case 7: UserDefaultsManager.referenceFiatCurrency = Currency.rub
+        case 8: UserDefaultsManager.referenceFiatCurrency = Currency.cad
         default: return
         }
         self.tableView.cellForRow(at: IndexPath(item: currentlySelectedIndex, section: 0))?.accessoryType = .none

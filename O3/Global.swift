@@ -60,6 +60,7 @@ enum Currency: String {
     case aud
     case gbp
     case rub
+    case cad
 
     var symbol: String {
         switch self {
@@ -72,6 +73,7 @@ enum Currency: String {
         case .aud: return "$"
         case .gbp: return "£"
         case .rub: return "₽"
+        case .cad: return "$"
         }
     }
 
@@ -86,6 +88,7 @@ enum Currency: String {
         case .aud: return "en_AU"
         case .gbp: return "en_GB"
         case .rub: return "ru_RU"
+        case .cad: return "en_CA"
         }
     }
 }
