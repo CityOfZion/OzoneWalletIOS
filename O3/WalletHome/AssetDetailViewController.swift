@@ -32,7 +32,7 @@ class AssetDetailViewController: UIViewController, GraphPanDelegate, ScrollableG
     var selectedAsset: String!
     var selectedInterval: PriceInterval = .oneDay
     var priceHistory: History?
-    var referenceCurrency: Currency = .btc
+    var referenceCurrency: Currency = .usd
 
     func selectedPriceIntervalString() -> String {
         switch selectedInterval {
@@ -110,7 +110,7 @@ class AssetDetailViewController: UIViewController, GraphPanDelegate, ScrollableG
         }
         switch referenceCurrency {
         case .btc:
-            amountLabel.text = String(format: "%.8fBTC", latestPrice.averageBTC)
+            amountLabel.text = "₿"+latestPrice.averageBTC.string(Precision.btc, removeTrailing: true)
         default:
             amountLabel.text = latestPrice.averageFiatMoney().formattedString()
         }
@@ -147,7 +147,7 @@ class AssetDetailViewController: UIViewController, GraphPanDelegate, ScrollableG
             case .btc:
                 referenceCurrencyCurrentValue = currentValue.averageBTC
                 referenceCurrencyOriginalValue = originalValue.averageBTC
-                self.amountLabel.text = String(format: "%@BTC", referenceCurrencyCurrentValue.string(Precision.btc))
+                self.amountLabel.text = String(format: "%@BTC", referenceCurrencyCurrentValue.string(Precision.btc, removeTrailing: true))
             default:
                 referenceCurrencyCurrentValue = currentValue.average
                 referenceCurrencyOriginalValue = originalValue.average

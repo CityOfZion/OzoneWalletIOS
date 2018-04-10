@@ -378,15 +378,15 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="Znk-Ss-776">
-                            <rect key="frame" x="0.0" y="88" width="375" height="44"/>
+                            <rect key="frame" x="0.0" y="101" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transactionCell" id="jdI-3P-RKw" customClass="TransactionCell" customModule="O3" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="60"/>
+                            <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transactionCell" rowHeight="73" id="jdI-3P-RKw" customClass="TransactionCell" customModule="O3" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="73"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jdI-3P-RKw" id="fT9-xE-lEc">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="72.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GQl-nI-ULC">
@@ -401,27 +401,45 @@
                                             <color key="textColor" red="0.058823529409999999" green="0.062745098040000002" blue="0.090196078430000007" alpha="1" colorSpace="custom" customColorSpace="adobeRGB1998"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="AXSoNQEKjmqPBNPg5cNrHyWivfjok3Vj9D" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="azO-W0-GHR">
-                                            <rect key="frame" x="20" y="33" width="335" height="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="To: AJ5uKii3iiHfrD5XW88jaiYTFdCavJCMFH" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="azO-W0-GHR">
+                                            <rect key="frame" x="20" y="30.5" width="335" height="17"/>
+                                            <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="12"/>
+                                            <color key="textColor" name="lightThemePrimary"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="From: AJ5uKii3iiHfrD5XW88jaiYTFdCavJCMFH" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQO-dx-ufG">
+                                            <rect key="frame" x="20" y="47.5" width="256.5" height="17"/>
+                                            <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="12"/>
+                                            <color key="textColor" name="lightThemeOrange"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Block: 12346788" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="92Q-W4-ueE">
+                                            <rect key="frame" x="60" y="14" width="90" height="16.5"/>
                                             <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="12"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="KQO-dx-ufG" firstAttribute="leading" secondItem="azO-W0-GHR" secondAttribute="leading" id="CLf-Ff-cRH"/>
+                                        <constraint firstItem="azO-W0-GHR" firstAttribute="top" secondItem="92Q-W4-ueE" secondAttribute="bottom" id="YDK-f7-WcF"/>
                                         <constraint firstItem="E6R-Un-vlA" firstAttribute="centerY" secondItem="GQl-nI-ULC" secondAttribute="centerY" id="bdL-C5-rrM"/>
+                                        <constraint firstItem="KQO-dx-ufG" firstAttribute="top" secondItem="azO-W0-GHR" secondAttribute="bottom" id="eU8-LJ-nrL"/>
                                         <constraint firstItem="azO-W0-GHR" firstAttribute="trailing" secondItem="E6R-Un-vlA" secondAttribute="trailing" id="g0y-X3-Rb5"/>
                                         <constraint firstItem="GQl-nI-ULC" firstAttribute="top" secondItem="fT9-xE-lEc" secondAttribute="topMargin" id="g41-5l-krF"/>
                                         <constraint firstItem="azO-W0-GHR" firstAttribute="leading" secondItem="GQl-nI-ULC" secondAttribute="leading" id="g7h-Bf-NVT"/>
                                         <constraint firstItem="GQl-nI-ULC" firstAttribute="leading" secondItem="fT9-xE-lEc" secondAttribute="leading" constant="20" id="qN8-gw-uyw"/>
+                                        <constraint firstItem="92Q-W4-ueE" firstAttribute="leading" secondItem="GQl-nI-ULC" secondAttribute="trailing" constant="4" id="tUO-Nd-PDY"/>
+                                        <constraint firstItem="92Q-W4-ueE" firstAttribute="centerY" secondItem="GQl-nI-ULC" secondAttribute="centerY" id="u5P-yU-l2G"/>
                                         <constraint firstAttribute="trailing" secondItem="E6R-Un-vlA" secondAttribute="trailing" constant="20" id="waf-ff-1vJ"/>
-                                        <constraint firstItem="azO-W0-GHR" firstAttribute="top" secondItem="GQl-nI-ULC" secondAttribute="bottom" id="xIc-n8-IEK"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="addressLabel" destination="azO-W0-GHR" id="HgI-A7-TLA"/>
                                     <outlet property="amountLabel" destination="E6R-Un-vlA" id="wGz-8Y-PlU"/>
                                     <outlet property="assetLabel" destination="GQl-nI-ULC" id="pxV-ig-1s0"/>
+                                    <outlet property="fromAddressLabel" destination="KQO-dx-ufG" id="J00-3E-mUJ"/>
+                                    <outlet property="toAddressLabel" destination="azO-W0-GHR" id="DQh-L0-b2Z"/>
+                                    <outlet property="transactionTimeLabel" destination="92Q-W4-ueE" id="3Ai-U8-fCy"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -436,7 +454,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yJo-WP-vRI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5610" y="-581"/>
+            <point key="canvasLocation" x="5608.8000000000002" y="-581.55922038980509"/>
         </scene>
         <!--Transaction Web View Controller-->
         <scene sceneID="MEz-wf-gy5">
@@ -752,7 +770,10 @@
             <color red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="lightThemeOrange">
-            <color red="1" green="0.5" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="1" green="0.49803921568627452" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="lightThemePrimary">
+            <color red="0.0" green="0.41176470588235292" blue="0.85098039215686272" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="lightThemePrimary">
             <color red="0.0" green="0.41176470588235292" blue="0.85098039215686272" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

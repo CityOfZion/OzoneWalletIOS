@@ -177,4 +177,21 @@ public class O3Client {
             }
         }
     }
+
+    func getTokens(completion: @escaping(O3ClientResult<[NEP5Token]>) -> Void) {
+        let endpoint = "https://o3.network/settings/nep5.json"
+        sendRequest(endpoint, method: .GET, data: nil, noBaseURL: true) { result in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(let response):
+                let decoder = JSONDecoder()
+                guard let data = try? JSONSerialization.data(withJSONObject: response["nep5tokens"]!, options: .prettyPrinted),
+                    let list = try? decoder.decode([NEP5Token].self, from: data) else {
+                        return
+                }
+                completion(.success(list))
+            }
+        }
+    }
 }

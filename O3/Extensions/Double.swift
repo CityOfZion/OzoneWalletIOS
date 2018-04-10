@@ -8,12 +8,31 @@
 import Foundation
 
 extension Double {
-    func string(_ precision: Int) -> String {
+    func string(_ precision: Int, removeTrailing: Bool) -> String {
         let formatter = NumberFormatter()
         formatter.minimumFractionDigits = precision
         formatter.maximumFractionDigits = precision
         formatter.numberStyle = .decimal
-        return formatter.string(from: self as NSNumber) ?? "\(self)"
+        var stringWithTrailing = formatter.string(from: self as NSNumber) ?? "\(self)"
+        if !removeTrailing {
+            return stringWithTrailing
+        }
+        var truncated = stringWithTrailing
+        for x in (0...stringWithTrailing.characters.count-1).reversed() {
+            let lastChar = stringWithTrailing[stringWithTrailing.index(stringWithTrailing.startIndex, offsetBy: x)]
+            if lastChar == "0" || lastChar == "." {
+                truncated = String(truncated.dropLast())
+            } else {
+                break
+            }
+        }
+
+        if truncated.characters.count == 0 {
+            return "0"
+        } else {
+            return truncated
+        }
+
     }
 
     func stringWithSign(_ precision: Int) -> String {
