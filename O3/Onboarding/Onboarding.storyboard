@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Feh-6v-5Ue">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Feh-6v-5Ue">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="Avenir.ttc">
-            <string>Avenir-Book</string>
-            <string>Avenir-Heavy</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Onboarding View Controller-->
         <scene sceneID="345-dw-5NR">
@@ -174,6 +168,7 @@
                         <outlet property="collectionView" destination="ZTq-rt-rCN" id="mMq-r6-2eY"/>
                         <outlet property="createNewWalletButton" destination="U2y-eL-E2Y" id="m1R-2O-IJM"/>
                         <outlet property="loginButton" destination="aOA-TP-pz9" id="aMu-GU-53Z"/>
+                        <outlet property="newToO3Label" destination="0ej-aP-Hg8" id="GYC-1v-zeR"/>
                         <segue destination="2cF-Xh-uiy" kind="show" identifier="segueToLogin" id="nDz-8f-fC4"/>
                         <segue destination="bCm-98-80m" kind="show" identifier="segueToWelcome" id="H33-T8-8WR"/>
                         <segue destination="iy0-Jz-sHW" kind="show" identifier="firstTimeLogin" id="x6J-qK-Ati"/>
@@ -250,6 +245,7 @@
                         <viewLayoutGuide key="safeArea" id="hCT-fL-H0W"/>
                     </view>
                     <connections>
+                        <outlet property="cancelButton" destination="BgK-hP-zRg" id="3BX-lQ-nD5"/>
                         <outlet property="loginButton" destination="zxT-w2-Mdf" id="RLx-O5-zKd"/>
                         <segue destination="6fG-df-BHS" kind="presentation" identifier="loggedin" modalTransitionStyle="crossDissolve" id="2cU-TJ-2tJ"/>
                     </connections>
@@ -398,6 +394,7 @@
                     <connections>
                         <outlet property="loginButton" destination="36p-VS-Jw7" id="Lfj-Yc-SpO"/>
                         <outlet property="wifTextField" destination="eHV-oy-wwY" id="HwX-58-eB3"/>
+                        <outlet property="wifTextFieldInfoLabel" destination="PGR-rj-rKv" id="xYs-SZ-ydE"/>
                         <segue destination="6fG-df-BHS" kind="presentation" identifier="segueToMainFromLogin" id="1ME-Er-JZt"/>
                         <segue destination="1YE-0v-iEa" kind="presentation" identifier="segueToQrFromLogin" id="j0f-tP-1zP"/>
                     </connections>
@@ -471,6 +468,7 @@ Create a new wallet will write the new private key over the existing one. Please
                         <viewLayoutGuide key="safeArea" id="YN4-R6-lKF"/>
                     </view>
                     <connections>
+                        <outlet property="createNewWalletButton" destination="JYL-wE-2wB" id="xyT-81-YK7"/>
                         <outlet property="titleLabel" destination="SEW-OK-L5T" id="be6-Nx-B2K"/>
                     </connections>
                 </viewController>
@@ -587,8 +585,11 @@ It is highly reccomended that you have a passcode set on your iPhone. Removing t
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="pleaseBackupWarning" destination="mks-dB-te8" id="pKs-yn-52X"/>
                         <outlet property="privateKeyLabel" destination="pRw-MP-Ayh" id="jnV-m7-hwk"/>
                         <outlet property="privateKeyQR" destination="IVZ-iD-CcU" id="7Nx-56-A37"/>
+                        <outlet property="privateKeyTitle" destination="urR-h0-O7b" id="k1o-Ha-tGg"/>
+                        <outlet property="startButton" destination="eBZ-Su-uxi" id="boz-Pv-Pp1"/>
                         <segue destination="6fG-df-BHS" kind="presentation" identifier="segueToMainFromWelcome" id="gND-3E-7d0"/>
                     </connections>
                 </tableViewController>
@@ -634,8 +635,8 @@ It is highly reccomended that you have a passcode set on your iPhone. Removing t
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="H33-T8-8WR"/>
-        <segue reference="1ME-Er-JZt"/>
+        <segue reference="4F1-SI-Z13"/>
+        <segue reference="gND-3E-7d0"/>
         <segue reference="nDz-8f-fC4"/>
     </inferredMetricsTieBreakers>
 </document>

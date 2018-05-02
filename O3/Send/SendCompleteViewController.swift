@@ -14,17 +14,20 @@ class SendCompleteViewController: UIViewController {
     @IBOutlet weak var completeTitle: UILabel!
     @IBOutlet weak var completeSubtitle: UILabel!
     var transactionSucceeded: Bool!
+    @IBOutlet weak var closeButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        closeButton.setTitle(SendStrings.close, for: UIControlState())
+
         if transactionSucceeded {
             completeImage.image = #imageLiteral(resourceName: "checked")
-            completeTitle.text = "Created Transaction Successfully"
-            completeSubtitle.text = "Once your transaction has been confirmed it will appear in your transaction histoty"
+            completeTitle.text = SendStrings.transactionSucceededTitle
+            completeSubtitle.text = SendStrings.transactionSucceededSubtitle
         } else {
             completeImage.image = #imageLiteral(resourceName: "sad")
-            completeTitle.text = "Something Went Wrong"
-            completeSubtitle.text = "Please try to send your transaction again later"
+            completeTitle.text = SendStrings.transactionFailedTitle
+            completeSubtitle.text = SendStrings.transactionFailedSubtitle
         }
     }
     @IBAction func closeTapped(_ sender: Any) {

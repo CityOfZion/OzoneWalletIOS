@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import DeckTransition
 import SwiftTheme
+import Crashlytics
 
 class O3TabBarController: UITabBarController {
     var halfModalTransitioningDelegate: HalfModalTransitioningDelegate?
@@ -77,6 +78,11 @@ class O3TabBarController: UITabBarController {
         present(modal, animated: true, completion: nil)
     }
 
+    func tokenSaleTapped() {
+        let modal = UIStoryboard(name: "TokenSale", bundle: nil).instantiateInitialViewController() as? UINavigationController
+        present(modal!, animated: true, completion: nil)
+    }
+
     @IBAction func tappedLeftBarButtonItem(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
@@ -87,17 +93,24 @@ class O3TabBarController: UITabBarController {
     @objc func menuButtonAction(_ sender: UIButton) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        let send = UIAlertAction(title: "Send", style: .default) { _ in
+        let send = UIAlertAction(title: TabbarStrings.sendTitle, style: .default) { _ in
             self.sendTapped()
         }
         actionSheet.addAction(send)
 
-        let receive = UIAlertAction(title: "Receive", style: .default) { _ in
+        let receive = UIAlertAction(title: TabbarStrings.receiveTitle, style: .default) { _ in
             self.receivedTapped()
         }
         actionSheet.addAction(receive)
 
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+        let tokenSale = UIAlertAction(title: TabbarStrings.tokenSalesTitle, style: .default) { _ in
+            self.tokenSaleTapped()
+        }
+        if O3Cache.gasBalance() > 0 || O3Cache.neoBalance() > 0 {
+            actionSheet.addAction(tokenSale)
+        }
+
+        let cancel = UIAlertAction(title: OzoneAlert.cancelNegativeConfirmString, style: .cancel) { _ in
 
         }
         actionSheet.addAction(cancel)
@@ -111,6 +124,10 @@ class O3TabBarController: UITabBarController {
 
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         guard let index = tabBar.items?.index(of: item) else { return }
+        let tabTappedMessages = ["Portfolio", "Wallet", "Center Button", "News", "Settings" ]
+        Answers.logCustomEvent(withName: "Tab Tapped",
+                               customAttributes: ["Tab Name": tabTappedMessages[index]])
+
         if index == 4 {
            self.performSegue(withIdentifier: "segueToSettings", sender: nil)
         }

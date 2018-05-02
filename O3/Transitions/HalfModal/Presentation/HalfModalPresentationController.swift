@@ -38,11 +38,15 @@ class HalfModalPresentationController: UIPresentationController {
         return view
     }
 
-    func adjustToFullScreen() {
+    func adjustToFullScreen(allowReverse: Bool = true) {
         if let presentedView = presentedView, let containerView = self.containerView {
             UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: { () -> Void in
                 if self.isMaximized {
-                    presentedView.frame = self.frameOfPresentedViewInContainerView
+                    if allowReverse {
+                        presentedView.frame = self.frameOfPresentedViewInContainerView
+                    } else {
+                        return
+                    }
                 } else {
                     presentedView.frame = containerView.frame
                 }
@@ -109,9 +113,9 @@ class HalfModalPresentationController: UIPresentationController {
 protocol HalfModalPresentable { }
 
 extension HalfModalPresentable where Self: UIViewController {
-    func maximizeToFullScreen() {
+    func maximizeToFullScreen(allowReverse: Bool = true) {
         if let presetation = navigationController?.presentationController as? HalfModalPresentationController {
-            presetation.adjustToFullScreen()
+            presetation.adjustToFullScreen(allowReverse: allowReverse)
         }
     }
 }

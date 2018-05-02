@@ -35,6 +35,7 @@ class AddressSelectTableViewController: UITableViewController, HalfModalPresenta
         addTheme()
         super.viewDidLoad()
         loadContacts()
+        self.title = SendStrings.addressBook
         tableView.reloadData()
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
     }

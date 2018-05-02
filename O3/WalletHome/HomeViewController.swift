@@ -143,6 +143,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     override func viewDidLoad() {
+        setLocalizedStrings()
         ThemeManager.setTheme(index: UserDefaultsManager.themeIndex)
         addThemedElements()
         addObservers()
@@ -168,7 +169,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.assetsTable.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height * 0.5)
         setupGraphView()
         super.viewDidLoad()
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -299,6 +299,16 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             return 0
         }
         return portfolio!.data.count
+    }
+
+    func setLocalizedStrings() {
+        self.navigationController?.navigationBar.topItem?.title = PortfolioStrings.portfolio
+        fiveMinButton.setTitle(PortfolioStrings.sixHourInterval, for: UIControlState())
+        fifteenMinButton.setTitle(PortfolioStrings.oneDayInterval, for: UIControlState())
+        thirtyMinButton.setTitle(PortfolioStrings.oneWeekInterval, for: UIControlState())
+        sixtyMinButton.setTitle(PortfolioStrings.oneMonthInterval, for: UIControlState())
+        oneDayButton.setTitle(PortfolioStrings.oneMonthInterval, for: UIControlState())
+        allButton.setTitle(PortfolioStrings.allInterval, for: UIControlState())
     }
 }
 

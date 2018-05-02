@@ -18,6 +18,7 @@ class PrivateKeyViewController: UIViewController {
         view.theme_backgroundColor = O3Theme.backgroundColorPicker
         privateKeyLabel.text = Authenticated.account?.wif
         qrView.image = UIImage(qrData: Authenticated.account?.wif ?? "", width: qrView.frame.width, height: qrView.frame.height)
+        title = SettingsStrings.privateKeyTitle
     }
 
     @IBAction func shareTapped(_ sender: Any) {

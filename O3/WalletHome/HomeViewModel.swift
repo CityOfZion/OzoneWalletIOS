@@ -203,7 +203,7 @@ class HomeViewModel {
     func fetchAssetBalances(address: String, isReadOnly: Bool) {
         group.enter()
         DispatchQueue.global().async {
-            Neo.client.getAccountState(for: address) { result in
+             NeoClient(seed: UserDefaultsManager.seed).getAccountState(for: address) { result in
                 switch result {
                 case .failure:
                     self.fetchNativeAssetsFromCache(isReadOnly: isReadOnly)
@@ -218,6 +218,7 @@ class HomeViewModel {
                                                                assetType: AssetType.nativeAsset,
                                                                decimal: 0,
                                                                balance: Decimal(Double(asset.value) ?? 0))
+                            if !isReadOnly { O3Cache.setNEOForSession(neoBalance: Int(asset.value) ?? 0) }
                         } else {
                             assetToAdd = TransferableAsset(assetID: NeoSwift.AssetId.gasAssetId.rawValue,
                                                           name: "GAS",
@@ -225,6 +226,7 @@ class HomeViewModel {
                                                           assetType: AssetType.nativeAsset,
                                                           decimal: 8,
                                                           balance: Decimal(Double(asset.value) ?? 0))
+                            if !isReadOnly { O3Cache.setGASForSession(gasBalance: Double(asset.value) ?? 0.0) }
                         }
                         if isReadOnly {
                             self.addReadOnlyAsset(assetToAdd)
@@ -280,7 +282,6 @@ class HomeViewModel {
                 switch result {
                 case .failure:
                     self.delegate?.hideLoadingIndicator()
-                    print(result)
                 case .success(let portfolio):
                     self.delegate?.hideLoadingIndicator()
                     self.delegate?.updateWithPortfolioData(portfolio)

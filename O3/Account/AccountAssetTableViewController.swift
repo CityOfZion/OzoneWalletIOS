@@ -11,8 +11,11 @@ import NeoSwift
 import PKHUD
 import Cache
 import SwiftTheme
+import Crashlytics
+import StoreKit
 
 class AccountAssetTableViewController: UITableViewController {
+    @IBOutlet weak var addNEP5Button: UIButton!
 
     private enum sections: Int {
         case unclaimedGAS = 0
@@ -32,6 +35,7 @@ class AccountAssetTableViewController: UITableViewController {
     var tokensCache = [NEP5Token: Decimal]()
     var cachedNEOBalance: Int = 0
     var cachedGASBalance: Double = 0.0
+    var mostRecentClaimAmount = 0.0
 
     func initiateCache() {
         if let storage =  try? Storage(diskConfig: DiskConfig(name: "O3")) {
@@ -46,17 +50,18 @@ class AccountAssetTableViewController: UITableViewController {
     }
 
     func addObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadNEP5TokensSection), name: NSNotification.Name(rawValue: "halfModalDismissed"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadNEP5TokensSection), name: NSNotification.Name(rawValue: "tokenSelectorDismissed"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadCells), name: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil)
     }
 
     deinit {
         NotificationCenter.default.removeObserver(self, name: Notification.Name(rawValue: ThemeUpdateNotification), object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name(rawValue: "halfModalDismissed"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name(rawValue: "tokenSelectiorDismissed"), object: nil)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setLocalizedStrings()
         addObservers()
         self.view.theme_backgroundColor = O3Theme.backgroundColorPicker
         self.tableView.theme_backgroundColor = O3Theme.backgroundColorPicker
@@ -78,6 +83,7 @@ class AccountAssetTableViewController: UITableViewController {
     @objc func reloadAllData() {
         loadAccountState()
         loadClaimableGAS()
+        self.tableView.reloadData()
     }
 
     @objc func reloadNEP5TokensSection() {
@@ -97,14 +103,20 @@ class AccountAssetTableViewController: UITableViewController {
                 }
                 return
             }
-
+            Answers.logCustomEvent(withName: "Gas Claimed",
+                             customAttributes: ["Amount": self.mostRecentClaimAmount])
             DispatchQueue.main.async {
                 //HUD something to notify user that claim succeeded
                 //done claiming
                 HUD.hide()
 
                 DispatchQueue.main.async {
-                    OzoneAlert.alertDialog(message: "Your claim has succeeded, it may take a few minutes to be reflected in your transaction history. You can claim again after 5 minutes", dismissTitle: "Got it") { }
+                    OzoneAlert.alertDialog(message: AccountStrings.successfulClaimPrompt, dismissTitle: OzoneAlert.okPositiveConfirmString) {
+                        UserDefaultsManager.numClaims += 1
+                        if UserDefaultsManager.numClaims == 1 || UserDefaultsManager.numClaims % 10 == 0 {
+                            SKStoreReviewController.requestReview()
+                        }
+                    }
                 }
 
                 //save latest claim time interval here to limit user to only claim every 5 minutes
@@ -140,7 +152,7 @@ class AccountAssetTableViewController: UITableViewController {
         //disable the button after tapped
         enableClaimButton(enable: false)
 
-        HUD.show(.labeledProgress(title: "Claiming GAS", subtitle: "This might take a little while..."))
+        HUD.show(.labeledProgress(title: AccountStrings.claimingInProgressTitle, subtitle: AccountStrings.claimingInProgressSubtitle))
 
         //select best node
         if let bestNode = NEONetworkMonitor.autoSelectBestNode() {
@@ -155,6 +167,7 @@ class AccountAssetTableViewController: UITableViewController {
             }
             return
         }
+
         //to be able to claim. we need to send the entire NEO to ourself.
         Authenticated.account?.sendAssetTransaction(asset: AssetId.neoAssetId, amount: Double(self.neoBalance!), toAddress: (Authenticated.account?.address)!) { completed, _ in
             if completed == false {
@@ -181,15 +194,16 @@ class AccountAssetTableViewController: UITableViewController {
         if Authenticated.account == nil {
             return
         }
-        NeoClient.sharedMain.getClaims(address: (Authenticated.account?.address)!) {result in
+
+        Authenticated.account?.neoClient.getClaims(address: (Authenticated.account?.address)!) { result in
             switch result {
             case .failure:
                 return
             case .success(let claims):
                 self.claims = claims
-                let amount: Double = Double(claims.totalUnspentClaim) / 100000000.0
+                self.mostRecentClaimAmount = Double(claims.totalUnspentClaim) / 100000000.0
                 DispatchQueue.main.async {
-                    self.showClaimableGASAmount(amount: amount)
+                    self.showClaimableGASAmount(amount: self.mostRecentClaimAmount)
                 }
             }
         }
@@ -273,7 +287,9 @@ class AccountAssetTableViewController: UITableViewController {
     }
 
     @IBAction func addNEP5TokensTapped(_ sender: Any) {
-        self.performSegue(withIdentifier: "addTokens", sender: nil)
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "addTokens", sender: nil)
+        }
     }
 
     // MARK: - Table view data source
@@ -318,6 +334,7 @@ class AccountAssetTableViewController: UITableViewController {
         guard let address =  Authenticated.account?.address else {
             return
         }
+
         NeoClient(seed: UserDefaultsManager.seed).getTokenBalanceUInt(token.tokenHash, address: address) { result in
             switch result {
             case .failure:
@@ -398,14 +415,9 @@ class AccountAssetTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    // MARK: -
-    var halfModalTransitioningDelegate: HalfModalTransitioningDelegate?
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "addTokens" {
-            self.halfModalTransitioningDelegate = HalfModalTransitioningDelegate(viewController: self, presentingViewController: segue.destination)
-            segue.destination.modalPresentationStyle = .custom
-            segue.destination.transitioningDelegate = self.halfModalTransitioningDelegate
-        }
+    func setLocalizedStrings() {
+        self.navigationController?.navigationBar.topItem?.title = AccountStrings.accountTitle
+        addNEP5Button.setTitle(AccountStrings.addNEP5Token, for: UIControlState())
     }
 }
 

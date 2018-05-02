@@ -11,25 +11,26 @@ import NeoSwift
 
 class PreCreateWalletViewController: UIViewController {
 
-    @IBOutlet var titleLabel: UILabel?
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet weak var createNewWalletButton: ShadowedButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Create a Wallet"
+        setLocalizedStrings()
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         setNeedsStatusBarAppearanceUpdate()
-
-        //if user already have an o3 wallet address we then show that creating wallet will overwrite the existing wallet
-        if UserDefaultsManager.o3WalletAddress != nil {
-
-        }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToWelcome" {
-            //create a new wallet
             Authenticated.account = Account()
         }
     }
 
+    func setLocalizedStrings() {
+        self.title = OnboardingStrings.createNewWalletTitle
+    createNewWalletButton.setTitle(OnboardingStrings.createNewWalletTitle, for: UIControlState())
+        titleLabel.text = OnboardingStrings.alreadyHaveWalletWarning
+
+    }
 }

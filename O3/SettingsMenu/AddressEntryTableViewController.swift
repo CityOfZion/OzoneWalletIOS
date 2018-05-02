@@ -37,7 +37,7 @@ class AddressEntryTableViewController: UITableViewController, AVCaptureMetadataO
         let address = addressTextView.text.trim()
         if !NEOValidator.validateNEOAddress(address) {
             DispatchQueue.main.async {
-                OzoneAlert.alertDialog(message: "Invalid Address", dismissTitle: "OK", didDismiss: {
+                OzoneAlert.alertDialog(message: SettingsStrings.invalidAddressError, dismissTitle: OzoneAlert.okPositiveConfirmString, didDismiss: {
                     self.addressTextView.becomeFirstResponder()
                 })
             }
@@ -74,6 +74,7 @@ class AddressEntryTableViewController: UITableViewController, AVCaptureMetadataO
 
     override func viewDidLoad() {
         setThemedElements()
+        setLocalizedStrings()
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         addressTextView.delegate = self
@@ -136,6 +137,12 @@ class AddressEntryTableViewController: UITableViewController, AVCaptureMetadataO
         let address = addressTextView.text?.trim().isEmpty == false
         enabled = validNickname && address
         proceedButton.isEnabled = enabled
+    }
+
+    func setLocalizedStrings() {
+        addressLabel.text = SettingsStrings.addressLabel
+        nicknameField.text = SettingsStrings.nicknameLabel
+        closeButton.setTitle(SettingsStrings.close, for: UIControlState())
     }
 }
 

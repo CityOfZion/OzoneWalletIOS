@@ -10,6 +10,31 @@ import Foundation
 import UIKit
 
 extension UIView {
+    func  shakeToShowError() {
+        let maxShakes = 6
+        let shakeDuration = 0.05
+        let shakeTransform = 6.0 as CGFloat
+        var direction = 1.0 as CGFloat
+
+        for i in 0...maxShakes {
+            UIView.animate(
+                withDuration: shakeDuration,
+                delay: shakeDuration * Double(i),
+                options: .curveEaseIn,
+                animations: {
+                    if i >= maxShakes {
+                        self.transform = CGAffineTransform.identity
+                    } else {
+                        self.transform = CGAffineTransform(translationX: shakeTransform * direction, y: 0)
+                    }
+            },
+                completion: nil
+            )
+
+            direction *= -1
+        }
+    }
+
     func embed(_ embeddedView: UIView) {
         self.addSubview(embeddedView)
         embeddedView.translatesAutoresizingMaskIntoConstraints = false

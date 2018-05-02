@@ -27,6 +27,20 @@ class Fiat: Money {
 
 extension Money {
     func formattedString() -> String {
+
+        //more than one billion
+        if self.amount > 1000000000 {
+            var n = Double(self.amount)
+            n = Double(n/1000000000)
+            let amountNumber = NSNumber(value: n)
+            let formatter = NumberFormatter()
+            formatter.locale = Locale(identifier: self.locale)
+            formatter.numberStyle = .currency
+            if let formattedTipAmount = formatter.string(from: amountNumber as NSNumber) {
+                return formattedTipAmount + "B"
+            }
+        }
+
         let amountNumber = NSNumber(value: self.amount)
         let formatter = NumberFormatter()
         formatter.locale = Locale(identifier: self.locale)

@@ -9,8 +9,11 @@
 import UIKit
 import CoreData
 import DeckTransition
-class ContactsTableViewController: UITableViewController, AddressAddDelegate {
+import Crashlytics
 
+class ContactsTableViewController: UITableViewController, AddressAddDelegate {
+    @IBOutlet weak var addAddressButton: ShadowedButton!
+    @IBOutlet weak var addAddressDescriptionLabel: UILabel!
     let appDelegate: AppDelegate? = UIApplication.shared.delegate as? AppDelegate
     var fetchedResultsController: NSFetchedResultsController<Contact>?
     var selectedAddress = ""
@@ -36,6 +39,7 @@ class ContactsTableViewController: UITableViewController, AddressAddDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setLocalizedStrings()
         tableView.theme_backgroundColor = O3Theme.backgroundColorPicker
         tableView.theme_separatorColor = O3Theme.tableSeparatorColorPicker
         view.theme_backgroundColor = O3Theme.backgroundColorPicker
@@ -89,7 +93,7 @@ class ContactsTableViewController: UITableViewController, AddressAddDelegate {
     }
 
     func tappedRemoveAddress(_ index: Int) {
-        OzoneAlert.confirmDialog(message: "Are you sure you want to delete", cancelTitle: "Cancel", confirmTitle: "OK", didCancel: {
+        OzoneAlert.confirmDialog(message: AccountStrings.areYouSureDelete, cancelTitle: OzoneAlert.cancelNegativeConfirmString, confirmTitle: OzoneAlert.okPositiveConfirmString, didCancel: {
 
         }) {
             guard let contacts = self.fetchedResultsController?.fetchedObjects else { return  }
@@ -100,28 +104,28 @@ class ContactsTableViewController: UITableViewController, AddressAddDelegate {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let edit = UIAlertAction(title: "Edit Name", style: .default) { _ in
+        let edit = UIAlertAction(title: AccountStrings.editName, style: .default) { _ in
             self.tappedEditWatchOnlyAddress(indexPath.row)
         }
         actionSheet.addAction(edit)
 
-        let send = UIAlertAction(title: "Send to Address", style: .default) { _ in
+        let send = UIAlertAction(title: AccountStrings.sendToAddress, style: .default) { _ in
             self.selectedAddress = self.fetchedResultsController?.object(at: indexPath).address ?? ""
             self.sendTapped()
         }
         actionSheet.addAction(send)
 
-        let copy = UIAlertAction(title: "Copy Address", style: .default) { _ in
+        let copy = UIAlertAction(title: AccountStrings.copyAddress, style: .default) { _ in
             UIPasteboard.general.string = self.fetchedResultsController?.object(at: indexPath).address ?? ""
         }
         actionSheet.addAction(copy)
 
-        let delete = UIAlertAction(title: "Delete", style: .destructive) { _ in
+        let delete = UIAlertAction(title: AccountStrings.delete, style: .destructive) { _ in
             self.tappedRemoveAddress(indexPath.row)
         }
         actionSheet.addAction(delete)
 
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+        let cancel = UIAlertAction(title: OzoneAlert.cancelNegativeConfirmString, style: .cancel) { _ in
 
         }
         actionSheet.addAction(cancel)
@@ -133,18 +137,20 @@ class ContactsTableViewController: UITableViewController, AddressAddDelegate {
     func tappedEditWatchOnlyAddress(_ index: Int) {
         guard let contacts = fetchedResultsController?.fetchedObjects else { return  }
         let toUpdate = contacts[index]
-        let alert = UIAlertController(title: "Edit name", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: AccountStrings.editName, message: nil, preferredStyle: .alert)
         alert.addTextField { (textfield) in
             textfield.text = toUpdate.nickName
         }
-        let save = UIAlertAction(title: "Save", style: .default) { _ in
+        let save = UIAlertAction(title: AccountStrings.save, style: .default) { _ in
             let textfield = alert.textFields?.first
             toUpdate.nickName = textfield?.text?.trim()
             try? UIApplication.appDelegate.persistentContainer.viewContext.save()
+            Answers.logCustomEvent(withName: "Contact Added",
+                                   customAttributes: ["Total Contacts": contacts.count + 1])
             self.tableView.reloadData()
         }
         alert.addAction(save)
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+        let cancel = UIAlertAction(title: OzoneAlert.cancelNegativeConfirmString, style: .cancel) { _ in
 
         }
         alert.addAction(cancel)
@@ -181,21 +187,16 @@ extension ContactsTableViewController: NSFetchedResultsControllerDelegate {
     }
 
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        switch (type) {
+        switch type {
         case .insert:
             if let indexPath = newIndexPath {
                 tableView.insertRows(at: [indexPath], with: .fade)
             }
-            break
         case .delete:
             if let indexPath = indexPath {
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
-            break
         case .update:
-            //            if let indexPath = indexPath, let cell = iTableView.cellForRow(at: indexPath) {
-            //                configureCell(cell, at: indexPath)
-            //            }
             break
         case .move:
             if let indexPath = indexPath {
@@ -205,7 +206,12 @@ extension ContactsTableViewController: NSFetchedResultsControllerDelegate {
             if let newIndexPath = newIndexPath {
                 tableView.insertRows(at: [newIndexPath], with: .fade)
             }
-            break
         }
+    }
+
+    func setLocalizedStrings() {
+        addAddressButton.setTitle(AccountStrings.addContact, for: UIControlState())
+        addAddressDescriptionLabel.text = AccountStrings.addContactDescription
+
     }
 }

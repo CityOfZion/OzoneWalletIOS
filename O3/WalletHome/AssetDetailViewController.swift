@@ -88,6 +88,7 @@ class AssetDetailViewController: UIViewController, GraphPanDelegate, ScrollableG
 
     override func viewDidLoad() {
         addThemedElements()
+        setLocalizedStrings()
         super.viewDidLoad()
         setupGraphView()
         navigationItem.title = selectedAsset.uppercased()
@@ -200,5 +201,15 @@ class AssetDetailViewController: UIViewController, GraphPanDelegate, ScrollableG
             return 0
         }
         return priceHistory!.data.count
+    }
+
+    func setLocalizedStrings() {
+        fiveMinButton.setTitle(PortfolioStrings.sixHourInterval, for: UIControlState())
+        fifteenMinButton.setTitle(PortfolioStrings.oneDayInterval, for: UIControlState())
+        thirtyMinButton.setTitle(PortfolioStrings.oneWeekInterval, for: UIControlState())
+        sixtyMinButton.setTitle(PortfolioStrings.oneMonthInterval, for: UIControlState())
+        oneDayButton.setTitle(PortfolioStrings.threeMonthInterval, for: UIControlState())
+        allButton.setTitle(PortfolioStrings.allInterval, for: UIControlState())
+
     }
 }

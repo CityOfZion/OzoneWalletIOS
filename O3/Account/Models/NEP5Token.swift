@@ -9,6 +9,7 @@
 import UIKit
 struct NEP5Token: Codable, Hashable {
 
+    var logoURL: String!
     var tokenHash: String!
     var name: String!
     var symbol: String!
@@ -24,6 +25,7 @@ struct NEP5Token: Codable, Hashable {
     }
 
     enum CodingKeys: String, CodingKey {
+        case logoURL
         case tokenHash
         case name
         case symbol
@@ -31,7 +33,8 @@ struct NEP5Token: Codable, Hashable {
         case totalSupply
     }
 
-    public init(tokenHash: String, name: String, symbol: String, decimal: Int, totalSupply: Int) {
+    public init(logoURL: String, tokenHash: String, name: String, symbol: String, decimal: Int, totalSupply: Int) {
+        self.logoURL = logoURL
         self.tokenHash = tokenHash
         self.name = name
         self.symbol = symbol
@@ -41,11 +44,12 @@ struct NEP5Token: Codable, Hashable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        let logoURL: String = try container.decode(String.self, forKey: .logoURL)
         let tokenHash: String = try container.decode(String.self, forKey: .tokenHash)
         let name: String = try container.decode(String.self, forKey: .name)
         let symbol: String = try container.decode(String.self, forKey: .symbol)
         let decimal: Int = try container.decode(Int.self, forKey: .decimal)
         let totalSupply: Int = try container.decode(Int.self, forKey: .totalSupply)
-        self.init(tokenHash: tokenHash, name: name, symbol: symbol, decimal: decimal, totalSupply: totalSupply)
+        self.init(logoURL: logoURL, tokenHash: tokenHash, name: name, symbol: symbol, decimal: decimal, totalSupply: totalSupply)
     }
 }

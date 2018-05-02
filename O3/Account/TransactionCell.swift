@@ -37,7 +37,6 @@ class TransactionCell: UITableViewCell {
     @IBOutlet weak var assetLabel: UILabel!
     @IBOutlet weak var toAddressLabel: UILabel!
     @IBOutlet weak var fromAddressLabel: UILabel!
-
     @IBOutlet weak var amountLabel: UILabel!
 
     override func awakeFromNib() {
@@ -51,24 +50,31 @@ class TransactionCell: UITableViewCell {
 
     func getAddressAlias(address: String) -> String {
         if address == Authenticated.account?.address ?? "" {
-            return "O3 Wallet"
+            return AccountStrings.o3Wallet
         } else if let contactIndex = delegate?.getContacts().index(where: {$0.address == address}) {
             return delegate?.getContacts()[contactIndex].nickName ?? address
         } else if let watchAddressIndex = delegate?.getWatchAddresses().index(where: {$0.address == address}) {
             return delegate?.getWatchAddresses()[watchAddressIndex].nickName ?? address
         } else if address == "claim" {
-            return address.capitalized
+            return AccountStrings.claimTransaction
         }
         return address
     }
 
     var data: TransactionData? {
         didSet {
+            if data?.toAddress ?? "" == Authenticated.account?.address ?? "" {
+                amountLabel.theme_textColor = O3Theme.positiveGainColorPicker
+                amountLabel.text = data?.amount.stringWithSign((data?.precision)!)
+            } else {
+                amountLabel.theme_textColor = O3Theme.negativeLossColorPicker
+                amountLabel.text = data?.amount.stringWithSign((data?.precision)! * -1)
+            }
             assetLabel.text = data?.asset.uppercased()
+            transactionTimeLabel?.text = AccountStrings.blockPrefix + String(data?.date ?? 0)
+            toAddressLabel.text = AccountStrings.toPrefix + getAddressAlias(address: data?.toAddress ?? "")
+            fromAddressLabel.text = AccountStrings.fromPrefix + getAddressAlias(address: data?.fromAddress ?? "")
             amountLabel.text = data?.amount.stringWithSign((data?.precision)!)
-            transactionTimeLabel?.text = "Block: " + String(data?.date ?? 0)
-            toAddressLabel.text = "To: " + getAddressAlias(address: data?.toAddress ?? "")
-            fromAddressLabel.text = "From: " + getAddressAlias(address: data?.fromAddress ?? "")
             amountLabel.theme_textColor = (data?.toAddress ?? "" == Authenticated.account?.address ?? "" ) ? O3Theme.positiveGainColorPicker : O3Theme.negativeLossColorPicker
         }
     }

@@ -275,4 +275,5 @@ class O3Theme {
 
     static let statusBarStylePicker = ThemeStatusBarStylePicker(styles: .default, .lightContent, .lightContent)
     static let tabBarStylePicker = ThemeBarStylePicker(styles: .default, .black)
+
 }

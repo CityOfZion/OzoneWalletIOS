@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import NeoSwift
+import Crashlytics
 
 class NetworkTableViewController: UITableViewController, NetworkSeedCellDelegate {
     var testNodes = (NEONetworkMonitor.sharedInstance.network?.testNet.nodes)!
@@ -53,59 +54,42 @@ class NetworkTableViewController: UITableViewController, NetworkSeedCellDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.theme_separatorColor = O3Theme.tableSeparatorColorPicker
-        navigationItem.title = "Network"
+        navigationItem.title = SettingsStrings.networkTitle
         updateNodeData()
 
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0: return 1
-        case 1: return tableNodes.count
-        default: fatalError("Undefined table section behavior")
-        }
+        return tableNodes.count
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "networkTypeCell") as? NetworkTypeCell else {
-                fatalError("Undefined cell behavior")
-            }
-            cell.delegate = self
-            cell.networkTypeButton.setTitle(UserDefaultsManager.network.rawValue, for: UIControlState())
-            cell.seedTypeButton.setTitle(UserDefaultsManager.useDefaultSeed == true ? "Default": "Custom", for: UIControlState())
-            cell.selectionStyle = .none
-            return cell
-        } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "networkSeedCell") as? NetworkSeedCell else {
-                fatalError("Undefined cell behavior")
-            }
-            cell.selectionStyle = .none
-            cell.delegate = self
-            cell.node = tableNodes[indexPath.row]
-            return cell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "networkSeedCell") as? NetworkSeedCell else {
+            fatalError("Undefined cell behavior")
         }
+        cell.selectionStyle = .none
+        cell.delegate = self
+        cell.node = tableNodes[indexPath.row]
+        return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1 {
-            OzoneAlert.confirmDialog(message: "Selecting this seed will switch network management to manual mode.", cancelTitle: "Cancel", confirmTitle: "Confirm", didCancel: {}) {
-                UserDefaultsManager.seed = self.tableNodes[indexPath.row].URL
-                UserDefaultsManager.useDefaultSeed = false
-                DispatchQueue.main.async { tableView.reloadData() }
-            }
+         OzoneAlert.confirmDialog(message: SettingsStrings.networkSwitchWarning, cancelTitle: OzoneAlert.cancelNegativeConfirmString, confirmTitle: OzoneAlert.confirmPositiveConfirmString, didCancel: {}) {
+
+            Answers.logCustomEvent(withName: "Network Node Set",
+                                   customAttributes: ["Network Node": self.tableNodes[indexPath.row].URL])
+
+            UserDefaultsManager.seed = self.tableNodes[indexPath.row].URL
+            UserDefaultsManager.useDefaultSeed = false
+            DispatchQueue.main.async { tableView.reloadData() }
         }
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
-            return 44
-        } else {
-            return 67.5
-        }
+        return 67.5
     }
 }

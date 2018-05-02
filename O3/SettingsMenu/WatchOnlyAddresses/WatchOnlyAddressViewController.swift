@@ -9,9 +9,12 @@
 import Foundation
 import UIKit
 import Channel
+import Crashlytics
 
 class WatchOnlyAddressViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddressAddDelegate, AddAddressCellDelegate, HalfModalPresentable {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var addWatchAddressDescription: UILabel!
+
     var watchAddresses = [WatchAddress]()
 
     func loadWatchAddresses() {
@@ -31,6 +34,7 @@ class WatchOnlyAddressViewController: UIViewController, UITableViewDelegate, UIT
 
     override func viewDidLoad() {
         setThemedElements()
+        setLocalizedStrings()
         super.viewDidLoad()
         let rightBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "angle-up"), style: .plain, target: self, action: #selector(maximize(_:)))
         navigationItem.rightBarButtonItem = rightBarButton
@@ -86,7 +90,7 @@ class WatchOnlyAddressViewController: UIViewController, UITableViewDelegate, UIT
     }
 
     func tappedRemoveAddress(_ index: Int) {
-        OzoneAlert.confirmDialog(message: "Are you sure you want to delete", cancelTitle: "Cancel", confirmTitle: "Delete", didCancel: {}) {
+        OzoneAlert.confirmDialog(message: SettingsStrings.deleteConfirmationPrompt, cancelTitle: OzoneAlert.cancelNegativeConfirmString, confirmTitle: OzoneAlert.confirmPositiveConfirmString, didCancel: {}) {
             let toDelete = self.watchAddresses[index]
             Channel.shared().unsubscribe(fromTopic: toDelete.address!) {}
             UIApplication.appDelegate.persistentContainer.viewContext.delete(self.watchAddresses[index])
@@ -103,22 +107,22 @@ class WatchOnlyAddressViewController: UIViewController, UITableViewDelegate, UIT
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let edit = UIAlertAction(title: "Edit Name", style: .default) { _ in
+        let edit = UIAlertAction(title: SettingsStrings.editNameString, style: .default) { _ in
             self.tappedEditWatchOnlyAddress(indexPath.row)
         }
         actionSheet.addAction(edit)
 
-        let copy = UIAlertAction(title: "Copy", style: .default) { _ in
+        let copy = UIAlertAction(title: SettingsStrings.copyAddressString, style: .default) { _ in
              UIPasteboard.general.string = self.watchAddresses[indexPath.row].address ?? ""
         }
         actionSheet.addAction(copy)
 
-        let delete = UIAlertAction(title: "Delete", style: .destructive) { _ in
+        let delete = UIAlertAction(title: SettingsStrings.deleteString, style: .destructive) { _ in
             self.tappedRemoveAddress(indexPath.row)
         }
         actionSheet.addAction(delete)
 
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+        let cancel = UIAlertAction(title: OzoneAlert.cancelNegativeConfirmString, style: .cancel) { _ in
 
         }
         actionSheet.addAction(cancel)
@@ -129,18 +133,20 @@ class WatchOnlyAddressViewController: UIViewController, UITableViewDelegate, UIT
 
     func tappedEditWatchOnlyAddress(_ index: Int) {
      let toUpdate = self.watchAddresses[index]
-        let alert = UIAlertController(title: "Edit name", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: SettingsStrings.editNameString, message: nil, preferredStyle: .alert)
         alert.addTextField { (textfield) in
             textfield.text = toUpdate.nickName
         }
-        let save = UIAlertAction(title: "Save", style: .default) { _ in
+        let save = UIAlertAction(title: SettingsStrings.saveString, style: .default) { _ in
             let textfield = alert.textFields?.first
             toUpdate.nickName = textfield?.text?.trim()
             try? UIApplication.appDelegate.persistentContainer.viewContext.save()
+            Answers.logCustomEvent(withName: "Watch Address Added",
+                                   customAttributes: ["Total Watch Addresses": self.watchAddresses.count + 1])
             self.tableView.reloadData()
         }
         alert.addAction(save)
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+        let cancel = UIAlertAction(title: OzoneAlert.cancelNegativeConfirmString, style: .cancel) { _ in
 
         }
         alert.addAction(cancel)
@@ -156,5 +162,10 @@ class WatchOnlyAddressViewController: UIViewController, UITableViewDelegate, UIT
             fatalError("Unknow segue destination")
         }
         dest.delegate = self
+    }
+
+    func setLocalizedStrings() {
+        self.title = SettingsStrings.watchAddressTitle
+        addWatchAddressDescription.text = SettingsStrings.addWatchAddressDescription
     }
 }

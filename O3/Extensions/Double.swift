@@ -10,29 +10,11 @@ import Foundation
 extension Double {
     func string(_ precision: Int, removeTrailing: Bool) -> String {
         let formatter = NumberFormatter()
-        formatter.minimumFractionDigits = precision
+        formatter.minimumFractionDigits = 0 //make this minimum to zero so it's properly remove the trailing zero
         formatter.maximumFractionDigits = precision
         formatter.numberStyle = .decimal
-        var stringWithTrailing = formatter.string(from: self as NSNumber) ?? "\(self)"
-        if !removeTrailing {
-            return stringWithTrailing
-        }
-        var truncated = stringWithTrailing
-        for x in (0...stringWithTrailing.characters.count-1).reversed() {
-            let lastChar = stringWithTrailing[stringWithTrailing.index(stringWithTrailing.startIndex, offsetBy: x)]
-            if lastChar == "0" || lastChar == "." {
-                truncated = String(truncated.dropLast())
-            } else {
-                break
-            }
-        }
-
-        if truncated.characters.count == 0 {
-            return "0"
-        } else {
-            return truncated
-        }
-
+        let stringWithTrailing = formatter.string(from: self as NSNumber) ?? "\(self)"
+        return stringWithTrailing
     }
 
     func stringWithSign(_ precision: Int) -> String {

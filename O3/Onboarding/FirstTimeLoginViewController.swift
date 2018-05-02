@@ -12,7 +12,7 @@ class FirstTimeLoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Login"
+        self.title = OnboardingStrings.loginTitle
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.navigationController?.hideHairline()
         setNeedsStatusBarAppearanceUpdate()

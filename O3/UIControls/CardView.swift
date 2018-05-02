@@ -14,7 +14,7 @@ class CardView: UIView {
     override var backgroundColor: UIColor? {
         didSet {
             if shadowLayer != nil {
-               shadowLayer.fillColor = UserDefaultsManager.themeIndex == 0 ?     Theme.light.cardColor.cgColor : Theme.dark.cardColor.cgColor
+               shadowLayer.fillColor = UserDefaultsManager.themeIndex == 0 ?  Theme.light.cardColor.cgColor : Theme.dark.cardColor.cgColor
             }
         }
     }
@@ -26,7 +26,7 @@ class CardView: UIView {
         if shadowLayer == nil {
             shadowLayer = CAShapeLayer()
             shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: 6).cgPath
-            shadowLayer.fillColor = UserDefaultsManager.themeIndex == 0 ?     Theme.light.cardColor.cgColor : Theme.dark.cardColor.cgColor
+            shadowLayer.fillColor = UserDefaultsManager.themeIndex == 0 ? Theme.light.cardColor.cgColor : Theme.dark.cardColor.cgColor
 
             shadowLayer.shadowColor = UIColor.black.cgColor
             shadowLayer.shadowPath = shadowLayer.path

@@ -13,6 +13,7 @@ class MyAddressViewController: UIViewController {
     @IBOutlet var qrImageView: UIImageView!
     @IBOutlet var addressLabel: UILabel!
     @IBOutlet var qrCodeContainerView: UIView!
+    @IBOutlet weak var addressInfoLabel: UILabel!
 
     func configureView() {
         applyNavBarTheme()
@@ -37,21 +38,21 @@ class MyAddressViewController: UIViewController {
 
     @IBAction func showActionSheet() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let saveQR = UIAlertAction(title: "Save QR Code Image", style: .default) { _ in
+        let saveQR = UIAlertAction(title: AccountStrings.saveQRAction, style: .default) { _ in
             self.saveQRCodeImage()
         }
         alert.addAction(saveQR)
-        let copyAddress = UIAlertAction(title: "Copy Address", style: .default) { _ in
+        let copyAddress = UIAlertAction(title: AccountStrings.copyAddressAction, style: .default) { _ in
             UIPasteboard.general.string = Authenticated.account?.address
             //maybe need some Toast style to notify that it's copied
         }
         alert.addAction(copyAddress)
-        let share = UIAlertAction(title: "Share", style: .default) { _ in
+        let share = UIAlertAction(title: AccountStrings.shareAction, style: .default) { _ in
             self.share()
         }
         alert.addAction(share)
 
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+        let cancel = UIAlertAction(title: OzoneAlert.cancelNegativeConfirmString, style: .cancel) { _ in
 
         }
         alert.addAction(cancel)
@@ -61,19 +62,20 @@ class MyAddressViewController: UIViewController {
 
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if let error = error {
-            let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            let alert = UIAlertController(title: OzoneAlert.errorTitle, message: error.localizedDescription, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: OzoneAlert.okPositiveConfirmString, style: .default))
             present(alert, animated: true)
         } else {
             //change it to Toast style.
-            let alert = UIAlertController(title: "Saved!", message: "Image saved successfully", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            let alert = UIAlertController(title: AccountStrings.saved, message: AccountStrings.savedMessage, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: OzoneAlert.okPositiveConfirmString, style: .default))
             present(alert, animated: true)
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setLocalizedStrings()
         configureView()
         let tap = UITapGestureRecognizer(target: self, action: #selector(showActionSheet))
         self.view.addGestureRecognizer(tap)
@@ -83,4 +85,8 @@ class MyAddressViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 
+    func setLocalizedStrings() {
+        addressInfoLabel.text = AccountStrings.myAddressInfo
+        title = AccountStrings.myAddressTitle
+    }
 }

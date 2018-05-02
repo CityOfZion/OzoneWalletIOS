@@ -25,3 +25,21 @@ extension UINavigationController {
     }
 
 }
+
+extension UISearchBar {
+
+    internal func findHairline(view: UIView) {
+        for v in view.subviews {
+            if let hairlineView = v as? UIImageView {
+                hairlineView.isHidden = hairlineView.bounds.size.height == (1 / UIScreen.main.scale) ? true : false
+                break
+            }
+            findHairline(view: v)
+        }
+    }
+
+    func hideHairline() {
+        findHairline(view: self)
+    }
+
+}

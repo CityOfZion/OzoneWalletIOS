@@ -27,9 +27,8 @@ class AssetSelectorTableViewController: UITableViewController {
     var selectedNEP5Tokens: [String: NEP5Token] = [:]
 
     var assets: [String: TransferableAsset]! = [:]
-    var transferableNEO: TransferableAsset! = TransferableAsset(assetID: NeoSwift.AssetId.neoAssetId.rawValue, name: "NEO", symbol: "NEO", assetType: AssetType.nativeAsset, decimal: 0, balance: 0.0)
-
-    var transferableGAS: TransferableAsset! = TransferableAsset(assetID: NeoSwift.AssetId.gasAssetId.rawValue, name: "GAS", symbol: "GAS", assetType: AssetType.nativeAsset, decimal: 0, balance: 0.0)
+    var transferableNEO: TransferableAsset! = TransferableAsset.NEO()
+    var transferableGAS: TransferableAsset! = TransferableAsset.GAS()
 
     func addThemedElements() {
         applyNavBarTheme()
@@ -40,7 +39,8 @@ class AssetSelectorTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addThemedElements()
-        self.title = NSLocalizedString("Select Asset", comment: "")
+        self.title = SendStrings.assetSelectorTitle
+
         selectedNEP5Tokens = UserDefaultsManager.selectedNEP5Token!
         for token in selectedNEP5Tokens {
             let nep5 = token.value
@@ -76,7 +76,12 @@ class AssetSelectorTableViewController: UITableViewController {
     }
 
     func loadAccountState() {
-        Neo.client.getAccountState(for: Authenticated.account?.address ?? "") { result in
+
+        #if TESTNET
+            Authenticated.account?.neoClient = NeoClient(network: .test)
+        #endif
+
+         Authenticated.account?.neoClient.getAccountState(for: Authenticated.account?.address ?? "") { result in
             switch result {
             case .failure:
                 DispatchQueue.main.async {
@@ -147,8 +152,11 @@ class AssetSelectorTableViewController: UITableViewController {
         guard let address =  Authenticated.account?.address else {
             return
         }
+        #if TESTNET
+            Authenticated.account?.neoClient = NeoClient(network: .test)
+        #endif
 
-        Neo.client.getTokenBalanceUInt(token.tokenHash, address: address) { result in
+        Authenticated.account?.neoClient.getTokenBalanceUInt(token.tokenHash, address: address) { result in
             switch result {
             case .failure:
                 DispatchQueue.main.async {

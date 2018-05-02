@@ -1,0 +1,500 @@
+/* Created with Localizable Strings Merge, the swiss-army knife for iOS and OS X localization. */
+
+/* Negative Response to an alert message, it is a negative action stating that they want to cancel whatever their current action is */
+"ALERT_Cancel" = "ALERT_Cancel";
+
+/* Positive Response to an alert message, it is a positive action stating that they have read the alert and are confirming whatever action they are about to take */
+"ALERT_Confirm" = "ALERT_Confirm";
+
+/* Negative Response to an alert message, it is a negative action stating that they have not yet completed what they need to do */
+"ALERT_Not_Yet_Negative_Confirm" = "ALERT_Not_Yet_Negative_Confirm";
+
+/* Positive Response to an alert message, it is a generic positive action replying ok to whatever the prompt is */
+"ALERT_OK" = "ALERT_OK";
+
+/* Title for button when you add a contact to address book */
+"CONTACTS_Add_Contact_Button_Title" = "CONTACTS_Add_Contact_Button_Title";
+
+/* An informative description about what happens when you add a contact */
+"CONTACTS_Add_Contact_Description" = "CONTACTS_Add_Contact_Description";
+
+/* A prompt asking if you are sure that you want to delete this contact */
+"CONTACTS_Are_You_Sure_To_Delete" = "CONTACTS_Are_You_Sure_To_Delete";
+
+/* Title to copy address */
+"CONTACTS_Copy_Address" = "CONTACTS_Copy_Address";
+
+/* Title to delete Contact */
+"CONTACTS_Delete" = "CONTACTS_Delete";
+
+/* Title for editing name of a contact */
+"CONTACTS_Edit_Name" = "CONTACTS_Edit_Name";
+
+/* Save Action for Contacts */
+"CONTACTS_Save" = "CONTACTS_Save";
+
+/* Title for sending to contact */
+"CONTACTS_Send_To" = "CONTACTS_Send_To";
+
+/* A title for error alert prompts */
+"Error" = "Error";
+
+/* Title of the news feed page */
+"NEWSFEED_News_Title" = "NEWSFEED_News_Title";
+
+/* A prompt asking the user to please confirm that they have indeed backed up their private key in a secure location before continuing */
+"ONBARDING_Confirmed_Private_Key_Saved_Prompt" = "ONBARDING_Confirmed_Private_Key_Saved_Prompt";
+
+/* On authentication screen, when wallet already exists. Ask them to login using the specific type of authentication they have, e.g Login using TouchID */
+"ONBOARDING Login_Button_Specifying_Biometric" = "ONBOARDING Login_Button_Specifying_Biometric";
+
+/* On authentication screen, when wallet already exists. Ask them to login using the specific type of authentication they have, e.g Login using Passcode */
+"ONBOARDING Login_Button_Specifying_PassCode" = "ONBOARDING Login_Button_Specifying_PassCode";
+
+/* When the user tries to create a new wallet, but they already have one saved on the devicve, this explanation/warning is given to the user */
+"ONBOARDING_Already_Have_Wallet_Explanation" = "ONBOARDING_Already_Have_Wallet_Explanation";
+
+/* Title For Creating a New Wallet in the onboarding flow */
+"ONBOARDING_Create_New _Wallet" = "ONBOARDING_Create_New _Wallet";
+
+/* Error message that is displayed when the user tries to Create a New Wallet without a passcode */
+"ONBOARDING_Create_Wallet_No_Passcode_Error" = "ONBOARDING_Create_Wallet_No_Passcode_Error";
+
+/* Prompt asking the user to authenticate themselves when they already have a wallet stored on device. */
+"ONBOARDING_Existing_Wallet_Authentication_Prompt" = "ONBOARDING_Existing_Wallet_Authentication_Prompt";
+
+/* Error message to display when the system fails to retrieve the private key from the keychain */
+"ONBOARDING_Keychain_Failure_Error" = "ONBOARDING_Keychain_Failure_Error";
+
+/* Subtitle under the text field of the login controller. Explains what to do in textfield */
+"ONBOARDING_Login_Input_Info_Title" = "ONBOARDING_Login_Input_Info_Title";
+
+/* Error message that is displayed when the user tries to login without a passcode */
+"ONBOARDING_Login_No_Passcode_Error" = "ONBOARDING_Login_No_Passcode_Error";
+
+/* Title for all login items in the onboarding flow */
+"ONBOARDING_Login_Title" = "ONBOARDING_Login_Title";
+
+/* Welcome label to create a new wallet */
+"ONBOARDING_New To O3?" = "ONBOARDING_New To O3?";
+
+/* A warning given to the user to make sure that they have backed up their private key in a secure location. Also states that deletibg the passcode will delete the key from the device */
+"ONBOARDING_Please_Backup Warning" = "ONBOARDING_Please_Backup Warning";
+
+/* A title presented over the top of the private key, specifies WIF format. e.g. Your Private Key (WIF) */
+"ONBOARDING_Private_Key_title" = "ONBOARDING_Private_Key_title";
+
+/* Displayed when the app is waiting to connect to the network. It is finding the best NEO node to connect to */
+"ONBOARDING_Selecting_Best_Node" = "ONBOARDING_Selecting_Best_Node";
+
+/* Title to start the app after completing the onboarding */
+"ONBOARDING_Start_Action_Title" = "ONBOARDING_Start_Action_Title";
+
+/* The first subtitle in the onboarding pages */
+"ONBOARDING_Tutorial_Subtitle_One" = "ONBOARDING_Tutorial_Subtitle_One";
+
+/* The third subtitle in the onboarding pages */
+"ONBOARDING_Tutorial_Subtitle_Three" = "ONBOARDING_Tutorial_Subtitle_Three";
+
+/* The second subtitle in the onboarding pages */
+"ONBOARDING_Tutorial_Subtitle_Two" = "ONBOARDING_Tutorial_Subtitle_Two";
+
+/* The first title in the onboarding pages */
+"ONBOARDING_Tutorial_Title_One" = "ONBOARDING_Tutorial_Title_One";
+
+/* The third title in the onboarding pages */
+"ONBOARDING_Tutorial_Title_Three" = "ONBOARDING_Tutorial_Title_Three";
+
+/* The second title in the onboarding pages */
+"ONBOARDING_Tutorial_Title_Two" = "ONBOARDING_Tutorial_Title_Two";
+
+/* Title Welciming the user after successful wallet creation */
+"ONBOARDING_Welcome" = "ONBOARDING_Welcome";
+
+/* A header title on the portfolio screen, show the displayed funds are inside cold storage */
+"PORTFOLIO_Cold_Storage_Header" = "PORTFOLIO_Cold_Storage_Header";
+
+/* A header title on the portfolio screen, show the displayed funds are a combination of those store in O3 wallet and cold storage */
+"PORTFOLIO_Combined_Header" = "PORTFOLIO_Combined_Header";
+
+/* Interval Button on portfolio page, interval specifies 1 Month */
+"PORTFOLIO_Interval_Button_1M" = "PORTFOLIO_Interval_Button_1M";
+
+/* Interval Button on portfolio page, interval specifies 1 Week */
+"PORTFOLIO_Interval_Button_1W" = "PORTFOLIO_Interval_Button_1W";
+
+/* Interval Button on portfolio page, interval specifies 24 HOURS */
+"PORTFOLIO_Interval_Button_24h" = "PORTFOLIO_Interval_Button_24h";
+
+/* Interval Button on portfolio page, interval specifies 3 Months */
+"PORTFOLIO_Interval_Button_3M" = "PORTFOLIO_Interval_Button_3M";
+
+/* Interval Button on portfolio page, interval specifies SIX HOURS */
+"PORTFOLIO_Interval_Button_6h" = "PORTFOLIO_Interval_Button_6h";
+
+/* Interval Button on portfolio page, interval specifies ALL of Time */
+"PORTFOLIO_Interval_Button_ALL" = "PORTFOLIO_Interval_Button_ALL";
+
+/* A header title on the portfolio screen, shows the displayed funds are located in the O3Wallet */
+"PORTFOLIO_O3_Wallet_Header" = "PORTFOLIO_O3_Wallet_Header";
+
+/* Title of the portfolio page */
+"PORTFOLIO_Portfolio_Title" = "PORTFOLIO_Portfolio_Title";
+
+/* A title for the scan button in the send screen */
+"SCAN_Button_Title" = "SCAN_Button_Title";
+
+/* A Title for the address book button in the send screen */
+"SEND_Address_Button_Title" = "SEND_Address_Button_Title";
+
+/* Label title for the amount on the send screen */
+"SEND_Amount_Label" = "SEND_Amount_Label";
+
+/* Label title for the asset field on the send screen */
+"SEND_Asset_Label" = "SEND_Asset_Label";
+
+/* A prompt asking for user authentication before performing the send action */
+"SEND_Authenticate_To_Send" = "SEND_Authenticate_To_Send";
+
+/* Title for button to close send screen after transaction completed */
+"SEND_Close" = "SEND_Close";
+
+/* A confirmation dialog that asks the user to confirm the asset, amount, and recipient of their transaction */
+"SEND_Confirmation_Prompt" = "SEND_Confirmation_Prompt";
+
+/* Description to display when the transaction has failed to be submitted to the NEO blockchain */
+"SEND_Created_Transaction_Failed_Description" = "SEND_Created_Transaction_Failed_Description";
+
+/* Title to display when the transaction has failed to be submitted to the NEO blockchain */
+"SEND_Created_Transaction_Failed_Title" = "SEND_Created_Transaction_Failed_Title";
+
+/* Description to display when the transaction has successfuly been submitted to the NEO blockchain */
+"SEND_Created_Transaction_Successfully_Description" = "SEND_Created_Transaction_Successfully_Description";
+
+/* Title to display when the transaction has successfuly been submitted to the NEO blockchain */
+"SEND_Created_Transaction_Successfully_Title" = "SEND_Created_Transaction_Successfully_Title";
+
+/* Error to display when the user tries to send to an invalid NEO address */
+"SEND_Invalid_Address_Error" = "SEND_Invalid_Address_Error";
+
+/* Error to display when the user tries to send an invalid amount */
+"SEND_Invalid_Amount_Error" = "SEND_Invalid_Amount_Error";
+
+/* Error To display when the user is trying to send without enough balance */
+"SEND_Not_Enough_Balance_Error" = "SEND_Not_Enough_Balance_Error";
+
+/* Error to display when the user is trying to send a token but does not have enough gas to make the invoke occur. It requires 0.00000001 GAS in the wallet in order to send a token */
+"SEND_Not_Enough_Gas_Token_Transfer" = "SEND_Not_Enough_Gas_Token_Transfer";
+
+/* A title for the paste button in the send screen */
+"SEND_Paste_Button_Title" = "SEND_Paste_Button_Title";
+
+/* Error to display when the user is trying to send gas, but the amount they are sending is the max amount. The user can round down the gas amount a small amount to precent this error */
+"SEND_Rounding_Gas_Error" = "SEND_Rounding_Gas_Error";
+
+/* A title for the Select Asset pull up menu */
+"SEND_Select_Asset_Title" = "SEND_Select_Asset_Title";
+
+/* A title for the the selected asset label, before the user has selected any asset. */
+"SEND_Selected_Asset_Title" = "SEND_Selected_Asset_Title";
+
+/* A title indicating a send action */
+"SEND_Send_Title" = "SEND_Send_Title";
+
+/* A place holder text, indicating that the NEO Wallet Address should go in this text field */
+"SEND_To_Address_Placeholder" = "SEND_To_Address_Placeholder";
+
+/* Label title for the send to field on the send screen */
+"SEND_To_Label" = "SEND_To_Label";
+
+/* Title for add watch address button */
+"SETTINGS_Add_Watch_Address" = "SETTINGS_Add_Watch_Address";
+
+/* Description under add address button that describes what a watch address is and how it will work in the app */
+"SETTINGS_Add_Watch_Description" = "SETTINGS_Add_Watch_Description";
+
+/* Label to describe an address input field */
+"SETTINGS_Address_Label" = "SETTINGS_Address_Label";
+
+/* Prompt requesting user to authenticate before viewing sensitive information like private key */
+"SETTINGS_Authenticate_To_View" = "SETTINGS_Authenticate_To_View";
+
+/* String to describe a close action */
+"SETTINGS_Close_Title" = "SETTINGS_Close_Title";
+
+/* Settings Menu Title For Contact */
+"SETTINGS_Contact" = "SETTINGS_Contact";
+
+/* Title for Currency Menu in Settings */
+"SETTINGS_Currency_Title" = "SETTINGS_Currency_Title";
+
+/* Error To display when user tries to add an invalid address */
+"SETTINGS_Invalid_Address" = "SETTINGS_Invalid_Address";
+
+/* Settings Menu Title for Logout */
+"SETTINGS_Logout" = "SETTINGS_Logout";
+
+/* Warning that appears when attempting to logout from settings */
+"SETTINGS_Logout_Warning" = "SETTINGS_Logout_Warning";
+
+/* Settings Menu Title for Private Key */
+"SETTINGS_My_Private_Key" = "SETTINGS_My_Private_Key";
+
+/* Warning to display when the user decied to manually switch the network node that they are connected to */
+"SETTINGS_Network_Switch_Warning" = "SETTINGS_Network_Switch_Warning";
+
+/* Title for Network Screen In Settings */
+"SETTINGS_Network_Title" = "SETTINGS_Network_Title";
+
+/* Lavel to describe a nickname input field */
+"SETTINGS_Nickname_LAbel" = "SETTINGS_Nickname_LAbel";
+
+/* Title for Settings Menu */
+"SETTINGS_Settings_Title" = "SETTINGS_Settings_Title";
+
+/* Settings Mneu Title For Support */
+"SETTINGS_Support" = "SETTINGS_Support";
+
+/* Settings Menu Title for Theme */
+"SETTINGS_Theme" = "SETTINGS_Theme";
+
+/* Label For Classic Theme */
+"SETTINGS_Theme_Classic" = "SETTINGS_Theme_Classic";
+
+/* Label For Dark Theme */
+"SETTINGS_Theme_Dark" = "SETTINGS_Theme_Dark";
+
+/* Settings Menu Title For Version */
+"SETTINGS_Version" = "SETTINGS_Version";
+
+/* Settings Menu Title For Watch Only Address */
+"SETTINGS_Watch_Only_Address" = "SETTINGS_Watch_Only_Address";
+
+/* A title for the Watch Only Address Title Screen */
+"SETTINGS_Watch_Only_Address_Title" = "SETTINGS_Watch_Only_Address_Title";
+
+/* Title for receive action in tabbar */
+"TABBAR_Receive_Action" = "TABBAR_Receive_Action";
+
+/* Title for send action in tabbar */
+"TABBAR_Send_Action" = "TABBAR_Send_Action";
+
+/* Title for Token Sale Action in tabbar */
+"TABBAR_Token_Sale_Action" = "TABBAR_Token_Sale_Action";
+
+/* Displayed when xhecking the whitelist status of a participant */
+"TOKENSALE_Checking_Status" = "TOKENSALE_Checking_Status";
+
+/* Text for close button to close the tokensale screen */
+"TOKENSALE_Close" = "TOKENSALE_Close";
+
+/* Title for button to allow for contacting after ato kensale transaction fails */
+"TOKENSALE_Contact_Title" = "TOKENSALE_Contact_Title";
+
+/* String showing that the token sale has already ended */
+"TOKENSALE_Ended" = "TOKENSALE_Ended";
+
+/* A string displaying how muc time is left in the token sale */
+"TOKENSALE_Ends_In" = "TOKENSALE_Ends_In";
+
+/* A detailed description about what will happen if the user signs up for the email list to get notified about token sales */
+"TOKENSALE_Get_Notified_Description" = "TOKENSALE_Get_Notified_Description";
+
+/* A title showing users can get notified about the latest token sales */
+"TOKENSALE_Get_Notified_Title" = "TOKENSALE_Get_Notified_Title";
+
+/* Error that shows when the user tries to partcipate in a tokensale that has already ended */
+"TOKENSALE_Has_Ended_Error" = "TOKENSALE_Has_Ended_Error";
+
+/* String on the review screen describing that this transaction will have priority */
+"TOKENSALE_Has_Priority_Label" = "TOKENSALE_Has_Priority_Label";
+
+/* An error indicating the user has entered an invalid contribution amount */
+"TOKENSALE_Invalid_Amount_Error" = "TOKENSALE_Invalid_Amount_Error";
+
+/* Disclaimer text asking the user to aggree that they have read the agreement provided by the tokensale issuer */
+"TOKENSALE_Issuer_Agreement" = "TOKENSALE_Issuer_Agreement";
+
+/* A string showing that the displayed token sale is currently active */
+"TOKENSALE_Live_Status" = "TOKENSALE_Live_Status";
+
+/* An error that shows when the user tries to contribute more than the max contribution amount */
+"TOKENSALE_Max_Contribution_Error" = "TOKENSALE_Max_Contribution_Error";
+
+/* An error that show when the user tries to contribute less than the min contribution amount */
+"TOKENSALE_Min_Contribution_Error" = "TOKENSALE_Min_Contribution_Error";
+
+/* An error when the user has not yet agreed to the tokensale disclaimers */
+"TOKENSALE_Not_Agreed_To_Disclaimers Error" = "TOKENSALE_Not_Agreed_To_Disclaimers Error";
+
+/* An error indicating that the user does not have enough balance for the amount entered */
+"TOKENSALE_Not_Enough_Balance_Error" = "TOKENSALE_Not_Enough_Balance_Error";
+
+/* A string showing the user is not whitelisted for this tokensale */
+"TOKENSALE_Not_WhiteListed" = "TOKENSALE_Not_WhiteListed";
+
+/* An error to display when the user is not whitelisted for the tokensale */
+"TOKENSALE_Not_Whitelisted_Error" = "TOKENSALE_Not_Whitelisted_Error";
+
+/* Disclaimer text asking the user to agree to the terms of the O3 Application. States that the user is interacting directly with the smart contract */
+"TOKENSALE_O3_Agreement" = "TOKENSALE_O3_Agreement";
+
+/* Text for the participate action */
+"TOKENSALE_Participate" = "TOKENSALE_Participate";
+
+/* A Dialog that shows explaining when, what is priority is tapped. Explains that priority allows your transactions to process faster on the blockchain */
+"TOKENSALE_Priority_Explanation" = "TOKENSALE_Priority_Explanation";
+
+/* Label showing priority. Also displays the gas cost for priority. This is fixed at 0.0011GAS */
+"TOKENSALE_Priority_Label" = "TOKENSALE_Priority_Label";
+
+/* Label for the date in the token sale receipt in transaction success screen */
+"TOKENSALE_Receipt_Date_Label" = "TOKENSALE_Receipt_Date_Label";
+
+/* Email Text For the receipt that the user can send to themselves */
+"TOKENSALE_Receipt_Email_Full_Text" = "TOKENSALE_Receipt_Email_Full_Text";
+
+/* Label for the priority in the token sale receipt in transaction success screen */
+"TOKENSALE_Receipt_Priority_Label" = "TOKENSALE_Receipt_Priority_Label";
+
+/* Label for the receiving asset and amount in the token sale receipt in transaction success screen */
+"TOKENSALE_Receipt_Receiving_Label" = "TOKENSALE_Receipt_Receiving_Label";
+
+/* Label for the sending asset and amount in the token sale receipt in transaction success screen */
+"TOKENSALE_Receipt_Sending_Label" = "TOKENSALE_Receipt_Sending_Label";
+
+/* Label for token sale name in the token sale receipt in transaction success screen */
+"TOKENSALE_Receipt_Tokensale_Name_Label" = "TOKENSALE_Receipt_Tokensale_Name_Label";
+
+/* Label for the transaction id in the token sale receipt in transaction success screen */
+"TOKENSALE_Receipt_txid_Label" = "TOKENSALE_Receipt_txid_Label";
+
+/* A title for reviewing token sale participation buttton */
+"TOKENSALE_Review_Button_Title" = "TOKENSALE_Review_Button_Title";
+
+/* An error occurs when the user tries to send the max amount of gas. This is due to a potential rounding error, ro prevent this, send slightly les than the max amount */
+"TOKENSALE_Rounding_Error" = "TOKENSALE_Rounding_Error";
+
+/* Button title to save your receipt */
+"TOKENSALE_save_button_title" = "TOKENSALE_save_button_title";
+
+/* Description showing that the transaction is currently being submitted to the NEO blockchain */
+"TOKENSALE_Sending_In_Progress" = "TOKENSALE_Sending_In_Progress";
+
+/* Button title for allowing users to subscribe to token sale news */
+"TOKENSALE_Subscribe" = "TOKENSALE_Subscribe";
+
+/* Title text showing your tokensale transaction has been successfully submitted to the blockchain */
+"TOKENSALE_Successful_Transaction_Title" = "TOKENSALE_Successful_Transaction_Title";
+
+/* A title for the token sales screen */
+"TOKENSALE_Token_Sales_Title" = "TOKENSALE_Token_Sales_Title";
+
+/* A Title for the transction receipt in the tokensale success */
+"TOKENSALE_Transaction" = "TOKENSALE_Transaction";
+
+/* Description that shows when there is an error */
+"TOKENSALE_Transaction_Error_Description" = "TOKENSALE_Transaction_Error_Description";
+
+/* A title for a button that directs the user to the tokensale website button */
+"TOKENSALE_Website_Button_Title" = "TOKENSALE_Website_Button_Title";
+
+/* Title Describing the send amount in the tokensale review screen */
+"TOKENSALE_You_Are_Sending_Title" = "TOKENSALE_You_Are_Sending_Title";
+
+/* A title indicating how much the user will receive with a given contribution amount */
+"TOKENSALE_You_Will_receive_Title" = "TOKENSALE_You_Will_receive_Title";
+
+/* Title for digital art and collectibles */
+"TOKENSelection_art_and_collectibles" = "TOKENSelection_art_and_collectibles"; /* NEW */
+
+/* Title for NEP5 Section of Tab */
+"TOKENSELECTION_nep5_title" = "TOKENSELECTION_nep5_title"; /* NEW */
+
+/* A title for the account screen */
+"WALLET_Account" = "WALLET_Account";
+
+/* A title for the button which allows you to add a NEP-5 Token to your wallet */
+"WALLET_Add_NEP5_Token" = "WALLET_Add_NEP5_Token";
+
+/* Title of assets tab in wallet screen */
+"WALLET_Assets" = "WALLET_Assets";
+
+/* Prefix used to indicate the block number in the transaction history */
+"WALLET_Block_Prefix" = "WALLET_Block_Prefix";
+
+/* A Title for the claim Action */
+"WALLET_Claim_Action" = "WALLET_Claim_Action";
+
+/* A subtitle to display while claiming is in progress */
+"WALLET_Claim_In_Progress_Subtitle" = "WALLET_Claim_In_Progress_Subtitle";
+
+/* A title to display while claiming is in progress */
+"WALLET_Claim_In_Progress_Title" = "WALLET_Claim_In_Progress_Title";
+
+/* A Message to display in the alert after the user hs successfully claimed their gas */
+"WALLET_Claim_Succeeded_Prompt" = "WALLET_Claim_Succeeded_Prompt";
+
+/* Indicated that the transation in history originated from claim */
+"WALLET_Claim_Transaction" = "WALLET_Claim_Transaction";
+
+/* Title of Contacts tab in wallet screen */
+"WALLET_Contacts" = "WALLET_Contacts";
+
+/* An action title for copying our address */
+"WALLET_Copy_Address" = "WALLET_Copy_Address";
+
+/* Prefix used in the transaction history to indicate where the transaction came from */
+"WALLET_From_Prefix" = "WALLET_From_Prefix";
+
+/* Informative text explaining you can store neo, gas, and nep-5 tokens using this address */
+"WALLET_My_Address_Explanation" = "WALLET_My_Address_Explanation";
+
+/* Title of the My Address Page */
+"WALLET_My_Address_Title" = "WALLET_My_Address_Title";
+
+/* Title for NEP-5 Tokens Selection View */
+"WALLET_NEP5_Tokens" = "WALLET_NEP5_Tokens";
+
+/* Done bar button item */
+"WALLET_NEP_5_DONE" = "WALLET_NEP_5_DONE";
+
+/* String in transaction history indicating O3 Wallet */
+"WALLET_O3_Wallet" = "WALLET_O3_Wallet";
+
+/* An Action Title for saving your QR code */
+"WALLET_Save_Qr_Action" = "WALLET_Save_Qr_Action";
+
+/* A description to give more information about saving the address */
+"WALLET_Saved_Description" = "WALLET_Saved_Description";
+
+/* A title to display when you've successfully saved your wallet address qr code */
+"WALLET_Saved_Title" = "WALLET_Saved_Title";
+
+/* An action title for sharing O3 */
+"WALLET_Share" = "WALLET_Share";
+
+/* Prefix used in the transaction history to indicate where the transaction went to */
+"WALLET_To_Prefix" = "WALLET_To_Prefix";
+
+/* Title of Transactions tab in wallet screen */
+"WALLET_Transactions" = "WALLET_Transactions";
+
+/* A title for Unclaimed Gas in the wallet */
+"WALLET_Unclaimed_Gas_Title" = "WALLET_Unclaimed_Gas_Title";
+
+/* Title to copy watch address */
+"WATCH_ADDRESS_Copy_Address" = "WATCH_ADDRESS_Copy_Address";
+
+/* Title to delete Watch Address */
+"WATCH_ADDRESS_Delete" = "WATCH_ADDRESS_Delete";
+
+/* A prompt asking for user confirmation to delete the watch address */
+"WATCH_ADDRESS_Delete_Confirmation" = "WATCH_ADDRESS_Delete_Confirmation";
+
+/* Title for editing name of a watch address */
+"WATCH_ADDRESS_Edit_Name" = "WATCH_ADDRESS_Edit_Name";
+
+/* Save Action for Watch Addresses */
+"WATCH_ADDRESS_Save" = "WATCH_ADDRESS_Save";
+

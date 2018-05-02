@@ -1,21 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VaG-FZ-R5v">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VaG-FZ-R5v">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="Avenir.ttc">
-            <string>Avenir-Book</string>
-            <string>Avenir-Heavy</string>
-            <string>Avenir-Medium</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Send-->
         <scene sceneID="PHd-Pj-gbv">
@@ -219,10 +212,13 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="addressButton" destination="ANg-rg-qAU" id="Wop-hT-wft"/>
                         <outlet property="amountField" destination="bGg-fs-bbW" id="ZIh-qB-VjE"/>
                         <outlet property="amountLabel" destination="8C1-08-qRh" id="brl-Nf-fHX"/>
                         <outlet property="assetLabel" destination="UzJ-KV-tT0" id="w9Z-yO-rL4"/>
+                        <outlet property="pasteButton" destination="fFo-Fo-LA5" id="kC1-RX-kCG"/>
                         <outlet property="recipientCell" destination="8W3-rc-lrN" id="DM6-Wd-dix"/>
+                        <outlet property="scanButton" destination="Lwl-OV-g56" id="c39-he-oEw"/>
                         <outlet property="selectedAssetLabel" destination="X2N-SH-LmH" id="nCU-Po-Ugj"/>
                         <outlet property="sendAmountCell" destination="PGe-Vj-nVT" id="saq-2A-LMQ"/>
                         <outlet property="sendAssetCell" destination="CDA-XS-156" id="6O0-1A-peG"/>
@@ -435,7 +431,7 @@
         <!--Send Complete View Controller-->
         <scene sceneID="qWz-bL-nri">
             <objects>
-                <viewController id="apJ-tv-Dug" customClass="SendCompleteViewController" customModule="O3" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TransactionComplete" id="apJ-tv-Dug" customClass="SendCompleteViewController" customModule="O3" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kou-KG-NK8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -490,6 +486,7 @@
                         <viewLayoutGuide key="safeArea" id="GW6-RC-cK8"/>
                     </view>
                     <connections>
+                        <outlet property="closeButton" destination="bLi-RQ-J97" id="XUX-eB-qhy"/>
                         <outlet property="completeImage" destination="IhL-Ch-Fxb" id="q7Q-Wv-r7q"/>
                         <outlet property="completeSubtitle" destination="NZu-9x-CAj" id="QrG-Q3-RBN"/>
                         <outlet property="completeTitle" destination="8DK-ty-Lfl" id="bcA-YS-fFF"/>

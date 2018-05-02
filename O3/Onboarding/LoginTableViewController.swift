@@ -16,6 +16,7 @@ import SwiftTheme
 
 class LoginTableViewController: UITableViewController, QRScanDelegate {
     @IBOutlet weak var wifTextField: UITextView!
+    @IBOutlet weak var wifTextFieldInfoLabel: UILabel!
     @IBOutlet weak var loginButton: ShadowedButton!
     var watchAddresses = [WatchAddress]()
 
@@ -32,6 +33,7 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setLocalizedStrings()
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.navigationController?.hideHairline()
         setNeedsStatusBarAppearanceUpdate()
@@ -57,7 +59,7 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
         //enable push notifcation. maybe put this in somewhere else?
         Channel.pushNotificationEnabled(true)
 
-        HUD.show(.labeledProgress(title: nil, subtitle: "Selecting best node..."))
+        HUD.show(.labeledProgress(title: nil, subtitle: OnboardingStrings.selectingBestNodeTitle))
         DispatchQueue.global(qos: .background).async {
             let bestNode = NEONetworkMonitor.autoSelectBestNode()
             DispatchQueue.main.async {
@@ -111,10 +113,15 @@ class LoginTableViewController: UITableViewController, QRScanDelegate {
     @IBAction func checkToProceed() {
         DispatchQueue.main.async { self.loginButton.isEnabled = self.wifTextField.text.isEmpty == false }
     }
+
+    func setLocalizedStrings() {
+        navigationItem.title = OnboardingStrings.loginTitle
+        wifTextFieldInfoLabel.text = OnboardingStrings.loginInputInfo
+        loginButton.setTitle(OnboardingStrings.loginTitle, for: UIControlState())
+    }
 }
 
 extension LoginTableViewController: UITextViewDelegate {
-
     func textViewDidChange(_ textView: UITextView) {
         self.checkToProceed()
     }

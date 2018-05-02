@@ -1,13 +1,15 @@
-github "philackm/ScrollableGraphView" ~> 4.0.2
+github "philackm/ScrollableGraphView"
 github "kishikawakatsumi/KeychainAccess"
 github "HarshilShah/DeckTransition"
 github "CityOfZion/neo-swift" "master"
 github "ashleymills/Reachability.swift"
-github "pkluz/PKHUD" ~> 4.0
-github "onevcat/Kingfisher" ~> 4.0
-github "uias/Tabman" ~> 1.5
+github "pkluz/PKHUD" 
+github "onevcat/Kingfisher"
+github "uias/Tabman"
 github "hyperoslo/Cache"
 binary "https://raw.githubusercontent.com/Building42/Specs/master/Carthage/Fabric.json"
 binary "https://raw.githubusercontent.com/Building42/Specs/master/Carthage/Crashlytics.json"
 github "jiecao-fm/SwiftTheme"
 github "teambition/WebBrowser"
+github "Marxon13/M13Checkbox"
+github "airbnb/lottie-ios" "master"

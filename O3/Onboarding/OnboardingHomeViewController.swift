@@ -10,20 +10,20 @@ import Foundation
 import UIKit
 import NeoSwift
 import SwiftTheme
+import LocalAuthentication
 
 class OnboardingViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var collectionPageControl: UIPageControl!
-    @IBOutlet weak var addAddressButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var createNewWalletButton: UIButton!
+    @IBOutlet weak var newToO3Label: UILabel!
+    var features: [OnboardingCollectionCell.Data]!
 
-    var features: [OnboardingCollectionCell.Data] = [OnboardingCollectionCell.Data(imageName: "chart", title: "Add-Watch Only Address", subtitle: "Safely monitor your wallet from mobile"),
-                                                     OnboardingCollectionCell.Data(imageName: "lock", title: "Login using a private key", subtitle: "Open your NEO wallet with private key"),
-                                                     OnboardingCollectionCell.Data(imageName: "exchange", title: "Send & Receive", subtitle: "Send & receive assets on NEO")]
     override func viewDidLoad() {
         super.viewDidLoad()
+        setLocalizedStrings()
         self.navigationController?.hideHairline()
         ThemeManager.setTheme(index: 2)
         collectionView.delegate = self
@@ -70,21 +70,24 @@ class OnboardingViewController: UIViewController, UICollectionViewDelegate, UICo
     }
 
     @IBAction func loginButtonTapped(_ sender: Any) {
-        //if UserDefaultsManager.launchedBefore == true {
-            performSegue(withIdentifier: "segueToLogin", sender: nil)
+        if !LAContext().canEvaluatePolicy(.deviceOwnerAuthentication, error: nil) {
+            OzoneAlert.alertDialog(message: OnboardingStrings.loginNoPassCodeError, dismissTitle: OzoneAlert.okPositiveConfirmString) {}
             return
-        //}
-       // UserDefaultsManager.launchedBefore = true
-       // performSegue(withIdentifier: "firstTimeLogin", sender: nil)
+        }
+        performSegue(withIdentifier: "segueToLogin", sender: nil)
     }
 
     @IBAction func createNewWalletButtonTapped(_ sender: Any) {
         //if user doesn't have wallet we then create one
+        if !LAContext().canEvaluatePolicy(.deviceOwnerAuthentication, error: nil) {
+            OzoneAlert.alertDialog(message: OnboardingStrings.createWalletNoPassCodeError, dismissTitle: OzoneAlert.okPositiveConfirmString) {}
+            return
+        }
         if UserDefaultsManager.o3WalletAddress == nil {
+            Authenticated.account = Account()
             performSegue(withIdentifier: "segueToWelcome", sender: nil)
             return
         }
-       // UserDefaultsManager.launchedBefore = true
         performSegue(withIdentifier: "preCreateWallet", sender: nil)
     }
 
@@ -93,5 +96,21 @@ class OnboardingViewController: UIViewController, UICollectionViewDelegate, UICo
             //create a new wallet
             Authenticated.account = Account()
         }
+    }
+
+    func setLocalizedStrings() {
+
+        features = [
+            OnboardingCollectionCell.Data(imageName: "chart", title: OnboardingStrings.landingTitleOne,
+                                          subtitle: OnboardingStrings.landingSubtitleOne),
+            OnboardingCollectionCell.Data(imageName: "lock", title: OnboardingStrings.landingTitleTwo,
+                                          subtitle: OnboardingStrings.landingSubtitleTwo),
+            OnboardingCollectionCell.Data(imageName: "exchange", title: OnboardingStrings.landingTitleThree,
+                                          subtitle: OnboardingStrings.landingSubtitleThree)
+        ]
+
+        loginButton.setTitle(OnboardingStrings.loginTitle, for: UIControlState())
+    createNewWalletButton.setTitle(OnboardingStrings.createNewWalletTitle, for: UIControlState())
+        newToO3Label.text = OnboardingStrings.newToO3
     }
 }

@@ -49,7 +49,6 @@ class PortfolioAssetCell: UITableViewCell {
             let precision = referenceCurrency == .btc ? Precision.btc : Precision.usd
             let referencePrice = referenceCurrency == .btc ? latestPrice.averageBTC : latestPrice.average
             let referenceFirstPrice = referenceCurrency == .btc ? firstPrice.averageBTC : firstPrice.average
-
             assetAmountLabel.text = amount.string(8, removeTrailing: true)
             if referenceCurrency == .btc {
                 assetFiatAmountLabel.text = "₿"+latestPrice.averageBTC.string(Precision.btc, removeTrailing: true)
@@ -58,7 +57,9 @@ class PortfolioAssetCell: UITableViewCell {
             }
 
             //format USD properly
-            if referenceCurrency == .usd {
+            if referenceCurrency == .btc {
+                assetFiatPriceLabel.text = "₿"+referencePrice.string(precision, removeTrailing: referenceCurrency == .btc)
+            } else {
                 assetFiatPriceLabel.text = Fiat(amount: Float(referencePrice)).formattedString()
             } else {
                 assetFiatPriceLabel.text = "₿"+referencePrice.string(precision, removeTrailing: referenceCurrency == .btc)
